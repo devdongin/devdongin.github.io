@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선동인 | Windows Systems &amp; AI Inference Engineer</title>
 <meta name="description" content="Windows 커널 드라이버, AI 추론 SDK, 보안 솔루션 개발자 선동인의 포트폴리오">
+<meta property="og:type" content="website">
+<meta property="og:title" content="선동인 | Windows Systems &amp; AI Inference Engineer">
+<meta property="og:description" content="커널 드라이버부터 AI 추론 SDK, 배포까지 — Windows 보안 솔루션의 전체 사이클을 다루는 개발자">
+<meta property="og:url" content="https://devdongin.github.io">
+<meta property="og:image" content="https://devdongin.github.io/login_avatar.jpg">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="memoji.svg">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
@@ -339,6 +345,7 @@
     .stack { padding: 20px; }
     .stack-row { flex-direction: column; gap: 6px; }
     .stack-label { width: auto; }
+    .scroll-hint { display: none; }
   }
 </style>
 </head>
@@ -400,7 +407,7 @@
     <div class="section-head reveal">
       <p class="kicker">What I Do</p>
       <h2>핵심 역량</h2>
-      <p>애플리케이션 아래, 커널과 하드웨어 사이의 영역을 다룹니다</p>
+      <p>어떻게 일하고, 무엇을 만들 수 있는가 — 증명 가능한 것만 적었습니다</p>
     </div>
     <div class="skills strengths">
       <div class="skill-card reveal">
@@ -496,16 +503,16 @@
         <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발</li>
         <li><strong>CULockerFsfd (C)</strong> — 솔루션 프로세스·파일 자체 보호 커널 드라이버. Anti-Debugging, 로컬 파일 I/O 통제</li>
         <li><strong>SeeuonCP</strong> — Windows Hello를 대체하는 얼굴 인증 Credential Provider 모듈 개발</li>
-        <li><strong>SEEUONIdp</strong> — Identity Provider 확장판 클라이언트 메인 개발·설계. SSO 연계, GoogleOTP 연동, P/W-less 얼굴 본인인증</li>
+        <li><strong>SEEUONIdp</strong> — Identity Provider 확장판 클라이언트 메인 개발·설계. SSO 연계, GoogleOTP 연동, Passwordless 얼굴 본인인증</li>
         <li><strong>스크린 캡처 방지</strong> — API 후킹, DLL 인젝션 기반 화면 유출 차단 기능 개발</li>
         <li><strong>배포 총괄</strong> — Python, NSIS, Themida, 인증서 서명 기반 전체 릴리스 파이프라인 담당</li>
-        <li><strong>장애 분석</strong> — WinDbg 정적 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 해결</li>
+        <li><strong>장애 분석</strong> — WinDbg 크래시 덤프 사후 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 원인 규명·해결</li>
       </ul>
       <div class="highlight-box">
         <p>✦ SI 사업으로 시작해 회사 <strong>핵심 솔루션</strong>으로 성장 주도</p>
         <p>✦ 2024년 회사 매출 100억 중 <strong>40–50% 담당</strong> 프로젝트로 성장</p>
         <p>✦ 2025–2026 고객사 확대, <strong>누적 매출 약 80억 원</strong>의 주요 수입원 솔루션</p>
-        <p>✦ 클라이언트 저장소 <strong>커밋 81% · 1위 기여자</strong> (832 / 1,029 커밋)</p>
+        <p>✦ 사내 클라이언트 저장소 <strong>커밋 81% · 1위 기여자</strong> (832 / 1,029 커밋)</p>
       </div>
       <div class="clients-block">
         <p class="clients-label">고객사 &amp; POC — 에이전트 보안 파트 메인 개발자</p>
@@ -528,9 +535,9 @@
         <span class="badge green">MS Altitude 정식 할당</span>
       </div>
       <ul>
-        <li>커널 드라이버 베이스 설계부터 인증서 서명, 배포까지 <strong>전체 사이클 단독 개발</strong> — 저장소 커밋 <strong>93/93 (100%)</strong></li>
+        <li>커널 드라이버 베이스 설계부터 인증서 서명, 배포까지 <strong>전체 사이클 단독 개발</strong> — 사내 저장소 커밋 <strong>93/93 (100%)</strong></li>
         <li>Microsoft에 filter altitude 정식 할당받아 <strong>공식 allocated altitudes 문서 등재</strong> (CULockerFsfd.sys)</li>
-        <li><strong>MS Hardware Dev Center 등록</strong> — 드라이버 제출·서명·배포 체계까지 단독 구축</li>
+        <li><strong>MS Hardware Dev Center 등록</strong> — 드라이버 제출, attestation 서명, 배포 체계 구축</li>
         <li>Anti-Debugging 및 로컬 시스템 파일 I/O 통제로 솔루션 무결성 보호. 프로세스·파일/폴더 보호 및 권한 설정</li>
       </ul>
     </div>
@@ -550,7 +557,7 @@
         <li>훈련 모델을 C/C++로 포팅한 <strong>추론 엔진 SDK</strong> 설계·개발 및 데모 앱 제작</li>
         <li>C / C++ / C# / Python <strong>멀티 언어 바인딩</strong>, Windows·Ubuntu 크로스 플랫폼 라이브러리 제공</li>
         <li>SEEUON의 기반 SDK로 채택 — 이를 토대로 판별 미들웨어(FaceOnDiscriminator) 개발</li>
-        <li>Edge Device 보드 최적화 버전 개발 — 저장소 <strong>기여 2위 (커밋 325회)</strong></li>
+        <li>Edge Device 보드 최적화 버전 개발 — 사내 저장소 <strong>기여 2위 (커밋 325회)</strong></li>
       </ul>
     </div>
 
