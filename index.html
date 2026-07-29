@@ -83,6 +83,24 @@
   }
   .nav-cta:hover { filter: brightness(1.1); background: var(--accent) !important; }
 
+  /* ===== AI review strip ===== */
+  .ai-strip {
+    margin-top: var(--nav-h);
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+    font-size: 13px; color: var(--text-dim);
+  }
+  .ai-strip .container { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .ai-tag {
+    flex-shrink: 0; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; color: var(--accent);
+    background: var(--accent-dim);
+    padding: 2px 8px; border-radius: 999px;
+  }
+  .ai-strip strong { color: var(--text); font-weight: 600; }
+  .ai-strip .ai-meta { opacity: 0.7; }
+
   /* ===== Hero ===== */
   .hero {
     min-height: 100svh;
@@ -367,6 +385,13 @@
     </div>
   </div>
 </nav>
+
+<div class="ai-strip" id="ai-review">
+  <div class="container">
+    <span class="ai-tag">AI REVIEW</span>
+    <p><strong>커널 드라이버 단독 개발(사내 커밋 100%)부터 AI 추론 SDK, 누적 80억 솔루션까지 — 주장 전부가 데이터로 증명되는 풀사이클 Windows 시스템 개발자.</strong> <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여 데이터를 근거로 자동 생성·갱신합니다 · 갱신 2026-07-30 01:00 KST</span></p>
+  </div>
+</div>
 
 <section class="hero" id="top">
   <div class="container hero-inner">
