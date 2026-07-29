@@ -19,6 +19,12 @@
     --accent: #58a6ff;
     --accent-dim: rgba(88,166,255,0.12);
     --green: #3fb950;
+    --green-dim: rgba(63,185,80,0.12);
+    --green-faint: rgba(63,185,80,0.07);
+    --green-border: rgba(63,185,80,0.25);
+    --on-accent: #0d1117;
+    --bg-glass: rgba(13,17,23,0.8);
+    --border-hover: #3d4654;
     --nav-h: 64px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,7 +42,7 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     height: var(--nav-h);
-    background: rgba(13,17,23,0.8);
+    background: var(--bg-glass);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid transparent;
@@ -65,7 +71,7 @@
   .nav-cta {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 14px; font-weight: 600;
-    color: #0d1117 !important; background: var(--accent);
+    color: var(--on-accent) !important; background: var(--accent);
     padding: 8px 16px !important; border-radius: 8px;
     text-decoration: none;
   }
@@ -131,7 +137,7 @@
     transition: transform .15s, filter .15s, border-color .15s, background .15s;
   }
   .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: var(--accent); color: #0d1117; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
   .btn-primary:hover { filter: brightness(1.1); }
   .btn-ghost { border: 1px solid var(--border); color: var(--text); }
   .btn-ghost:hover { border-color: var(--accent); background: var(--accent-dim); }
@@ -185,6 +191,7 @@
   section { padding: 96px 0; }
   section.alt { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .section-head { text-align: center; margin-bottom: 56px; }
+  .section-head--tight { margin-bottom: 0; }
   .section-head .kicker {
     color: var(--accent); font-size: 13px; font-weight: 700;
     letter-spacing: 0.12em; text-transform: uppercase;
@@ -205,10 +212,48 @@
     padding: 26px;
     transition: background .15s, transform .15s, border-color .15s;
   }
-  .skill-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); border-color: #3d4654; }
+  .skill-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); border-color: var(--border-hover); }
   .skill-card .icon { font-size: 26px; margin-bottom: 12px; }
   .skill-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
   .skill-card p { font-size: 14px; color: var(--text-dim); }
+
+  /* ===== Strengths / Stack / Clients / Edu ===== */
+  .strengths {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-bottom: 18px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 13px; font-weight: 500;
+    padding: 4px 12px; border-radius: 999px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: border-color .15s, color .15s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--text); }
+  .chip.hot { background: var(--accent-dim); border-color: transparent; color: var(--accent); font-weight: 600; }
+  .stack {
+    margin-top: 40px; padding: 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .stack-row { display: flex; align-items: baseline; gap: 16px; }
+  .stack-label {
+    flex-shrink: 0; width: 120px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .clients-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .clients-label { font-size: 13px; color: var(--text-dim); font-weight: 600; margin-bottom: 10px; }
+  .edu-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px; max-width: 720px; margin: 48px auto 0;
+  }
+  .gh-note { margin-top: 16px; font-size: 13px; color: var(--text-dim); }
 
   /* ===== Projects ===== */
   .project {
@@ -218,6 +263,7 @@
     padding: 32px;
     margin-bottom: 24px;
   }
+  .project:last-child { margin-bottom: 0; }
   .project-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
   .project h3 { font-size: 20px; font-weight: 700; }
   .project .meta { font-size: 13px; color: var(--text-dim); }
@@ -228,7 +274,7 @@
     padding: 3px 10px; border-radius: 999px;
     background: var(--accent-dim); color: var(--accent);
   }
-  .badge.green { background: rgba(63,185,80,0.15); color: var(--green); }
+  .badge.green { background: var(--green-dim); color: var(--green); }
   .project ul { list-style: none; }
   .project li {
     font-size: 15px; color: var(--text-dim);
@@ -238,8 +284,8 @@
   .project li strong { color: var(--text); font-weight: 600; }
   .highlight-box {
     margin-top: 20px; padding: 16px 18px;
-    background: rgba(63,185,80,0.07);
-    border: 1px solid rgba(63,185,80,0.25);
+    background: var(--green-faint);
+    border: 1px solid var(--green-border);
     border-radius: 12px;
   }
   .highlight-box p { font-size: 14px; color: var(--text-dim); margin-bottom: 4px; }
@@ -262,7 +308,7 @@
     background: var(--bg); border: 3px solid var(--accent);
   }
   .entry .period { font-size: 13px; color: var(--accent); font-weight: 600; }
-  .entry h3 { font-size: 19px; font-weight: 700; margin: 4px 0 2px; }
+  .entry h3 { font-size: 20px; font-weight: 700; margin: 4px 0 2px; }
   .entry h3 small { font-weight: 400; font-size: 14px; color: var(--text-dim); }
   .entry .role { font-size: 14px; color: var(--text-dim); margin-bottom: 14px; }
   .entry ul { list-style: none; }
@@ -280,6 +326,7 @@
     padding: 32px 0; text-align: center;
     color: var(--text-dim); font-size: 13px;
   }
+  section.alt + footer { border-top: 0; }
 
   @media (max-width: 720px) {
     .nav-links a:not(.nav-cta) { display: none; }
@@ -288,6 +335,10 @@
     .hero-actions { justify-content: center; }
     section { padding: 64px 0; }
     .project { padding: 22px; }
+    .skill-card { padding: 20px; }
+    .stack { padding: 20px; }
+    .stack-row { flex-direction: column; gap: 6px; }
+    .stack-label { width: auto; }
   }
 </style>
 </head>
@@ -303,6 +354,7 @@
       <a href="#skills">역량</a>
       <a href="#projects">프로젝트</a>
       <a href="#career">경력</a>
+      <a href="#contact">연락</a>
       <a href="https://he11oworld.tistory.com" target="_blank" rel="noopener">블로그</a>
       <a class="nav-cta" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
     </div>
@@ -336,7 +388,7 @@
 
 <div class="stats">
   <div class="stats-inner">
-    <div class="stat reveal"><div class="num">6년+</div><div class="label">Windows 시스템 개발</div></div>
+    <div class="stat reveal"><div class="num">7년</div><div class="label">Windows 시스템 개발</div></div>
     <div class="stat reveal"><div class="num">40–50%</div><div class="label">2024 회사 매출 기여 (100억 중)</div></div>
     <div class="stat reveal"><div class="num">80억+</div><div class="label">담당 솔루션 누적 매출</div></div>
     <div class="stat reveal"><div class="num">MS 등재</div><div class="label">Filter Altitude 정식 할당</div></div>
@@ -349,6 +401,23 @@
       <p class="kicker">What I Do</p>
       <h2>핵심 역량</h2>
       <p>애플리케이션 아래, 커널과 하드웨어 사이의 영역을 다룹니다</p>
+    </div>
+    <div class="skills strengths">
+      <div class="skill-card reveal">
+        <div class="icon">🧭</div>
+        <h3>사용자 관점의 설계</h3>
+        <p>저수준 시스템을 다루지만 시작점은 언제나 화면 앞의 사용자입니다. 커널 정책 하나, 인증 플로우 하나도 실제 업무 흐름을 방해하지 않는 방향으로 설계합니다</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">🤝</div>
+        <h3>커뮤니케이션 &amp; 협업</h3>
+        <p>고객사 실무자, 영업, AI 리서처 사이에서 기술 언어를 통역합니다. POC 현장에서 요구사항을 직접 듣고 스펙으로 옮기며, 첫 회사에서부터 부팀장을 맡았습니다</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">📈</div>
+        <h3>AI 상용화 경험</h3>
+        <p>연구실의 모델을 매출 내는 제품으로 옮깁니다. 훈련된 모델을 C/C++ 추론 SDK로 포팅하고 미들웨어·애플리케이션·배포까지 상용 수준으로 완성했습니다</p>
+      </div>
     </div>
     <div class="skills">
       <div class="skill-card reveal">
@@ -372,6 +441,32 @@
         <p>NSIS, Themida, 인증서 서명 기반 배포 파이프라인 구축. 솔루션 전체 릴리스 프로세스 담당</p>
       </div>
     </div>
+    <div class="stack reveal">
+      <div class="stack-row">
+        <span class="stack-label">Languages</span>
+        <div class="chips">
+          <span class="chip hot">C++</span><span class="chip hot">C</span><span class="chip">C#</span><span class="chip">Python</span><span class="chip">MFC</span><span class="chip">WPF</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <span class="stack-label">Kernel / OS</span>
+        <div class="chips">
+          <span class="chip hot">WDK · Minifilter</span><span class="chip hot">WinDbg</span><span class="chip">FSD / FsFd</span><span class="chip">Credential Provider</span><span class="chip">API Hooking · DLL Injection</span><span class="chip">Windows API · IPC</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <span class="stack-label">AI / Vision</span>
+        <div class="chips">
+          <span class="chip hot">OpenVINO</span><span class="chip">OpenCV</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Vision AI</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <span class="stack-label">Build / Deploy</span>
+        <div class="chips">
+          <span class="chip">NSIS</span><span class="chip">InstallShield</span><span class="chip">Themida</span><span class="chip">Code Signing</span><span class="chip">CMake</span><span class="chip">Ubuntu</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -388,7 +483,7 @@
         <h3>SEEUON / SEEUONIdp</h3>
         <span class="meta">2023.07 – 현재 · (주)시선에이아이</span>
       </div>
-      <p class="desc">AI 영상처리 기반 PC 화면 보안 솔루션 — POC 데모부터 SDK, 미들웨어, 애플리케이션, 커널 드라이버까지 전체 사이클 참여</p>
+      <p class="desc">Vision AI 기반 단말 보안 솔루션 — 화면 촬영 감지, 안면인식 본인인증, 얼굴 위변조 탐지. POC 데모부터 SDK, 미들웨어, 애플리케이션, 커널 드라이버까지 전체 사이클 참여</p>
       <div class="badges">
         <span class="badge">C / C++</span>
         <span class="badge">OpenVINO</span>
@@ -401,6 +496,8 @@
         <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발</li>
         <li><strong>CULockerFsfd (C)</strong> — 솔루션 프로세스·파일 자체 보호 커널 드라이버. Anti-Debugging, 로컬 파일 I/O 통제</li>
         <li><strong>SeeuonCP</strong> — Windows Hello를 대체하는 얼굴 인증 Credential Provider 모듈 개발</li>
+        <li><strong>SEEUONIdp</strong> — Identity Provider 확장판 클라이언트 메인 개발·설계. SSO 연계, GoogleOTP 연동, P/W-less 얼굴 본인인증</li>
+        <li><strong>스크린 캡처 방지</strong> — API 후킹, DLL 인젝션 기반 화면 유출 차단 기능 개발</li>
         <li><strong>배포 총괄</strong> — Python, NSIS, Themida, 인증서 서명 기반 전체 릴리스 파이프라인 담당</li>
         <li><strong>장애 분석</strong> — WinDbg 정적 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 해결</li>
       </ul>
@@ -408,8 +505,15 @@
         <p>✦ SI 사업으로 시작해 회사 <strong>핵심 솔루션</strong>으로 성장 주도</p>
         <p>✦ 2024년 회사 매출 100억 중 <strong>40–50% 담당</strong> 프로젝트로 성장</p>
         <p>✦ 2025–2026 고객사 확대, <strong>누적 매출 약 80억 원</strong>의 주요 수입원 솔루션</p>
+        <p>✦ 클라이언트 저장소 <strong>커밋 81% · 1위 기여자</strong> (832 / 1,029 커밋)</p>
       </div>
-      <p class="clients"><strong>고객사</strong> — 삼성 SDS · 삼성 SDI · 국세청 · SGI 서울보증 · 삼성전기 인도 외 대기업 POC 다수 (에이전트 보안 파트 메인 개발자)</p>
+      <div class="clients-block">
+        <p class="clients-label">고객사 &amp; POC — 에이전트 보안 파트 메인 개발자</p>
+        <div class="chips">
+          <span class="chip hot">삼성 SDS</span><span class="chip hot">삼성 SDI</span><span class="chip hot">국세청</span><span class="chip hot">SGI 서울보증</span><span class="chip hot">삼성전기 인도법인</span>
+          <span class="chip">삼성디스플레이</span><span class="chip">삼성바이오로직스</span><span class="chip">삼성서울병원</span><span class="chip">미래에셋증권</span><span class="chip">신한카드</span><span class="chip">현대자동차 미주법인</span><span class="chip">신세계 I&amp;C</span><span class="chip">우리은행</span><span class="chip">도쿄일렉트론코리아</span>
+        </div>
+      </div>
     </div>
 
     <div class="project reveal">
@@ -424,9 +528,10 @@
         <span class="badge green">MS Altitude 정식 할당</span>
       </div>
       <ul>
-        <li>커널 드라이버 베이스 설계부터 인증서 서명, 배포까지 <strong>전체 사이클 단독 개발</strong></li>
+        <li>커널 드라이버 베이스 설계부터 인증서 서명, 배포까지 <strong>전체 사이클 단독 개발</strong> — 저장소 커밋 <strong>93/93 (100%)</strong></li>
         <li>Microsoft에 filter altitude 정식 할당받아 <strong>공식 allocated altitudes 문서 등재</strong> (CULockerFsfd.sys)</li>
-        <li>Anti-Debugging 및 로컬 시스템 파일 I/O 통제로 솔루션 무결성 보호</li>
+        <li><strong>MS Hardware Dev Center 등록</strong> — 드라이버 제출·서명·배포 체계까지 단독 구축</li>
+        <li>Anti-Debugging 및 로컬 시스템 파일 I/O 통제로 솔루션 무결성 보호. 프로세스·파일/폴더 보호 및 권한 설정</li>
       </ul>
     </div>
 
@@ -445,6 +550,7 @@
         <li>훈련 모델을 C/C++로 포팅한 <strong>추론 엔진 SDK</strong> 설계·개발 및 데모 앱 제작</li>
         <li>C / C++ / C# / Python <strong>멀티 언어 바인딩</strong>, Windows·Ubuntu 크로스 플랫폼 라이브러리 제공</li>
         <li>SEEUON의 기반 SDK로 채택 — 이를 토대로 판별 미들웨어(FaceOnDiscriminator) 개발</li>
+        <li>Edge Device 보드 최적화 버전 개발 — 저장소 <strong>기여 2위 (커밋 325회)</strong></li>
       </ul>
     </div>
 
@@ -466,14 +572,32 @@
         <li>전체 배포 파이프라인 담당 (Python, NSIS, Themida, 코드 서명)</li>
       </ul>
     </div>
+
+    <div class="project reveal">
+      <div class="project-head">
+        <h3>골프 자세분석 프로그램</h3>
+        <span class="meta">2024.06 · 김해문화체육센터 납품</span>
+        <span class="badge green">Side Project · 1인 개발</span>
+      </div>
+      <p class="desc">영상 기반 골프 스윙 자세 분석 프로그램 — 기획부터 개발, 현장 납품까지 혼자 완성한 사이드 프로젝트</p>
+      <div class="badges">
+        <span class="badge">OpenCV</span>
+        <span class="badge">OpenVINO</span>
+      </div>
+      <ul>
+        <li>OpenCV 영상처리 + OpenVINO 추론으로 골프 스윙 자세를 분석하는 프로그램 개발</li>
+        <li>요구사항 협의부터 개발·설치·납품까지 <strong>전 과정 1인 수행</strong> (약 4주)</li>
+        <li>본업의 AI 추론 SDK 경험을 업무 밖 실사용 제품으로 검증</li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <section id="career">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Career</p>
-      <h2>경력</h2>
+      <p class="kicker">Career &amp; Education</p>
+      <h2>경력 &amp; 학력</h2>
     </div>
     <div class="timeline">
       <div class="entry reveal">
@@ -494,12 +618,24 @@
         </ul>
       </div>
       <div class="entry reveal">
-        <p class="period">– 2019</p>
+        <p class="period">2019.09 – 2020.01</p>
         <h3>오토소프트</h3>
-        <p class="role">차량 소프트웨어 테스트 / 분석</p>
+        <p class="role">IVI-설계팀 · 차량 소프트웨어 테스트 / 분석</p>
         <ul>
           <li>현대·기아 자동차 디지털 클러스터 테스트, 차량 내 모듈 개발 코드 분석</li>
         </ul>
+      </div>
+    </div>
+    <div class="edu-grid">
+      <div class="skill-card reveal">
+        <div class="icon">🎓</div>
+        <h3>학력</h3>
+        <p>호서대학교 정보통신공학 학사 (2014 – 2020)<br>졸업작품: 시각장애인을 위한 영상·음성 복합 서비스</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">🏆</div>
+        <h3>수상</h3>
+        <p>교내 캡스톤디자인 경진대회 최우수상 (2019)<br>YOLO 객체 인식 + STT/TTS 기반 시각장애인용 물건찾기 시스템</p>
       </div>
     </div>
   </div>
@@ -507,15 +643,17 @@
 
 <section class="alt contact" id="contact">
   <div class="container reveal">
-    <div class="section-head" style="margin-bottom:0">
+    <div class="section-head section-head--tight">
       <p class="kicker">Contact</p>
       <h2>함께 일해보고 싶다면</h2>
       <p>커널, 보안, AI 추론 — 어떤 이야기든 환영합니다</p>
     </div>
     <div class="links">
-      <a class="btn btn-primary" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="mailto:devdongin@gmail.com">✉ devdongin@gmail.com</a>
+      <a class="btn btn-ghost" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-ghost" href="https://he11oworld.tistory.com" target="_blank" rel="noopener">Tech Blog</a>
     </div>
+    <p class="gh-note">주요 개발 활동은 재직 중인 회사 조직의 프라이빗 저장소에서 이루어집니다 — 개인 계정이 조용한 이유입니다 🙂</p>
   </div>
 </section>
 
