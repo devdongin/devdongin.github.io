@@ -52,6 +52,8 @@
     --avatar-ring: rgba(88,166,255,0.06);
     --avatar-ring-hover: rgba(88,166,255,0.12);
     --avatar-shadow: rgba(0,0,0,0.5);
+    --accent-glow: rgba(88,166,255,0.6);
+    --card-shadow: rgba(0,0,0,0.35);
     --nav-h: 64px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -388,6 +390,7 @@
   }
   section.alt + footer { border-top: 0; }
   .visits { margin-top: 8px; font-size: 12px; color: var(--text-dim); opacity: 0.8; }
+  .visits-note { opacity: 0.7; }
 
 
   .hero-note { margin-top: 14px; font-size: 12.5px; color: var(--text-dim); opacity: 0.85; }
@@ -411,11 +414,11 @@
   .stat { transition: transform .2s ease; }
   .stat:hover { transform: translateY(-3px); }
   .project { transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
-  .project:hover { transform: translateY(-3px); border-color: var(--border-hover); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+  .project:hover { transform: translateY(-3px); border-color: var(--border-hover); box-shadow: 0 12px 32px var(--card-shadow); }
   .badge { transition: filter .15s ease; }
   .badge:hover { filter: brightness(1.25); }
   .entry::before { transition: box-shadow .2s ease; }
-  .entry:hover::before { box-shadow: 0 0 10px rgba(88,166,255,0.6); }
+  .entry:hover::before { box-shadow: 0 0 10px var(--accent-glow); }
   .entry h3 { transition: color .2s ease; }
   .entry:hover h3 { color: var(--accent); }
   .activity { transition: border-color .2s ease; }
@@ -479,7 +482,7 @@
       <div class="ai-review-box" id="ai-review">
         <span class="ai-tag">AI REVIEW</span>
         <p><strong>커널 드라이버 단독 개발(사내 커밋 100%)부터 AI 추론 SDK, 누적 80억 솔루션까지 주장 전부가 데이터로 증명되는 풀사이클 개발자.</strong> 최근에는 AI 코딩 하네스를 실무에 도입해 SEEUON macOS 버전 구축까지 영역을 넓히는 중.
-        <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여 데이터를 근거로 자동 생성·갱신합니다 · 갱신 2026-07-30 01:56 KST</span></p>
+        <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여 데이터를 근거로 자동 생성·갱신합니다 · 갱신 2026-07-30 02:28 KST</span></p>
       </div>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#projects">프로젝트 보기</a>
@@ -791,7 +794,7 @@
 <footer>
   <div class="container">
     <p>© 2026 선동인 (devdongin) · Built with plain HTML — hosted on GitHub Pages</p>
-    <p class="visits" hidden>👀 Today <span id="v-today">–</span> · Total <span id="v-total">–</span></p>
+    <p class="visits" hidden>👀 Today <span id="v-today">–</span> · Total <span id="v-total">–</span> <span class="visits-note">· 제3자 무가입 집계(Abacus), 재미로만 봐주세요</span></p>
   </div>
 </footer>
 
@@ -806,15 +809,18 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  // heatmap: show most recent weeks first on narrow screens
+  document.querySelectorAll('.heatmap-scroll').forEach(el => { el.scrollLeft = el.scrollWidth; });
+
   // visitor counter (Abacus - keyless)
   (async () => {
     try {
       const kst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
       const base = 'https://abacus.jasoncameron.dev/hit/devdongin-github-io';
-      const [t, d] = await Promise.all([
-        fetch(base + '/visits-total').then(r => r.json()),
-        fetch(base + '/visits-' + kst).then(r => r.json()),
-      ]);
+      const get = p => fetch(base + p, { signal: AbortSignal.timeout(3000) })
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+      const [t, d] = await Promise.all([get('/visits-total'), get('/visits-' + kst)]);
+      if (typeof t.value !== 'number' || typeof d.value !== 'number') return;
       document.getElementById('v-total').textContent = t.value.toLocaleString();
       document.getElementById('v-today').textContent = d.value.toLocaleString();
       document.querySelector('.visits').hidden = false;
