@@ -1,0 +1,69 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="c"><circle cx="256" cy="256" r="256"/></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e9ebef"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6e8ec"/>
+      <stop offset="0.45" stop-color="#cfd2d8"/>
+      <stop offset="1" stop-color="#b4b8c0"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d5c40"/>
+      <stop offset="1" stop-color="#5e442f"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fad7b2"/>
+      <stop offset="1" stop-color="#f2c69e"/>
+    </linearGradient>
+  </defs>
+
+  <g clip-path="url(#c)">
+    <!-- background -->
+    <rect width="512" height="512" fill="url(#bg)"/>
+
+    <!-- ears -->
+    <ellipse cx="143" cy="300" rx="19" ry="26" fill="url(#skin)"/>
+    <ellipse cx="369" cy="300" rx="19" ry="26" fill="url(#skin)"/>
+
+    <!-- head -->
+    <ellipse cx="256" cy="302" rx="114" ry="126" fill="url(#skin)"/>
+
+    <!-- eyes -->
+    <ellipse cx="217" cy="283" rx="11.5" ry="13.5" fill="#3d2d26"/>
+    <ellipse cx="295" cy="283" rx="11.5" ry="13.5" fill="#3d2d26"/>
+    <circle cx="221" cy="278" r="3.6" fill="#ffffff" opacity="0.9"/>
+    <circle cx="299" cy="278" r="3.6" fill="#ffffff" opacity="0.9"/>
+
+    <!-- hair: dome + straight fringe with soft scallops + side locks -->
+    <path fill="url(#hair)" d="
+      M142 336
+      C132 206 194 152 256 152
+      C318 152 380 206 370 336
+      L342 336
+      C346 302 348 278 340 266
+      Q322 258 306 264
+      Q288 270 272 264
+      Q256 258 240 264
+      Q222 270 206 264
+      Q188 258 172 266
+      C164 278 166 302 170 336
+      Z"/>
+    <!-- hair shine -->
+    <path d="M196 178 q28 -14 60 -12" stroke="#96755250" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.35"/>
+
+    <!-- MacBook lid -->
+    <rect x="86" y="308" width="340" height="190" rx="20" fill="url(#lid)"/>
+    <rect x="86" y="308" width="340" height="190" rx="20" fill="none" stroke="#9da1a9" stroke-width="2" opacity="0.6"/>
+    <!-- top edge highlight -->
+    <path d="M106 312 h300" stroke="#f2f3f5" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+    <!-- apple mark -->
+    <g transform="translate(256 408) scale(0.88)" fill="#989da6">
+      <path d="M31.6 -14.6c-.3-9.4 7.7-13.9 8-14.1-4.4-6.4-11.2-7.3-13.6-7.4-5.8-.6-11.3 3.4-14.2 3.4-2.9 0-7.4-3.3-12.2-3.2-6.3.1-12.1 3.7-15.3 9.3-6.5 11.3-1.7 28 4.7 37.2 3.1 4.5 6.8 9.6 11.6 9.4 4.7-.2 6.4-3 12-3s7.2 3 12.1 2.9c5-.1 8.2-4.6 11.3-9.1 3.5-5.2 5-10.2 5.1-10.5-.1-.1-9.8-3.8-9.5-14.9z"/>
+      <path d="M22.9 -41.4c2.6-3.1 4.3-7.5 3.8-11.8-3.7.1-8.2 2.5-10.8 5.6-2.4 2.8-4.5 7.2-3.9 11.4 4.1.3 8.3-2.1 10.9-5.2z"/>
+    </g>
+  </g>
+</svg>

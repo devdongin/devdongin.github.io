@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>손동인 | Windows Systems &amp; AI Inference Engineer</title>
+<meta name="description" content="Windows 커널 드라이버, AI 추론 SDK, 보안 솔루션 개발자 손동인의 포트폴리오">
+<link rel="icon" type="image/svg+xml" href="memoji.svg">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-soft: #10151d;
+    --bg-card: #161b22;
+    --bg-card-hover: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #9ba7b4;
+    --accent: #58a6ff;
+    --accent-dim: rgba(88,166,255,0.12);
+    --green: #3fb950;
+    --nav-h: 64px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== Nav ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(13,17,23,0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); }
+  .nav-inner {
+    max-width: 1024px; margin: 0 auto; padding: 0 24px;
+    height: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+    font-weight: 700; font-size: 16px;
+  }
+  .brand img { width: 32px; height: 32px; border-radius: 50%; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    padding: 8px 14px; border-radius: 8px;
+    transition: color .15s, background .15s;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--accent-dim); }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600;
+    color: #0d1117 !important; background: var(--accent);
+    padding: 8px 16px !important; border-radius: 8px;
+    text-decoration: none;
+  }
+  .nav-cta:hover { filter: brightness(1.1); background: var(--accent) !important; }
+
+  /* ===== Hero ===== */
+  .hero {
+    min-height: 100svh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 55% 45% at 75% 20%, rgba(88,166,255,0.10), transparent),
+      radial-gradient(ellipse 40% 35% at 15% 85%, rgba(63,185,80,0.06), transparent);
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(88,166,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(88,166,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+  }
+  .hero-inner {
+    position: relative;
+    display: flex; align-items: center; gap: 56px;
+    width: 100%;
+    padding-top: var(--nav-h);
+  }
+  .hero-text { flex: 1; }
+  .hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--accent); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--accent-dim);
+    padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .hero .eyebrow::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero .tagline {
+    font-size: clamp(16px, 2.2vw, 19px);
+    color: var(--text-dim);
+    margin-top: 20px; max-width: 540px;
+  }
+  .hero .tagline strong { color: var(--text); font-weight: 600; }
+  .hero-actions { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 10px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    transition: transform .15s, filter .15s, border-color .15s, background .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--accent); color: #0d1117; }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent); background: var(--accent-dim); }
+  .btn svg { width: 17px; height: 17px; fill: currentColor; }
+  .hero-avatar { flex-shrink: 0; }
+  .hero-avatar img {
+    width: clamp(200px, 26vw, 300px);
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 0 8px rgba(88,166,255,0.06), 0 24px 64px rgba(0,0,0,0.5);
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .scroll-hint {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    color: var(--text-dim); font-size: 12px; letter-spacing: 0.1em;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    opacity: 0.7;
+  }
+  .scroll-hint::after {
+    content: ""; width: 1px; height: 28px;
+    background: linear-gradient(var(--text-dim), transparent);
+    animation: drip 1.8s ease-in-out infinite;
+  }
+  @keyframes drip {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ===== Stats bar ===== */
+  .stats {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-soft);
+  }
+  .stats-inner {
+    max-width: 1024px; margin: 0 auto; padding: 32px 24px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px; text-align: center;
+  }
+  .stat .num { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat .label { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ===== Sections ===== */
+  section { padding: 96px 0; }
+  section.alt { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .section-head { text-align: center; margin-bottom: 56px; }
+  .section-head .kicker {
+    color: var(--accent); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .section-head h2 { font-size: clamp(26px, 4vw, 34px); font-weight: 800; margin-top: 8px; letter-spacing: -0.01em; }
+  .section-head p { color: var(--text-dim); margin-top: 12px; font-size: 16px; }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.on { opacity: 1; transform: none; }
+
+  /* ===== Skills ===== */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+  .skill-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+    transition: background .15s, transform .15s, border-color .15s;
+  }
+  .skill-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); border-color: #3d4654; }
+  .skill-card .icon { font-size: 26px; margin-bottom: 12px; }
+  .skill-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .skill-card p { font-size: 14px; color: var(--text-dim); }
+
+  /* ===== Projects ===== */
+  .project {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+  .project-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .project h3 { font-size: 20px; font-weight: 700; }
+  .project .meta { font-size: 13px; color: var(--text-dim); }
+  .project .desc { font-size: 15px; color: var(--text-dim); margin-bottom: 16px; }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .badge {
+    font-size: 12px; font-weight: 600;
+    padding: 3px 10px; border-radius: 999px;
+    background: var(--accent-dim); color: var(--accent);
+  }
+  .badge.green { background: rgba(63,185,80,0.15); color: var(--green); }
+  .project ul { list-style: none; }
+  .project li {
+    font-size: 15px; color: var(--text-dim);
+    padding-left: 18px; position: relative; margin-bottom: 8px;
+  }
+  .project li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  .project li strong { color: var(--text); font-weight: 600; }
+  .highlight-box {
+    margin-top: 20px; padding: 16px 18px;
+    background: rgba(63,185,80,0.07);
+    border: 1px solid rgba(63,185,80,0.25);
+    border-radius: 12px;
+  }
+  .highlight-box p { font-size: 14px; color: var(--text-dim); margin-bottom: 4px; }
+  .highlight-box p:last-child { margin-bottom: 0; }
+  .highlight-box strong { color: var(--green); }
+  .clients { margin-top: 16px; font-size: 13px; color: var(--text-dim); }
+  .clients strong { color: var(--text); font-weight: 600; }
+
+  /* ===== Timeline ===== */
+  .timeline { position: relative; padding-left: 28px; max-width: 720px; margin: 0 auto; }
+  .timeline::before {
+    content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px;
+    width: 2px; background: var(--border);
+  }
+  .entry { position: relative; padding-bottom: 48px; }
+  .entry:last-child { padding-bottom: 0; }
+  .entry::before {
+    content: ""; position: absolute; left: -28px; top: 7px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--accent);
+  }
+  .entry .period { font-size: 13px; color: var(--accent); font-weight: 600; }
+  .entry h3 { font-size: 19px; font-weight: 700; margin: 4px 0 2px; }
+  .entry h3 small { font-weight: 400; font-size: 14px; color: var(--text-dim); }
+  .entry .role { font-size: 14px; color: var(--text-dim); margin-bottom: 14px; }
+  .entry ul { list-style: none; }
+  .entry li {
+    font-size: 15px; color: var(--text-dim);
+    padding-left: 18px; position: relative; margin-bottom: 7px;
+  }
+  .entry li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+
+  /* ===== Contact / Footer ===== */
+  .contact { text-align: center; }
+  .contact .links { display: flex; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0; text-align: center;
+    color: var(--text-dim); font-size: 13px;
+  }
+
+  @media (max-width: 720px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero-inner { flex-direction: column-reverse; text-align: center; gap: 32px; padding-top: calc(var(--nav-h) + 24px); }
+    .hero .tagline { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    section { padding: 64px 0; }
+    .project { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img src="memoji.svg" alt="">
+      devdongin
+    </a>
+    <div class="nav-links">
+      <a href="#skills">역량</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#career">경력</a>
+      <a href="https://he11oworld.tistory.com" target="_blank" rel="noopener">블로그</a>
+      <a class="nav-cta" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">Windows Systems &amp; AI Inference Engineer</span>
+      <h1>커널부터 AI까지,<br><span class="accent">전체 사이클</span>을 만듭니다</h1>
+      <p class="tagline">
+        안녕하세요, <strong>손동인</strong>입니다.<br>
+        커널 드라이버부터 AI 추론 SDK, 배포 파이프라인까지 —
+        <strong>Windows 보안 솔루션의 처음과 끝</strong>을 다루는 저수준 시스템 개발자입니다.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">프로젝트 보기</a>
+        <a class="btn btn-ghost" href="https://github.com/devdongin" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <img src="memoji.svg" alt="손동인 미모지 아바타">
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat reveal"><div class="num">6년+</div><div class="label">Windows 시스템 개발</div></div>
+    <div class="stat reveal"><div class="num">40–50%</div><div class="label">2024 회사 매출 기여 (100억 중)</div></div>
+    <div class="stat reveal"><div class="num">80억+</div><div class="label">담당 솔루션 누적 매출</div></div>
+    <div class="stat reveal"><div class="num">MS 등재</div><div class="label">Filter Altitude 정식 할당</div></div>
+  </div>
+</div>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="kicker">What I Do</p>
+      <h2>핵심 역량</h2>
+      <p>애플리케이션 아래, 커널과 하드웨어 사이의 영역을 다룹니다</p>
+    </div>
+    <div class="skills">
+      <div class="skill-card reveal">
+        <div class="icon">🔧</div>
+        <h3>커널 드라이버 개발</h3>
+        <p>FileSystem Minifilter Driver 단독 설계·개발. Microsoft filter altitude 정식 할당 (CULockerFsfd.sys)</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">🤖</div>
+        <h3>AI 추론 SDK</h3>
+        <p>OpenVINO 기반 C/C++ 추론 엔진 설계. C/C++/C#/Python 멀티 언어 바인딩, Windows/Linux 크로스 플랫폼</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">🔍</div>
+        <h3>리버스 엔지니어링</h3>
+        <p>WinDbg 크래시 덤프 분석으로 프로세스 비정상 종료, 타 보안 솔루션과의 충돌 원인 규명 및 해결</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">📦</div>
+        <h3>배포 &amp; 코드 서명</h3>
+        <p>NSIS, Themida, 인증서 서명 기반 배포 파이프라인 구축. 솔루션 전체 릴리스 프로세스 담당</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="kicker">Projects</p>
+      <h2>주요 프로젝트</h2>
+      <p>POC 데모부터 커널 드라이버까지, 한 솔루션의 전체 여정</p>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-head">
+        <h3>SEEUON / SEEUONIdp</h3>
+        <span class="meta">2023.07 – 현재 · (주)시선에이아이</span>
+      </div>
+      <p class="desc">AI 영상처리 기반 PC 화면 보안 솔루션 — POC 데모부터 SDK, 미들웨어, 애플리케이션, 커널 드라이버까지 전체 사이클 참여</p>
+      <div class="badges">
+        <span class="badge">C / C++</span>
+        <span class="badge">OpenVINO</span>
+        <span class="badge">Kernel Driver</span>
+        <span class="badge">WinDbg</span>
+        <span class="badge">Credential Provider</span>
+      </div>
+      <ul>
+        <li><strong>CUFaceSDK (C++)</strong> — OpenVINO 기반 AI 추론 SDK. 애플리케이션 개발의 공통 기반 엔진</li>
+        <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발</li>
+        <li><strong>CULockerFsfd (C)</strong> — 솔루션 프로세스·파일 자체 보호 커널 드라이버. Anti-Debugging, 로컬 파일 I/O 통제</li>
+        <li><strong>SeeuonCP</strong> — Windows Hello를 대체하는 얼굴 인증 Credential Provider 모듈 개발</li>
+        <li><strong>배포 총괄</strong> — Python, NSIS, Themida, 인증서 서명 기반 전체 릴리스 파이프라인 담당</li>
+        <li><strong>장애 분석</strong> — WinDbg 정적 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 해결</li>
+      </ul>
+      <div class="highlight-box">
+        <p>✦ SI 사업으로 시작해 회사 <strong>핵심 솔루션</strong>으로 성장 주도</p>
+        <p>✦ 2024년 회사 매출 100억 중 <strong>40–50% 담당</strong> 프로젝트로 성장</p>
+        <p>✦ 2025–2026 고객사 확대, <strong>누적 매출 약 80억 원</strong>의 주요 수입원 솔루션</p>
+      </div>
+      <p class="clients"><strong>고객사</strong> — 삼성 SDS · 삼성 SDI · 국세청 · SGI 서울보증 · 삼성전기 인도 외 대기업 POC 다수 (에이전트 보안 파트 메인 개발자)</p>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-head">
+        <h3>CULockerFsfd</h3>
+        <span class="meta">2023.07 – 현재 · Windows FileSystem Minifilter Driver</span>
+      </div>
+      <p class="desc">SEEUON의 파일·프로세스 자체 방어 커널 드라이버 — 베이스 설계부터 서명, MS 등재까지 단독 개발</p>
+      <div class="badges">
+        <span class="badge">C</span>
+        <span class="badge">WDK / Minifilter</span>
+        <span class="badge green">MS Altitude 정식 할당</span>
+      </div>
+      <ul>
+        <li>커널 드라이버 베이스 설계부터 인증서 서명, 배포까지 <strong>전체 사이클 단독 개발</strong></li>
+        <li>Microsoft에 filter altitude 정식 할당받아 <strong>공식 allocated altitudes 문서 등재</strong> (CULockerFsfd.sys)</li>
+        <li>Anti-Debugging 및 로컬 시스템 파일 I/O 통제로 솔루션 무결성 보호</li>
+      </ul>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-head">
+        <h3>CUFaceSDK</h3>
+        <span class="meta">2022.07 – 2024.01 · AI Model Inference SDK</span>
+      </div>
+      <p class="desc">훈련된 AI 모델을 애플리케이션에서 쓸 수 있게 하는 OpenVINO 기반 추론 엔진 SDK</p>
+      <div class="badges">
+        <span class="badge">C / C++</span>
+        <span class="badge">OpenVINO</span>
+        <span class="badge">Windows / Linux</span>
+      </div>
+      <ul>
+        <li>훈련 모델을 C/C++로 포팅한 <strong>추론 엔진 SDK</strong> 설계·개발 및 데모 앱 제작</li>
+        <li>C / C++ / C# / Python <strong>멀티 언어 바인딩</strong>, Windows·Ubuntu 크로스 플랫폼 라이브러리 제공</li>
+        <li>SEEUON의 기반 SDK로 채택 — 이를 토대로 판별 미들웨어(FaceOnDiscriminator) 개발</li>
+      </ul>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-head">
+        <h3>ClouDoc</h3>
+        <span class="meta">2020.01 – 2022.05 · 엠클라우독(넷아이디)</span>
+      </div>
+      <p class="desc">문서 중앙화 보안 솔루션 — 클라이언트(MFC)와 파일시스템 커널 드라이버 개발, 부팀장 역할 수행</p>
+      <div class="badges">
+        <span class="badge">C++ / MFC</span>
+        <span class="badge">FSD / FsFd</span>
+        <span class="badge">WinDbg</span>
+      </div>
+      <ul>
+        <li>로컬 PC 환경 통제 — <strong>가상드라이브, 탐색기 이동·복사 정책, 매체 제어, 네트워크 제어</strong></li>
+        <li>FileSystem Driver(FSD) 및 Filter Driver(FsFd) 개발·배포</li>
+        <li>WinDbg 덤프 분석으로 타 보안 프로그램과의 충돌 원인 규명 및 해결</li>
+        <li>전체 배포 파이프라인 담당 (Python, NSIS, Themida, 코드 서명)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="career">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="kicker">Career</p>
+      <h2>경력</h2>
+    </div>
+    <div class="timeline">
+      <div class="entry reveal">
+        <p class="period">2022.07 – 현재</p>
+        <h3>(주)시선에이아이 <small>([구]씨유박스)</small></h3>
+        <p class="role">Windows Systems / AI Inference Engineer</p>
+        <ul>
+          <li>영상보안 솔루션 SEEUON — SDK·미들웨어·커널 드라이버·배포 전체 사이클 개발</li>
+          <li>삼성 SDS·SDI, 국세청, SGI 서울보증 등 주요 고객사 메인 개발자 수행</li>
+        </ul>
+      </div>
+      <div class="entry reveal">
+        <p class="period">2020.01 – 2022.05</p>
+        <h3>엠클라우독 <small>(넷아이디)</small></h3>
+        <p class="role">보안 솔루션 클라이언트 / 커널 드라이버 개발 · 부팀장</p>
+        <ul>
+          <li>문서 중앙화 솔루션 ClouDoc 클라이언트(MFC) 및 파일시스템 드라이버 개발</li>
+        </ul>
+      </div>
+      <div class="entry reveal">
+        <p class="period">– 2019</p>
+        <h3>오토소프트</h3>
+        <p class="role">차량 소프트웨어 테스트 / 분석</p>
+        <ul>
+          <li>현대·기아 자동차 디지털 클러스터 테스트, 차량 내 모듈 개발 코드 분석</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt contact" id="contact">
+  <div class="container reveal">
+    <div class="section-head" style="margin-bottom:0">
+      <p class="kicker">Contact</p>
+      <h2>함께 일해보고 싶다면</h2>
+      <p>커널, 보안, AI 추론 — 어떤 이야기든 환영합니다</p>
+    </div>
+    <div class="links">
+      <a class="btn btn-primary" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://he11oworld.tistory.com" target="_blank" rel="noopener">Tech Blog</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 손동인 (devdongin) · Built with plain HTML — hosted on GitHub Pages</p>
+  </div>
+</footer>
+
+<script>
+  // nav border on scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+  // reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
