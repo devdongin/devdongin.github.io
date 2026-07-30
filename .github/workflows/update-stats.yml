@@ -10,7 +10,8 @@ name: update-stats
 
 on:
   schedule:
-    - cron: "30 15 * * 0" # 매주 월요일 00:30 KST
+    - cron: "30 15 * * 0" # 매주 월요일 00:30 KST — 전체 갱신 (통계 + AI REVIEW)
+    - cron: "30 15 * * 1-6" # 그 외 요일 00:30 KST — 통계·히트맵만 (daily)
   workflow_dispatch:
 
 permissions:
@@ -47,6 +48,8 @@ jobs:
         run: echo "NOW_KST=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M')" >> "$GITHUB_ENV"
 
       - name: Regenerate AI review (Claude, subscription OAuth)
+        # 평일 daily 실행에서는 건너뛰고, 주간 실행·수동 실행에서만 재작성
+        if: github.event.schedule != '30 15 * * 1-6'
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -60,7 +63,9 @@ jobs:
             규칙:
             - CLAUDE.md의 절대 규칙을 지킨다: 민감정보 금지, 이름은 "선동인",
               사실에 없는 수치·경력 창작 금지.
-            - 구조 유지: <p><strong>한 문장 핵심 평가.</strong> 이어지는 한두 문장.
+            - 구조 유지: <p><strong>한 문장 핵심 평가.</strong> 이어서 3~4문장으로 상세히 —
+              집계 범위(전 저장소·전 브랜치), 대표 저장소 기여율, 월별 추이(정점·소강·회복),
+              최근 확장 활동 순으로 구체 수치를 인용해 쓴다.
               <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여
               데이터를 근거로 자동 생성·갱신합니다 · 갱신 ${{ env.NOW_KST }} KST</span></p>
             - 평가 근거는 data/stats.json의 실제 수치(총 커밋 수, 기여 통계)와

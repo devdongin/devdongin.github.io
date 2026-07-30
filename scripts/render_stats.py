@@ -73,11 +73,12 @@ def build_svg(daily, start, end, total):
                              f'fill="{color(n)}"><title>{d.isoformat()} · {n} commits'
                              f'</title></rect>')
 
-    parts.append(f'<text x="{width - 167}" y="112" font-size="10" fill="#9ba7b4">Less</text>')
+    # 범례는 셀 그리드(마지막 행 y=107) 아래에 배치해 겹치지 않게 한다
+    parts.append(f'<text x="{width - 167}" y="122" font-size="10" fill="#9ba7b4">Less</text>')
     for i, c in enumerate(PALETTE):
-        parts.append(f'<rect x="{width - 133 + i * 13}" y="102" width="11" height="11" '
+        parts.append(f'<rect x="{width - 133 + i * 13}" y="113" width="11" height="11" '
                      f'rx="2" fill="{c}"/>')
-    parts.append(f'<text x="{width - 64}" y="112" font-size="10" fill="#9ba7b4">More</text>')
+    parts.append(f'<text x="{width - 64}" y="122" font-size="10" fill="#9ba7b4">More</text>')
 
     label = f"커밋 히트맵 {start.isoformat()}부터 {end.isoformat()}까지, 총 {total} 커밋"
     return (f'<svg viewBox="0 0 {width} {height}" width="{width}" '
