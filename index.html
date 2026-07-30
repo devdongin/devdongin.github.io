@@ -586,7 +586,7 @@
       <div class="skill-card reveal">
         <div class="icon">🧵</div>
         <h3>멀티스레딩 &amp; 병목 설계</h3>
-        <p>실시간 영상 캡처와 AI 추론이 겹치는 파이프라인에서 스레드 구조를 설계합니다. 락 경합·병목 지점을 분석해 구조 개선으로 풀어내는 것이 강점입니다</p>
+        <p>추론 SDK와 판별 미들웨어의 스레드 구조를 재설계해 <strong>프레임당 처리 시간을 150ms → 40~50ms(약 3배)</strong>로 단축했습니다. 실시간 영상 처리와 AI 추론이 겹치는 파이프라인에서 병목을 찾아 구조로 푸는 것이 강점입니다</p>
       </div>
       <div class="skill-card reveal">
         <div class="icon">🔍</div>
@@ -651,7 +651,7 @@
       </div>
       <ul>
         <li><strong>CUFaceSDK (C++)</strong> — OpenVINO 기반 AI 추론 SDK. 애플리케이션 개발의 공통 기반 엔진</li>
-        <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발</li>
+        <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발. 스레드 구조 재설계로 <strong>프레임당 150ms → 40~50ms</strong> 단축</li>
         <li><strong>CULockerFsfd (C)</strong> — 솔루션 프로세스·파일 자체 보호 커널 드라이버. Anti-Debugging, 로컬 파일 I/O 통제</li>
         <li><strong>SeeuonCP</strong> — Windows 로그인 화면에서 얼굴 인증을 제공하는 커스텀 Credential Provider 모듈 개발<!-- STAT-SEEUONCP:START --> — 사내 저장소 커밋 <strong>16/21 (76% · 2026-07-30 기준)</strong><!-- STAT-SEEUONCP:END --></li>
         <li><strong>SEEUONIdp</strong> — Identity Provider 확장판 클라이언트 메인 개발·설계. SSO 연계, GoogleOTP 연동, Passwordless 얼굴 본인인증</li>
@@ -725,8 +725,8 @@
         <ul>
           <li><strong>문제</strong> — 연구실에서 훈련된 모델은 그대로는 상용 제품에서 쓸 수 없다: C++ 제품군에 맞는 추론 계층이 필요</li>
           <li><strong>구현</strong> — OpenVINO 기반 C/C++ 추론 엔진을 설계하고, C/C++/C#/Python 바인딩과 Windows·Ubuntu 크로스 플랫폼 빌드 제공</li>
-          <li><strong>난점 → 해결</strong> — Edge Device 보드 등 이기종 배포 환경 대응이 필요해 보드 최적화 버전을 별도 개발</li>
-          <li><strong>결과</strong> — SEEUON 제품군의 공통 기반 SDK로 채택, 판별 미들웨어(FaceOnDiscriminator)의 토대</li>
+          <li><strong>난점 → 해결</strong> — 실시간 영상에 추론을 얹으면 프레임당 150ms가 소요돼 실사용이 어려웠음. SDK와 판별 미들웨어(FaceOnDiscriminator)의 스레드 구조와 처리 경로를 재설계해 병목 제거</li>
+          <li><strong>결과</strong> — <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>로 실시간 처리 수준 확보. SEEUON 제품군의 공통 기반 SDK로 채택되어 Edge Device 보드 최적화 버전까지 확장</li>
         </ul>
       </details>
     </div>
