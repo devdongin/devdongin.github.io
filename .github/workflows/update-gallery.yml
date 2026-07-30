@@ -1,0 +1,41 @@
+# 갤러리 자동 반영 — gallery/ 폴더에 미디어를 넣고 push하면 페이지가 갱신된다.
+# (gallery.html 자체를 커밋하므로 트리거는 gallery/** 로 한정해 재귀 실행을 막는다)
+name: update-gallery
+
+on:
+  push:
+    branches: [main]
+    paths: ["gallery/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-gallery
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Render gallery page
+        run: python scripts/render_gallery.py
+
+      - name: Commit & push
+        run: |
+          git config user.name devdongin
+          git config user.email devdongin@users.noreply.github.com
+          git add gallery.html
+          if git diff --cached --quiet; then
+            echo "no changes, skipping commit"
+            exit 0
+          fi
+          git commit -m "chore: 갤러리 자동 반영"
+          git push
