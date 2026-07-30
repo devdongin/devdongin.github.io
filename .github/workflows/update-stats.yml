@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write # claude-code-action OIDC 요구사항
 
 concurrency:
   group: update-stats
