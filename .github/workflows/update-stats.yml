@@ -69,10 +69,10 @@ jobs:
         run: |
           git config user.name devdongin
           git config user.email devdongin@users.noreply.github.com
-          if git diff --quiet -- index.html data/stats.json; then
+          git add index.html data/
+          if git diff --cached --quiet; then
             echo "no changes, skipping commit"
             exit 0
           fi
-          git add index.html data/stats.json
           git commit -m "chore: 주간 자동 갱신 — 커밋 통계 & AI REVIEW"
           git push

@@ -22,6 +22,7 @@
 출력(data/stats.json)에는 일자별 합계·슬러그별 수치만 남고
 저장소 실명은 포함되지 않는다. 로그에도 저장소명을 출력하지 않는다.
 """
+import hashlib
 import json
 import os
 import sys
@@ -30,6 +31,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
+
+CACHE_PATH = "data/scan_cache.json"
 
 API = "https://api.github.com"
 KST = timezone(timedelta(hours=9))
@@ -55,8 +58,9 @@ def gh(token, path, params=None):
                 return json.load(r)
         except urllib.error.HTTPError as e:
             if e.code in (403, 429) and attempt < 3:
+                # 실제 리셋 시각까지 대기 (시간당 한도라 최대 1시간)
                 reset = int(e.headers.get("X-RateLimit-Reset", "0"))
-                wait = min(max(reset - time.time() + 2, 5), 300)
+                wait = min(max(reset - time.time() + 5, 10), 3700)
                 print(f"[collect] rate limited, waiting {int(wait)}s", file=sys.stderr)
                 time.sleep(wait)
                 continue
@@ -98,14 +102,41 @@ def main():
     for target in config["scan"]:
         kind, name = target.split(":", 1)
         if kind == "org":
-            repos += [r["full_name"] for r in gh_paged(token, f"/orgs/{name}/repos", {"type": "all"})]
+            listing = gh_paged(token, f"/orgs/{name}/repos", {"type": "all"})
         else:
-            repos += [r["full_name"] for r in gh_paged(token, f"/users/{name}/repos", {"type": "owner"})]
-    print(f"[collect] scanning {len(repos)} repos", file=sys.stderr)
+            listing = gh_paged(token, f"/users/{name}/repos", {"type": "owner"})
+        repos += [(r["full_name"], r.get("pushed_at") or "") for r in listing]
+
+    # 스킵 캐시: 과거 스캔에서 커밋이 한 건도 없던 레포는 제외한다.
+    # public 파일이므로 레포명은 sha256 해시로만 기록한다.
+    # 캐시를 지우고 커밋하면 전체 레포를 다시 스캔한다.
+    try:
+        cache = json.load(open(CACHE_PATH, encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        cache = {"repos": {}}
+
+    targets = []
+    skipped_cache = skipped_dormant = 0
+    for full_name, pushed_at in repos:
+        h = hashlib.sha256(full_name.encode()).hexdigest()[:16]
+        entry = cache["repos"].get(h)
+        if entry and not entry.get("found"):
+            skipped_cache += 1
+            continue
+        if pushed_at:
+            pushed = datetime.fromisoformat(pushed_at.replace("Z", "+00:00"))
+            if pushed < datetime(start.year, start.month, start.day, tzinfo=KST):
+                # 집계 기간 시작 이후 push가 없으면 새 커밋도 없다
+                skipped_dormant += 1
+                continue
+        targets.append((full_name, h))
+    print(f"[collect] {len(repos)} repos listed, scanning {len(targets)} "
+          f"(cache-skip {skipped_cache}, dormant-skip {skipped_dormant})", file=sys.stderr)
 
     daily = {}
     seen = set()
-    for i, repo in enumerate(repos, 1):
+    for i, (repo, h) in enumerate(targets, 1):
+        found_before = len(seen)
         for branch in gh_paged(token, f"/repos/{repo}/branches"):
             for author in authors:
                 commits = gh_paged(token, f"/repos/{repo}/commits", {
@@ -120,7 +151,11 @@ def main():
                     d = datetime.fromisoformat(iso).astimezone(KST).date()
                     if start <= d <= end:
                         daily[d.isoformat()] = daily.get(d.isoformat(), 0) + 1
-        print(f"[collect] repo {i}/{len(repos)} done, {len(seen)} unique commits", file=sys.stderr)
+        cache["repos"][h] = {
+            "found": len(seen) > found_before,
+            "scanned_at": datetime.now(KST).isoformat(timespec="seconds"),
+        }
+        print(f"[collect] repo {i}/{len(targets)} done, {len(seen)} unique commits", file=sys.stderr)
 
     repo_stats = {}
     for full_name, slug in config.get("repo_stats", {}).items():
@@ -150,6 +185,9 @@ def main():
     os.makedirs("data", exist_ok=True)
     with open("data/stats.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
+        f.write("\n")
+    with open(CACHE_PATH, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(cache, f, indent=1, sort_keys=True)
         f.write("\n")
     print(f"[collect] total {out['total_commits']} commits, "
           f"{len(repo_stats)} repo stats -> data/stats.json", file=sys.stderr)
