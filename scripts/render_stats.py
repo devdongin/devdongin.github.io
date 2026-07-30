@@ -11,6 +11,7 @@
 
 AI-REVIEW 구간은 이 스크립트가 건드리지 않는다 (Claude가 별도 갱신).
 """
+import html as html_mod
 import json
 import re
 import sys
@@ -18,6 +19,10 @@ from datetime import date, timedelta
 
 INDEX = "index.html"
 STATS = "data/stats.json"
+BLOG = "data/blog.json"
+
+# LinkedIn 프로필 URL — 비어 있으면 카드 미출력
+LINKEDIN_URL = ""
 
 CELL, STEP, X0, Y0 = 11, 13, 8, 18
 COLS = 54  # 마지막 열이 집계 종료일이 속한 주가 되도록 54주 고정
@@ -94,6 +99,37 @@ def build_monthly(daily, start, end):
             + "".join(rows) + "</tbody></table>")
 
 
+def build_blog_cards(posts):
+    esc = html_mod.escape
+    cards = []
+    for p in posts:
+        cards.append(
+            f'<a class="flow-card" href="{esc(p["link"])}" target="_blank" rel="noopener">'
+            f'<span class="fc-tag">{esc(p["category"])}</span>'
+            f'<span class="fc-title">{esc(p["title"])}</span>'
+            f'<span class="fc-meta">{esc(p["date"])}</span></a>')
+    cards.append(
+        '<a class="flow-card" href="https://he11oworld.tistory.com" target="_blank" rel="noopener">'
+        '<span class="fc-tag">Tech Blog</span>'
+        '<span class="fc-title">블로그 전체 보기 →</span>'
+        '<span class="fc-meta">he11oworld.tistory.com</span></a>')
+    if LINKEDIN_URL:
+        cards.append(
+            f'<a class="flow-card" href="{LINKEDIN_URL}" target="_blank" rel="noopener">'
+            f'<span class="fc-tag">LinkedIn</span>'
+            f'<span class="fc-title">프로필 보기 →</span>'
+            f'<span class="fc-meta">linkedin.com</span></a>')
+    cards.append(
+        '<a class="flow-card" href="https://github.com/devdongin" target="_blank" rel="noopener">'
+        '<span class="fc-tag">GitHub</span>'
+        '<span class="fc-title">저장소 보기 →</span>'
+        '<span class="fc-meta">github.com/devdongin</span></a>')
+    half = "".join(cards)
+    # 끊김 없는 무한 스크롤을 위해 동일한 절반을 2벌 렌더 (두 번째는 스크린리더 제외)
+    return (f'\n      <div class="ticker-half">{half}</div>'
+            f'\n      <div class="ticker-half" aria-hidden="true">{half}</div>\n      ')
+
+
 def replace(html, name, new_inner, required=True):
     pattern = re.compile(
         rf"(<!-- {re.escape(name)}:START -->)(.*?)(<!-- {re.escape(name)}:END -->)",
@@ -148,6 +184,14 @@ def main():
                        f' — 사내 저장소 커밋 <strong>{s["mine"]:,}/{s["total"]:,} '
                        f'({s["percent"]}% · {end} 기준)</strong>',
                        required=False)
+
+    try:
+        with open(BLOG, encoding="utf-8") as f:
+            posts = json.load(f).get("posts", [])
+    except (FileNotFoundError, json.JSONDecodeError):
+        posts = []
+    if posts:
+        html = replace(html, "BLOG-CARDS", build_blog_cards(posts), required=False)
 
     with open(INDEX, "w", encoding="utf-8", newline="\n") as f:
         f.write(html)

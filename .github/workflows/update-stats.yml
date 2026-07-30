@@ -37,6 +37,9 @@ jobs:
           STATS_CONFIG: ${{ secrets.STATS_CONFIG }}
         run: python scripts/collect_stats.py
 
+      - name: Collect blog posts (RSS)
+        run: python scripts/collect_blog.py
+
       - name: Render stats into index.html
         run: python scripts/render_stats.py
 

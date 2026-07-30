@@ -1,0 +1,52 @@
+{
+ "posts": [
+  {
+   "title": "[쿠X 파트너스] 운영정책 위반 안내 (?)",
+   "link": "https://he11oworld.tistory.com/entry/%EC%BF%A0X-%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8A%A4-%EC%9A%B4%EC%98%81%EC%A0%95%EC%B1%85-%EC%9C%84%EB%B0%98-%EC%95%88%EB%82%B4",
+   "category": "IT최신동향",
+   "date": "2025-12-19"
+  },
+  {
+   "title": "AWS가 마비됐다..",
+   "link": "https://he11oworld.tistory.com/entry/AWS%EA%B0%80-%EB%A7%88%EB%B9%84%EB%90%90%EB%8B%A4",
+   "category": "IT최신동향",
+   "date": "2025-10-20"
+  },
+  {
+   "title": "[크몽] 개발 부업 후기 25/09/12",
+   "link": "https://he11oworld.tistory.com/entry/%ED%81%AC%EB%AA%BD-%EA%B0%9C%EB%B0%9C-%EB%B6%80%EC%97%85-%ED%9B%84%EA%B8%B0-250912",
+   "category": "개발자 일기",
+   "date": "2025-09-13"
+  },
+  {
+   "title": "[아이폰/티머니] 아이폰에서 티머니 사용이 가능해졌습니다 (사용/등록방법)",
+   "link": "https://he11oworld.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0%ED%8B%B0%EB%A8%B8%EB%8B%88-%EC%95%84%EC%9D%B4%ED%8F%B0%EC%97%90%EC%84%9C-%ED%8B%B0%EB%A8%B8%EB%8B%88-%EC%82%AC%EC%9A%A9%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%A1%8C%EC%8A%B5%EB%8B%88%EB%8B%A4-%EC%82%AC%EC%9A%A9%EB%93%B1%EB%A1%9D%EB%B0%A9%EB%B2%95",
+   "category": "IT최신동향",
+   "date": "2025-07-22"
+  },
+  {
+   "title": "아이폰/애플워치/티머니 국내 상륙 확정 소식",
+   "link": "https://he11oworld.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0%EC%95%A0%ED%94%8C%EC%9B%8C%EC%B9%98%ED%8B%B0%EB%A8%B8%EB%8B%88-%EA%B5%AD%EB%82%B4-%EC%83%81%EB%A5%99-%ED%99%95%EC%A0%95%EC%86%8C",
+   "category": "IT최신동향",
+   "date": "2025-06-16"
+  },
+  {
+   "title": "[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 2편 (데모 빌드)",
+   "link": "https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-2%ED%8E%B8-%EB%8D%B0%EB%AA%A8-%EB%B9%8C%EB%93%9C",
+   "category": "AI",
+   "date": "2025-03-27"
+  },
+  {
+   "title": "[코어키퍼-CoreKeeper] &quot;크로스 플레이 권한이 없어 진행할 수 없습니다&quot; 해결 방법",
+   "link": "https://he11oworld.tistory.com/entry/%EC%BD%94%EC%96%B4%ED%82%A4%ED%8D%BC-CoreKeeper-%ED%81%AC%EB%A1%9C%EC%8A%A4-%ED%94%8C%EB%A0%88%EC%9D%B4-%EA%B6%8C%ED%95%9C%EC%9D%B4-%EC%97%86%EC%96%B4-%EC%A7%84%ED%96%89%ED%95%A0-%EC%88%98-%EC%97%86%EC%8A%B5%EB%8B%88%EB%8B%A4-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95",
+   "category": "잡다한 팁",
+   "date": "2024-09-26"
+  },
+  {
+   "title": "SourceTree/소스트리 실행되지 않는 현상 고치기",
+   "link": "https://he11oworld.tistory.com/entry/SourceTree%EC%86%8C%EC%8A%A4%ED%8A%B8%EB%A6%AC-%EC%8B%A4%ED%96%89%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81-%EA%B3%A0%EC%B9%98%EA%B8%B0",
+   "category": "그냥 개발 이야기",
+   "date": "2024-05-22"
+  }
+ ]
+}
