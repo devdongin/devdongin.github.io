@@ -102,14 +102,27 @@
     font-weight: 700; font-size: 16px;
   }
   .brand img { width: 32px; height: 32px; border-radius: 50%; }
-  .nav-links { display: flex; gap: 4px; }
+  .nav-links { position: relative; display: flex; gap: 4px; }
   .nav-links a {
+    position: relative; z-index: 1;
     color: var(--text-dim); text-decoration: none;
     font-size: 14px; font-weight: 500;
     padding: 8px 14px; border-radius: 8px;
     transition: color .15s, background .15s;
   }
   .nav-links a:hover { color: var(--text); background: var(--accent-dim); }
+  .nav-links a.active { color: var(--text); }
+  .nav-indicator {
+    position: absolute; left: 0; top: 50%; z-index: 0;
+    height: 34px; width: 0;
+    border-radius: 8px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(88,166,255,0.18);
+    transform: translate(0, -50%);
+    opacity: 0;
+    transition: transform .26s ease, width .26s ease, opacity .18s ease;
+    pointer-events: none;
+  }
   .nav-cta {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 14px; font-weight: 600;
@@ -563,10 +576,12 @@
     .reveal { transition: none; }
     .hero-avatar img { animation: none; }
     .scroll-hint::after { animation: none; }
+    .nav-indicator { transition: none; }
   }
 
   @media (max-width: 720px) {
     .nav-links a:not(.nav-cta) { display: none; }
+    .nav-indicator { display: none; }
     .hero-inner { flex-direction: column-reverse; text-align: center; gap: 32px; padding-top: calc(var(--nav-h) + 24px); }
     .hero .tagline { margin-left: auto; margin-right: auto; }
     .hero-actions { justify-content: center; }
@@ -589,13 +604,14 @@
       devdongin
     </a>
     <div class="nav-links">
-      <a href="#skills">역량</a>
-      <a href="#projects">프로젝트</a>
-      <a href="#activity">활동</a>
-      <a href="#interview">면접</a>
-      <a href="#career">경력</a>
+      <span class="nav-indicator" aria-hidden="true"></span>
+      <a href="#skills" data-section-link>역량</a>
+      <a href="#projects" data-section-link>프로젝트</a>
+      <a href="#activity" data-section-link>활동</a>
+      <a href="#interview" data-section-link>면접</a>
+      <a href="#career" data-section-link>경력</a>
       <a href="gallery.html">갤러리</a>
-      <a href="#contact">연락</a>
+      <a href="#contact" data-section-link>연락</a>
       <a href="https://he11oworld.tistory.com" target="_blank" rel="noopener">블로그</a>
       <a class="nav-cta" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
     </div>
@@ -1098,6 +1114,44 @@
   // nav border on scroll
   const nav = document.getElementById('nav');
   addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+  // sliding section indicator in top nav
+  const navLinks = [...document.querySelectorAll('[data-section-link]')];
+  const navIndicator = document.querySelector('.nav-indicator');
+  const sectionById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
+  const moveIndicator = active => {
+    if (!navIndicator || !active || active.offsetParent === null) return;
+    navLinks.forEach(a => a.classList.toggle('active', a === active));
+    navIndicator.style.width = `${active.offsetWidth}px`;
+    navIndicator.style.transform = `translate(${active.offsetLeft}px, -50%)`;
+    navIndicator.style.opacity = '1';
+  };
+  const hideIndicator = () => {
+    navLinks.forEach(a => a.classList.remove('active'));
+    if (navIndicator) navIndicator.style.opacity = '0';
+  };
+  const sectionObserver = new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) moveIndicator(sectionById.get(visible.target.id));
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: [0.05, 0.2, 0.45, 0.7] });
+  sectionById.forEach((_, id) => {
+    const section = document.getElementById(id);
+    if (section) sectionObserver.observe(section);
+  });
+  const topSection = document.getElementById('top');
+  if (topSection) {
+    new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) hideIndicator();
+    }, { threshold: 0.55 }).observe(topSection);
+  }
+  navLinks.forEach(a => a.addEventListener('click', () => moveIndicator(a)));
+  navLinks.forEach(a => a.addEventListener('focus', () => moveIndicator(a)));
+  addEventListener('resize', () => {
+    const active = document.querySelector('[data-section-link].active');
+    if (active) moveIndicator(active);
+  }, { passive: true });
 
   // reveal on scroll
   const io = new IntersectionObserver(entries => {
