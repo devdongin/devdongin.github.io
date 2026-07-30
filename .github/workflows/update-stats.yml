@@ -1,0 +1,76 @@
+# 주간 자동 갱신 — 커밋 집계 + AI REVIEW
+#
+# 필요한 repo secrets:
+#   STATS_TOKEN             회사 계정 PAT (대상 저장소 읽기 권한)
+#   STATS_CONFIG            집계 설정 JSON — scripts/collect_stats.py docstring 참고.
+#                           내부 저장소명이 포함되므로 반드시 secret으로만 관리한다.
+#   CLAUDE_CODE_OAUTH_TOKEN Claude 구독(Pro/Max) OAuth 토큰 — `claude setup-token`으로 발급.
+#                           API 별도 과금 없이 플랜 사용량에서 차감된다.
+name: update-stats
+
+on:
+  schedule:
+    - cron: "30 15 * * 0" # 매주 월요일 00:30 KST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect commit stats
+        env:
+          STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
+          STATS_CONFIG: ${{ secrets.STATS_CONFIG }}
+        run: python scripts/collect_stats.py
+
+      - name: Render stats into index.html
+        run: python scripts/render_stats.py
+
+      - name: Set KST timestamp
+        run: echo "NOW_KST=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M')" >> "$GITHUB_ENV"
+
+      - name: Regenerate AI review (Claude, subscription OAuth)
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: '--allowedTools "Read,Edit"'
+          prompt: |
+            data/stats.json(최신 커밋 집계)과 index.html, CLAUDE.md를 읽고,
+            index.html에서 <!-- AI-REVIEW:START --> 와 <!-- AI-REVIEW:END --> 사이의
+            평가 문단만 다시 작성하라.
+
+            규칙:
+            - CLAUDE.md의 절대 규칙을 지킨다: 민감정보 금지, 이름은 "선동인",
+              사실에 없는 수치·경력 창작 금지.
+            - 구조 유지: <p><strong>한 문장 핵심 평가.</strong> 이어지는 한두 문장.
+              <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여
+              데이터를 근거로 자동 생성·갱신합니다 · 갱신 ${{ env.NOW_KST }} KST</span></p>
+            - 평가 근거는 data/stats.json의 실제 수치(총 커밋 수, 기여 통계)와
+              index.html에 이미 공개된 사실만 사용한다. 내부 저장소명은 절대 쓰지 않는다.
+            - 최근 활동량(월별 추이)이 눈에 띄게 변했다면 그것을 반영해도 좋다.
+            - 마커 밖의 내용은 절대 수정하지 않는다.
+
+      - name: Commit & push
+        run: |
+          git config user.name devdongin
+          git config user.email devdongin@users.noreply.github.com
+          if git diff --quiet -- index.html data/stats.json; then
+            echo "no changes, skipping commit"
+            exit 0
+          fi
+          git add index.html data/stats.json
+          git commit -m "chore: 주간 자동 갱신 — 커밋 통계 & AI REVIEW"
+          git push
