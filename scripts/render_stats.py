@@ -26,6 +26,27 @@ LINKEDIN_URL = "https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021
 # 크몽 프로필 URL — 비어 있으면 카드 미출력
 KMONG_URL = "https://kmong.com/@%EA%B0%AD%EB%8F%99"
 
+# 채널 카드 시그니처 로고 (인라인 SVG, 색상은 CSS가 결정)
+BRAND_ICONS = {
+    "linkedin": ('<svg class="fc-logo" viewBox="0 0 24 24" aria-hidden="true">'
+                 '<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0'
+                 '-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 '
+                 '3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-'
+                 '.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 '
+                 '0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0'
+                 'H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24'
+                 ' 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>'),
+    "github": ('<svg class="fc-logo" viewBox="0 0 16 16" aria-hidden="true">'
+               '<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38'
+               ' 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.2'
+               '8-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.2'
+               '8-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.0'
+               '2.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.'
+               '2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3'
+               '.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8'
+               '.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>'),
+}
+
 CELL, STEP, X0, Y0 = 11, 13, 8, 18
 COLS = 54  # 마지막 열이 집계 종료일이 속한 주가 되도록 54주 고정
 PALETTE = ["#1b222c", "#0e4429", "#006d32", "#26a641", "#39d353"]
@@ -105,23 +126,26 @@ def build_monthly(daily, start, end):
 def _blog_half(posts, focusable):
     esc = html_mod.escape
     extra = "" if focusable else ' tabindex="-1"'
-    # LinkedIn이 현재 주 활동 채널 — 카드를 맨 앞에 배치
+    # LinkedIn이 현재 주 활동 채널 — 카드를 맨 앞에 배치. 채널 카드는 브랜드 컬러/로고 적용
     entries = []
     if LINKEDIN_URL:
-        entries.append(("LinkedIn", "최근 활동 & 프로필 보기 →", "linkedin.com", LINKEDIN_URL))
-    entries += [(p["category"], p["title"], p["date"], p["link"]) for p in posts]
+        entries.append(("LinkedIn", "최근 활동 & 프로필 보기 →", "linkedin.com",
+                        LINKEDIN_URL, "linkedin"))
+    entries += [(p["category"], p["title"], p["date"], p["link"], None) for p in posts]
     entries.append(("Tech Blog", "블로그 전체 보기 →", "he11oworld.tistory.com",
-                    "https://he11oworld.tistory.com"))
+                    "https://he11oworld.tistory.com", "tistory"))
     entries.append(("GitHub", "저장소 보기 →", "github.com/devdongin",
-                    "https://github.com/devdongin"))
+                    "https://github.com/devdongin", "github"))
     if KMONG_URL:
-        entries.append(("크몽", "개발 외주 프로필 →", "kmong.com/@갭동", KMONG_URL))
+        entries.append(("kmong", "개발 외주 프로필 →", "kmong.com/@갭동", KMONG_URL, "kmong"))
     return "".join(
-        f'<a class="flow-card" href="{esc(link)}" target="_blank" rel="noopener"{extra}>'
+        f'<a class="flow-card{f" flow-card--{brand}" if brand else ""}" '
+        f'href="{esc(link)}" target="_blank" rel="noopener"{extra}>'
+        f'{BRAND_ICONS.get(brand, "")}'
         f'<span class="fc-tag">{esc(tag)}</span>'
         f'<span class="fc-title">{esc(title)}</span>'
         f'<span class="fc-meta">{esc(meta)}</span></a>'
-        for tag, title, meta, link in entries)
+        for tag, title, meta, link, brand in entries)
 
 
 def build_blog_cards(posts):
