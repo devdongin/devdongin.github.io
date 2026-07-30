@@ -19,6 +19,9 @@ PAGE = "gallery.html"
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".jfif", ".avif"}
 VID_EXT = {".mp4", ".webm"}
 CAPTIONS = {
+    "해커톤-1.webp": "서울시 하드웨어 해커톤 2019",
+    "해커톤-2.webp": "서울시 하드웨어 해커톤 2019",
+    "해커톤-3.webp": "서울시 하드웨어 해커톤 2019",
     "liveness-데모.mp4": "Windows 로그인 세션 liveness 데모 — 보안 솔루션의 시작 지점인 로그인 단계라 성능보다 위변조 탐지 강도를 우선해 설정했습니다",
 }
 

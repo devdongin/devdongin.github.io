@@ -607,8 +607,8 @@
       <span class="nav-indicator" aria-hidden="true"></span>
       <a href="#skills" data-section-link>역량</a>
       <a href="#projects" data-section-link>프로젝트</a>
-      <a href="#activity" data-section-link>활동</a>
       <a href="#interview" data-section-link>면접</a>
+      <a href="#activity" data-section-link>활동</a>
       <a href="#career" data-section-link>경력</a>
       <a href="gallery.html">갤러리</a>
       <a href="#contact" data-section-link>연락</a>
@@ -1118,7 +1118,10 @@
   // sliding section indicator in top nav
   const navLinks = [...document.querySelectorAll('[data-section-link]')];
   const navIndicator = document.querySelector('.nav-indicator');
-  const sectionById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
+  const navSections = navLinks
+    .map(link => ({ link, section: document.getElementById(link.getAttribute('href').slice(1)) }))
+    .filter(item => item.section)
+    .sort((a, b) => a.section.offsetTop - b.section.offsetTop);
   const moveIndicator = active => {
     if (!navIndicator || !active || active.offsetParent === null) return;
     navLinks.forEach(a => a.classList.toggle('active', a === active));
@@ -1130,28 +1133,24 @@
     navLinks.forEach(a => a.classList.remove('active'));
     if (navIndicator) navIndicator.style.opacity = '0';
   };
-  const sectionObserver = new IntersectionObserver(entries => {
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (visible) moveIndicator(sectionById.get(visible.target.id));
-  }, { rootMargin: '-40% 0px -50% 0px', threshold: [0.05, 0.2, 0.45, 0.7] });
-  sectionById.forEach((_, id) => {
-    const section = document.getElementById(id);
-    if (section) sectionObserver.observe(section);
-  });
-  const topSection = document.getElementById('top');
-  if (topSection) {
-    new IntersectionObserver(entries => {
-      if (entries.some(e => e.isIntersecting)) hideIndicator();
-    }, { threshold: 0.55 }).observe(topSection);
-  }
+  const syncIndicator = () => {
+    const navHeight = nav.offsetHeight || 72;
+    const readLine = scrollY + navHeight + Math.min(innerHeight * 0.22, 180);
+    const active = [...navSections].reverse().find(({ section }) => section.offsetTop <= readLine);
+    if (!active) {
+      hideIndicator();
+      return;
+    }
+    moveIndicator(active.link);
+  };
   navLinks.forEach(a => a.addEventListener('click', () => moveIndicator(a)));
   navLinks.forEach(a => a.addEventListener('focus', () => moveIndicator(a)));
   addEventListener('resize', () => {
-    const active = document.querySelector('[data-section-link].active');
-    if (active) moveIndicator(active);
+    navSections.sort((a, b) => a.section.offsetTop - b.section.offsetTop);
+    syncIndicator();
   }, { passive: true });
+  addEventListener('scroll', syncIndicator, { passive: true });
+  syncIndicator();
 
   // reveal on scroll
   const io = new IntersectionObserver(entries => {
