@@ -5,16 +5,16 @@
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선동인 | Windows Systems &amp; AI Inference Engineer</title>
-<meta name="description" content="Windows 커널 드라이버, AI 추론 SDK, 보안 솔루션 개발자 선동인의 포트폴리오">
+<meta name="description" content="Vision AI 영상보안 솔루션을 AI 추론 SDK·Windows 클라이언트·커널 보호·배포·운영까지 제품화해온 시스템 소프트웨어 엔지니어 선동인의 포트폴리오">
 <meta name="google-site-verification" content="8krlzHDtJ5GVQ8Z6HOvz6EHLX4pDK0UsEzQ-aY-irrE">
 <meta property="og:type" content="website">
 <meta property="og:title" content="선동인 | Windows Systems &amp; AI Inference Engineer">
-<meta property="og:description" content="커널 드라이버부터 AI 추론 SDK, 배포까지 — Windows 보안 솔루션의 전체 사이클을 다루는 개발자">
+<meta property="og:description" content="Vision AI 영상보안 솔루션 SEEUON을 AI 추론 SDK·Windows 클라이언트·미들웨어·배포·운영 대응까지 제품화해온 엔지니어">
 <meta property="og:url" content="https://devdongin.github.io">
 <meta property="og:image" content="https://devdongin.github.io/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="선동인 — 커널부터 AI까지, 전체 사이클을 만듭니다 · devdongin.github.io">
+<meta property="og:image:alt" content="선동인 — Vision AI 보안 제품을, 처음부터 끝까지 · devdongin.github.io">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://devdongin.github.io/">
 <script type="application/ld+json">
@@ -285,6 +285,63 @@
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     margin-bottom: 18px;
   }
+  /* v2: 중요도에 따른 카드 크기 — 대표 역량은 넓게 */
+  .skill-card--lead {
+    background: linear-gradient(160deg, var(--bg-card-hover), var(--bg-card) 60%);
+    border-color: rgba(88,166,255,0.35);
+  }
+  .skill-card--lead .icon { font-size: 30px; }
+  .skill-card--lead h3 { font-size: 19px; }
+  .skill-card--lead p { font-size: 15px; line-height: 1.7; }
+  .skill-card--lead .lead-tag {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; color: var(--accent);
+    background: var(--accent-dim); padding: 2px 8px; border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  @media (min-width: 721px) { .skill-card--lead { grid-column: span 2; } }
+  /* v2: 대표 제품 카드 강조 */
+  .project--featured {
+    padding: 38px;
+    border-color: rgba(88,166,255,0.4);
+    box-shadow: 0 0 0 1px rgba(88,166,255,0.08), 0 24px 64px rgba(0,0,0,0.35);
+  }
+  .project--featured h3 { font-size: 24px; }
+  .project--featured .desc { font-size: 16px; color: var(--text); }
+  .badge.lead { background: var(--accent); color: var(--on-accent); }
+  /* v2: 가상 면접 Q&A */
+  .qa {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 12px; overflow: hidden;
+    transition: border-color .2s ease;
+  }
+  .qa:hover { border-color: var(--border-hover); }
+  .qa[open] { border-color: rgba(88,166,255,0.35); }
+  .qa summary {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 18px 22px; cursor: pointer;
+    font-size: 15px; font-weight: 600; line-height: 1.6;
+    list-style: none;
+  }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary:hover { background: var(--bg-card-hover); }
+  .qa[open] summary { border-bottom: 1px solid var(--border); }
+  .qa-badge {
+    flex: none; width: 24px; height: 24px; border-radius: 7px;
+    background: var(--accent-dim); color: var(--accent);
+    font-size: 12px; font-weight: 800;
+    display: grid; place-items: center; margin-top: 1px;
+  }
+  .qa-body { padding: 20px 22px 24px; font-size: 14.5px; color: var(--text-dim); line-height: 1.85; }
+  .qa-body p + p { margin-top: 14px; }
+  .qa-body strong { color: var(--text); font-weight: 600; }
+  .qa-note {
+    margin-top: 16px; padding: 12px 16px;
+    border-left: 2px solid var(--accent); background: var(--accent-dim);
+    border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.7;
+  }
+  .qa-note b { color: var(--accent); font-weight: 700; }
+  .interview-note { text-align: center; font-size: 13px; color: var(--text-dim); margin-top: 22px; opacity: 0.85; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     font-size: 13px; font-weight: 500;
@@ -517,6 +574,7 @@
       <a href="#skills">역량</a>
       <a href="#projects">프로젝트</a>
       <a href="#activity">활동</a>
+      <a href="#interview">면접</a>
       <a href="#career">경력</a>
       <a href="gallery.html">갤러리</a>
       <a href="#contact">연락</a>
@@ -529,19 +587,20 @@
 <section class="hero" id="top">
   <div class="container hero-inner">
     <div class="hero-text">
-      <span class="eyebrow">Windows Systems &amp; AI Inference Engineer</span>
-      <h1>커널부터 AI까지,<br><span class="accent">전체 사이클</span>을 만듭니다</h1>
+      <span class="eyebrow">Vision AI Security · Windows Client &amp; Inference Engineer</span>
+      <h1>Vision AI 보안 제품을,<br><span class="accent">처음부터 끝까지</span></h1>
       <p class="tagline">
         안녕하세요, <strong>선동인</strong>입니다.<br>
-        Windows 커널 드라이버·보안 클라이언트·AI 추론 SDK를
-        <strong>상용 제품으로 만들어 온</strong> 시스템 소프트웨어 엔지니어입니다.
+        Vision AI 영상보안 솔루션 <strong>SEEUON</strong>의 AI 추론 SDK·Windows 클라이언트·미들웨어·배포,
+        그리고 <strong>고객사 운영 장애 대응</strong>까지 — 제품 전체 사이클을 다뤄온 시스템 소프트웨어 엔지니어입니다.
       </p>
       <div class="ai-review-box" id="ai-review">
         <span class="ai-tag">AI REVIEW</span>
         <!-- AI-REVIEW:START -->
-        <p><strong>커널 드라이버 단독 개발(사내 커밋 100%)부터 Windows 로그인 Credential Provider(기여 76%), OpenVINO 추론 SDK(기여 2위·325커밋)까지 — 주장 전부가 저장소 데이터로 증명되는 풀사이클 시스템 엔지니어.</strong>
-        최근 12개월 커밋 886건은 두 계정의 전 저장소·전 브랜치 집계이며, 핵심 클라이언트 저장소에서는 전체 커밋의 81%를 차지하는 1위 기여자다. 고객사 확장기였던 3~5월에 월 121~143커밋으로 정점을 기록했고, 6월 소강기를 지나 7월 들어 활동이 다시 회복되는 추세. 최근에는 AI 코딩 하네스(Claude Code)를 실무에 도입해 SEEUON macOS 버전 구축과 이 포트폴리오의 자동 갱신 파이프라인까지 같은 흐름에서 운영하고 있다.
-        <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여 데이터를 근거로 자동 생성·갱신합니다 · 갱신 2026-07-30 18:35 KST</span></p>
+        <p><strong>Vision AI 영상보안 제품을 연구실 모델에서 고객사 운영 환경까지 끌고 간 엔지니어.</strong>
+        추론 SDK 설계(기여 2위·325커밋), 솔루션 자기보호 커널 드라이버 단독 개발(커밋 100%), Windows 로그인 얼굴인증 Credential Provider(기여 76%)가 한 제품의 서로 다른 층위로 이어진다. 강점은 범위가 아니라 <strong>깊이가 필요한 지점에서 실제로 내려간 기록</strong>이다 — 추론 파이프라인 스레드 재설계로 프레임당 150ms를 40~50ms로 줄였고, 백신·EDR 충돌은 풀 덤프와 WinDbg로 원인 경로까지 규명해 고객사·벤더 화이트리스트 협의로 마무리했다.
+        최근 12개월 커밋 886건(두 계정 전 저장소·전 브랜치 집계)에서 핵심 클라이언트 저장소 기여율 81%로 1위. 고객사 확장기였던 3~5월 월 121~143커밋으로 정점을 찍었고, 최근에는 AI 코딩 하네스를 실무에 들여 macOS 버전 구축과 이 페이지의 자동 갱신 파이프라인을 함께 운영 중이다.
+        <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여 데이터를 근거로 자동 생성·갱신합니다 · 갱신 2026-07-30 21:10 KST</span></p>
         <!-- AI-REVIEW:END -->
       </div>
       <div class="hero-actions">
@@ -581,6 +640,17 @@
       <p>어떻게 일하고, 무엇을 만들 수 있는가 — 증명 가능한 것만 적었습니다</p>
     </div>
     <div class="skills strengths">
+      <div class="skill-card skill-card--lead reveal">
+        <span class="lead-tag">CORE</span>
+        <div class="icon">🎯</div>
+        <h3>제품 전체 사이클 — 연구실 모델에서 고객사 운영까지</h3>
+        <p>Vision AI 영상보안 솔루션 SEEUON을 POC 데모부터 추론 SDK, 판별 미들웨어, Windows 클라이언트, 설치·배포, 그리고 고객사 운영 장애 대응까지 끌고 왔습니다. 훈련된 모델을 <strong>실제 고객 환경에서 도는 제품</strong>으로 옮기는 것이 제 일의 정의입니다</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">🚨</div>
+        <h3>운영 장애 대응 &amp; 고객사 협의</h3>
+        <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 후에야 드러나는 문제를 재현·분석·조정합니다. 풀 덤프와 WinDbg로 원인 경로를 규명하고, 벤더·고객사 보안 담당자와 화이트리스트를 협의해 제품 안정성으로 연결했습니다</p>
+      </div>
       <div class="skill-card reveal">
         <div class="icon">🧭</div>
         <h3>사용자 관점의 설계</h3>
@@ -591,17 +661,12 @@
         <h3>커뮤니케이션 &amp; 협업</h3>
         <p>고객사 실무자, 영업, AI 리서처 사이에서 기술 언어를 통역합니다. POC 현장에서 요구사항을 직접 듣고 스펙으로 옮기며, 첫 회사에서부터 부팀장을 맡았습니다</p>
       </div>
-      <div class="skill-card reveal">
-        <div class="icon">📈</div>
-        <h3>AI 상용화 경험</h3>
-        <p>연구실의 모델을 매출 내는 제품으로 옮깁니다. 훈련된 모델을 C/C++ 추론 SDK로 포팅하고 미들웨어·애플리케이션·배포까지 상용 수준으로 완성했습니다</p>
-      </div>
     </div>
     <div class="skills">
       <div class="skill-card reveal">
         <div class="icon">🔧</div>
-        <h3>커널 드라이버 개발</h3>
-        <p>FileSystem Minifilter Driver 단독 설계·개발. Microsoft filter altitude 정식 할당 (CULockerFsfd.sys)</p>
+        <h3>커널 드라이버 &amp; 자기보호</h3>
+        <p>FileSystem Minifilter 단독 설계·개발. 화이트리스트 기반 솔루션 자기보호, 관리자·SYSTEM 권한 우회까지 커널에서 차단, IOCTL 기반 커널-유저모드 통신 설계. Microsoft filter altitude 정식 할당</p>
       </div>
       <div class="skill-card reveal">
         <div class="icon">🤖</div>
@@ -661,13 +726,14 @@
       <p>POC 데모부터 커널 드라이버까지, 한 솔루션의 전체 여정</p>
     </div>
 
-    <div class="project reveal">
+    <div class="project project--featured reveal">
       <div class="project-head">
         <h3>SEEUON / SEEUONIdp</h3>
         <span class="meta">2023.07 – 현재 · (주)시선에이아이</span>
       </div>
-      <p class="desc">Vision AI 기반 단말 보안 솔루션 — 화면 촬영 감지, 안면인식 본인인증, 얼굴 위변조 탐지. POC 데모부터 SDK, 미들웨어, 애플리케이션, 커널 드라이버까지 전체 사이클 참여</p>
+      <p class="desc">Vision AI 기반 단말 보안 솔루션 — 화면 촬영 감지, 안면인식 본인인증, 얼굴 위변조 탐지. POC 데모부터 추론 SDK·미들웨어·클라이언트·배포, 그리고 고객사 운영 장애 대응까지 제품 전체 사이클을 담당했습니다</p>
       <div class="badges">
+        <span class="badge lead">대표 제품</span>
         <span class="badge">C / C++</span>
         <span class="badge">OpenVINO</span>
         <span class="badge">Kernel Driver</span>
@@ -685,6 +751,15 @@
         <li><strong>배포 총괄</strong> — Python, NSIS, Themida, 인증서 서명 기반 전체 릴리스 파이프라인 담당</li>
         <li><strong>장애 분석</strong> — WinDbg 크래시 덤프 사후 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 원인 규명·해결</li>
       </ul>
+      <details class="deep-dive">
+        <summary>기술 딥다이브 — 제품을 고객 환경에서 살려두는 일</summary>
+        <ul>
+          <li><strong>문제</strong> — Vision AI 보안 클라이언트는 만드는 것보다 <strong>남의 PC에서 계속 도는 것</strong>이 어렵다. 백신·EDR과 같은 시스템 영역을 놓고 부딪히고, OS 업데이트마다 전제가 바뀌며, 솔루션 자신이 우회·종료의 표적이 된다</li>
+          <li><strong>구현</strong> — 추론 SDK(공통 엔진) → 판별 미들웨어 → 클라이언트 앱으로 층을 나눠 모델 교체가 상위 레이어를 흔들지 않게 했고, 솔루션 자기보호는 커널(Minifilter)로, 로그인 경로 인증은 Credential Provider로 각각 내려서 해결</li>
+          <li><strong>난점 → 해결</strong> — DLL 인젝션·API 후킹·파일시스템 필터링은 타 보안 제품과 충돌이 잦은 영역. 재현 가능한 케이스는 풀 덤프를 남기도록 설정하고 충돌 시점에 각 프로세스·드라이버가 타는 API/I/O 경로를 WinDbg로 분석 — 자사 원인이면 예외 처리·기능 수정, 상호 충돌이면 벤더·고객사 보안 담당자와 화이트리스트를 협의하고, 불가피한 조합은 한쪽 기능을 끄는 운영 정책으로 정리</li>
+          <li><strong>결과</strong> — SI 프로젝트로 시작한 솔루션이 회사 핵심 제품이 되었고, 삼성 계열·공공·금융 등 다수 고객사 환경에 구축·운영</li>
+        </ul>
+      </details>
       <div class="highlight-box">
         <p>✦ SI 사업으로 시작해 회사 <strong>핵심 솔루션</strong>으로 성장 주도</p>
         <p>✦ 2024년 회사 매출 100억 중 <strong>40–50% 담당</strong> 프로젝트로 성장</p>
@@ -720,9 +795,11 @@
       <details class="deep-dive">
         <summary>기술 딥다이브 — 문제와 해결</summary>
         <ul>
-          <li><strong>문제</strong> — 보안 솔루션은 그 자체가 우회 대상이 된다: 프로세스 강제 종료, 디버거 부착, 로컬 파일 변조로 정책을 무력화할 수 있음</li>
-          <li><strong>구현</strong> — FileSystem Minifilter로 보호 대상 프로세스·파일/폴더에 대한 I/O를 커널단에서 통제하고 Anti-Debugging을 결합</li>
-          <li><strong>난점 → 해결</strong> — 타 보안 솔루션과의 충돌·프로세스 비정상 종료를 WinDbg 크래시 덤프 분석으로 원인 경로부터 규명해 해결</li>
+          <li><strong>문제</strong> — 보안 솔루션은 그 자체가 우회 대상이 된다: 프로세스 강제 종료, 디버거 부착, 바이너리 교체로 정책을 무력화할 수 있음. 유저모드 방어만으로는 관리자 권한 앞에서 무의미하다</li>
+          <li><strong>설계 축이 이전 경험과 정반대였던 점</strong> — 엠클라우독의 파일시스템 드라이버는 <strong>사용자 파일시스템 전체를 관장하는 정책 기반 접근 제어</strong>였고, 난이도는 호환성에 있었다(OS 업데이트·신규 프로그램 출시마다 연쇄 파일 I/O와 fallback 미지원 프로그램 대응). CULockerFsfd는 반대로 <strong>솔루션 자기보호를 위한 화이트리스트</strong>가 목적이라, 정책 복잡도보다 차단 강도와 우회 봉쇄가 핵심이었다</li>
+          <li><strong>구현</strong> — 화이트리스트에 없는 접근은 정책 검사 없이 차단. 솔루션 내부 프로세스 사이에도 zero trust를 적용하고, <strong>관리자·SYSTEM 권한 프로세스라도 정책 밖이면 커널 레벨에서 거부</strong>. 신뢰 판별은 경로 → 바이너리 해시 → 디지털 서명 순으로 확인. Anti-Debugging을 함께 결합</li>
+          <li><strong>난점 → 해결</strong> — 강한 차단은 정상 운영을 깨뜨린다. 업데이트는 사용자 세션 중이 아니라 로그인 화면 단계에서 준비해 보호 정책을 제어하고, 단계별 롤백 함수로 실패를 복구하며, 업데이트 직후 버전 기준 바이너리·프로세스 무결성을 재검사. 보호가 완화된 구간의 인젝션 위험은 프로세스 로드 시 DLL 목록을 확인한 뒤 정책을 복구하고 reload하는 방식으로 좁혔다</li>
+          <li><strong>커널-유저모드 통신</strong> — IOCTL 기반. CRC류는 위변조에 취약해 배제하고, 드라이버와 제한된 유저모드 앱 사이에 공유 키와 salt를 둔 SHA-256 digest로 요청을 검증했다(암호화가 아니라 위변조·임의 프로세스 호출 차단이 목적). IOCTL은 파일 I/O처럼 빈번한 경로가 아니어서 검증 비용을 더 쓸 수 있다고 판단</li>
           <li><strong>결과</strong> — Microsoft filter altitude 정식 할당과 attestation 서명 배포 체계 구축, 커밋 100% 단독 개발로 고객사 운영 환경에 배포</li>
         </ul>
       </details>
@@ -750,6 +827,8 @@
         <ul>
           <li><strong>문제</strong> — 연구실에서 훈련된 모델은 그대로는 상용 제품에서 쓸 수 없다: C++ 제품군에 맞는 추론 계층이 필요</li>
           <li><strong>구현</strong> — OpenVINO 기반 C/C++ 추론 엔진을 설계하고, C/C++/C#/Python 바인딩과 Windows·Ubuntu 크로스 플랫폼 빌드 제공</li>
+          <li><strong>SDK 설계 원칙</strong> — 코어는 기능만 제공하고 <strong>메모리 소유권은 애플리케이션이 갖는 구조</strong>로 두었다. 리소스 생명주기는 명시적 init/finalize에 더해 언어별 생성자·소멸자 패턴까지 고려해 정리. 모델은 최초 로딩 시 캐시를 만들고 이후에는 필요한 모델만 부분 load/unload</li>
+          <li><strong>쓰는 사람 기준으로 검증</strong> — C#·Python Wrapper는 혼자 상상해서 내지 않고, 실제 그 언어를 쓰는 개발자들에게 사용성을 물어 API 형태를 조정했다</li>
           <li><strong>난점 → 해결</strong> — 실시간 영상에 추론을 얹으면 프레임당 150ms가 소요돼 실사용이 어려웠음. SDK와 판별 미들웨어(FaceOnDiscriminator)의 스레드 구조와 처리 경로를 재설계해 병목 제거</li>
           <li><strong>결과</strong> — <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>로 실시간 처리 수준 확보. SEEUON 제품군의 공통 기반 SDK로 채택되어 Edge Device 보드 최적화 버전까지 확장</li>
         </ul>
@@ -795,7 +874,65 @@
   </div>
 </section>
 
-<section id="activity">
+<section id="interview">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="kicker">Deep Dive</p>
+      <h2>가상 기술 면접</h2>
+      <p>AI(Codex)가 CTO 관점에서 파고든 질문과, 제가 실제로 내린 판단들</p>
+    </div>
+
+    <details class="qa reveal">
+      <summary><span class="qa-badge">Q</span>커널 드라이버를 두 회사에서 다 하셨는데, 목적이 어떻게 달랐나요?</summary>
+      <div class="qa-body">
+        <p>같은 FileSystem Minifilter지만 <strong>설계 축이 정반대</strong>였습니다.</p>
+        <p>엠클라우독의 드라이버는 <strong>사용자 파일시스템 전체를 관장하는 정책 기반 접근 제어</strong>가 목적이었습니다. 제품 자체가 프로세스 기준으로 동작했고, 정책 파일이 커널 메모리에 상주하면서 "이 프로세스가 이 경로에 권한이 있는가"를 판단했죠. 여기서 어려운 건 차단이 아니라 <strong>호환성</strong>이었습니다. OS 업데이트나 신규 프로그램이 나올 때마다 연달아 일어나는 파일 I/O를 감당해야 했고, 프로그램 쪽에서 fallback 처리를 하지 않아 정책을 새로 적용하는 도중 문제가 되는 경우도 많았습니다.</p>
+        <p>시선에이아이의 CULockerFsfd는 <strong>솔루션 자기보호를 위한 화이트리스트</strong>가 목적입니다. 정책 복잡도보다 차단 강도와 우회 봉쇄가 핵심이라, 화이트리스트에 없으면 별도 판단 없이 거부하면 됩니다. 대신 상당히 강하게 걸었습니다 — 솔루션 내부 프로세스 사이에도 zero trust를 적용했고, 관리자나 SYSTEM 권한 프로세스라도 정책에 맞지 않으면 커널 레벨에서 접근을 막았습니다.</p>
+      </div>
+    </details>
+
+    <details class="qa reveal">
+      <summary><span class="qa-badge">Q</span>강한 deny 정책을 유지하면서, 업데이트·설치·백신 스캔·장애 분석 같은 정상 운영 경로는 어떻게 열어줬나요?</summary>
+      <div class="qa-body">
+        <p>화이트리스트가 강할수록 운영이 깨지기 쉽다는 게 실제로 가장 큰 숙제였습니다.</p>
+        <p><strong>업데이트</strong>는 사용자 세션이 열려 있는 동안 수행하지 않고, Windows 로그인 화면 단계부터 준비해 보호 정책을 제어하는 방식으로 설계했습니다. 업데이트 도중에는 단계별 롤백 함수를 두어 실패 시 복구할 수 있게 했고, 완료 직후에는 버전 기준으로 바이너리·프로세스 무결성을 다시 검사했습니다. 보호가 완화된 구간에 인젝션이 들어올 위험은, 프로세스가 로드될 때 함께 올라온 DLL 목록을 확인하고 정책을 복구한 뒤 reload하는 방식으로 창을 좁혔습니다.</p>
+        <p><strong>백신·EDR</strong>은 원칙적으로 차단하되, OS가 스스로 보호하는 Windows Defender 컴포넌트는 허용했습니다. 그 외 제품은 고객사 환경과 정책에 따라 예외 등록이나 운영 협의로 풀었습니다. <strong>장애 분석</strong>은 모니터링 서비스를 따로 두고, 덤프는 레지스트리 설정으로 수집해 서버로 자동 전송되게 했습니다.</p>
+        <div class="qa-note"><b>지금이라면</b> — 보호를 전체 완화하는 대신, 업데이트에 필요한 파일·프로세스·시간 범위만 여는 maintenance mode로 좁히겠습니다. 완화 구간 자체가 가장 매력적인 공격 타이밍이니까요.</div>
+      </div>
+    </details>
+
+    <details class="qa reveal">
+      <summary><span class="qa-badge">Q</span>커널과 유저모드 프로그램 사이의 요청은 무엇으로 신뢰했나요?</summary>
+      <div class="qa-body">
+        <p>IOCTL로 주고받았고, 검증에는 <strong>공유 키와 salt를 포함한 SHA-256 digest</strong>를 사용했습니다. CRC 같은 방식은 위변조에 취약하다고 판단해 배제했고, IOCTL은 파일 I/O처럼 초당 수천 번 들어오는 경로가 아니어서 검증에 연산을 더 써도 부담이 적다고 봤습니다. 목적은 암호화가 아니라 <strong>요청 위변조와 임의 프로세스의 호출을 걸러내는 것</strong>이고, 커널과 통신하는 앱 자체를 소수로 한정했습니다.</p>
+        <p>바이너리 쪽은 패킹·난독화와 경로 화이트리스트를 함께 걸어, 키가 든 실행 파일을 복사하거나 교체해서 분석하는 비용을 올렸습니다. 신뢰 판별도 경로만 보지 않고 해시와 디지털 서명까지 확인했습니다.</p>
+        <div class="qa-note"><b>지금이라면</b> — 바이너리에 포함된 키는 장기적으로 완전한 보안 경계로 보기 어렵습니다. 난독화는 분석 비용을 올릴 뿐 불가능하게 만들지는 못하니까요. per-install key, nonce/timestamp 기반 replay 방지, 짧은 유효시간의 maintenance token, 그리고 커널 측에서 요청자를 한 번 더 검증하는 구조를 얹겠습니다. fake app 식별용으로 쓰던 빠른 해시도 SHA-256으로 통일하는 게 맞습니다.</div>
+      </div>
+    </details>
+
+    <details class="qa reveal">
+      <summary><span class="qa-badge">Q</span>다른 보안 솔루션과의 충돌은 어떻게 다뤘나요?</summary>
+      <div class="qa-body">
+        <p>충돌은 예외가 아니라 <strong>상수</strong>였습니다. 특히 DLL 인젝션, API 후킹, 파일시스템 필터링처럼 타 EDR·백신과 같은 시스템 영역을 쓰는 기능에서 부딪힐 가능성이 컸습니다.</p>
+        <p>재현 가능한 시나리오는 풀 덤프를 남기도록 설정하고, 충돌 시점에 각 프로세스와 드라이버가 어떤 API·I/O 경로를 타는지 WinDbg로 분석했습니다. 원인이 자사 기능이면 예외 처리나 기능 수정으로 대응했고, 서로의 동작이 맞물려 생기는 문제면 고객사 보안 담당자나 해당 솔루션 벤더와 협의해 화이트리스트 등록을 진행했습니다. 인터넷망 연결이 가능한 환경이면 벤더 쪽에, 온프레미스면 고객사 담당자를 통해 예외 정책을 잡는 식이었습니다.</p>
+        <p>기능적으로 충돌이 불가피한 조합은 상호 보완적으로 한쪽 기능을 끄는 <strong>운영 정책</strong>으로 정리했습니다. 기술로 다 풀리지 않는 영역은 합의로 푸는 게 결국 제품을 살리는 길이었습니다.</p>
+      </div>
+    </details>
+
+    <details class="qa reveal">
+      <summary><span class="qa-badge">Q</span>C++ 코어 SDK를 C#·Python에 바인딩할 때 메모리 소유권과 생명주기는 어떻게 설계했나요?</summary>
+      <div class="qa-body">
+        <p>코어 SDK는 <strong>기능만 제공</strong>하고 상태와 리소스를 무겁게 들고 있지 않도록 했습니다. 메모리 소유권은 애플리케이션에 두고, 생명주기는 명시적인 init/finalize로 열고 닫게 했습니다. 여기에 언어별 생성자·소멸자 패턴이 있으면 그것도 함께 적용해서, 어느 쪽 습관으로 써도 리소스가 새지 않도록 했습니다.</p>
+        <p>모델은 최초 로딩 시 필요한 캐시 파일을 만들고, 이후에는 <strong>필요한 모델만 부분 load/unload</strong>할 수 있게 구성했습니다. 여러 모델을 항상 메모리에 올려둘 필요가 없는 제품 특성을 반영한 선택이었습니다.</p>
+        <p>C#·Python Wrapper는 제가 상상해서 만들지 않고, 실제 그 언어를 쓰는 개발자들에게 써보게 하면서 API 형태를 조정했습니다. SDK는 결국 쓰는 사람이 편해야 채택된다고 생각합니다.</p>
+      </div>
+    </details>
+
+    <p class="interview-note">위 답변은 실제 기술 면접 시뮬레이션에서 나온 것으로, 제품 보안에 영향을 줄 수 있는 구체적 구현 값은 의도적으로 제외했습니다.</p>
+  </div>
+</section>
+
+<section id="activity" class="alt">
   <div class="container">
     <div class="section-head reveal">
       <p class="kicker">Activity</p>
@@ -820,7 +957,7 @@
   </div>
 </section>
 
-<section id="career" class="alt">
+<section id="career">
   <div class="container">
     <div class="section-head reveal">
       <p class="kicker">Career &amp; Education</p>
@@ -876,7 +1013,7 @@
   </div>
 </section>
 
-<section id="blog">
+<section id="blog" class="alt">
   <div class="container">
     <div class="section-head reveal">
       <p class="kicker">Blog &amp; Links</p>
@@ -894,7 +1031,7 @@
   </div>
 </section>
 
-<section class="contact alt" id="contact">
+<section class="contact" id="contact">
   <div class="container reveal">
     <div class="section-head section-head--tight">
       <p class="kicker">Contact</p>
@@ -913,7 +1050,7 @@
 
 <footer>
   <div class="container">
-    <p>© 2026 선동인 (devdongin) · Built with plain HTML — hosted on GitHub Pages</p>
+    <p>© 2026 선동인 (devdongin) · <strong>v2</strong> · Built with plain HTML — hosted on GitHub Pages</p>
     <p class="visits" hidden>👀 Today <span id="v-today">–</span> · Total <span id="v-total">–</span> <span class="visits-note">· 제3자 무가입 집계(Abacus), 재미로만 봐주세요</span></p>
   </div>
 </footer>
