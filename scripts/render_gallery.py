@@ -18,6 +18,9 @@ GALLERY_DIR = "gallery"
 PAGE = "gallery.html"
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".jfif", ".avif"}
 VID_EXT = {".mp4", ".webm"}
+CAPTIONS = {
+    "liveness-데모.mp4": "Windows 로그인 세션 liveness 데모 — 보안 솔루션의 시작 지점인 로그인 단계라 성능보다 위변조 탐지 강도를 우선해 설정했습니다",
+}
 
 
 def build_card(name):
@@ -25,7 +28,7 @@ def build_card(name):
     ext = ext.lower()
     if ext not in IMG_EXT | VID_EXT:
         return None
-    caption = html.escape(re.sub(r"[-_]+", " ", stem).strip())
+    caption = html.escape(CAPTIONS.get(name, re.sub(r"[-_]+", " ", stem).strip()))
     url = f"{GALLERY_DIR}/{urllib.parse.quote(name)}"
     if ext in VID_EXT:
         mime = "video/webm" if ext == ".webm" else "video/mp4"
