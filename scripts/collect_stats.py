@@ -34,6 +34,10 @@ from datetime import datetime, timedelta, timezone
 API = "https://api.github.com"
 KST = timezone(timedelta(hours=9))
 
+# data/stats.json 은 public 이므로, 설정 실수로 내부 저장소명이 slug 로
+# 흘러들지 않도록 렌더러가 아는 공개 슬러그만 허용한다.
+ALLOWED_SLUGS = {"seeuonclient", "culockerfsfd", "cufacesdk"}
+
 
 def gh(token, path, params=None):
     url = API + path
@@ -120,6 +124,8 @@ def main():
 
     repo_stats = {}
     for full_name, slug in config.get("repo_stats", {}).items():
+        if slug not in ALLOWED_SLUGS:
+            sys.exit(f"[collect] error: slug not in allowlist: '{slug}'")
         contribs = list(gh_paged(token, f"/repos/{full_name}/contributors"))
         if not contribs:
             print(f"[collect] warn: no contributor data for slug '{slug}'", file=sys.stderr)
