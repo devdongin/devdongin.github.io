@@ -22,7 +22,7 @@ STATS = "data/stats.json"
 BLOG = "data/blog.json"
 
 # LinkedIn 프로필 URL — 비어 있으면 카드 미출력
-LINKEDIN_URL = ""
+LINKEDIN_URL = "https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/"
 
 CELL, STEP, X0, Y0 = 11, 13, 8, 18
 COLS = 54  # 마지막 열이 집계 종료일이 속한 주가 되도록 54주 고정
@@ -102,11 +102,13 @@ def build_monthly(daily, start, end):
 def _blog_half(posts, focusable):
     esc = html_mod.escape
     extra = "" if focusable else ' tabindex="-1"'
-    entries = [(p["category"], p["title"], p["date"], p["link"]) for p in posts]
+    # LinkedIn이 현재 주 활동 채널 — 카드를 맨 앞에 배치
+    entries = []
+    if LINKEDIN_URL:
+        entries.append(("LinkedIn", "최근 활동 & 프로필 보기 →", "linkedin.com", LINKEDIN_URL))
+    entries += [(p["category"], p["title"], p["date"], p["link"]) for p in posts]
     entries.append(("Tech Blog", "블로그 전체 보기 →", "he11oworld.tistory.com",
                     "https://he11oworld.tistory.com"))
-    if LINKEDIN_URL:
-        entries.append(("LinkedIn", "프로필 보기 →", "linkedin.com", LINKEDIN_URL))
     entries.append(("GitHub", "저장소 보기 →", "github.com/devdongin",
                     "https://github.com/devdongin"))
     return "".join(
