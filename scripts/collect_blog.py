@@ -36,6 +36,9 @@ def main():
         if not title or not link:
             continue
         category = html.unescape((item.findtext("category") or "").strip())
+        # 포트폴리오 하단 노출용이므로 기술 글("개발/*" 카테고리)만 선별한다
+        if not category.startswith("개발/"):
+            continue
         category = category.rsplit("/", 1)[-1] or "Blog"  # "개발/AI" → "AI"
         try:
             date = parsedate_to_datetime(item.findtext("pubDate")).astimezone(KST).date().isoformat()
