@@ -142,6 +142,12 @@ def main():
         html = replace(html, "STAT-CUFACESDK",
                        f'<strong>기여 {s["rank"]}위 (커밋 {s["mine"]}회 · {end} 기준)</strong>',
                        required=False)
+    s = repo_stats.get("seeuoncp")
+    if s:
+        html = replace(html, "STAT-SEEUONCP",
+                       f' — 사내 저장소 커밋 <strong>{s["mine"]:,}/{s["total"]:,} '
+                       f'({s["percent"]}% · {end} 기준)</strong>',
+                       required=False)
 
     with open(INDEX, "w", encoding="utf-8", newline="\n") as f:
         f.write(html)

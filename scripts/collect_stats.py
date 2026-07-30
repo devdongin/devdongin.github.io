@@ -36,7 +36,7 @@ KST = timezone(timedelta(hours=9))
 
 # data/stats.json 은 public 이므로, 설정 실수로 내부 저장소명이 slug 로
 # 흘러들지 않도록 렌더러가 아는 공개 슬러그만 허용한다.
-ALLOWED_SLUGS = {"seeuonclient", "culockerfsfd", "cufacesdk"}
+ALLOWED_SLUGS = {"seeuonclient", "culockerfsfd", "cufacesdk", "seeuoncp"}
 
 
 def gh(token, path, params=None):
