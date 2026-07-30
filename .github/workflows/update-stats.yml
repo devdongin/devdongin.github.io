@@ -47,6 +47,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub App 설치 없이 워크플로 토큰 사용
           claude_args: '--allowedTools "Read,Edit"'
           prompt: |
             data/stats.json(최신 커밋 집계)과 index.html, CLAUDE.md를 읽고,
