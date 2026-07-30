@@ -23,6 +23,7 @@
 저장소 실명은 포함되지 않는다. 로그에도 저장소명을 출력하지 않는다.
 """
 import hashlib
+import http.client
 import json
 import os
 import sys
@@ -52,12 +53,12 @@ def gh(token, path, params=None):
         "X-GitHub-Api-Version": "2022-11-28",
         "User-Agent": "devdongin-github-io-stats",
     })
-    for attempt in range(4):
+    for attempt in range(6):
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
                 return json.load(r)
         except urllib.error.HTTPError as e:
-            if e.code in (403, 429) and attempt < 3:
+            if e.code in (403, 429) and attempt < 5:
                 # 실제 리셋 시각까지 대기 (시간당 한도라 최대 1시간)
                 reset = int(e.headers.get("X-RateLimit-Reset", "0"))
                 wait = min(max(reset - time.time() + 5, 10), 3700)
@@ -67,9 +68,13 @@ def gh(token, path, params=None):
             if e.code in (404, 409):  # 접근 불가 / 빈 저장소
                 return None
             raise
-        except urllib.error.URLError:
-            if attempt < 3:
-                time.sleep(10)
+        except (urllib.error.URLError, http.client.HTTPException, OSError) as e:
+            # RemoteDisconnected, 타임아웃 등 일시적 네트워크 오류 — 백오프 후 재시도
+            if attempt < 5:
+                wait = min(10 * (2 ** attempt), 120)
+                print(f"[collect] network error ({type(e).__name__}), "
+                      f"retrying in {wait}s", file=sys.stderr)
+                time.sleep(wait)
                 continue
             raise
     return None
