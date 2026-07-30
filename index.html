@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>선동인 | Windows Systems &amp; AI Inference Engineer</title>
+<title>선동인 | Vision AI 보안 · Windows Client &amp; Inference Engineer</title>
 <meta name="description" content="Vision AI 영상보안 솔루션을 AI 추론 SDK·Windows 클라이언트·커널 보호·배포·운영까지 제품화해온 시스템 소프트웨어 엔지니어 선동인의 포트폴리오">
 <meta name="google-site-verification" content="8krlzHDtJ5GVQ8Z6HOvz6EHLX4pDK0UsEzQ-aY-irrE">
 <meta property="og:type" content="website">
-<meta property="og:title" content="선동인 | Windows Systems &amp; AI Inference Engineer">
+<meta property="og:title" content="선동인 | Vision AI 보안 · Windows Client &amp; Inference Engineer">
 <meta property="og:description" content="Vision AI 영상보안 솔루션 SEEUON을 AI 추론 SDK·Windows 클라이언트·미들웨어·배포·운영 대응까지 제품화해온 엔지니어">
 <meta property="og:url" content="https://devdongin.github.io">
 <meta property="og:image" content="https://devdongin.github.io/og-card.png">
@@ -300,14 +300,15 @@
     margin-bottom: 10px;
   }
   @media (min-width: 721px) { .skill-card--lead { grid-column: span 2; } }
-  /* v2: 대표 제품 카드 강조 */
-  .project--featured {
+  /* v2: 대표 제품 카드 강조 (.project 규칙이 뒤에 오므로 특이도를 높인다) */
+  .project.project--featured {
     padding: 38px;
     border-color: rgba(88,166,255,0.4);
     box-shadow: 0 0 0 1px rgba(88,166,255,0.08), 0 24px 64px rgba(0,0,0,0.35);
   }
-  .project--featured h3 { font-size: 24px; }
-  .project--featured .desc { font-size: 16px; color: var(--text); }
+  .project.project--featured h3 { font-size: 24px; }
+  .project.project--featured .desc { font-size: 16px; color: var(--text); }
+  @media (max-width: 720px) { .project.project--featured { padding: 24px; } }
   .badge.lead { background: var(--accent); color: var(--on-accent); }
   /* v2: 가상 면접 Q&A */
   .qa {
