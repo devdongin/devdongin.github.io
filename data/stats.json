@@ -4,7 +4,7 @@
   "start": "2025-07-30",
   "end": "2026-07-30"
  },
- "total_commits": 884,
+ "total_commits": 886,
  "daily": {
   "2025-07-30": 2,
   "2025-07-31": 2,
@@ -194,13 +194,13 @@
   "2026-07-24": 6,
   "2026-07-27": 7,
   "2026-07-28": 1,
-  "2026-07-29": 7,
-  "2026-07-30": 8
+  "2026-07-29": 5,
+  "2026-07-30": 12
  },
  "repo_stats": {
   "seeuonclient": {
    "mine": 832,
-   "total": 1030,
+   "total": 1029,
    "percent": 81,
    "rank": 1
   },
@@ -212,9 +212,15 @@
   },
   "cufacesdk": {
    "mine": 325,
-   "total": null,
-   "percent": null,
+   "total": 1863,
+   "percent": 17,
    "rank": 2
+  },
+  "seeuoncp": {
+   "mine": 16,
+   "total": 21,
+   "percent": 76,
+   "rank": 1
   }
  }
 }
