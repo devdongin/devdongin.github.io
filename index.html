@@ -572,11 +572,108 @@
   .highlight-box { transition: border-color .2s ease; }
   .highlight-box:hover { border-color: var(--green); }
 
+
+  /* ===== Motion: scroll progress, stagger, pipeline, expand ===== */
+  .scroll-progress {
+    position: absolute; left: 0; bottom: -1px; height: 2px; width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--green));
+    transition: width .1s linear;
+    z-index: 2;
+  }
+
+  /* reveal 카드 계단식 등장 */
+  html.js .reveal { transition-delay: calc(var(--rd, 0) * 70ms); }
+
+  /* 스탯 숫자 등장 */
+  html.js .stat.reveal .num { transform: scale(.92); transition: transform .5s cubic-bezier(.2,.8,.3,1.2); transition-delay: calc(var(--rd, 0) * 70ms + 80ms); }
+  html.js .stat.reveal.on .num { transform: none; }
+
+  /* 섹션 kicker 밑줄 성장 */
+  .section-head .kicker { position: relative; display: inline-block; }
+  .section-head .kicker::after {
+    content: ""; position: absolute; left: 50%; bottom: -5px; height: 2px; width: 0;
+    background: var(--accent); border-radius: 2px; opacity: .55;
+    transition: width .6s cubic-bezier(.2,.8,.3,1), left .6s cubic-bezier(.2,.8,.3,1);
+  }
+  .section-head.on .kicker::after { width: 100%; left: 0; }
+
+  /* 파이프라인 다이어그램 — 순차 흐름 */
+  .thread-step { position: relative; overflow: hidden; }
+  .thread-flow.flowing .thread-step::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+    animation: flow-sweep 2.6s ease-in-out infinite;
+  }
+  .thread-flow.flowing .thread-step:nth-child(1)::after { animation-delay: 0s; }
+  .thread-flow.flowing .thread-step:nth-child(2)::after { animation-delay: .28s; }
+  .thread-flow.flowing .thread-step:nth-child(3)::after { animation-delay: .56s; }
+  .thread-flow.flowing .thread-step:nth-child(4)::after { animation-delay: .84s; }
+  @keyframes flow-sweep {
+    0% { transform: translateX(-100%); opacity: 0; }
+    12% { opacity: 1; }
+    45% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(100%); opacity: 0; }
+  }
+
+  /* 히트맵 셀 웨이브 등장 */
+  .heatmap-scroll.wave rect { animation: cell-in .45s ease both; }
+  @keyframes cell-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+
+  /* details 펼침 */
+  .deep-dive[open] > *:not(summary), .qa[open] > *:not(summary), .heatmap-alt[open] > *:not(summary) {
+    animation: expand-in .32s cubic-bezier(.2,.8,.3,1) both;
+  }
+  @keyframes expand-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .deep-dive summary, .qa summary, .heatmap-alt summary { transition: color .15s ease; }
+  .qa-badge { transition: transform .25s cubic-bezier(.2,.8,.3,1.4), background .2s ease; }
+  .qa[open] .qa-badge { transform: scale(1.12); }
+
+  /* nav 링크 밑줄 */
+  .nav-links a:not(.nav-cta)::after {
+    content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 1px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    transition: transform .22s ease; opacity: .7;
+  }
+  .nav-links a:not(.nav-cta) { position: relative; }
+  .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+
+  /* 아바타 링 펄스 */
+  .hero-avatar { position: relative; }
+  .hero-avatar::before {
+    content: ""; position: absolute; inset: -6px; border-radius: 50%;
+    border: 1px solid var(--accent); opacity: 0;
+    animation: ring-pulse 4.5s ease-out infinite;
+  }
+  @keyframes ring-pulse {
+    0% { transform: scale(.96); opacity: 0; }
+    18% { opacity: .35; }
+    60% { transform: scale(1.06); opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* CTA 버튼 광택 */
+  .btn-primary { position: relative; overflow: hidden; }
+  .btn-primary::after {
+    content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+    transform: skewX(-20deg); transition: left .5s ease;
+  }
+  .btn-primary:hover::after { left: 130%; }
+
   @media (prefers-reduced-motion: reduce) {
     .reveal { transition: none; }
     .hero-avatar img { animation: none; }
     .scroll-hint::after { animation: none; }
     .nav-indicator { transition: none; }
+    html.js .reveal, html.js .stat.reveal .num { transition-delay: 0s; }
+    .section-head .kicker::after { transition: none; }
+    .thread-flow.flowing .thread-step::after { animation: none; }
+    .heatmap-scroll.wave rect { animation: none; }
+    .deep-dive[open] > *:not(summary), .qa[open] > *:not(summary), .heatmap-alt[open] > *:not(summary) { animation: none; }
+    .qa-badge { transition: none; }
+    .hero-avatar::before { animation: none; }
+    .btn-primary::after { transition: none; }
+    .scroll-progress { transition: none; }
   }
 
   @media (max-width: 720px) {
@@ -605,6 +702,7 @@
     </a>
     <div class="nav-links">
       <span class="nav-indicator" aria-hidden="true"></span>
+      <span class="scroll-progress" aria-hidden="true"></span>
       <a href="#skills" data-section-link>역량</a>
       <a href="#projects" data-section-link>프로젝트</a>
       <a href="#interview" data-section-link>면접</a>
@@ -1150,11 +1248,52 @@
   addEventListener('scroll', syncIndicator, { passive: true });
   syncIndicator();
 
-  // reveal on scroll
+  // reveal on scroll (형제 순서에 따른 계단식 지연)
+  const reveals = [...document.querySelectorAll('.reveal')];
+  reveals.forEach(el => {
+    const sibs = [...(el.parentElement?.children || [])].filter(c => c.classList.contains('reveal'));
+    const i = sibs.indexOf(el);
+    if (sibs.length > 1 && i > 0) el.style.setProperty('--rd', Math.min(i, 5));
+  });
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  reveals.forEach(el => io.observe(el));
+
+  // 스크롤 진행바
+  const progress = document.querySelector('.scroll-progress');
+  if (progress) {
+    const setProgress = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = (max > 0 ? Math.min(scrollY / max, 1) * 100 : 0) + '%';
+    };
+    addEventListener('scroll', setProgress, { passive: true });
+    addEventListener('resize', setProgress, { passive: true });
+    setProgress();
+  }
+
+  // 히트맵 셀 웨이브 · 파이프라인 흐름 (뷰 진입 시 1회)
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!calm) {
+    const heat = document.querySelector('.heatmap-scroll');
+    if (heat) {
+      const hio = new IntersectionObserver(es => es.forEach(e => {
+        if (!e.isIntersecting) return;
+        const rects = [...heat.querySelectorAll('rect')];
+        const xs = [...new Set(rects.map(r => +r.getAttribute('x')))].sort((a, b) => a - b);
+        rects.forEach(r => { r.style.animationDelay = (xs.indexOf(+r.getAttribute('x')) * 11) + 'ms'; });
+        heat.classList.add('wave');
+        hio.disconnect();
+      }), { threshold: 0.15 });
+      hio.observe(heat);
+    }
+    document.querySelectorAll('.thread-flow').forEach(flow => {
+      const fio = new IntersectionObserver(es => es.forEach(e => {
+        flow.classList.toggle('flowing', e.isIntersecting);
+      }), { threshold: 0.3 });
+      fio.observe(flow);
+    });
+  }
 
   // heatmap: show most recent weeks first on narrow screens
   document.querySelectorAll('.heatmap-scroll').forEach(el => { el.scrollLeft = el.scrollWidth; });
