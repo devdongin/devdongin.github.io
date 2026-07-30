@@ -40,7 +40,17 @@
 
 ## 커밋 히트맵
 
-`#activity`의 커밋 히트맵은 **두 계정(disun-cubox-ai + devdongin)의 최근 12개월 커밋을 전 저장소·전 브랜치에서 집계**한 것이다 (SHA 중복 제거, KST 기준). GitHub 기본 잔디는 기본 브랜치만 세지만, 고객사별 코드가 브랜치로 분리되어 있어 전체 push를 반영해야 한다는 취지 (2026-07-30 사용자 지시). 데이터는 로컬에서 `gh api`로 사전 수집해 정적으로 심는다 — 페이지에는 일자별 집계 수치만 넣고 **내부 저장소명은 절대 노출하지 않는다**. 주기적으로 재수집해 갱신한다.
+`#activity`의 커밋 히트맵은 **두 계정(disun-cubox-ai + devdongin)의 최근 12개월 커밋을 전 저장소·전 브랜치에서 집계**한 것이다 (SHA 중복 제거, KST 기준). GitHub 기본 잔디는 기본 브랜치만 세지만, 고객사별 코드가 브랜치로 분리되어 있어 전체 push를 반영해야 한다는 취지 (2026-07-30 사용자 지시). 페이지에는 일자별 집계 수치만 넣고 **내부 저장소명은 절대 노출하지 않는다**.
+
+## 자동 갱신 파이프라인 (2026-07-30 도입)
+
+주 1회 GitHub Actions(`.github/workflows/update-stats.yml`, 매주 월 00:30 KST)가 통계와 AI REVIEW를 자동 갱신한다.
+
+- `scripts/collect_stats.py` — GitHub API로 전 저장소·전 브랜치 커밋 집계 → `data/stats.json`. 스캔 대상·저장소 매핑은 secret `STATS_CONFIG`로 주입한다 (**내부 저장소명은 공개 파일·Actions 로그 어디에도 남기지 않는다** — 이 레포는 public이라 로그도 공개다).
+- `scripts/render_stats.py` — stats.json을 index.html의 마커 구간에 결정적으로 렌더링: `HEATMAP`(SVG), `HEATMAP-TITLE`, `COLLECTED`, `MONTHLY`, `STAT-SEEUONCLIENT`/`STAT-CULOCKERFSFD`/`STAT-CUFACESDK`.
+- AI REVIEW(`AI-REVIEW` 마커 구간)는 워크플로 내 Claude Code(구독 OAuth, `CLAUDE_CODE_OAUTH_TOKEN`)가 최신 stats.json을 근거로 재작성한다. 이 구간은 render_stats.py가 건드리지 않는다.
+- 수동으로 index.html의 마커 구간을 편집하지 말 것 — 다음 자동 갱신에서 덮어써진다. 마커 주석 자체를 삭제하면 렌더러가 실패한다(의도된 안전장치).
+- 필요 secrets: `STATS_TOKEN`(회사 계정 fine-grained PAT, 대상 저장소 Contents/Metadata Read), `STATS_CONFIG`, `CLAUDE_CODE_OAUTH_TOKEN`(`claude setup-token`으로 발급, 플랜 차감 방식).
 
 ## 작업 후 필수: 3자 관점 리뷰
 
