@@ -574,12 +574,6 @@
 
 
   /* ===== Motion: scroll progress, stagger, pipeline, expand ===== */
-  .scroll-progress {
-    position: absolute; left: 0; bottom: -1px; height: 2px; width: 0;
-    background: linear-gradient(90deg, var(--accent), var(--green));
-    transition: width .1s linear;
-    z-index: 2;
-  }
 
   /* reveal 카드 계단식 등장 */
   html.js .reveal { transition-delay: calc(var(--rd, 0) * 70ms); }
@@ -673,8 +667,7 @@
     .qa-badge { transition: none; }
     .hero-avatar::before { animation: none; }
     .btn-primary::after { transition: none; }
-    .scroll-progress { transition: none; }
-  }
+    }
 
   @media (max-width: 720px) {
     .nav-links a:not(.nav-cta) { display: none; }
@@ -702,15 +695,14 @@
     </a>
     <div class="nav-links">
       <span class="nav-indicator" aria-hidden="true"></span>
-      <span class="scroll-progress" aria-hidden="true"></span>
       <a href="#skills" data-section-link>역량</a>
       <a href="#projects" data-section-link>프로젝트</a>
       <a href="#interview" data-section-link>면접</a>
       <a href="#activity" data-section-link>활동</a>
       <a href="#career" data-section-link>경력</a>
-      <a href="gallery.html">갤러리</a>
       <a href="#contact" data-section-link>연락</a>
       <a href="https://he11oworld.tistory.com" target="_blank" rel="noopener">블로그</a>
+      <a href="gallery.html">갤러리</a>
       <a class="nav-cta" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -1229,17 +1221,28 @@
     navLinks.forEach(a => a.classList.remove('active'));
     if (navIndicator) navIndicator.style.opacity = '0';
   };
+  // 클릭으로 이동하는 동안에는 스크롤 동기화가 인디케이터를 뺏지 않도록 잠근다
+  let lockUntil = 0;
   const syncIndicator = () => {
+    if (Date.now() < lockUntil) return;
     const navHeight = nav.offsetHeight || 72;
     const readLine = scrollY + navHeight + Math.min(innerHeight * 0.22, 180);
-    const active = [...navSections].reverse().find(({ section }) => section.offsetTop <= readLine);
+    // 페이지 바닥에 닿으면 마지막 섹션을 활성화한다 —
+    // 문서 끝의 짧은 섹션은 readLine 기준을 영영 만족하지 못하기 때문
+    const atBottom = scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+    const active = atBottom
+      ? navSections[navSections.length - 1]
+      : [...navSections].reverse().find(({ section }) => section.offsetTop <= readLine);
     if (!active) {
       hideIndicator();
       return;
     }
     moveIndicator(active.link);
   };
-  navLinks.forEach(a => a.addEventListener('click', () => moveIndicator(a)));
+  navLinks.forEach(a => a.addEventListener('click', () => {
+    lockUntil = Date.now() + 900;
+    moveIndicator(a);
+  }));
   navLinks.forEach(a => a.addEventListener('focus', () => moveIndicator(a)));
   addEventListener('resize', () => {
     navSections.sort((a, b) => a.section.offsetTop - b.section.offsetTop);
@@ -1259,18 +1262,6 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   reveals.forEach(el => io.observe(el));
-
-  // 스크롤 진행바
-  const progress = document.querySelector('.scroll-progress');
-  if (progress) {
-    const setProgress = () => {
-      const max = document.documentElement.scrollHeight - innerHeight;
-      progress.style.width = (max > 0 ? Math.min(scrollY / max, 1) * 100 : 0) + '%';
-    };
-    addEventListener('scroll', setProgress, { passive: true });
-    addEventListener('resize', setProgress, { passive: true });
-    setProgress();
-  }
 
   // 히트맵 셀 웨이브 · 파이프라인 흐름 (뷰 진입 시 1회)
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
