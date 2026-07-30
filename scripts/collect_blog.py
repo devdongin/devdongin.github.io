@@ -4,6 +4,7 @@
 secret 불필요 (공개 RSS). 실패 시 기존 blog.json을 유지하기 위해
 경고만 남기고 정상 종료한다 — 블로그 수집 실패가 전체 갱신을 막지 않게.
 """
+import html
 import json
 import os
 import sys
@@ -29,11 +30,12 @@ def main():
 
     posts = []
     for item in root.iter("item"):
-        title = (item.findtext("title") or "").strip()
+        # Tistory RSS는 제목을 이중 인코딩하므로 entity를 한 번 되돌린다
+        title = html.unescape((item.findtext("title") or "").strip())
         link = (item.findtext("link") or "").strip()
         if not title or not link:
             continue
-        category = (item.findtext("category") or "").strip()
+        category = html.unescape((item.findtext("category") or "").strip())
         category = category.rsplit("/", 1)[-1] or "Blog"  # "개발/AI" → "AI"
         try:
             date = parsedate_to_datetime(item.findtext("pubDate")).astimezone(KST).date().isoformat()

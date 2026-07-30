@@ -99,35 +99,30 @@ def build_monthly(daily, start, end):
             + "".join(rows) + "</tbody></table>")
 
 
-def build_blog_cards(posts):
+def _blog_half(posts, focusable):
     esc = html_mod.escape
-    cards = []
-    for p in posts:
-        cards.append(
-            f'<a class="flow-card" href="{esc(p["link"])}" target="_blank" rel="noopener">'
-            f'<span class="fc-tag">{esc(p["category"])}</span>'
-            f'<span class="fc-title">{esc(p["title"])}</span>'
-            f'<span class="fc-meta">{esc(p["date"])}</span></a>')
-    cards.append(
-        '<a class="flow-card" href="https://he11oworld.tistory.com" target="_blank" rel="noopener">'
-        '<span class="fc-tag">Tech Blog</span>'
-        '<span class="fc-title">블로그 전체 보기 →</span>'
-        '<span class="fc-meta">he11oworld.tistory.com</span></a>')
+    extra = "" if focusable else ' tabindex="-1"'
+    entries = [(p["category"], p["title"], p["date"], p["link"]) for p in posts]
+    entries.append(("Tech Blog", "블로그 전체 보기 →", "he11oworld.tistory.com",
+                    "https://he11oworld.tistory.com"))
     if LINKEDIN_URL:
-        cards.append(
-            f'<a class="flow-card" href="{LINKEDIN_URL}" target="_blank" rel="noopener">'
-            f'<span class="fc-tag">LinkedIn</span>'
-            f'<span class="fc-title">프로필 보기 →</span>'
-            f'<span class="fc-meta">linkedin.com</span></a>')
-    cards.append(
-        '<a class="flow-card" href="https://github.com/devdongin" target="_blank" rel="noopener">'
-        '<span class="fc-tag">GitHub</span>'
-        '<span class="fc-title">저장소 보기 →</span>'
-        '<span class="fc-meta">github.com/devdongin</span></a>')
-    half = "".join(cards)
-    # 끊김 없는 무한 스크롤을 위해 동일한 절반을 2벌 렌더 (두 번째는 스크린리더 제외)
-    return (f'\n      <div class="ticker-half">{half}</div>'
-            f'\n      <div class="ticker-half" aria-hidden="true">{half}</div>\n      ')
+        entries.append(("LinkedIn", "프로필 보기 →", "linkedin.com", LINKEDIN_URL))
+    entries.append(("GitHub", "저장소 보기 →", "github.com/devdongin",
+                    "https://github.com/devdongin"))
+    return "".join(
+        f'<a class="flow-card" href="{esc(link)}" target="_blank" rel="noopener"{extra}>'
+        f'<span class="fc-tag">{esc(tag)}</span>'
+        f'<span class="fc-title">{esc(title)}</span>'
+        f'<span class="fc-meta">{esc(meta)}</span></a>'
+        for tag, title, meta, link in entries)
+
+
+def build_blog_cards(posts):
+    # 끊김 없는 무한 스크롤을 위해 동일한 절반을 2벌 렌더.
+    # 두 번째 절반은 스크린리더(aria-hidden·inert)와 탭 순서(tabindex)에서 제외.
+    return (f'\n      <div class="ticker-half">{_blog_half(posts, True)}</div>'
+            f'\n      <div class="ticker-half" aria-hidden="true" inert>'
+            f'{_blog_half(posts, False)}</div>\n      ')
 
 
 def replace(html, name, new_inner, required=True):
