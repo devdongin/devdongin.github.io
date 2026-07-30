@@ -11,7 +11,7 @@
 <meta property="og:title" content="선동인 | Vision AI 보안 제품을, 처음부터 끝까지">
 <meta property="og:description" content="Vision AI 영상보안 솔루션 SEEUON의 AI 추론 SDK·Windows 클라이언트·미들웨어·배포·고객사 운영 장애 대응까지 제품 전체 사이클을 다뤄온 시스템 소프트웨어 엔지니어">
 <meta property="og:url" content="https://devdongin.github.io">
-<meta property="og:image" content="https://devdongin.github.io/og-card.png">
+<meta property="og:image" content="https://devdongin.github.io/assets/images/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="선동인 — Vision AI 보안 제품을, 처음부터 끝까지 · devdongin.github.io">
@@ -25,12 +25,12 @@
   "alternateName": "devdongin",
   "jobTitle": "Vision AI Security · Windows Client & Inference Engineer",
   "url": "https://devdongin.github.io",
-  "image": "https://devdongin.github.io/login_avatar.jpg",
+  "image": "https://devdongin.github.io/assets/images/login_avatar.jpg",
   "sameAs": ["https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/", "https://github.com/devdongin", "https://he11oworld.tistory.com", "https://kmong.com/@%EA%B0%AD%EB%8F%99"]
 }
 </script>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -279,6 +279,23 @@
   .skill-card .icon { font-size: 26px; margin-bottom: 12px; }
   .skill-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
   .skill-card p { font-size: 14px; color: var(--text-dim); }
+  .thread-flow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .thread-step {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(88,166,255,0.06);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .thread-step strong { color: var(--text); font-weight: 700; }
+  .thread-step span { color: var(--accent); font-weight: 700; white-space: nowrap; }
 
   /* ===== Strengths / Stack / Clients / Edu ===== */
   .strengths {
@@ -568,7 +585,7 @@
 <nav id="nav">
   <div class="nav-inner">
     <a class="brand" href="#top">
-      <img src="avatar-nav.webp" alt="" width="32" height="32">
+      <img src="assets/images/avatar-nav.webp" alt="" width="32" height="32">
       devdongin
     </a>
     <div class="nav-links">
@@ -618,7 +635,7 @@
       <p class="hero-note">주요 개발 활동은 회사 조직의 프라이빗 저장소에 있습니다 · <a href="#activity">개발 활동 근거 보기 ↓</a></p>
     </div>
     <div class="hero-avatar">
-      <img src="avatar-hero.webp" alt="선동인 미모지 아바타" width="300" height="300" fetchpriority="high">
+      <img src="assets/images/avatar-hero.webp" alt="선동인 미모지 아바타" width="300" height="300" fetchpriority="high">
     </div>
   </div>
   <div class="scroll-hint">SCROLL</div>
@@ -677,7 +694,13 @@
       <div class="skill-card reveal">
         <div class="icon">🧵</div>
         <h3>멀티스레딩 &amp; 병목 설계</h3>
-        <p>추론 SDK와 판별 미들웨어의 스레드 구조를 재설계해 <strong>프레임당 처리 시간을 150ms → 40~50ms(약 3배)</strong>로 단축했습니다. 서버 GPU가 아니라 <strong>고객 사용자 PC 환경</strong>에서, 한 프레임에 얼굴·바디 탐지 / 카메라 탐지 / 위변조 탐지 <strong>모델 3종과 얼굴 특징점 추출</strong>을 모두 통과시키는 조건입니다</p>
+        <p>프레임 수집·전처리·모델 추론·후처리를 한 경로에서 순차 처리하던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI와 위변조 탐지를 조건부 실행하고, 무거운 추론 작업을 워커 단위로 나눠 <strong>150ms → 40~50ms</strong>까지 줄였습니다</p>
+        <div class="thread-flow" aria-label="멀티스레딩 병목 개선 흐름">
+          <div class="thread-step"><strong>Capture / Preprocess</strong><span>입력 분리</span></div>
+          <div class="thread-step"><strong>Detection Workers</strong><span>모델 3종</span></div>
+          <div class="thread-step"><strong>ROI / Liveness Gate</strong><span>조건부 실행</span></div>
+          <div class="thread-step"><strong>Postprocess / Decision</strong><span>판별 통합</span></div>
+        </div>
       </div>
       <div class="skill-card reveal">
         <div class="icon">🔍</div>
@@ -832,8 +855,8 @@
           <li><strong>OpenVINO 선택</strong> — 국내 고객 PC 환경의 다수가 Intel CPU 기반이라는 점을 고려했습니다. OpenVINO는 CPU 스레드 튜닝, 모델 캐싱, 내장 그래픽 활용 가능성 등 클라이언트 추론에서 조정할 수 있는 옵션이 많아 ONNX Runtime/OpenCV DNN 대비 제품 환경 최적화 여지가 컸습니다</li>
           <li><strong>SDK 설계 원칙</strong> — 코어는 기능만 제공하고 <strong>메모리 소유권은 애플리케이션이 갖는 구조</strong>로 두었습니다. 리소스 생명주기는 명시적 init/finalize에 더해 언어별 생성자·소멸자 패턴까지 고려해 정리했습니다. 모델은 최초 로딩 시 캐시를 만들고 이후에는 필요한 모델만 부분 load/unload할 수 있게 했습니다</li>
           <li><strong>쓰는 사람 기준으로 검증</strong> — C#·Python Wrapper는 혼자 상상해서 내지 않고, 실제 그 언어를 쓰는 개발자들에게 사용성을 물어 API 형태를 조정했습니다</li>
-          <li><strong>파이프라인 설계</strong> — 위변조 탐지는 얼굴 기반 공격이므로 얼굴이 검출된 경우에만 ROI를 잡아 수행했습니다. 다만 고객 정책에 따라 모든 판별 이력을 남겨야 하는 모드도 있어, 조건부 실행과 전체 탐지를 모두 지원했습니다. 성능 수치는 얼굴·바디 탐지, 카메라 탐지, 위변조 탐지와 특징점 추출을 모두 수행하는 <strong>가장 높은 보안 강도</strong>를 기준으로 잡았습니다</li>
-          <li><strong>난점 → 해결</strong> — 실행 환경이 서버 GPU가 아니라 <strong>고객의 일반 사용자 PC</strong>였고, 한 프레임에 얼굴·바디 탐지 / 카메라 탐지 / 위변조 탐지 모델 3종과 얼굴 특징점 추출이 모두 얹혔습니다. 초기엔 프레임당 150ms(약 6fps)라 실시간 감시라 부르기 어려운 수준이었습니다. SDK와 판별 미들웨어(FaceOnDiscriminator)의 스레드 구조와 처리 경로를 재설계해 병목을 제거했습니다</li>
+          <li><strong>파이프라인 설계</strong> — 프레임 수집·전처리·모델 추론·후처리·판별이 한 경로에서 순차 처리되던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI를 만들고, 위변조 탐지는 얼굴이 검출된 경우에만 수행했습니다. 다만 고객 정책에 따라 모든 판별 이력을 남겨야 하는 모드도 있어, 조건부 실행과 전체 탐지를 모두 지원했습니다</li>
+          <li><strong>난점 → 해결</strong> — 실행 환경이 서버 GPU가 아니라 <strong>고객의 일반 사용자 PC</strong>였고, 한 프레임에 얼굴·바디 탐지 / 카메라 탐지 / 위변조 탐지 모델 3종과 얼굴 특징점 추출이 모두 얹혔습니다. 초기엔 프레임당 150ms(약 6fps)라 실시간 감시라 부르기 어려운 수준이었습니다. 추론 워커와 판별 미들웨어(FaceOnDiscriminator)의 처리 경로를 분리하고, ROI 기반 조건부 실행과 모델 캐싱으로 병목을 줄였습니다</li>
           <li><strong>정확도와 트레이드오프</strong> — 3배 개선은 모델 경량화나 입력 해상도 축소가 아니라 추론 아키텍처와 처리 경로 개선에서 얻었습니다. 모델 자체 정확도는 유지했고, 정확도 손실 가능성은 사용자 PC에서 실행 가능한 모델을 만들기 위한 FP16/양자화 단계의 트레이드오프로 분리해 판단했습니다</li>
           <li><strong>결과</strong> — 같은 사용자 PC에서 <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>. 추가 하드웨어 없이 실시간 처리 수준을 확보했고, SEEUON 제품군의 공통 기반 SDK로 채택되어 Edge Device 보드 최적화 버전까지 확장</li>
         </ul>
@@ -1067,7 +1090,7 @@
 <footer>
   <div class="container">
     <p>© 2026 선동인 (devdongin) · <strong>v2</strong> · Built with plain HTML — hosted on GitHub Pages</p>
-    <p class="visits" hidden>👀 Today <span id="v-today">–</span> · Total <span id="v-total">–</span> <span class="visits-note">· 제3자 무가입 집계(Abacus), 재미로만 봐주세요</span></p>
+    <p class="visits" hidden>👀 Today <span id="v-today">–</span> · Total <span id="v-total">–</span> <span class="visits-note">· 제3자 무가입 집계(Abacus)</span></p>
   </div>
 </footer>
 

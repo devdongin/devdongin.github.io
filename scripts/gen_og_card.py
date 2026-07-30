@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""og-card.png 생성 — 링크 공유 시 노출되는 1200x630 카드.
+"""assets/images/og-card.png 생성 — 링크 공유 시 노출되는 1200x630 카드.
 
 사이트 다크 팔레트(index.html :root)와 동일한 톤. 로컬에서 실행:
   pip install pillow
@@ -8,6 +8,7 @@
 폰트는 Windows 맑은 고딕(malgun)을 사용한다 (Pretendard 근사치).
 """
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from pathlib import Path
 
 W, H = 1200, 630
 BG = "#0d1117"
@@ -18,6 +19,7 @@ DIM = "#9ba7b4"
 ACCENT = "#58a6ff"
 
 FONT_DIR = "C:/Windows/Fonts/"
+ASSET_DIR = Path("assets/images")
 
 
 def font(name, size):
@@ -66,7 +68,7 @@ def main():
     # 우측 아바타 (원형 + 액센트 링)
     avatar_size = 260
     cx, cy = W - 90 - avatar_size // 2, H // 2 - 40
-    avatar = Image.open("login_avatar.jpg").convert("RGB")
+    avatar = Image.open(ASSET_DIR / "login_avatar.jpg").convert("RGB")
     avatar = ImageOps.fit(avatar, (avatar_size, avatar_size))
     mask = Image.new("L", (avatar_size * 4, avatar_size * 4), 0)
     ImageDraw.Draw(mask).ellipse([0, 0, avatar_size * 4, avatar_size * 4], fill=255)
@@ -75,8 +77,9 @@ def main():
     d.ellipse([cx - ring, cy - ring, cx + ring, cy + ring], fill=CARD, outline=ACCENT, width=4)
     img.paste(avatar, (cx - avatar_size // 2, cy - avatar_size // 2), mask)
 
-    img.save("og-card.png", optimize=True)
-    print("og-card.png written")
+    ASSET_DIR.mkdir(parents=True, exist_ok=True)
+    img.save(ASSET_DIR / "og-card.png", optimize=True)
+    print("assets/images/og-card.png written")
 
 
 if __name__ == "__main__":

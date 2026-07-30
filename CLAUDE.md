@@ -30,7 +30,7 @@
 - 컴포넌트 재사용 우선: `.skill-card`, `.project`, `.badge`, `.chip`, `.timeline`, `.stack`, `.edu-grid`.
 - 스크롤 애니메이션은 새 요소에 `class="reveal"`만 부여 (IntersectionObserver가 처리, JS 수정 불필요).
 - 섹션 배경 교차 유지: 기본 → `.alt` → 기본 → `.alt`.
-- 아바타는 `login_avatar.jpg`(실제 미모지), 파비콘은 `memoji.svg`.
+- 아바타와 공유 카드 리소스는 `assets/images/` 아래에서 관리한다. 원본 미모지 사진은 `assets/images/login_avatar.jpg`, 파비콘 소스는 `assets/images/memoji.svg`.
 
 ## 리뷰 우선순위 (2026-07-30 사용자 지시)
 
