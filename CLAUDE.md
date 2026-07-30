@@ -45,6 +45,10 @@
 
 ## AI 리뷰 박스 자동 갱신
 
+**스타일(2026-07-31 사용자 지시): 컴팩트하게 — 한 문장 핵심 + 근거 1~2문장, 총 3문장 이내. 풀어쓰지 않는다.** 갱신 주기는 3시간이며 페이지에도 "3시간마다"로 서술한다.
+
+**모델 구성 표기(2026-07-31 확정)**: 추론 파이프라인은 "모델 5종 + 특징점 추출" — 사람 탐지, 카메라 탐지, liveness 3종(디스플레이/출력물/IR). 얼굴 등록 시 품질 평가 모델 3종 추가. "모델 3종/4종"은 오기.
+
 히어로의 `#ai-review` 박스(태그라인 하단)는 **AI가 선동인에 대해 자동 판단한 평가**다. 의미 있는 변경·리뷰 사이클마다 평가문과 갱신 시각(KST)을 업데이트한다. "AI가 자동 생성·갱신한다"는 명시 문구는 유지한다. 위치는 히어로 description 하단 (2026-07-30 사용자 지시로 최상단 스트립에서 이동).
 
 ## 커밋 히트맵
@@ -53,7 +57,7 @@
 
 ## 자동 갱신 파이프라인 (2026-07-30 도입)
 
-주 1회 GitHub Actions(`.github/workflows/update-stats.yml`, 매주 월 00:30 KST)가 통계와 AI REVIEW를 자동 갱신한다.
+GitHub Actions(`.github/workflows/update-stats.yml`)가 자동 갱신한다 — **통계·히트맵·블로그는 매일 00:30 KST, AI REVIEW는 3시간마다** (2026-07-31 사용자 지시).
 
 - `scripts/collect_stats.py` — GitHub API로 전 저장소·전 브랜치 커밋 집계 → `data/stats.json`. 스캔 대상·저장소 매핑은 secret `STATS_CONFIG`로 주입한다 (**내부 저장소명은 공개 파일·Actions 로그 어디에도 남기지 않는다** — 이 레포는 public이라 로그도 공개다).
 - `scripts/render_stats.py` — stats.json을 index.html의 마커 구간에 결정적으로 렌더링: `HEATMAP`(SVG), `HEATMAP-TITLE`, `COLLECTED`, `MONTHLY`, `STAT-SEEUONCLIENT`/`STAT-CULOCKERFSFD`/`STAT-CUFACESDK`.

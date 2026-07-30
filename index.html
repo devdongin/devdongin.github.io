@@ -631,10 +631,8 @@
       <div class="ai-review-box" id="ai-review">
         <span class="ai-tag">AI REVIEW</span>
         <!-- AI-REVIEW:START -->
-        <p><strong>Vision AI 영상보안 제품을 연구실 모델에서 고객사 운영 환경까지 끌고 간 엔지니어.</strong>
-        추론 SDK 설계(기여 2위·325커밋), 솔루션 자기보호 커널 드라이버 단독 개발(커밋 100%), Windows 로그인 얼굴인증 Credential Provider(기여 76%)가 한 제품의 서로 다른 층위로 이어집니다. 강점은 범위가 아니라 <strong>깊이가 필요한 지점에서 실제로 내려간 기록</strong>입니다 — 서버가 아닌 사용자 PC에서 모델 3종과 특징점 추출을 얹은 추론 파이프라인을 재설계해 프레임당 150ms를 40~50ms로 줄였고, 백신·EDR 충돌은 풀 덤프와 WinDbg로 원인 경로까지 규명해 고객사·벤더 화이트리스트 협의로 마무리했습니다.
-        최근 12개월 커밋 886건(두 계정 전 저장소·전 브랜치 집계)에서 핵심 클라이언트 저장소 기여율 81%로 1위. 고객사 확장기였던 3~5월 월 121~143커밋으로 정점을 찍었고, 최근에는 AI 코딩 하네스를 실무에 들여 macOS 버전 구축과 이 페이지의 자동 갱신 파이프라인을 함께 운영 중입니다.
-        <span class="ai-meta">이 평가는 AI(Claude)가 선동인의 경력·저장소 기여 데이터를 근거로 자동 생성·갱신합니다 · 갱신 2026-07-30 21:10 KST</span></p>
+        <p><strong>Vision AI 영상보안 제품을 연구실 모델에서 고객사 운영 환경까지 제품화한 엔지니어.</strong> 사용자 PC에서 모델 5종 + 특징점 추출을 돌리는 추론 파이프라인을 재설계해 프레임당 150ms를 40~50ms로 줄였고, 추론 SDK(기여 2위)·자기보호 커널 드라이버(커밋 100%)·얼굴인증 Credential Provider(기여 76%)를 한 제품의 층위로 쌓았습니다. 최근 12개월 커밋 886건(두 계정 전 저장소·전 브랜치), 핵심 클라이언트 저장소 기여율 81% 1위.
+        <span class="ai-meta">이 평가는 AI(Claude)가 저장소 기여 데이터를 근거로 3시간마다 자동 생성·갱신합니다 · 최근 갱신 2026-07-31 00:47 KST</span></p>
         <!-- AI-REVIEW:END -->
       </div>
       <div class="hero-actions">
@@ -659,7 +657,7 @@
 
 <div class="stats">
   <div class="stats-inner">
-    <div class="stat reveal"><div class="num">150ms → 45ms</div><div class="label">모델 4종 동시 추론 · 사용자 PC 기준 (3배 개선)</div></div>
+    <div class="stat reveal"><div class="num">150ms → 45ms</div><div class="label">모델 5종 + 특징점 추출 · 사용자 PC 기준 (3배 개선)</div></div>
     <div class="stat reveal"><div class="num">7년</div><div class="label">Windows 시스템 개발</div></div>
     <div class="stat reveal"><div class="num">40–50%</div><div class="label">2024 회사 매출 기여 (100억 중)</div></div>
     <div class="stat reveal"><div class="num">80억+</div><div class="label">담당 솔루션 누적 매출</div></div>
@@ -713,8 +711,8 @@
         <p>프레임 수집·전처리·모델 추론·후처리를 한 경로에서 순차 처리하던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI와 위변조 탐지를 조건부 실행하고, 무거운 추론 작업을 워커 단위로 나눠 <strong>150ms → 40~50ms</strong>까지 줄였습니다</p>
         <div class="thread-flow" aria-label="멀티스레딩 병목 개선 흐름">
           <div class="thread-step"><strong>Capture / Preprocess</strong><span>입력 분리</span></div>
-          <div class="thread-step"><strong>Detection Workers</strong><span>모델 3종</span></div>
-          <div class="thread-step"><strong>ROI / Liveness Gate</strong><span>조건부 실행</span></div>
+          <div class="thread-step"><strong>Detection Workers</strong><span>person · camera</span></div>
+          <div class="thread-step"><strong>ROI / Liveness Gate</strong><span>liveness 3종 조건부</span></div>
           <div class="thread-step"><strong>Postprocess / Decision</strong><span>판별 통합</span></div>
         </div>
       </div>
@@ -782,7 +780,7 @@
       </div>
       <ul>
         <li><strong>CUFaceSDK (C++)</strong> — OpenVINO 기반 AI 추론 SDK. 애플리케이션 개발의 공통 기반 엔진</li>
-        <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발. 사용자 PC에서 모델 3종 + 특징점 추출을 프레임마다 통과시키는 구조를 재설계해 <strong>프레임당 150ms → 40~50ms</strong> 단축</li>
+        <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발. 사용자 PC에서 모델 5종 + 특징점 추출을 프레임마다 통과시키는 구조를 재설계해 <strong>프레임당 150ms → 40~50ms</strong> 단축</li>
         <li><strong>CULockerFsfd (C)</strong> — 솔루션 프로세스·파일 자체 보호 커널 드라이버. Anti-Debugging, 로컬 파일 I/O 통제</li>
         <li><strong>SeeuonCP</strong> — Windows 로그인 화면에서 얼굴 인증을 제공하는 커스텀 Credential Provider 모듈 개발<!-- STAT-SEEUONCP:START --> — 사내 저장소 커밋 <strong>16/21 (76% · 2026-07-30 기준)</strong><!-- STAT-SEEUONCP:END --></li>
         <li><strong>SEEUONIdp</strong> — Identity Provider 확장판 클라이언트 메인 개발·설계. SSO 연계, GoogleOTP 연동, Passwordless 얼굴 본인인증</li>
@@ -872,7 +870,7 @@
           <li><strong>SDK 설계 원칙</strong> — 코어는 기능만 제공하고 <strong>메모리 소유권은 애플리케이션이 갖는 구조</strong>로 두었습니다. 리소스 생명주기는 명시적 init/finalize에 더해 언어별 생성자·소멸자 패턴까지 고려해 정리했습니다. 모델은 최초 로딩 시 캐시를 만들고 이후에는 필요한 모델만 부분 load/unload할 수 있게 했습니다</li>
           <li><strong>쓰는 사람 기준으로 검증</strong> — C#·Python Wrapper는 혼자 상상해서 내지 않고, 실제 그 언어를 쓰는 개발자들에게 사용성을 물어 API 형태를 조정했습니다</li>
           <li><strong>파이프라인 설계</strong> — 프레임 수집·전처리·모델 추론·후처리·판별이 한 경로에서 순차 처리되던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI를 만들고, 위변조 탐지는 얼굴이 검출된 경우에만 수행했습니다. 다만 고객 정책에 따라 모든 판별 이력을 남겨야 하는 모드도 있어, 조건부 실행과 전체 탐지를 모두 지원했습니다</li>
-          <li><strong>난점 → 해결</strong> — 실행 환경이 서버 GPU가 아니라 <strong>고객의 일반 사용자 PC</strong>였고, 한 프레임에 얼굴·바디 탐지 / 카메라 탐지 / 위변조 탐지 모델 3종과 얼굴 특징점 추출이 모두 얹혔습니다. 초기엔 프레임당 150ms(약 6fps)라 실시간 감시라 부르기 어려운 수준이었습니다. 추론 워커와 판별 미들웨어(FaceOnDiscriminator)의 처리 경로를 분리하고, ROI 기반 조건부 실행과 모델 캐싱으로 병목을 줄였습니다</li>
+          <li><strong>난점 → 해결</strong> — 실행 환경이 서버 GPU가 아니라 <strong>고객의 일반 사용자 PC</strong>였고, 한 프레임에 사람 탐지·카메라 탐지, 그리고 위변조(liveness) 탐지 3종 — 디스플레이·출력물·IR — 까지 모델 5종과 얼굴 특징점 추출이 모두 얹혔습니다 (얼굴 등록 시엔 품질 평가 모델 3종이 추가됩니다). 초기엔 프레임당 150ms(약 6fps)라 실시간 감시라 부르기 어려운 수준이었습니다. 추론 워커와 판별 미들웨어(FaceOnDiscriminator)의 처리 경로를 분리하고, ROI 기반 조건부 실행과 모델 캐싱으로 병목을 줄였습니다</li>
           <li><strong>정확도와 트레이드오프</strong> — 3배 개선은 모델 경량화나 입력 해상도 축소가 아니라 추론 아키텍처와 처리 경로 개선에서 얻었습니다. 모델 자체 정확도는 유지했고, 정확도 손실 가능성은 사용자 PC에서 실행 가능한 모델을 만들기 위한 FP16/양자화 단계의 트레이드오프로 분리해 판단했습니다</li>
           <li><strong>결과</strong> — 같은 사용자 PC에서 <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>. 추가 하드웨어 없이 실시간 처리 수준을 확보했고, SEEUON 제품군의 공통 기반 SDK로 채택되어 Edge Device 보드 최적화 버전까지 확장</li>
         </ul>

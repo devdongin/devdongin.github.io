@@ -192,7 +192,7 @@ def main():
     if s:
         html = replace(html, "STAT-SEEUONCLIENT",
                        f'<strong>커밋 {s["percent"]}% · {s["rank"]}위 기여자</strong> '
-                       f'({s["mine"]:,} / {s["total"]:,} 커밋 · 기본 브랜치 · {end} 기준)',
+                       f'({s["mine"]:,} / {s["total"]:,} 커밋 · 기본 브랜치 contributors 집계 · {end} 기준)',
                        required=False)
     s = repo_stats.get("culockerfsfd")
     if s:
