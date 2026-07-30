@@ -23,6 +23,8 @@ BLOG = "data/blog.json"
 
 # LinkedIn 프로필 URL — 비어 있으면 카드 미출력
 LINKEDIN_URL = "https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/"
+# 크몽 프로필 URL — 비어 있으면 카드 미출력
+KMONG_URL = "https://kmong.com/@%EA%B0%AD%EB%8F%99"
 
 CELL, STEP, X0, Y0 = 11, 13, 8, 18
 COLS = 54  # 마지막 열이 집계 종료일이 속한 주가 되도록 54주 고정
@@ -112,6 +114,8 @@ def _blog_half(posts, focusable):
                     "https://he11oworld.tistory.com"))
     entries.append(("GitHub", "저장소 보기 →", "github.com/devdongin",
                     "https://github.com/devdongin"))
+    if KMONG_URL:
+        entries.append(("크몽", "개발 외주 프로필 →", "kmong.com/@갭동", KMONG_URL))
     return "".join(
         f'<a class="flow-card" href="{esc(link)}" target="_blank" rel="noopener"{extra}>'
         f'<span class="fc-tag">{esc(tag)}</span>'
