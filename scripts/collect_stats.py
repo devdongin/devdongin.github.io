@@ -43,6 +43,16 @@ KST = timezone(timedelta(hours=9))
 ALLOWED_SLUGS = {"seeuonclient", "culockerfsfd", "cufacesdk", "seeuoncp"}
 
 
+class ApiError(Exception):
+    """URL·저장소명을 담지 않는 API 오류.
+
+    urllib의 HTTPError/URLError는 메시지와 traceback에 요청 URL을 그대로 싣는다.
+    이 저장소는 public이고 Actions 로그도 공개이므로, 예외가 gh() 밖으로 새어
+    나가면 /repos/{owner}/{private-repo} 가 로그에 남는다. 상태 코드와 익명
+    대상 번호만 남기고 원인 예외는 __cause__ 로도 붙이지 않는다.
+    """
+
+
 def gh(token, path, params=None):
     url = API + path
     if params:
@@ -67,7 +77,8 @@ def gh(token, path, params=None):
                 continue
             if e.code in (404, 409):  # 접근 불가 / 빈 저장소
                 return None
-            raise
+            # from None — HTTPError 의 URL 이 traceback 에 실리지 않도록 체인을 끊는다
+            raise ApiError(f"GitHub API 오류 (HTTP {e.code})") from None
         except (urllib.error.URLError, http.client.HTTPException, OSError) as e:
             # RemoteDisconnected, 타임아웃 등 일시적 네트워크 오류 — 백오프 후 재시도
             if attempt < 5:
@@ -76,7 +87,7 @@ def gh(token, path, params=None):
                       f"retrying in {wait}s", file=sys.stderr)
                 time.sleep(wait)
                 continue
-            raise
+            raise ApiError(f"네트워크 오류 재시도 소진 ({type(e).__name__})") from None
     return None
 
 
@@ -121,19 +132,26 @@ def main():
         cache = {"repos": {}}
 
     targets = []
+    pushed_map = {}
     skipped_cache = skipped_dormant = 0
     for full_name, pushed_at in repos:
         h = hashlib.sha256(full_name.encode()).hexdigest()[:16]
         entry = cache["repos"].get(h)
         if entry and not entry.get("found"):
-            skipped_cache += 1
-            continue
+            # 스캔 당시의 pushed_at 을 함께 저장해 두고, 그 뒤로 push 가 있었다면
+            # 캐시를 무효화하고 다시 스캔한다. (기록이 없는 옛 캐시는 재스캔한다 —
+            # 한 번 비었다는 이유로 영구히 빠지는 것을 막기 위함)
+            cached_push = entry.get("pushed_at")
+            if cached_push and pushed_at and pushed_at <= cached_push:
+                skipped_cache += 1
+                continue
         if pushed_at:
             pushed = datetime.fromisoformat(pushed_at.replace("Z", "+00:00"))
             if pushed < datetime(start.year, start.month, start.day, tzinfo=KST):
                 # 집계 기간 시작 이후 push가 없으면 새 커밋도 없다
                 skipped_dormant += 1
                 continue
+        pushed_map[h] = pushed_at
         targets.append((full_name, h))
     print(f"[collect] {len(repos)} repos listed, scanning {len(targets)} "
           f"(cache-skip {skipped_cache}, dormant-skip {skipped_dormant})", file=sys.stderr)
@@ -158,6 +176,9 @@ def main():
                         daily[d.isoformat()] = daily.get(d.isoformat(), 0) + 1
         cache["repos"][h] = {
             "found": len(seen) > found_before,
+            # 다음 실행에서 "이 시점 이후 push 가 있었는가" 를 판단하는 기준.
+            # 고유 커밋이 0이어도(SHA 중복 포함) push 가 새로 생기면 재스캔된다.
+            "pushed_at": pushed_map.get(h, ""),
             "scanned_at": datetime.now(KST).isoformat(timespec="seconds"),
         }
         print(f"[collect] repo {i}/{len(targets)} done, {len(seen)} unique commits", file=sys.stderr)

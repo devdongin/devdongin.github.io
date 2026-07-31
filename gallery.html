@@ -56,6 +56,15 @@
     transition: border-color .2s ease, transform .2s ease;
   }
   .g-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .g-card a:focus-visible, .back:focus-visible, .heatmap-scroll:focus-visible,
+  .g-card video:focus-visible, .g-embed iframe:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .g-card, .back { transition: none; }
+    .g-card:hover { transform: none; }
+  }
   .g-card img, .g-card video { display: block; width: 100%; height: auto; }
   .g-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
   .g-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }

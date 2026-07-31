@@ -19,7 +19,9 @@ permissions:
   id-token: write # claude-code-action OIDC 요구사항
 
 concurrency:
-  group: update-stats
+  # 두 워크플로 모두 main 에 자동 커밋·push 하므로 같은 group 으로 묶는다.
+  # 서로 다른 group 이면 동시 실행 시 non-fast-forward 로 한쪽이 실패한다.
+  group: main-writer
   cancel-in-progress: false
 
 jobs:
@@ -108,4 +110,12 @@ jobs:
             exit 0
           fi
           git commit -m "chore: 자동 갱신 — 커밋 통계 / AI REVIEW"
-          git push
+          # 다른 writer 워크플로가 먼저 push 했을 수 있으므로 rebase 후 재시도한다.
+          # (concurrency group 으로 대부분 막히지만, 수동 push 와 겹치는 경우가 남는다)
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected, rebasing (attempt $i)"
+            git pull --rebase --autostash origin main || exit 1
+          done
+          echo "push failed after retries" >&2
+          exit 1

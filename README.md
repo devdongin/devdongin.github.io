@@ -7,9 +7,16 @@ Vision AI 영상보안 솔루션을 연구실 모델에서 고객사 운영 환�
 
 ## 무엇으로 만들었나
 
-의존성 없는 **정적 HTML 한 장**입니다. 빌드 단계도, 프레임워크도, 번들러도 없습니다.
-랜딩 페이지의 외부 요청은 폰트 CDN(Pretendard) 하나뿐이고, 나머지는 전부 인라인 CSS·JS와 저장소 안의 이미지입니다.
-(갤러리의 유튜브 카드만 재생 시 `youtube-nocookie.com`을 부릅니다.)
+의존성 없는 **정적 HTML**입니다 — 랜딩(`index.html`)과 갤러리(`gallery.html`) 두 장뿐이고,
+빌드 단계도, 프레임워크도, 번들러도 없습니다. CSS·JS는 전부 인라인입니다.
+
+외부로 나가는 요청은 이게 전부입니다:
+
+| 대상 | 어디서 | 시점 |
+|---|---|---|
+| Pretendard 폰트 CDN | 두 페이지 | 로드 시 |
+| Abacus (방문자 카운터) | 랜딩 푸터 | 로드 시 |
+| `youtube-nocookie.com` | 히어로 데모·갤러리 | **재생 클릭 후** (그전엔 썸네일만) |
 
 ```
 index.html          랜딩 페이지 (인라인 CSS/JS)
@@ -54,4 +61,4 @@ python3 -m http.server 8000
 
 ---
 
-문의는 devdongin@gmail.com 으로 주세요. [프로필](https://github.com/devdongin) · [블로그](https://he11oworld.tistory.com)
+문의는 [사이트의 Contact 섹션](https://devdongin.github.io/#contact)으로 주세요. [프로필](https://github.com/devdongin) · [블로그](https://he11oworld.tistory.com)

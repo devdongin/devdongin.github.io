@@ -4,4 +4,8 @@
     <loc>https://devdongin.github.io/</loc>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://devdongin.github.io/gallery.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

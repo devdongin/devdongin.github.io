@@ -1,6 +1,6 @@
 # CLAUDE.md — devdongin.github.io
 
-선동인의 개인 포트폴리오 사이트. GitHub Pages 정적 호스팅, 단일 `index.html` (외부 의존성은 Pretendard 폰트 CDN 하나).
+선동인의 개인 포트폴리오 사이트. GitHub Pages 정적 호스팅, `index.html`(랜딩) + `gallery.html`(대외 활동) 두 장. 외부 요청은 Pretendard 폰트 CDN, 방문자 카운터(Abacus), 그리고 **클릭 후에만** 부르는 `youtube-nocookie.com` 뿐이다.
 
 ## 에이전트 역할 분담
 
@@ -13,7 +13,7 @@
 
 1. **이름 표기는 "선동인"** — "손동인"은 오기. (macOS 계정명 sundongin에서 유추하지 말 것)
 2. **민감 정보 게시 금지**: 전화번호, 집주소, 연봉/희망연봉, 출생연도/나이, 학점.
-3. 이메일 `devdongin@gmail.com`은 **Contact 섹션에만** 노출.
+3. 이메일 `devdongin@gmail.com`은 **사이트(index.html)에서는 Contact 섹션에만** 노출한다. 저장소 README에는 주소를 직접 쓰지 말고 Contact 섹션으로 링크한다 (GitHub 프로필 README는 사용자가 직접 관리하는 소개 문서라 예외).
 4. 공개 범위 (2026-07-30 사용자 승인): POC 고객사 실명, 스크린 캡처 방지 기법명(API 후킹·DLL 인젝션), 커밋 기여 통계, 매출 기여 수치는 게시 허용.
 5. 이력서/사실에 없는 수치·경력을 창작하지 말 것.
 
@@ -53,11 +53,11 @@
 
 ## 커밋 히트맵
 
-`#activity`의 커밋 히트맵은 **두 계정(disun-cubox-ai + devdongin)의 최근 12개월 커밋을 전 저장소·전 브랜치에서 집계**한 것이다 (SHA 중복 제거, KST 기준). GitHub 기본 잔디는 기본 브랜치만 세지만, 고객사별 코드가 브랜치로 분리되어 있어 전체 push를 반영해야 한다는 취지 (2026-07-30 사용자 지시). 페이지에는 일자별 집계 수치만 넣고 **내부 저장소명은 절대 노출하지 않는다**.
+`#activity`의 커밋 히트맵은 **두 계정(disun-cubox-ai + devdongin)의 최근 12개월 커밋을 전 저장소·전 브랜치에서 집계**한 것이다 (SHA 중복 제거, KST 기준). GitHub 기본 잔디는 기본 브랜치와 gh-pages만 세지만, 고객사별 코드가 브랜치로 분리되어 있어 전체 push를 반영해야 한다는 취지 (2026-07-30 사용자 지시). 페이지에는 일자별 집계 수치만 넣고 **내부 저장소명은 절대 노출하지 않는다**.
 
 ## 자동 갱신 파이프라인 (2026-07-30 도입)
 
-GitHub Actions(`.github/workflows/update-stats.yml`)가 자동 갱신한다 — **통계·히트맵·블로그는 매일 00:30 KST, AI REVIEW는 3시간마다** (2026-07-31 사용자 지시).
+GitHub Actions(`.github/workflows/update-stats.yml`)가 자동 갱신한다 — **AI REVIEW는 3시간마다**, **통계·히트맵·블로그는 `stats.json`의 수집일이 오늘(KST)이 아닐 때** 그날 처음 살아남은 실행이 채운다. 특정 크론 슬롯에 묶으면 GitHub이 그 실행을 흘렸을 때 하루가 통째로 비기 때문이다(실제 발생, 2026-08-01 수정).
 
 - `scripts/collect_stats.py` — GitHub API로 전 저장소·전 브랜치 커밋 집계 → `data/stats.json`. 스캔 대상·저장소 매핑은 secret `STATS_CONFIG`로 주입한다 (**내부 저장소명은 공개 파일·Actions 로그 어디에도 남기지 않는다** — 이 레포는 public이라 로그도 공개다).
 - `scripts/render_stats.py` — stats.json을 index.html의 마커 구간에 결정적으로 렌더링: `HEATMAP`(SVG), `HEATMAP-TITLE`, `COLLECTED`, `MONTHLY`, `STAT-SEEUONCLIENT`/`STAT-CULOCKERFSFD`/`STAT-CUFACESDK`.
