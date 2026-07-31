@@ -24,7 +24,14 @@ BLOG = "data/blog.json"
 # LinkedIn 프로필 URL — 비어 있으면 카드 미출력
 LINKEDIN_URL = "https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/"
 # 크몽 프로필 URL — 비어 있으면 카드 미출력
-KMONG_URL = "https://kmong.com/@%EA%B0%AD%EB%8F%99"
+KMONG_URL = ""
+
+# 메인 포트폴리오에서는 시니어 포지셔닝에 맞는 글만 노출한다.
+FEATURED_BLOG_PATTERNS = (
+    "OpenVino/C++",
+    "WinDbg",
+    "cv::Mat",
+)
 
 # 채널 카드 시그니처 로고 (인라인 SVG, 색상은 CSS가 결정)
 BRAND_ICONS = {
@@ -156,6 +163,10 @@ def build_blog_cards(posts):
     # 애니메이션이 후반부로 가서 두 번째 절반이 화면을 채우면 카드 클릭이
     # 그대로 통과해 버린다. tabindex="-1"만으로 키보드 중복 탭은 막히고,
     # aria-hidden 안에 키보드 포커스 가능한 요소가 없으므로 접근성 검사도 통과한다.
+    posts = [
+        p for p in posts
+        if any(pattern in p.get("title", "") for pattern in FEATURED_BLOG_PATTERNS)
+    ][:5]
     return (f'\n      <div class="ticker-half">{_blog_half(posts, True)}</div>'
             f'\n      <div class="ticker-half" aria-hidden="true">'
             f'{_blog_half(posts, False)}</div>\n      ')
