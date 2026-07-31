@@ -343,7 +343,7 @@
   /* v2: 제품 쇼케이스 (데모 영상 + 아키텍처) */
   .showcase {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px; margin: 20px 0 22px;
+    gap: 16px; margin: 20px 0 22px; align-items: start;
   }
   .showcase-item {
     background: var(--bg-soft); border: 1px solid var(--border);
@@ -353,6 +353,8 @@
   .showcase-item video, .showcase-item .arch {
     display: block; width: 100%; height: auto; background: #0b0f15;
   }
+  /* 데모는 세로(1080x1920) 영상이라 높이를 제한하고 레터박스로 담는다 */
+  .showcase-item video { max-height: 420px; object-fit: contain; }
   .showcase-item .arch { padding: 10px 8px; }
   .showcase-item figcaption {
     padding: 12px 16px; font-size: 13px; line-height: 1.65;
