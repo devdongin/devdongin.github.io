@@ -334,17 +334,26 @@
   .skill-card--lead {
     background: linear-gradient(160deg, var(--bg-card-hover), var(--bg-card) 60%);
     border-color: rgba(88,166,255,0.35);
+    padding: 34px 36px;
+    display: flex; flex-direction: column;
   }
-  .skill-card--lead .icon { font-size: 30px; }
-  .skill-card--lead h3 { font-size: 19px; }
-  .skill-card--lead p { font-size: 15px; line-height: 1.7; }
+  .skill-card--lead .icon { font-size: 36px; margin-bottom: 16px; }
+  .skill-card--lead h3 { font-size: 21px; margin-bottom: 10px; }
+  .skill-card--lead p { font-size: 15.5px; line-height: 1.8; }
   .skill-card--lead .lead-tag {
-    display: inline-block; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.08em; color: var(--accent);
-    background: var(--accent-dim); padding: 2px 8px; border-radius: 999px;
-    margin-bottom: 10px;
+    display: inline-block; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--accent);
+    background: var(--accent-dim); padding: 3px 11px; border-radius: 999px;
+    margin-bottom: 12px;
   }
-  @media (min-width: 721px) { .strengths { grid-template-columns: repeat(2, 1fr); } }
+  /* CORE 카드 안에서는 파이프라인 다이어그램도 함께 커진다 */
+  /* 다이어그램은 카드 하단 정렬 — 본문 길이가 달라도 두 CORE 카드가 같은 결로 끝난다 */
+  .skill-card--lead .thread-flow { margin-top: auto; padding-top: 18px; gap: 8px; }
+  .skill-card--lead .thread-step { padding: 11px 14px; font-size: 13.5px; border-radius: 10px; }
+  @media (min-width: 721px) {
+    .strengths { grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 26px; }
+    .skill-card--lead { min-height: 320px; }
+  }
   /* v2: 대표 제품 카드 강조 (.project 규칙이 뒤에 오므로 특이도를 높인다) */
   .project.project--featured {
     padding: 38px;
@@ -957,7 +966,14 @@
         <span class="lead-tag">CORE</span>
         <div class="icon">🎯</div>
         <h3>제품 전체 사이클 경험 — 연구실 모델에서 고객사 운영까지</h3>
-        <p>POC 데모, 추론 SDK, 판별 미들웨어, Windows 클라이언트, 설치·배포와 장애 대응까지 한 제품의 흐름을 직접 이어왔습니다. 제 강점은 모델을 <strong>고객 PC에서 계속 도는 제품</strong>으로 바꾸는 일입니다</p>
+        <p>한 제품의 흐름을 처음부터 끝까지 직접 이어왔습니다. 제 강점은 모델을 <strong>고객 PC에서 계속 도는 제품</strong>으로 바꾸는 일입니다</p>
+        <div class="thread-flow" aria-label="제품 전체 사이클 흐름">
+          <div class="thread-step"><strong>POC 데모</strong><span>검증</span></div>
+          <div class="thread-step"><strong>추론 SDK · 미들웨어</strong><span>엔진</span></div>
+          <div class="thread-step"><strong>Windows 클라이언트</strong><span>제품</span></div>
+          <div class="thread-step"><strong>설치 · 배포</strong><span>릴리스</span></div>
+          <div class="thread-step"><strong>운영 장애 대응</strong><span>현장</span></div>
+        </div>
       </div>
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
