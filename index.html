@@ -323,6 +323,9 @@
   .thread-step span { color: var(--accent); font-weight: 700; white-space: nowrap; }
 
   /* ===== Strengths / Stack / Clients / Edu ===== */
+  /* 하단 역량 카드 5장 — 4+1 고아 배치 대신 3+2 로 균형 */
+  #skills .skills:not(.strengths) { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
   .strengths {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     margin-bottom: 18px;
@@ -341,7 +344,7 @@
     background: var(--accent-dim); padding: 2px 8px; border-radius: 999px;
     margin-bottom: 10px;
   }
-  @media (min-width: 721px) { .skill-card--lead { grid-column: span 2; } }
+  @media (min-width: 721px) { .strengths { grid-template-columns: repeat(2, 1fr); } }
   /* v2: 대표 제품 카드 강조 (.project 규칙이 뒤에 오므로 특이도를 높인다) */
   .project.project--featured {
     padding: 38px;
@@ -953,13 +956,20 @@
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
         <div class="icon">🎯</div>
-        <h3>제품 전체 사이클 — 연구실 모델에서 고객사 운영까지</h3>
+        <h3>제품 전체 사이클 경험 — 연구실 모델에서 고객사 운영까지</h3>
         <p>POC 데모, 추론 SDK, 판별 미들웨어, Windows 클라이언트, 설치·배포와 장애 대응까지 한 제품의 흐름을 직접 이어왔습니다. 제 강점은 모델을 <strong>고객 PC에서 계속 도는 제품</strong>으로 바꾸는 일입니다</p>
       </div>
-      <div class="skill-card reveal">
-        <div class="icon">🚨</div>
-        <h3>현장 장애 대응 &amp; 고객사 협의</h3>
-        <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 뒤 드러나는 문제를 WinDbg와 덤프로 좁히고, 고객사·벤더와 운영 가능한 예외 정책까지 정리합니다</p>
+      <div class="skill-card skill-card--lead reveal">
+        <span class="lead-tag">CORE</span>
+        <div class="icon">🧵</div>
+        <h3>멀티스레딩 &amp; 병목 설계 — 실시간을 만든 구조</h3>
+        <p>한 경로에서 순차 처리하던 수집·전처리·추론·후처리를 분리하고, ROI·위변조 탐지를 조건부 실행해 <strong>150ms → 40~50ms</strong>로 줄였습니다</p>
+        <div class="thread-flow" aria-label="멀티스레딩 병목 개선 흐름">
+          <div class="thread-step"><strong>Capture / Preprocess</strong><span>입력 분리</span></div>
+          <div class="thread-step"><strong>Detection Workers</strong><span>person · camera</span></div>
+          <div class="thread-step"><strong>ROI / Liveness Gate</strong><span>liveness 3종 조건부</span></div>
+          <div class="thread-step"><strong>Postprocess / Decision</strong><span>판별 통합</span></div>
+        </div>
       </div>
     </div>
     <div class="skills">
@@ -974,20 +984,19 @@
         <p>OpenVINO 기반 C/C++ 추론 엔진과 C++/C#/Python 바인딩을 만들고, 모델 5종 + 특징점 추출 경로를 제품 환경에 맞게 최적화했습니다</p>
       </div>
       <div class="skill-card reveal">
-        <div class="icon">🧵</div>
-        <h3>멀티스레딩 &amp; 병목 설계</h3>
-        <p>프레임 수집·전처리·모델 추론·후처리를 한 경로에서 순차 처리하던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI와 위변조 탐지를 조건부 실행하고, 무거운 추론 작업을 워커 단위로 나눠 <strong>150ms → 40~50ms</strong>까지 줄였습니다</p>
-        <div class="thread-flow" aria-label="멀티스레딩 병목 개선 흐름">
-          <div class="thread-step"><strong>Capture / Preprocess</strong><span>입력 분리</span></div>
-          <div class="thread-step"><strong>Detection Workers</strong><span>person · camera</span></div>
-          <div class="thread-step"><strong>ROI / Liveness Gate</strong><span>liveness 3종 조건부</span></div>
-          <div class="thread-step"><strong>Postprocess / Decision</strong><span>판별 통합</span></div>
-        </div>
+        <div class="icon">🚨</div>
+        <h3>필드 엔지니어링</h3>
+        <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 뒤에야 드러나는 문제를 고객 환경에서 재현하고, 풀 덤프와 WinDbg로 원인 경로를 규명해 제품 수정으로 연결합니다</p>
       </div>
       <div class="skill-card reveal">
-        <div class="icon">🔍</div>
-        <h3>릴리스·덤프 분석·협업</h3>
-        <p>NSIS, Themida, 코드 서명 기반 릴리스를 맡고, WinDbg 덤프 분석 결과를 고객사·벤더 협의와 제품 수정으로 연결했습니다</p>
+        <div class="icon">🤝</div>
+        <h3>커뮤니케이션 &amp; 협업</h3>
+        <p>고객사 실무자·보안 벤더·AI 리서처 사이에서 기술 언어를 통역합니다. 장애 분석 결과를 화이트리스트 협의로, POC 현장 요구를 스펙으로 옮기며, 첫 회사부터 부팀장을 맡았습니다</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="icon">📦</div>
+        <h3>배포 &amp; 코드 서명</h3>
+        <p>NSIS, Themida, 인증서 서명 기반 릴리스 파이프라인을 구축하고 솔루션 전체 릴리스 프로세스를 담당했습니다</p>
       </div>
     </div>
     <div class="stack reveal">
