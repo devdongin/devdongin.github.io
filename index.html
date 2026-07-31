@@ -340,6 +340,26 @@
   .project.project--featured .desc { font-size: 16px; color: var(--text); }
   @media (max-width: 720px) { .project.project--featured { padding: 24px; } }
   .badge.lead { background: var(--accent); color: var(--on-accent); }
+  /* v2: 제품 쇼케이스 (데모 영상 + 아키텍처) */
+  .showcase {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px; margin: 20px 0 22px;
+  }
+  .showcase-item {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .showcase-item video, .showcase-item .arch {
+    display: block; width: 100%; height: auto; background: #0b0f15;
+  }
+  .showcase-item .arch { padding: 10px 8px; }
+  .showcase-item figcaption {
+    padding: 12px 16px; font-size: 13px; line-height: 1.65;
+    color: var(--text-dim); border-top: 1px solid var(--border);
+  }
+  .showcase-item figcaption strong { color: var(--text); font-weight: 600; }
+
   /* v2: 가상 면접 Q&A */
   .qa {
     background: var(--bg-card); border: 1px solid var(--border);
@@ -860,6 +880,69 @@
         <span class="meta">2023.07 – 현재 · (주)시선에이아이</span>
       </div>
       <p class="desc">Vision AI 기반 단말 보안 솔루션 — 화면 촬영 감지, 안면인식 본인인증, 얼굴 위변조 탐지. POC 데모부터 추론 SDK·미들웨어·클라이언트·배포, 그리고 고객사 운영 장애 대응까지 제품 전체 사이클을 담당했습니다</p>
+
+      <div class="showcase">
+        <figure class="showcase-item">
+          <video controls preload="metadata" playsinline>
+            <source src="gallery/liveness-%EB%8D%B0%EB%AA%A8.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>실제 동작</strong> — Windows 로그인 화면의 liveness 판정. 보안 솔루션의 시작 지점이라 속도보다 위변조 탐지 강도를 우선해 설정한 구성입니다</figcaption>
+        </figure>
+        <figure class="showcase-item">
+          <svg class="arch" viewBox="0 0 560 292" xmlns="http://www.w3.org/2000/svg" role="img"
+               aria-label="SEEUON 처리 흐름: 카메라·화면 입력에서 추론 SDK의 모델 5종과 특징점 추출을 거쳐 판별 미들웨어, 클라이언트 앱, 서버로 이어지며 전 구간을 커널 드라이버가 보호한다">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#9ba7b4"/>
+              </marker>
+            </defs>
+            <style>
+              .ab { fill: #10151d; stroke: #30363d; }
+              .ab-hi { fill: rgba(88,166,255,0.12); stroke: #58a6ff; }
+              .at { fill: #e6edf3; font-size: 12px; font-weight: 700; }
+              .as { fill: #9ba7b4; font-size: 10.5px; }
+              .al { stroke: #9ba7b4; stroke-width: 1.2; marker-end: url(#ah); }
+            </style>
+
+            <rect class="ab" x="4" y="34" width="92" height="52" rx="9"/>
+            <text class="at" x="50" y="58" text-anchor="middle">카메라 · 화면</text>
+            <text class="as" x="50" y="74" text-anchor="middle">프레임 캡처</text>
+            <line class="al" x1="98" y1="60" x2="126" y2="60"/>
+
+            <rect class="ab-hi" x="130" y="16" width="152" height="88" rx="9"/>
+            <text class="at" x="206" y="38" text-anchor="middle">추론 SDK · CUFaceSDK</text>
+            <text class="as" x="206" y="57" text-anchor="middle">사람 탐지 · 카메라 탐지</text>
+            <text class="as" x="206" y="72" text-anchor="middle">liveness 3종(디스플레이 ·</text>
+            <text class="as" x="206" y="87" text-anchor="middle">출력물 · IR) + 특징점 추출</text>
+            <line class="al" x1="284" y1="60" x2="312" y2="60"/>
+
+            <rect class="ab" x="316" y="34" width="104" height="52" rx="9"/>
+            <text class="at" x="368" y="58" text-anchor="middle">판별 미들웨어</text>
+            <text class="as" x="368" y="74" text-anchor="middle">이상행위 판단</text>
+            <line class="al" x1="422" y1="60" x2="450" y2="60"/>
+
+            <rect class="ab" x="454" y="34" width="102" height="52" rx="9"/>
+            <text class="at" x="505" y="58" text-anchor="middle">클라이언트 앱</text>
+            <text class="as" x="505" y="74" text-anchor="middle">정책 · 알림 · 로그</text>
+
+            <line class="al" x1="505" y1="90" x2="505" y2="120"/>
+            <rect class="ab" x="450" y="124" width="106" height="38" rx="9"/>
+            <text class="as" x="503" y="148" text-anchor="middle">서버 이력 전송</text>
+
+            <line class="al" x1="206" y1="108" x2="206" y2="140"/>
+            <rect class="ab" x="130" y="144" width="152" height="42" rx="9"/>
+            <text class="as" x="206" y="163" text-anchor="middle">Credential Provider</text>
+            <text class="as" x="206" y="178" text-anchor="middle">로그인 화면 얼굴 인증</text>
+
+            <rect class="ab-hi" x="4" y="206" width="552" height="50" rx="9"/>
+            <text class="at" x="280" y="228" text-anchor="middle">커널 드라이버 · CULockerFsfd — 전 구간 자기보호</text>
+            <text class="as" x="280" y="246" text-anchor="middle">화이트리스트 파일·프로세스 I/O 통제 · 관리자/SYSTEM 우회 차단 · IOCTL 요청 검증</text>
+            <text class="as" x="280" y="278" text-anchor="middle">한 프레임 처리 150ms → 40~50ms · 사용자 PC 환경</text>
+          </svg>
+          <figcaption><strong>처리 흐름</strong> — 입력부터 서버 전송까지의 경로와, 그 전 구간을 감싸는 커널 자기보호 계층</figcaption>
+        </figure>
+      </div>
+
       <div class="badges">
         <span class="badge lead">대표 제품</span>
         <span class="badge">C / C++</span>
@@ -892,7 +975,7 @@
         <p>✦ SI 사업으로 시작해 회사 <strong>핵심 솔루션</strong>으로 성장 주도</p>
         <p>✦ 2024년 회사 매출 100억 중 <strong>40–50% 담당</strong> 프로젝트로 성장</p>
         <p>✦ 2025–2026 고객사 확대, <strong>누적 매출 약 80억 원</strong>의 주요 수입원 솔루션</p>
-        <p>✦ 사내 클라이언트 저장소 <!-- STAT-SEEUONCLIENT:START --><strong>커밋 81% · 1위 기여자</strong> (832 / 1,029 커밋 · 기본 브랜치 · 2026-07-30 기준)<!-- STAT-SEEUONCLIENT:END --></p>
+        <p>✦ 사내 클라이언트 저장소 <!-- STAT-SEEUONCLIENT:START --><strong>커밋 81% · 1위 기여자</strong> (832 / 1,029 커밋 · 기본 브랜치 contributors 집계 · 2026-07-30 기준)<!-- STAT-SEEUONCLIENT:END --></p>
       </div>
       <div class="clients-block">
         <p class="clients-label">고객사 &amp; POC — 에이전트 보안 파트 메인 개발자</p>
