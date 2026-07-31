@@ -37,7 +37,7 @@ def main():
     y = 118
 
     # eyebrow
-    eyebrow = "VISION AI SECURITY · WINDOWS CLIENT & INFERENCE"
+    eyebrow = "AI PRODUCT ENGINEERING · C++ SYSTEMS & INFERENCE"
     f_eye = font("malgunbd.ttf", 22)
     # 자간 벌리기
     x = margin
@@ -54,11 +54,11 @@ def main():
     d.text((margin + name_w + 28, y + 62), "devdongin", font=f_handle, fill=DIM)
     y += 164
 
-    # 헤드라인 두 줄 (전체 사이클 강조) — 아바타 영역(x>780)을 침범하지 않는다
+    # 헤드라인 두 줄 — 아바타 영역(x>780)을 침범하지 않는다
     f_head = font("malgunbd.ttf", 46)
-    d.text((margin, y), "Vision AI 보안 제품을,", font=f_head, fill=TEXT)
+    d.text((margin, y), "AI 모델을,", font=f_head, fill=TEXT)
     y += 66
-    d.text((margin, y), "처음부터 끝까지", font=f_head, fill=ACCENT)
+    d.text((margin, y), "실제 환경의 소프트웨어로", font=f_head, fill=ACCENT)
 
     # 하단 URL
     f_url = font("malgunbd.ttf", 30)

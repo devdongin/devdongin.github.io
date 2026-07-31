@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>선동인 | Vision AI 보안 제품을, 처음부터 끝까지</title>
-<meta name="description" content="Vision AI 영상보안 솔루션 SEEUON의 AI 추론 SDK·Windows 클라이언트·미들웨어·배포·고객사 운영 장애 대응까지 제품 전체 사이클을 다뤄온 시스템 소프트웨어 엔지니어 선동인의 포트폴리오">
+<title>선동인 | Vision AI 제품화 · C++ 시스템 소프트웨어 개발자</title>
+<meta name="description" content="AI 모델을 OpenVINO C++ 추론 SDK와 Windows 클라이언트에 통합하고, 실시간 최적화·커널 드라이버·배포·운영 장애 분석까지 수행해온 시스템 소프트웨어 개발자 선동인의 포트폴리오">
 <meta name="google-site-verification" content="8krlzHDtJ5GVQ8Z6HOvz6EHLX4pDK0UsEzQ-aY-irrE">
 <meta property="og:type" content="website">
-<meta property="og:title" content="선동인 | Vision AI 보안 제품을, 처음부터 끝까지">
-<meta property="og:description" content="Vision AI 영상보안 솔루션 SEEUON의 AI 추론 SDK·Windows 클라이언트·미들웨어·배포·고객사 운영 장애 대응까지 제품 전체 사이클을 다뤄온 시스템 소프트웨어 엔지니어">
+<meta property="og:title" content="선동인 | Vision AI 제품화 · C++ 시스템 소프트웨어 개발자">
+<meta property="og:description" content="AI 모델을 OpenVINO C++ 추론 SDK와 Windows 클라이언트에 통합하고 실시간 최적화부터 운영 장애까지 해결해온 개발자">
 <meta property="og:url" content="https://devdongin.github.io">
 <meta property="og:image" content="https://devdongin.github.io/assets/images/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="선동인 — Vision AI 보안 제품을, 처음부터 끝까지 · devdongin.github.io">
+<meta property="og:image:alt" content="선동인 — Vision AI 제품화 · C++ 시스템 소프트웨어 개발자">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://devdongin.github.io/">
 <script type="application/ld+json">
@@ -23,7 +23,7 @@
   "@type": "Person",
   "name": "선동인",
   "alternateName": "devdongin",
-  "jobTitle": "Vision AI Security · Windows Client & Inference Engineer",
+  "jobTitle": "AI Product Engineering · C++ Systems & Inference Engineer",
   "url": "https://devdongin.github.io",
   "image": "https://devdongin.github.io/assets/images/login_avatar.jpg",
   "sameAs": ["https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/", "https://github.com/devdongin", "https://he11oworld.tistory.com"]
@@ -160,16 +160,6 @@
   .ai-review-box strong { color: var(--text); font-weight: 600; }
   .ai-review-box .ai-meta { display: block; margin-top: 6px; opacity: 0.65; font-size: 12px; }
   .ai-review-box p { margin: 0; }
-  .ai-proof {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
-    padding: 0; list-style: none;
-  }
-  .ai-proof li {
-    font-size: 12px; color: var(--text-dim);
-    padding: 3px 8px; border: 1px solid var(--border);
-    border-radius: 999px; background: var(--bg-soft);
-  }
-
   /* ===== Hero ===== */
   .hero {
     min-height: 100svh;
@@ -366,7 +356,7 @@
     .strengths { grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 26px; }
     .skill-card--lead { min-height: 320px; }
   }
-  /* v2: 대표 제품 카드 강조 (.project 규칙이 뒤에 오므로 특이도를 높인다) */
+  /* 대표 개발 사례 카드 강조 (.project 규칙이 뒤에 오므로 특이도를 높인다) */
   .project.project--featured {
     padding: 38px;
     border-color: rgba(88,166,255,0.4);
@@ -376,7 +366,7 @@
   .project.project--featured .desc { font-size: 16px; color: var(--text); }
   @media (max-width: 720px) { .project.project--featured { padding: 24px; } }
   .badge.lead { background: var(--accent); color: var(--on-accent); }
-  /* v2: 제품 쇼케이스 (데모 영상 + 아키텍처) */
+  /* 대표 개발 사례의 동작 영상 + 아키텍처 */
   .showcase {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 16px; margin: 20px 0 22px; align-items: start;
@@ -632,7 +622,7 @@
 
 
 
-  /* ===== 제품 데모 밴드 (히어로 직후) ===== */
+  /* ===== AI 개발 하네스 사례 (히어로 직후) ===== */
   .demo-band { border-bottom: 1px solid var(--border); background: var(--bg-soft); padding: 44px 0 48px; }
   .demo-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
   .demo-head h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
@@ -809,8 +799,6 @@
       text-align: left; word-break: break-all; overflow-wrap: anywhere;
     }
     .ai-review-box .ai-meta { word-break: keep-all; overflow-wrap: normal; }
-    .ai-proof { gap: 5px; }
-    .ai-proof li { font-size: 11.5px; }
     .hero-actions {
       display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
       width: 100%; margin: 20px auto 0; gap: 8px;
@@ -865,20 +853,20 @@
 <section class="hero" id="top">
   <div class="container hero-inner">
     <div class="hero-text">
-      <p class="eyebrow"><span class="eyebrow-domain">Vision AI Security</span><span class="eyebrow-role">Windows Client &amp; Inference Engineer</span></p>
-      <h1>Vision AI 보안 제품을,<br><span class="accent">처음부터 끝까지</span></h1>
+      <p class="eyebrow"><span class="eyebrow-domain">AI Product Engineering</span><span class="eyebrow-role">C++ Systems &amp; Inference</span></p>
+      <h1>AI 모델을,<br><span class="accent">실제 환경의 소프트웨어로</span></h1>
       <p class="tagline">
-        <strong>선동인</strong>입니다. SEEUON의 AI 추론 SDK, Windows 클라이언트, 커널 자기보호, 배포와
-        고객사 장애 대응까지 이어온 <strong>시스템 소프트웨어 엔지니어</strong>입니다.
+        <strong>선동인</strong>입니다. OpenVINO C++ 추론 SDK와 Windows 클라이언트를 개발하고,
+        실시간 최적화·커널 보호·배포·장애 분석까지 수행해온 <strong>시스템 소프트웨어 엔지니어</strong>입니다.
       </p>
       <div class="ai-review-box" id="ai-review">
         <span class="ai-tag">AI REVIEW</span>
         <!-- AI-REVIEW:START -->
-        <p><strong>연구실 모델을 고객사 PC에서 계속 도는 Vision AI 보안 제품으로 옮겨온 시스템 소프트웨어 엔지니어입니다.</strong> 모델 5종과 특징점 추출 경로를 재설계해 150ms를 40~50ms로 줄였고, 핵심 클라이언트 저장소 기여율 81%로 구현을 주도했습니다. 최근 12개월 886 commits와 진행 중인 macOS 확장은 제품을 계속 운영하고 넓히는 실행력을 보여줍니다.<span class="ai-meta">이 평가는 AI(Claude)가 저장소 기여 데이터를 근거로 3시간마다 자동 생성·갱신합니다 · 최근 갱신 2026-08-01 01:23 KST</span></p>
+        <p><strong>AI 모델을 실제 사용자 PC에서 동작하는 C++ 소프트웨어로 통합해본 엔지니어입니다.</strong> 모델 5종과 특징점 추출 경로를 멀티스레드 구조로 재설계해 150ms를 40~50ms로 줄였고, 핵심 클라이언트 저장소 기여율 81%로 구현을 주도했습니다. Windows 시스템 연동 경험에 AI 하네스를 적용한 macOS 확장까지 더하며 개발 범위를 넓히고 있습니다.<span class="ai-meta">이 평가는 AI(Claude)가 저장소 기여 데이터를 근거로 3시간마다 자동 생성·갱신합니다 · 최근 갱신 2026-08-01 01:38 KST</span></p>
         <!-- AI-REVIEW:END -->
       </div>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">프로젝트 보기</a>
+        <a class="btn btn-primary" href="#projects">개발 사례 보기</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
           LinkedIn
@@ -900,9 +888,9 @@
 <div class="demo-band">
   <div class="container">
     <div class="demo-head reveal">
-      <h2>제품 데모</h2>
-      <span class="demo-tag">SEEUON macOS</span>
-      <p>위 소개가 실제로 어떤 작업인지 — AI 코딩 하네스를 실무에 들여 macOS로 옮기고 있는 Vision AI 보안 클라이언트입니다. 실시간 얼굴 인증과 감시 정책이 도는 화면을 그대로 담았습니다</p>
+      <h2>AI 개발 하네스 실전 사례</h2>
+      <span class="demo-tag">SEEUON macOS PORT</span>
+      <p>Windows에서 개발한 Vision AI 클라이언트의 동작을 Swift·AVFoundation 기반 macOS 앱으로 옮기며, Claude 구현과 Codex 리뷰를 설계·검증 절차 안에 통제한 작업입니다</p>
     </div>
     <button class="demo-frame reveal" type="button" data-yt="wrOujmQzxPk" aria-label="SEEUON macOS 클라이언트 동작 영상 재생">
       <img src="assets/images/macos-demo-poster.webp" alt="SEEUON macOS 클라이언트 화면 — 얼굴 검출 박스와 매칭 점수, 감시 정책 패널이 표시된 상태" width="1920" height="1242" loading="lazy">
@@ -910,15 +898,15 @@
     </button>
     <p class="demo-note reveal">사용자 PC에서 모델 5종과 특징점 추출이 프레임마다 도는 구성 — 프레임당 40~50ms · 소리 없음</p>
     <details class="deep-dive harness-dive reveal">
-      <summary>이 프로젝트를 운영하는 방식 — AI 하네스 설계 딥다이브</summary>
+      <summary>AI 에이전트를 개발 절차에 통합한 방식</summary>
       <dl>
         <div class="hd-row">
           <dt>과제</dt>
-          <dd>Windows 중심으로 성장한 SEEUON을 macOS로 확장하는 실제 제품 작업입니다. Swift/AVFoundation 재구현이 필요한 규모라 AI 에이전트 둘을 붙이되, <strong>제품 책임은 사람이 지는 구조</strong>를 먼저 설계했습니다.</dd>
+          <dd>Windows 클라이언트의 처리 흐름을 Swift/AVFoundation으로 재구현하는 작업입니다. AI 에이전트 둘을 사용하되, <strong>설계 판단과 최종 승인은 사람이 맡는 구조</strong>를 먼저 정의했습니다.</dd>
         </div>
         <div class="hd-row">
           <dt>역할 분리</dt>
-          <dd>선동인이 설계·결정·승인, Claude가 구현, Codex가 독립 리뷰를 맡습니다. 저장소의 AGENTS.md가 사람·AI 공통 규칙서이자 <strong>날짜가 박힌 의사결정 로그</strong>이고, 모든 우선순위는 "이 변경이 제품 핵심 기능을 어떻게 지원하는가"로 환원됩니다.</dd>
+          <dd>선동인이 설계·결정·승인, Claude가 구현, Codex가 독립 리뷰를 맡습니다. 저장소의 AGENTS.md를 사람·AI 공통 규칙서이자 <strong>날짜가 박힌 의사결정 로그</strong>로 사용하고, Windows 원본 동작과 요구사항 정합성을 기준으로 우선순위를 판단합니다.</dd>
         </div>
         <div class="hd-row">
           <dt>통제 장치</dt>
@@ -964,12 +952,12 @@
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4h-4"/></svg></div>
-        <h3>제품 전체 사이클 경험 — 연구실 모델에서 고객사 운영까지</h3>
-        <p>한 제품의 흐름을 처음부터 끝까지 직접 이어왔습니다. 제 강점은 모델을 <strong>고객 PC에서 계속 도는 제품</strong>으로 바꾸는 일입니다</p>
-        <div class="thread-flow" aria-label="제품 전체 사이클 흐름">
+        <h3>AI 모델 통합 — POC에서 운영 가능한 클라이언트까지</h3>
+        <p>훈련된 모델을 추론 SDK와 판별 미들웨어로 감싸 Windows 애플리케이션에 연결하고, 설치·배포와 현장 장애까지 이어서 해결했습니다</p>
+        <div class="thread-flow" aria-label="AI 모델 통합 개발 흐름">
           <div class="thread-step"><strong>POC 데모</strong><span>검증</span></div>
           <div class="thread-step"><strong>추론 SDK · 미들웨어</strong><span>엔진</span></div>
-          <div class="thread-step"><strong>Windows 클라이언트</strong><span>제품</span></div>
+          <div class="thread-step"><strong>Windows 클라이언트</strong><span>통합</span></div>
           <div class="thread-step"><strong>설치 · 배포</strong><span>릴리스</span></div>
           <div class="thread-step"><strong>운영 장애 대응</strong><span>현장</span></div>
         </div>
@@ -996,22 +984,22 @@
       <div class="skill-card reveal">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></div>
         <h3>AI 추론 SDK</h3>
-        <p>OpenVINO 기반 C/C++ 추론 엔진과 C++/C#/Python 바인딩을 만들고, 모델 5종 + 특징점 추출 경로를 제품 환경에 맞게 최적화했습니다</p>
+        <p>OpenVINO 기반 C/C++ 추론 엔진과 C++/C#/Python 바인딩을 만들고, 모델 5종 + 특징점 추출 경로를 일반 사용자 PC에 맞게 최적화했습니다</p>
       </div>
       <div class="skill-card reveal">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
         <h3>필드 엔지니어링</h3>
-        <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 뒤에야 드러나는 문제를 고객 환경에서 재현하고, 풀 덤프와 WinDbg로 원인 경로를 규명해 제품 수정으로 연결합니다</p>
+        <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 뒤에야 드러나는 문제를 고객 환경에서 재현하고, 풀 덤프와 WinDbg로 원인 경로를 규명해 코드 수정으로 연결합니다</p>
       </div>
       <div class="skill-card reveal">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h12v8H9l-4 4V5z"/><path d="M8 9h.01M12 9h.01"/><path d="M18 9h2v9l-3-3h-2"/></svg></div>
         <h3>커뮤니케이션 &amp; 협업</h3>
-        <p>고객사 실무자·보안 벤더·AI 리서처 사이에서 기술 언어를 통역합니다. 장애 분석 결과를 화이트리스트 협의로, POC 현장 요구를 스펙으로 옮기며, 첫 회사부터 부팀장을 맡았습니다</p>
+        <p>고객사 실무자·보안 벤더·AI 리서처 사이에서 기술 언어를 통역합니다. 장애 분석을 예외 정책과 코드 변경으로 연결하고, 엠클라우독에서는 부팀장으로 운영 이슈를 조율했습니다</p>
       </div>
       <div class="skill-card reveal">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg></div>
         <h3>배포 &amp; 코드 서명</h3>
-        <p>NSIS, Themida, 인증서 서명 기반 릴리스 파이프라인을 구축하고 솔루션 전체 릴리스 프로세스를 담당했습니다</p>
+        <p>NSIS, Themida, 인증서 서명 기반 릴리스 파이프라인을 구축하고 AI 클라이언트 전체 릴리스 프로세스를 담당했습니다</p>
       </div>
     </div>
     <div class="stack reveal">
@@ -1047,8 +1035,8 @@
   <div class="container">
     <div class="section-head reveal">
       <p class="kicker">Projects</p>
-      <h2>주요 프로젝트</h2>
-      <p>POC 데모부터 커널 드라이버까지, 한 솔루션의 전체 여정</p>
+      <h2>주요 개발 사례</h2>
+      <p>AI 모델을 시스템 소프트웨어에 통합하며 해결한 문제와 구현 결과</p>
     </div>
 
     <div class="project project--featured reveal">
@@ -1056,14 +1044,14 @@
         <h3>SEEUON / SEEUONIdp</h3>
         <span class="meta">2023.07 – 현재 · (주)시선에이아이</span>
       </div>
-      <p class="desc">Vision AI 기반 단말 보안 솔루션 — 화면 촬영 감지, 안면인식 본인인증, 얼굴 위변조 탐지. POC 데모부터 추론 SDK·미들웨어·클라이언트·배포, 그리고 고객사 운영 장애 대응까지 제품 전체 사이클을 담당했습니다</p>
+      <p class="desc">OpenVINO 추론 SDK와 판별 미들웨어를 설계하고 Windows 클라이언트, Credential Provider, 커널 자기보호, 설치·배포와 운영 장애 분석까지 연결한 대표 개발 사례입니다</p>
 
       <div class="showcase">
         <figure class="showcase-item">
           <video controls preload="metadata" playsinline poster="assets/images/liveness-poster.webp">
             <source src="gallery/liveness-%EB%8D%B0%EB%AA%A8.mp4" type="video/mp4">
           </video>
-          <figcaption><strong>실제 동작</strong> — Windows 로그인 화면의 liveness 판정. 보안 솔루션의 시작 지점이라 속도보다 위변조 탐지 강도를 우선해 설정한 구성입니다</figcaption>
+          <figcaption><strong>실제 동작</strong> — Windows 로그인 화면에 통합한 liveness 판정. 로그인 경로에서는 처리 속도보다 위변조 탐지 강도를 우선한 구성입니다</figcaption>
         </figure>
         <figure class="showcase-item">
           <svg class="arch" viewBox="0 0 560 292" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -1121,7 +1109,7 @@
       </div>
 
       <div class="badges">
-        <span class="badge lead">대표 제품</span>
+        <span class="badge lead">대표 개발 사례</span>
         <span class="badge">C / C++</span>
         <span class="badge">OpenVINO</span>
         <span class="badge">Kernel Driver</span>
@@ -1140,25 +1128,25 @@
         <li><strong>장애 분석</strong> — WinDbg 크래시 덤프 사후 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 원인 규명·해결</li>
       </ul>
       <details class="deep-dive">
-        <summary>기술 딥다이브 — 제품을 고객 환경에서 살려두는 일</summary>
+        <summary>기술 딥다이브 — AI 추론을 사용자 PC에 통합한 과정</summary>
         <ul>
-          <li><strong>문제</strong> — Vision AI 보안 클라이언트는 만드는 것보다 <strong>남의 PC에서 계속 도는 것</strong>이 어렵습니다. 백신·EDR과 같은 시스템 영역을 놓고 부딪히고, OS 업데이트마다 전제가 바뀌며, 솔루션 자신이 우회·종료의 표적이 됩니다</li>
+          <li><strong>문제</strong> — 연구실 모델을 사용자 PC에 통합하면 제한된 CPU 자원, 백신·EDR 충돌, OS 업데이트, 프로세스 우회·종료까지 모델 밖의 문제가 동시에 발생합니다</li>
           <li><strong>구현</strong> — 추론 SDK(공통 엔진) → 판별 미들웨어 → 클라이언트 앱으로 층을 나눠 모델 교체가 상위 레이어를 흔들지 않게 했고, 솔루션 자기보호는 커널(Minifilter)로, 로그인 경로 인증은 Credential Provider로 각각 내려서 해결</li>
           <li><strong>난점 → 해결</strong> — DLL 인젝션·API 후킹·파일시스템 필터링은 타 보안 제품과 충돌이 잦은 영역. 재현 가능한 케이스는 풀 덤프를 남기도록 설정하고 충돌 시점에 각 프로세스·드라이버가 타는 API/I/O 경로를 WinDbg로 분석 — 자사 원인이면 예외 처리·기능 수정, 상호 충돌이면 벤더·고객사 보안 담당자와 화이트리스트를 협의하고, 불가피한 조합은 한쪽 기능을 끄는 운영 정책으로 정리</li>
-          <li><strong>결과</strong> — SI 프로젝트로 시작한 솔루션이 회사 핵심 제품이 되었고, 삼성 계열·공공·금융 등 다수 고객사 환경에 구축·운영</li>
+          <li><strong>결과</strong> — 모델 5종 + 특징점 추출 경로를 150ms에서 40~50ms로 줄였고, SDK·클라이언트·커널 모듈을 여러 고객 환경에 배포·운영했습니다</li>
         </ul>
       </details>
       <div class="highlight-box">
-        <p>✦ SI 사업으로 시작해 회사 <strong>핵심 솔루션</strong>으로 성장 주도</p>
-        <p>✦ 2024년 회사 매출 100억 중 <strong>40–50% 담당</strong> 프로젝트로 성장</p>
-        <p>✦ 2025–2026 고객사 확대, <strong>누적 매출 약 80억 원</strong>의 주요 수입원 솔루션</p>
+        <p>✦ OpenVINO 기반 <strong>C++ 추론 SDK</strong>와 C/C++/C#/Python 바인딩 개발</p>
+        <p>✦ 모델 5종 + 특징점 추출 처리 <strong>150ms → 40~50ms</strong></p>
+        <p>✦ Windows 클라이언트·Credential Provider·커널 드라이버까지 통합</p>
+        <p>✦ 이 사례가 만든 사업 결과 — 2024 회사 매출의 <strong>40–50%</strong>, 누적 약 <strong>80억 원</strong></p>
         <p>✦ 사내 클라이언트 저장소 <!-- STAT-SEEUONCLIENT:START --><strong>커밋 81% · 1위 기여자</strong> (832 / 1,029 커밋 · 기본 브랜치 contributors 집계 · 2026-07-30 기준)<!-- STAT-SEEUONCLIENT:END --></p>
       </div>
       <div class="clients-block">
-        <p class="clients-label">고객사 &amp; POC — 에이전트 보안 파트 메인 개발자</p>
+        <p class="clients-label">구축·수행 고객사 — 에이전트 보안 파트 메인 개발</p>
         <div class="chips">
-          <span class="chip hot">삼성 SDS</span><span class="chip hot">삼성 SDI</span><span class="chip hot">국세청</span><span class="chip hot">SGI 서울보증</span><span class="chip hot">삼성전기 인도법인</span>
-          <span class="chip">삼성디스플레이</span><span class="chip">삼성바이오로직스</span><span class="chip">삼성서울병원</span><span class="chip">미래에셋증권</span><span class="chip">신한카드</span><span class="chip">현대자동차 미주법인</span><span class="chip">신세계 I&amp;C</span><span class="chip">우리은행</span><span class="chip">도쿄일렉트론코리아</span>
+          <span class="chip hot">삼성 SDS</span><span class="chip hot">삼성 SDI</span><span class="chip hot">국세청</span><span class="chip hot">SGI 서울보증</span><span class="chip hot">삼성전기 인도법인</span><span class="chip">외 대기업 POC 9건</span>
         </div>
       </div>
     </div>
@@ -1168,7 +1156,7 @@
         <h3>CULockerFsfd</h3>
         <span class="meta">2023.07 – 현재 · Windows FileSystem Minifilter Driver</span>
       </div>
-      <p class="desc">SEEUON의 파일·프로세스 자체 방어 커널 드라이버 — 베이스 설계부터 서명, MS 등재까지 단독 개발</p>
+      <p class="desc">Windows 파일·프로세스 접근을 커널에서 통제하는 Minifilter 드라이버 — 베이스 설계부터 서명, MS 등재까지 단독 개발</p>
       <div class="badges">
         <span class="badge">C</span>
         <span class="badge">WDK / Minifilter</span>
@@ -1213,16 +1201,16 @@
       <details class="deep-dive">
         <summary>기술 딥다이브 — 문제와 해결</summary>
         <ul>
-          <li><strong>문제</strong> — 연구실에서 훈련된 모델은 그대로는 상용 제품에서 쓸 수 없습니다: C++ 제품군에 맞는 추론 계층이 필요했습니다</li>
+          <li><strong>문제</strong> — 연구실에서 훈련된 모델을 C++ 클라이언트에서 안정적으로 호출하려면 모델 입출력과 런타임 차이를 감싸는 추론 계층이 필요했습니다</li>
           <li><strong>구현</strong> — OpenVINO 기반 C/C++ 추론 엔진을 설계하고, C/C++/C#/Python 바인딩과 Windows·Ubuntu 크로스 플랫폼 빌드 제공</li>
-          <li><strong>왜 사용자 PC인가</strong> — 보안 솔루션은 서버 장애 때도 업무 공백이 없어야 하고, 얼굴 영상을 서버로 보내기 어려운 고객 환경과 망분리 요구가 있습니다. GPU 서버나 전용 하드웨어를 전제로 하면 납품 비용과 고객 부담이 커지기 때문에, 가장 보편적인 실행 환경인 <strong>Intel CPU 기반 사용자 PC</strong>에서 돌아가는 구조를 선택했습니다</li>
-          <li><strong>OpenVINO 선택</strong> — 국내 고객 PC 환경의 다수가 Intel CPU 기반이라는 점을 고려했습니다. OpenVINO는 CPU 스레드 튜닝, 모델 캐싱, 내장 그래픽 활용 가능성 등 클라이언트 추론에서 조정할 수 있는 옵션이 많아 ONNX Runtime/OpenCV DNN 대비 제품 환경 최적화 여지가 컸습니다</li>
+          <li><strong>왜 사용자 PC인가</strong> — 서버 장애와 망분리 환경에서도 추론이 중단되지 않고 얼굴 영상을 외부로 보내지 않아야 했습니다. 그래서 <strong>Intel CPU 기반 사용자 PC</strong>를 기준 실행 환경으로 선택했습니다</li>
+          <li><strong>OpenVINO 선택</strong> — 대상 PC의 다수가 Intel CPU 기반이었고, CPU 스레드 튜닝·모델 캐싱·내장 그래픽 활용 등 클라이언트 추론 경로를 세밀하게 조정할 수 있어 ONNX Runtime/OpenCV DNN보다 요구사항에 잘 맞았습니다</li>
           <li><strong>SDK 설계 원칙</strong> — 코어는 기능만 제공하고 <strong>메모리 소유권은 애플리케이션이 갖는 구조</strong>로 두었습니다. 리소스 생명주기는 명시적 init/finalize에 더해 언어별 생성자·소멸자 패턴까지 고려해 정리했습니다. 모델은 최초 로딩 시 캐시를 만들고 이후에는 필요한 모델만 부분 load/unload할 수 있게 했습니다</li>
           <li><strong>쓰는 사람 기준으로 검증</strong> — C#·Python Wrapper는 혼자 상상해서 내지 않고, 실제 그 언어를 쓰는 개발자들에게 사용성을 물어 API 형태를 조정했습니다</li>
           <li><strong>파이프라인 설계</strong> — 프레임 수집·전처리·모델 추론·후처리·판별이 한 경로에서 순차 처리되던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI를 만들고, 위변조 탐지는 얼굴이 검출된 경우에만 수행했습니다. 다만 고객 정책에 따라 모든 판별 이력을 남겨야 하는 모드도 있어, 조건부 실행과 전체 탐지를 모두 지원했습니다</li>
           <li><strong>난점 → 해결</strong> — 실행 환경이 서버 GPU가 아니라 <strong>고객의 일반 사용자 PC</strong>였고, 한 프레임에 사람 탐지·카메라 탐지, 그리고 위변조(liveness) 탐지 3종 — 디스플레이·출력물·IR — 까지 모델 5종과 얼굴 특징점 추출이 모두 얹혔습니다 (얼굴 등록 시엔 품질 평가 모델 3종이 추가됩니다). 초기엔 프레임당 150ms(약 6fps)라 실시간 감시라 부르기 어려운 수준이었습니다. 추론 워커와 판별 미들웨어(FaceOnDiscriminator)의 처리 경로를 분리하고, ROI 기반 조건부 실행과 모델 캐싱으로 병목을 줄였습니다</li>
           <li><strong>정확도와 트레이드오프</strong> — 3배 개선은 모델 경량화나 입력 해상도 축소가 아니라 추론 아키텍처와 처리 경로 개선에서 얻었습니다. 모델 자체 정확도는 유지했고, 정확도 손실 가능성은 사용자 PC에서 실행 가능한 모델을 만들기 위한 FP16/양자화 단계의 트레이드오프로 분리해 판단했습니다</li>
-          <li><strong>결과</strong> — 같은 사용자 PC에서 <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>. 추가 하드웨어 없이 실시간 처리 수준을 확보했고, SEEUON 제품군의 공통 기반 SDK로 채택되어 Edge Device 보드 최적화 버전까지 확장</li>
+          <li><strong>결과</strong> — 같은 사용자 PC에서 <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>. SDK를 Windows 클라이언트와 판별 미들웨어의 공통 추론 계층으로 적용하고 Edge Device 보드 최적화 버전까지 확장</li>
         </ul>
       </details>
     </div>
@@ -1236,7 +1224,7 @@
       <article class="other-project">
         <h3>골프 자세분석 프로그램</h3>
         <p class="meta">2024.06 · Side Project · OpenCV/OpenVINO</p>
-        <p>김해문화체육센터 납품용 영상 기반 스윙 분석 프로그램을 <strong>기획부터 설치까지 1인 개발</strong>. 본업의 Vision AI 추론 경험을 외부 실사용 제품으로 검증한 사례입니다.</p>
+        <p>영상 기반 스윙 분석 데스크톱 프로그램을 <strong>기획부터 현장 설치까지 1인 개발</strong>. OpenCV/OpenVINO 추론을 외부 사용 환경에 직접 적용한 사례입니다.</p>
       </article>
     </div>
   </div>
@@ -1253,8 +1241,8 @@
     <details class="qa reveal">
       <summary><span class="qa-badge">Q</span>왜 서버 GPU가 아니라 사용자 PC에서 Vision AI 추론을 돌렸나요?</summary>
       <div class="qa-body">
-        <p>제품 요구사항 때문이었습니다. SEEUON은 보안 솔루션이라 서버가 내려가도 사용자 업무 공백이 생기지 않아야 했고, 얼굴 영상을 서버로 보내기 어려운 고객 환경과 망분리 요구도 고려해야 했습니다. GPU 서버나 전용 장비를 전제로 하면 고객사 납품 하드웨어가 강제되고 사업비 규모도 커지기 때문에, 가장 보편적인 실행 환경인 <strong>Intel CPU 기반 사용자 PC</strong>에서 돌아가는 구조가 필요했습니다.</p>
-        <p>그래서 OpenVINO 기반 SDK와 판별 미들웨어를 설계했습니다. 국내 고객 PC 환경의 다수가 Intel CPU 기반이라는 점을 활용했고, CPU 스레드 튜닝, 모델 캐싱, 내장 그래픽 활용 가능성처럼 제품 환경에서 조정 가능한 선택지를 확보했습니다.</p>
+        <p>서버 장애와 망분리 환경에서도 추론이 중단되지 않고, 얼굴 영상을 외부로 보내지 않아야 했습니다. 전용 GPU를 전제하지 않는 <strong>Intel CPU 기반 사용자 PC</strong>를 실행 환경으로 잡았습니다.</p>
+        <p>그래서 OpenVINO 기반 SDK와 판별 미들웨어를 설계했습니다. CPU 스레드 튜닝, 모델 캐싱, 내장 그래픽 활용 가능성처럼 클라이언트 실행 환경에서 조정 가능한 선택지를 확보했습니다.</p>
         <p>파이프라인은 단순히 스레드를 늘리는 방식으로만 보지 않았습니다. 위변조 탐지는 얼굴 기반 공격이므로 얼굴이 검출된 경우에만 ROI를 잡아 수행했고, 고객 정책에 따라 모든 판별 이력을 남겨야 하는 모드에서는 전체 탐지도 지원했습니다. 성능 수치는 얼굴·바디 탐지, 카메라 탐지, 위변조 탐지와 특징점 추출을 모두 수행하는 가장 높은 보안 강도를 기준으로 잡았습니다.</p>
         <p>속도 개선은 모델 경량화나 입력 해상도 축소가 아니라 추론 아키텍처와 처리 경로 개선에서 얻었습니다. 같은 사용자 PC에서 프레임당 처리 시간을 <strong>150ms에서 40~50ms</strong> 수준으로 줄였고, 모델 자체 정확도는 유지했습니다. 정확도 손실 가능성은 사용자 PC에서 실행 가능한 모델을 만들기 위한 FP16/양자화 단계의 트레이드오프로 분리해 판단했습니다.</p>
         <p>liveness는 RGB 단일 프레임만으로 강한 공격을 모두 막기 어렵다는 점을 전제로, 위협도가 높은 로그인 세션에서는 성능보다 탐지 강도를 우선했습니다. 갤러리의 liveness 데모도 Windows 로그인 세션 기준이라, 보안 솔루션의 시작 지점에서 가능한 한 강하게 체크하도록 설정한 사례입니다.</p>
@@ -1294,7 +1282,7 @@
       <div class="qa-body">
         <p>충돌은 예외가 아니라 <strong>상수</strong>였습니다. 특히 DLL 인젝션, API 후킹, 파일시스템 필터링처럼 타 EDR·백신과 같은 시스템 영역을 쓰는 기능에서 부딪힐 가능성이 컸습니다.</p>
         <p>재현 가능한 시나리오는 풀 덤프를 남기도록 설정하고, 충돌 시점에 각 프로세스와 드라이버가 어떤 API·I/O 경로를 타는지 WinDbg로 분석했습니다. 원인이 자사 기능이면 예외 처리나 기능 수정으로 대응했고, 서로의 동작이 맞물려 생기는 문제면 고객사 보안 담당자나 해당 솔루션 벤더와 협의해 화이트리스트 등록을 진행했습니다. 인터넷망 연결이 가능한 환경이면 벤더 쪽에, 온프레미스면 고객사 담당자를 통해 예외 정책을 잡는 식이었습니다.</p>
-        <p>기능적으로 충돌이 불가피한 조합은 상호 보완적으로 한쪽 기능을 끄는 <strong>운영 정책</strong>으로 정리했습니다. 기술로 다 풀리지 않는 영역은 합의로 푸는 게 결국 제품을 살리는 길이었습니다.</p>
+        <p>기능적으로 충돌이 불가피한 조합은 상호 보완적으로 한쪽 기능을 끄는 <strong>운영 정책</strong>으로 정리했습니다. 코드만으로 풀 수 없는 제약은 관계자와 합의해 운영 가능한 상태로 만들었습니다.</p>
       </div>
     </details>
 
@@ -1302,7 +1290,7 @@
       <summary><span class="qa-badge">Q</span>C++ 코어 SDK를 C#·Python에 바인딩할 때 메모리 소유권과 생명주기는 어떻게 설계했나요?</summary>
       <div class="qa-body">
         <p>코어 SDK는 <strong>기능만 제공</strong>하고 상태와 리소스를 무겁게 들고 있지 않도록 했습니다. 메모리 소유권은 애플리케이션에 두고, 생명주기는 명시적인 init/finalize로 열고 닫게 했습니다. 여기에 언어별 생성자·소멸자 패턴이 있으면 그것도 함께 적용해서, 어느 쪽 습관으로 써도 리소스가 새지 않도록 했습니다.</p>
-        <p>모델은 최초 로딩 시 필요한 캐시 파일을 만들고, 이후에는 <strong>필요한 모델만 부분 load/unload</strong>할 수 있게 구성했습니다. 여러 모델을 항상 메모리에 올려둘 필요가 없는 제품 특성을 반영한 선택이었습니다.</p>
+        <p>모델은 최초 로딩 시 필요한 캐시 파일을 만들고, 이후에는 <strong>필요한 모델만 부분 load/unload</strong>할 수 있게 구성했습니다. 실행 모드마다 사용하는 모델 조합이 다르다는 점을 반영한 선택이었습니다.</p>
         <p>C#·Python Wrapper는 제가 상상해서 만들지 않고, 실제 그 언어를 쓰는 개발자들에게 써보게 하면서 API 형태를 조정했습니다. SDK는 결국 쓰는 사람이 편해야 채택된다고 생각합니다.</p>
       </div>
     </details>
@@ -1348,7 +1336,7 @@
         <h3>(주)시선에이아이 <small>([구]씨유박스)</small></h3>
         <p class="role">Windows Systems / AI Inference Engineer</p>
         <ul>
-          <li>영상보안 솔루션 SEEUON — POC 데모부터 SDK·미들웨어·애플리케이션·커널 드라이버·배포까지 전체 사이클 개발, 회사 핵심 솔루션으로 성장 주도</li>
+          <li>Vision AI 클라이언트 SEEUON — POC 데모부터 추론 SDK·판별 미들웨어·Windows 애플리케이션·커널 드라이버·배포까지 개발</li>
           <li>OpenVINO 기반 AI 추론 SDK(CUFaceSDK) 설계·개발 — C/C++/C#/Python 멀티 언어 바인딩, Windows·Ubuntu 크로스 플랫폼</li>
           <li>FileSystem Minifilter 커널 드라이버(CULockerFsfd) 단독 개발 — Microsoft filter altitude 정식 할당, attestation 서명·배포 체계 구축</li>
           <li>Windows 로그인 얼굴인증 Credential Provider(SeeuonCP)와 IdP 확장판(SEEUONIdp) 클라이언트 메인 개발 — SSO·GoogleOTP·Passwordless 연계</li>
@@ -1491,7 +1479,7 @@
   reveals.forEach(el => io.observe(el));
 
 
-  // 제품 데모 — 클릭 전까지 유튜브를 부르지 않는 facade
+  // 개발 사례 영상 — 클릭 전까지 유튜브를 부르지 않는 facade
   document.querySelectorAll('.demo-frame').forEach(frame => {
     frame.addEventListener('click', () => {
       const id = frame.dataset.yt;
