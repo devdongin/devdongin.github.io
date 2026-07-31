@@ -26,7 +26,7 @@
   "jobTitle": "Vision AI Security · Windows Client & Inference Engineer",
   "url": "https://devdongin.github.io",
   "image": "https://devdongin.github.io/assets/images/login_avatar.jpg",
-  "sameAs": ["https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/", "https://github.com/devdongin", "https://he11oworld.tistory.com", "https://kmong.com/@%EA%B0%AD%EB%8F%99"]
+  "sameAs": ["https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/", "https://github.com/devdongin", "https://he11oworld.tistory.com"]
 }
 </script>
 <link rel="icon" type="image/png" href="assets/images/favicon.png">
@@ -152,6 +152,16 @@
   }
   .ai-review-box strong { color: var(--text); font-weight: 600; }
   .ai-review-box .ai-meta { display: block; margin-top: 6px; opacity: 0.65; font-size: 12px; }
+  .ai-review-box p { margin: 0; }
+  .ai-proof {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+    padding: 0; list-style: none;
+  }
+  .ai-proof li {
+    font-size: 12px; color: var(--text-dim);
+    padding: 3px 8px; border: 1px solid var(--border);
+    border-radius: 999px; background: var(--bg-soft);
+  }
 
   /* ===== Hero ===== */
   .hero {
@@ -737,12 +747,35 @@
     }
 
   @media (max-width: 720px) {
+    body { overflow-x: hidden; }
+    .container, .nav-inner { width: 100%; max-width: 100%; }
     .nav-links a:not(.nav-cta) { display: none; }
     .nav-indicator { display: none; }
-    .hero-inner { flex-direction: column-reverse; text-align: center; gap: 32px; padding-top: calc(var(--nav-h) + 24px); }
+    .hero { min-height: auto; padding: 88px 0 34px; }
+    .hero-inner { align-items: flex-start; flex-direction: column; text-align: center; gap: 22px; padding-top: 0; overflow: hidden; }
+    .hero-text { width: 100%; max-width: 342px; min-width: 0; }
     .hero .eyebrow { justify-content: center; }
-    .hero .tagline { margin-left: auto; margin-right: auto; }
-    .hero-actions { justify-content: center; }
+    .eyebrow-role { display: none; }
+    .hero h1 { font-size: 30px; line-height: 1.16; word-break: keep-all; }
+    .hero .tagline {
+      max-width: 100%; margin-left: auto; margin-right: auto;
+      word-break: break-all; overflow-wrap: anywhere;
+    }
+    .ai-review-box {
+      width: 100%; max-width: 100%; margin: 16px auto 0; padding: 12px 14px;
+      text-align: left; word-break: break-all; overflow-wrap: anywhere;
+    }
+    .ai-review-box .ai-meta { word-break: keep-all; overflow-wrap: normal; }
+    .ai-proof { gap: 5px; }
+    .ai-proof li { font-size: 11.5px; }
+    .hero-actions {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%; margin: 20px auto 0; gap: 8px;
+    }
+    .hero-actions .btn { justify-content: center; padding: 11px 14px; }
+    .hero-actions .btn:nth-child(3) { grid-column: 1 / -1; }
+    .hero-avatar { align-self: center; }
+    .hero-avatar img { width: 96px; }
     section { padding: 64px 0; }
     .project { padding: 22px; }
     .skill-card { padding: 20px; }
@@ -782,15 +815,19 @@
       <p class="eyebrow"><span class="eyebrow-domain">Vision AI Security</span><span class="eyebrow-role">Windows Client &amp; Inference Engineer</span></p>
       <h1>Vision AI 보안 제품을,<br><span class="accent">처음부터 끝까지</span></h1>
       <p class="tagline">
-        안녕하세요, <strong>선동인</strong>입니다.<br>
-        Vision AI 영상보안 솔루션 <strong>SEEUON</strong>의 AI 추론 SDK·Windows 클라이언트·미들웨어·배포,
-        그리고 <strong>고객사 운영 장애 대응</strong>까지 — 제품 전체 사이클을 다뤄온 시스템 소프트웨어 엔지니어입니다.
+        <strong>선동인</strong>입니다. SEEUON의 AI 추론 SDK, Windows 클라이언트, 커널 자기보호, 배포와
+        고객사 장애 대응까지 이어온 <strong>시스템 소프트웨어 엔지니어</strong>입니다.
       </p>
       <div class="ai-review-box" id="ai-review">
         <span class="ai-tag">AI REVIEW</span>
         <!-- AI-REVIEW:START -->
-        <p><strong>Vision AI 영상보안 제품을 연구실 모델에서 고객사 운영 환경까지 제품화한 엔지니어.</strong> 사용자 PC 환경에서 모델 5종 + 특징점 추출을 도는 추론 파이프라인을 재설계해 프레임당 150ms를 40~50ms로 줄였고, 추론 SDK(기여 2위)·자기보호 커널 드라이버(커밋 100%)·얼굴인증 Credential Provider(기여 76%)를 한 제품의 층위로 쌓아 올렸습니다. 최근 12개월 커밋 886건(두 계정 전 저장소·전 브랜치) 중 핵심 클라이언트 저장소 기여율은 81%로 1위이며, 커밋 활동이 최근까지 꾸준히 이어지고 있습니다.
-        <span class="ai-meta">이 평가는 AI(Claude)가 저장소 기여 데이터를 근거로 3시간마다 자동 생성·갱신합니다 · 최근 갱신 2026-07-31 22:53 KST</span></p>
+        <p><strong>연구실 모델을 고객사 PC에서 계속 도는 Vision AI 보안 제품으로 옮겨온 엔지니어.</strong></p>
+        <ul class="ai-proof" aria-label="AI 리뷰 근거">
+          <li>150ms → 40~50ms</li>
+          <li>클라이언트 저장소 81% · 1위</li>
+          <li>최근 12개월 886 commits</li>
+        </ul>
+        <span class="ai-meta">Claude가 저장소 기여 데이터를 근거로 자동 갱신 · 최근 갱신 2026-07-31 22:53 KST</span>
         <!-- AI-REVIEW:END -->
       </div>
       <div class="hero-actions">
@@ -816,7 +853,7 @@
 <div class="demo-band">
   <div class="container">
     <div class="demo-head reveal">
-      <h2>제가 만드는 것</h2>
+      <h2>제품 데모</h2>
       <span class="demo-tag">SEEUON macOS</span>
       <p>위 소개가 실제로 어떤 작업인지 — AI 코딩 하네스를 실무에 들여 macOS로 옮기고 있는 Vision AI 보안 클라이언트입니다. 실시간 얼굴 인증과 감시 정책이 도는 화면을 그대로 담았습니다</p>
     </div>
@@ -842,29 +879,19 @@
     <div class="section-head reveal">
       <p class="kicker">What I Do</p>
       <h2>핵심 역량</h2>
-      <p>어떻게 일하고, 무엇을 만들 수 있는가 — 증명 가능한 것만 적었습니다</p>
+      <p>무엇을 만들 수 있는지, 검증 가능한 축으로만 묶었습니다</p>
     </div>
     <div class="skills strengths">
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
         <div class="icon">🎯</div>
         <h3>제품 전체 사이클 — 연구실 모델에서 고객사 운영까지</h3>
-        <p>Vision AI 영상보안 솔루션 SEEUON을 POC 데모부터 추론 SDK, 판별 미들웨어, Windows 클라이언트, 설치·배포, 그리고 고객사 운영 장애 대응까지 끌고 왔습니다. 훈련된 모델을 <strong>실제 고객 환경에서 도는 제품</strong>으로 옮기는 것이 제 일의 정의입니다</p>
+        <p>POC 데모, 추론 SDK, 판별 미들웨어, Windows 클라이언트, 설치·배포와 장애 대응까지 한 제품의 흐름을 직접 이어왔습니다. 제 강점은 모델을 <strong>고객 PC에서 계속 도는 제품</strong>으로 바꾸는 일입니다</p>
       </div>
       <div class="skill-card reveal">
         <div class="icon">🚨</div>
-        <h3>운영 장애 대응 &amp; 고객사 협의</h3>
-        <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 후에야 드러나는 문제를 재현·분석·조정합니다. 풀 덤프와 WinDbg로 원인 경로를 규명하고, 벤더·고객사 보안 담당자와 화이트리스트를 협의해 제품 안정성으로 연결했습니다</p>
-      </div>
-      <div class="skill-card reveal">
-        <div class="icon">🧭</div>
-        <h3>사용자 관점의 설계</h3>
-        <p>저수준 시스템을 다루지만 시작점은 언제나 화면 앞의 사용자입니다. 커널 정책 하나, 인증 플로우 하나도 실제 업무 흐름을 방해하지 않는 방향으로 설계합니다</p>
-      </div>
-      <div class="skill-card reveal">
-        <div class="icon">🤝</div>
-        <h3>커뮤니케이션 &amp; 협업</h3>
-        <p>고객사 실무자, 영업, AI 리서처 사이에서 기술 언어를 통역합니다. POC 현장에서 요구사항을 직접 듣고 스펙으로 옮기며, 첫 회사에서부터 부팀장을 맡았습니다</p>
+        <h3>현장 장애 대응 &amp; 고객사 협의</h3>
+        <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 뒤 드러나는 문제를 WinDbg와 덤프로 좁히고, 고객사·벤더와 운영 가능한 예외 정책까지 정리합니다</p>
       </div>
     </div>
     <div class="skills">
@@ -876,7 +903,7 @@
       <div class="skill-card reveal">
         <div class="icon">🤖</div>
         <h3>AI 추론 SDK</h3>
-        <p>OpenVINO 기반 C/C++ 추론 엔진 설계. C/C++/C#/Python 멀티 언어 바인딩, Windows/Linux 크로스 플랫폼</p>
+        <p>OpenVINO 기반 C/C++ 추론 엔진과 C++/C#/Python 바인딩을 만들고, 모델 5종 + 특징점 추출 경로를 제품 환경에 맞게 최적화했습니다</p>
       </div>
       <div class="skill-card reveal">
         <div class="icon">🧵</div>
@@ -891,13 +918,8 @@
       </div>
       <div class="skill-card reveal">
         <div class="icon">🔍</div>
-        <h3>리버스 엔지니어링</h3>
-        <p>WinDbg 크래시 덤프 분석으로 프로세스 비정상 종료, 타 보안 솔루션과의 충돌 원인 규명 및 해결</p>
-      </div>
-      <div class="skill-card reveal">
-        <div class="icon">📦</div>
-        <h3>배포 &amp; 코드 서명</h3>
-        <p>NSIS, Themida, 인증서 서명 기반 배포 파이프라인 구축. 솔루션 전체 릴리스 프로세스 담당</p>
+        <h3>릴리스·덤프 분석·협업</h3>
+        <p>NSIS, Themida, 코드 서명 기반 릴리스를 맡고, WinDbg 덤프 분석 결과를 고객사·벤더 협의와 제품 수정으로 연결했습니다</p>
       </div>
     </div>
     <div class="stack reveal">
@@ -1113,41 +1135,17 @@
       </details>
     </div>
 
-    <div class="project reveal">
-      <div class="project-head">
+    <div class="other-projects reveal" aria-label="보조 프로젝트">
+      <article class="other-project">
         <h3>ClouDoc</h3>
-        <span class="meta">2020.01 – 2022.05 · 엠클라우독(넷아이디)</span>
-      </div>
-      <p class="desc">문서 중앙화 보안 솔루션 — 클라이언트(MFC)와 파일시스템 커널 드라이버 개발, 부팀장 역할 수행</p>
-      <div class="badges">
-        <span class="badge">C++ / MFC</span>
-        <span class="badge">FSD / FsFd</span>
-        <span class="badge">WinDbg</span>
-      </div>
-      <ul>
-        <li>로컬 PC 환경 통제 — <strong>가상드라이브, 탐색기 이동·복사 정책, 매체 제어, 네트워크 제어</strong></li>
-        <li>FileSystem Driver(FSD) 및 Filter Driver(FsFd) 개발·배포</li>
-        <li>WinDbg 덤프 분석으로 타 보안 프로그램과의 충돌 원인 규명 및 해결</li>
-        <li>전체 배포 파이프라인 담당 (Python, NSIS, Themida, 코드 서명)</li>
-      </ul>
-    </div>
-
-    <div class="project reveal">
-      <div class="project-head">
+        <p class="meta">2020.01 – 2022.05 · C++/MFC · FSD/FsFd · WinDbg</p>
+        <p>문서 중앙화 보안 솔루션 클라이언트와 파일시스템 드라이버 개발. 가상드라이브, 탐색기 이동·복사 정책, 매체/네트워크 제어와 배포 파이프라인을 맡았고, 부팀장으로 운영 이슈를 정리했습니다.</p>
+      </article>
+      <article class="other-project">
         <h3>골프 자세분석 프로그램</h3>
-        <span class="meta">2024.06 · 김해문화체육센터 납품</span>
-        <span class="badge green">Side Project · 1인 개발</span>
-      </div>
-      <p class="desc">영상 기반 골프 스윙 자세 분석 프로그램 — 기획부터 개발, 현장 납품까지 혼자 완성한 사이드 프로젝트</p>
-      <div class="badges">
-        <span class="badge">OpenCV</span>
-        <span class="badge">OpenVINO</span>
-      </div>
-      <ul>
-        <li>OpenCV 영상처리 + OpenVINO 추론으로 골프 스윙 자세를 분석하는 프로그램 개발</li>
-        <li>요구사항 협의부터 개발·설치·납품까지 <strong>전 과정 1인 수행</strong> (약 4주)</li>
-        <li>본업의 AI 추론 SDK 경험을 업무 밖 실사용 제품으로 검증</li>
-      </ul>
+        <p class="meta">2024.06 · Side Project · OpenCV/OpenVINO</p>
+        <p>김해문화체육센터 납품용 영상 기반 스윙 분석 프로그램을 <strong>기획부터 설치까지 1인 개발</strong>. 본업의 Vision AI 추론 경험을 외부 실사용 제품으로 검증한 사례입니다.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -1313,8 +1311,8 @@
   <div class="ticker reveal" role="region" aria-label="블로그 최근 글과 외부 채널 카드">
     <div class="ticker-track">
       <!-- BLOG-CARDS:START -->
-      <div class="ticker-half"><a class="flow-card flow-card--linkedin" href="https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/" target="_blank" rel="noopener"><svg class="fc-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="fc-tag">LinkedIn</span><span class="fc-title">최근 활동 &amp; 프로필 보기 →</span><span class="fc-meta">linkedin.com</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-2%ED%8E%B8-%EB%8D%B0%EB%AA%A8-%EB%B9%8C%EB%93%9C" target="_blank" rel="noopener"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 2편 (데모 빌드)</span><span class="fc-meta">2025-03-27</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/SourceTree%EC%86%8C%EC%8A%A4%ED%8A%B8%EB%A6%AC-%EC%8B%A4%ED%96%89%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81-%EA%B3%A0%EC%B9%98%EA%B8%B0" target="_blank" rel="noopener"><span class="fc-tag">그냥 개발 이야기</span><span class="fc-title">SourceTree/소스트리 실행되지 않는 현상 고치기</span><span class="fc-meta">2024-05-22</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-1%ED%8E%B8" target="_blank" rel="noopener"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 1편(개발환경 세팅)</span><span class="fc-meta">2024-04-28</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/%EB%B0%B0%EC%B9%98-%ED%8C%8C%EC%9D%BC-%EA%B4%80%EB%A6%AC%EC%9E%90-%EA%B6%8C%ED%95%9C%EC%9C%BC%EB%A1%9C-%EC%8B%A4%ED%96%89-%EC%BD%94%EB%93%9C" target="_blank" rel="noopener"><span class="fc-tag">윈도우</span><span class="fc-title">배치 파일 관리자 권한으로 실행 코드</span><span class="fc-meta">2024-03-20</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/Windows%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B9%84%EC%A0%95%EC%83%81-%EC%A2%85%EB%A3%8C-%EB%B6%84%EC%84%9D-%EB%8D%A4%ED%94%84-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95Feat-WinDbg" target="_blank" rel="noopener"><span class="fc-tag">리버싱</span><span class="fc-title">[Windows/윈도우] 프로세스 비정상 종료 분석 (덤프 분석) 방법 (Feat. WinDbg)</span><span class="fc-meta">2024-02-22</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenCVC-cvMat%EC%9D%98-%ED%8F%AC%EB%A7%B7%EC%9D%84-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B0%A9%EB%B2%95NCHW-NHWC-cvtransposeND-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95" target="_blank" rel="noopener"><span class="fc-tag">OpenCV</span><span class="fc-title">[OpenCV,C++] cv::Mat의 포맷을 바꾸는 방법(NCHW &lt;-&gt; NHWC), cv::transposeND() 사용 방법</span><span class="fc-meta">2023-08-30</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenCVC-OpenCV-%EC%84%A4%EC%B9%98-%EB%B0%8F-Visual-Studio%EC%97%90%EC%84%9C-OpenCV-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%84%A4%EC%A0%95" target="_blank" rel="noopener"><span class="fc-tag">OpenCV</span><span class="fc-title">[OpenCV,C++] OpenCV 설치 및 Visual Studio에서 OpenCV 사용하는 방법 - 프로젝트 설정</span><span class="fc-meta">2023-08-29</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/CC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%9D%98-CC-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-Hello-World-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0" target="_blank" rel="noopener"><span class="fc-tag">C, C++</span><span class="fc-title">[C/C++ 기초 강의] C/C++ 개발 시작하기 (Hello World 출력하기)</span><span class="fc-meta">2023-08-07</span></a><a class="flow-card flow-card--tistory" href="https://he11oworld.tistory.com" target="_blank" rel="noopener"><span class="fc-tag">Tech Blog</span><span class="fc-title">블로그 전체 보기 →</span><span class="fc-meta">he11oworld.tistory.com</span></a><a class="flow-card flow-card--github" href="https://github.com/devdongin" target="_blank" rel="noopener"><svg class="fc-logo" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span class="fc-tag">GitHub</span><span class="fc-title">저장소 보기 →</span><span class="fc-meta">github.com/devdongin</span></a><a class="flow-card flow-card--kmong" href="https://kmong.com/@%EA%B0%AD%EB%8F%99" target="_blank" rel="noopener"><span class="fc-tag">kmong</span><span class="fc-title">개발 외주 프로필 →</span><span class="fc-meta">kmong.com/@갭동</span></a></div>
-      <div class="ticker-half" aria-hidden="true"><a class="flow-card flow-card--linkedin" href="https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/" target="_blank" rel="noopener" tabindex="-1"><svg class="fc-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="fc-tag">LinkedIn</span><span class="fc-title">최근 활동 &amp; 프로필 보기 →</span><span class="fc-meta">linkedin.com</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-2%ED%8E%B8-%EB%8D%B0%EB%AA%A8-%EB%B9%8C%EB%93%9C" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 2편 (데모 빌드)</span><span class="fc-meta">2025-03-27</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/SourceTree%EC%86%8C%EC%8A%A4%ED%8A%B8%EB%A6%AC-%EC%8B%A4%ED%96%89%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81-%EA%B3%A0%EC%B9%98%EA%B8%B0" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">그냥 개발 이야기</span><span class="fc-title">SourceTree/소스트리 실행되지 않는 현상 고치기</span><span class="fc-meta">2024-05-22</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-1%ED%8E%B8" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 1편(개발환경 세팅)</span><span class="fc-meta">2024-04-28</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/%EB%B0%B0%EC%B9%98-%ED%8C%8C%EC%9D%BC-%EA%B4%80%EB%A6%AC%EC%9E%90-%EA%B6%8C%ED%95%9C%EC%9C%BC%EB%A1%9C-%EC%8B%A4%ED%96%89-%EC%BD%94%EB%93%9C" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">윈도우</span><span class="fc-title">배치 파일 관리자 권한으로 실행 코드</span><span class="fc-meta">2024-03-20</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/Windows%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B9%84%EC%A0%95%EC%83%81-%EC%A2%85%EB%A3%8C-%EB%B6%84%EC%84%9D-%EB%8D%A4%ED%94%84-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95Feat-WinDbg" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">리버싱</span><span class="fc-title">[Windows/윈도우] 프로세스 비정상 종료 분석 (덤프 분석) 방법 (Feat. WinDbg)</span><span class="fc-meta">2024-02-22</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenCVC-cvMat%EC%9D%98-%ED%8F%AC%EB%A7%B7%EC%9D%84-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B0%A9%EB%B2%95NCHW-NHWC-cvtransposeND-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">OpenCV</span><span class="fc-title">[OpenCV,C++] cv::Mat의 포맷을 바꾸는 방법(NCHW &lt;-&gt; NHWC), cv::transposeND() 사용 방법</span><span class="fc-meta">2023-08-30</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenCVC-OpenCV-%EC%84%A4%EC%B9%98-%EB%B0%8F-Visual-Studio%EC%97%90%EC%84%9C-OpenCV-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%84%A4%EC%A0%95" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">OpenCV</span><span class="fc-title">[OpenCV,C++] OpenCV 설치 및 Visual Studio에서 OpenCV 사용하는 방법 - 프로젝트 설정</span><span class="fc-meta">2023-08-29</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/CC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%9D%98-CC-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-Hello-World-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">C, C++</span><span class="fc-title">[C/C++ 기초 강의] C/C++ 개발 시작하기 (Hello World 출력하기)</span><span class="fc-meta">2023-08-07</span></a><a class="flow-card flow-card--tistory" href="https://he11oworld.tistory.com" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">Tech Blog</span><span class="fc-title">블로그 전체 보기 →</span><span class="fc-meta">he11oworld.tistory.com</span></a><a class="flow-card flow-card--github" href="https://github.com/devdongin" target="_blank" rel="noopener" tabindex="-1"><svg class="fc-logo" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span class="fc-tag">GitHub</span><span class="fc-title">저장소 보기 →</span><span class="fc-meta">github.com/devdongin</span></a><a class="flow-card flow-card--kmong" href="https://kmong.com/@%EA%B0%AD%EB%8F%99" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">kmong</span><span class="fc-title">개발 외주 프로필 →</span><span class="fc-meta">kmong.com/@갭동</span></a></div>
+      <div class="ticker-half"><a class="flow-card flow-card--linkedin" href="https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/" target="_blank" rel="noopener"><svg class="fc-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="fc-tag">LinkedIn</span><span class="fc-title">최근 활동 &amp; 프로필 보기 →</span><span class="fc-meta">linkedin.com</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-2%ED%8E%B8-%EB%8D%B0%EB%AA%A8-%EB%B9%8C%EB%93%9C" target="_blank" rel="noopener"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 2편 (데모 빌드)</span><span class="fc-meta">2025-03-27</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-1%ED%8E%B8" target="_blank" rel="noopener"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 1편(개발환경 세팅)</span><span class="fc-meta">2024-04-28</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/Windows%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B9%84%EC%A0%95%EC%83%81-%EC%A2%85%EB%A3%8C-%EB%B6%84%EC%84%9D-%EB%8D%A4%ED%94%84-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95Feat-WinDbg" target="_blank" rel="noopener"><span class="fc-tag">리버싱</span><span class="fc-title">[Windows/윈도우] 프로세스 비정상 종료 분석 (덤프 분석) 방법 (Feat. WinDbg)</span><span class="fc-meta">2024-02-22</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenCVC-cvMat%EC%9D%98-%ED%8F%AC%EB%A7%B7%EC%9D%84-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B0%A9%EB%B2%95NCHW-NHWC-cvtransposeND-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95" target="_blank" rel="noopener"><span class="fc-tag">OpenCV</span><span class="fc-title">[OpenCV,C++] cv::Mat의 포맷을 바꾸는 방법(NCHW &lt;-&gt; NHWC), cv::transposeND() 사용 방법</span><span class="fc-meta">2023-08-30</span></a><a class="flow-card flow-card--tistory" href="https://he11oworld.tistory.com" target="_blank" rel="noopener"><span class="fc-tag">Tech Blog</span><span class="fc-title">블로그 전체 보기 →</span><span class="fc-meta">he11oworld.tistory.com</span></a><a class="flow-card flow-card--github" href="https://github.com/devdongin" target="_blank" rel="noopener"><svg class="fc-logo" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span class="fc-tag">GitHub</span><span class="fc-title">저장소 보기 →</span><span class="fc-meta">github.com/devdongin</span></a></div>
+      <div class="ticker-half" aria-hidden="true"><a class="flow-card flow-card--linkedin" href="https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/" target="_blank" rel="noopener" tabindex="-1"><svg class="fc-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="fc-tag">LinkedIn</span><span class="fc-title">최근 활동 &amp; 프로필 보기 →</span><span class="fc-meta">linkedin.com</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-2%ED%8E%B8-%EB%8D%B0%EB%AA%A8-%EB%B9%8C%EB%93%9C" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 2편 (데모 빌드)</span><span class="fc-meta">2025-03-27</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenVinoC-Open-Model-Zoo-%EB%8D%B0%EB%AA%A8-%EB%8F%8C%EB%A0%A4%EB%B3%B4%EA%B8%B0-1%ED%8E%B8" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">AI</span><span class="fc-title">[OpenVino/C++]  Open Model Zoo 데모 돌려보기 - 1편(개발환경 세팅)</span><span class="fc-meta">2024-04-28</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/Windows%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B9%84%EC%A0%95%EC%83%81-%EC%A2%85%EB%A3%8C-%EB%B6%84%EC%84%9D-%EB%8D%A4%ED%94%84-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95Feat-WinDbg" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">리버싱</span><span class="fc-title">[Windows/윈도우] 프로세스 비정상 종료 분석 (덤프 분석) 방법 (Feat. WinDbg)</span><span class="fc-meta">2024-02-22</span></a><a class="flow-card" href="https://he11oworld.tistory.com/entry/OpenCVC-cvMat%EC%9D%98-%ED%8F%AC%EB%A7%B7%EC%9D%84-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B0%A9%EB%B2%95NCHW-NHWC-cvtransposeND-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">OpenCV</span><span class="fc-title">[OpenCV,C++] cv::Mat의 포맷을 바꾸는 방법(NCHW &lt;-&gt; NHWC), cv::transposeND() 사용 방법</span><span class="fc-meta">2023-08-30</span></a><a class="flow-card flow-card--tistory" href="https://he11oworld.tistory.com" target="_blank" rel="noopener" tabindex="-1"><span class="fc-tag">Tech Blog</span><span class="fc-title">블로그 전체 보기 →</span><span class="fc-meta">he11oworld.tistory.com</span></a><a class="flow-card flow-card--github" href="https://github.com/devdongin" target="_blank" rel="noopener" tabindex="-1"><svg class="fc-logo" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span class="fc-tag">GitHub</span><span class="fc-title">저장소 보기 →</span><span class="fc-meta">github.com/devdongin</span></a></div>
       <!-- BLOG-CARDS:END -->
     </div>
   </div>
@@ -1332,7 +1330,6 @@
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-ghost" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-ghost" href="https://he11oworld.tistory.com" target="_blank" rel="noopener">Tech Blog</a>
-      <a class="btn btn-ghost" href="https://kmong.com/@%EA%B0%AD%EB%8F%99" target="_blank" rel="noopener">크몽</a>
     </div>
   </div>
 </section>
