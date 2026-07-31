@@ -180,19 +180,21 @@
     padding-top: var(--nav-h);
   }
   .hero-text { flex: 1; }
+  /* 스펙시트 헤더 — 알약 배지 대신 헤어라인 + 도메인/역할 2단 */
   .hero .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: var(--accent); font-size: 13px; font-weight: 600;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    background: var(--accent-dim);
-    padding: 6px 14px; border-radius: 999px;
-    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-size: 13px; margin-bottom: 18px;
   }
   .hero .eyebrow::before {
-    content: ""; width: 7px; height: 7px; border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
+    content: ""; flex: none; width: 30px; height: 1px;
+    background: var(--accent); opacity: .75;
   }
+  .eyebrow-domain {
+    color: var(--accent); font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  .eyebrow-role { color: var(--text-dim); font-weight: 500; }
+  .eyebrow-role::before { content: "/"; margin-right: 9px; opacity: .4; }
   .hero h1 {
     font-size: clamp(36px, 6vw, 56px);
     font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;
@@ -695,6 +697,7 @@
     .nav-links a:not(.nav-cta) { display: none; }
     .nav-indicator { display: none; }
     .hero-inner { flex-direction: column-reverse; text-align: center; gap: 32px; padding-top: calc(var(--nav-h) + 24px); }
+    .hero .eyebrow { justify-content: center; }
     .hero .tagline { margin-left: auto; margin-right: auto; }
     .hero-actions { justify-content: center; }
     section { padding: 64px 0; }
@@ -733,7 +736,7 @@
 <section class="hero" id="top">
   <div class="container hero-inner">
     <div class="hero-text">
-      <span class="eyebrow">Vision AI Security · Windows Client &amp; Inference Engineer</span>
+      <p class="eyebrow"><span class="eyebrow-domain">Vision AI Security</span><span class="eyebrow-role">Windows Client &amp; Inference Engineer</span></p>
       <h1>Vision AI 보안 제품을,<br><span class="accent">처음부터 끝까지</span></h1>
       <p class="tagline">
         안녕하세요, <strong>선동인</strong>입니다.<br>
