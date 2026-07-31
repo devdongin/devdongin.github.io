@@ -650,6 +650,30 @@
     .demo-play span { width: 52px; height: 52px; }
   }
 
+  /* 하네스 딥다이브 — 라벨/본문 2단, 행 카드 */
+  .harness-dive summary { font-size: 14px; }
+  .harness-dive dl { margin: 16px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .hd-row {
+    display: grid; grid-template-columns: 108px 1fr; gap: 4px 20px; align-items: start;
+    padding: 16px 18px; background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: 12px;
+  }
+  .hd-row dt {
+    font-size: 13px; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.02em; padding-top: 2px;
+  }
+  .hd-row dd { margin: 0; font-size: 15px; line-height: 1.85; color: var(--text-dim); }
+  .hd-row dd strong { color: var(--text); font-weight: 600; }
+  .hd-row dd a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed var(--accent); }
+  .hd-row dd a:hover { border-bottom-style: solid; }
+  .hd-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .hd-stat {
+    font-size: 13px; color: var(--text-dim);
+    padding: 4px 12px; border: 1px solid var(--border);
+    border-radius: 999px; background: var(--bg-soft);
+  }
+  .hd-stat strong { color: var(--accent); font-weight: 700; }
+
   /* ===== Motion: scroll progress, stagger, pipeline, expand ===== */
 
   /* reveal 카드 계단식 등장 */
@@ -748,6 +772,8 @@
 
   @media (max-width: 720px) {
     body { overflow-x: hidden; }
+    .hd-row { grid-template-columns: 1fr; gap: 4px; padding: 14px 16px; }
+    .hd-row dd { font-size: 14.5px; line-height: 1.8; }
     .container, .nav-inner { width: 100%; max-width: 100%; }
     .nav-links a:not(.nav-cta) { display: none; }
     .nav-indicator { display: none; }
@@ -862,16 +888,37 @@
       <span class="demo-play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
     </button>
     <p class="demo-note reveal">사용자 PC에서 모델 5종과 특징점 추출이 프레임마다 도는 구성 — 프레임당 40~50ms · 소리 없음</p>
-    <details class="deep-dive reveal">
+    <details class="deep-dive harness-dive reveal">
       <summary>이 프로젝트를 운영하는 방식 — AI 하네스 설계 딥다이브</summary>
-      <ul>
-        <li><strong>과제</strong> — Windows 중심으로 성장한 SEEUON을 macOS로 확장하는 실제 제품 작업입니다. Swift/AVFoundation 재구현이 필요한 규모라, 속도를 위해 AI 에이전트 둘(Claude 구현 · Codex 리뷰)을 붙이되 <strong>제품 책임은 사람이 지는 구조</strong>를 먼저 설계했습니다</li>
-        <li><strong>단일 규칙 문서</strong> — 저장소의 AGENTS.md가 사람·AI 공통의 작업 규칙이자 <strong>의사결정 로그</strong>입니다. 대화에서 확정된 결정은 날짜와 함께 이 문서에 누적되고, 모든 우선순위 판단은 "이 변경이 제품 핵심 기능을 어떻게 지원하는가"라는 Critical Path 질문으로 환원됩니다</li>
-        <li><strong>통제 장치</strong> — main 직접 push 금지, 브랜치→자체 점검→<strong>Windows 원본 흐름도(drawio) 정합성 점검</strong>→PR→교차 리뷰→CI→명시적 merge(auto-merge 금지). 두 에이전트가 동시에 작업하므로 시작 전 동기화 절차도 강제입니다. AI의 "완료" 선언은 별도 판정 체크리스트를 만족하기 전까지 보류됩니다</li>
-        <li><strong>사람이 개입한 기록</strong> — 에이전트 제안 기능 하나를 검토 후 <strong>"구현 안 함"으로 종결</strong>하고 대안 경로를 지정한 결정, 리뷰 분담이 생기자 자체 점검 횟수를 5회→2회로 조정한 프로세스 튜닝이 모두 날짜와 함께 문서에 남아 있습니다</li>
-        <li><strong>규모 (로컬 저장소 실측, 진행 중)</strong> — 10주간 커밋 702개 · <strong>머지된 PR 254개</strong> · 테스트 케이스 646개. 데모 영상의 실서버 연동 화면이 현재 상태입니다</li>
-        <li><strong>같은 방식의 공개 버전</strong> — 이 포트폴리오 저장소가 동일한 하네스로 운영됩니다: <a href="https://github.com/devdongin/devdongin.github.io/blob/main/AGENTS.md" target="_blank" rel="noopener">역할 규칙(AGENTS.md)</a>과 <a href="https://github.com/devdongin/devdongin.github.io/issues?q=is%3Aissue" target="_blank" rel="noopener">Codex 리뷰 → 근거와 함께 종결되는 이슈 트래커</a>가 전부 공개돼 있어 협업 방식 자체를 검증할 수 있습니다</li>
-      </ul>
+      <dl>
+        <div class="hd-row">
+          <dt>과제</dt>
+          <dd>Windows 중심으로 성장한 SEEUON을 macOS로 확장하는 실제 제품 작업입니다. Swift/AVFoundation 재구현이 필요한 규모라 AI 에이전트 둘을 붙이되, <strong>제품 책임은 사람이 지는 구조</strong>를 먼저 설계했습니다.</dd>
+        </div>
+        <div class="hd-row">
+          <dt>역할 분리</dt>
+          <dd>선동인이 설계·결정·승인, Claude가 구현, Codex가 독립 리뷰를 맡습니다. 저장소의 AGENTS.md가 사람·AI 공통 규칙서이자 <strong>날짜가 박힌 의사결정 로그</strong>이고, 모든 우선순위는 "이 변경이 제품 핵심 기능을 어떻게 지원하는가"로 환원됩니다.</dd>
+        </div>
+        <div class="hd-row">
+          <dt>통제 장치</dt>
+          <dd>main 직접 push 금지. 브랜치 → 자체 점검 → <strong>Windows 원본 흐름도 정합성 점검</strong> → PR → 교차 리뷰 → CI → 명시적 merge. 에이전트 둘이 동시에 작업하므로 시작 전 동기화도 강제이며, AI의 "완료" 선언은 판정 체크리스트를 만족하기 전까지 보류됩니다.</dd>
+        </div>
+        <div class="hd-row">
+          <dt>사람의 개입</dt>
+          <dd>에이전트가 제안한 기능 하나를 검토 후 <strong>"구현 안 함"으로 종결</strong>하고 대안 경로를 지정한 결정, 리뷰 분담이 생기자 자체 점검 횟수를 5회에서 2회로 줄인 프로세스 튜닝 — 모두 날짜와 함께 문서에 남아 있습니다.</dd>
+        </div>
+        <div class="hd-row">
+          <dt>규모</dt>
+          <dd>
+            <span class="hd-stats"><span class="hd-stat"><strong>10주</strong> 진행</span><span class="hd-stat">커밋 <strong>702</strong></span><span class="hd-stat">머지된 PR <strong>254</strong></span><span class="hd-stat">테스트 <strong>646</strong></span></span>
+            로컬 저장소 실측 기준이며 진행 중입니다. 데모 영상의 실서버 연동 화면이 현재 상태입니다.
+          </dd>
+        </div>
+        <div class="hd-row">
+          <dt>공개 검증</dt>
+          <dd>이 포트폴리오 저장소가 같은 하네스로 운영됩니다 — <a href="https://github.com/devdongin/devdongin.github.io/blob/main/AGENTS.md" target="_blank" rel="noopener">역할 규칙(AGENTS.md)</a>과 <a href="https://github.com/devdongin/devdongin.github.io/issues?q=is%3Aissue" target="_blank" rel="noopener">Codex 리뷰가 근거와 함께 종결되는 이슈 트래커</a>가 전부 공개돼 있습니다.</dd>
+        </div>
+      </dl>
     </details>
   </div>
 </div>
