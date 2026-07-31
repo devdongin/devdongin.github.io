@@ -27,6 +27,7 @@
     font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
     background: var(--bg); color: var(--text);
     -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
   }
   nav {
     position: sticky; top: 0; z-index: 10;
@@ -41,6 +42,7 @@
   .brand img { width: 32px; height: 32px; border-radius: 50%; }
   .back { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 8px; }
   .back:hover { color: var(--text); background: var(--accent-dim); }
+  .back:active { transform: scale(0.97); }
   header { max-width: 1100px; margin: 0 auto; padding: 72px 24px 8px; text-align: center; }
   .kicker { color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
   header h1 { font-size: clamp(26px, 4vw, 34px); font-weight: 800; margin-top: 8px; }
