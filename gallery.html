@@ -40,7 +40,11 @@
   }
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 700; }
   .brand img { width: 32px; height: 32px; border-radius: 50%; }
-  .back { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 8px; }
+  .back {
+    color: var(--text-dim); text-decoration: none; font-size: 14px;
+    padding: 6px 12px; border-radius: 8px;
+    display: inline-flex; align-items: center; min-height: 44px;  /* 모바일 터치 목표 */
+  }
   .back:hover { color: var(--text); background: var(--accent-dim); }
   .back:active { transform: scale(0.97); }
   header { max-width: 1100px; margin: 0 auto; padding: 72px 24px 8px; text-align: center; }

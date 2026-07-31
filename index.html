@@ -67,6 +67,7 @@
     --avatar-shadow: rgba(0,0,0,0.5);
     --accent-glow: rgba(88,166,255,0.6);
     --card-shadow: rgba(0,0,0,0.35);
+    --accent-shadow: rgba(88,166,255,0.25);
     --nav-h: 64px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -368,7 +369,8 @@
   .badge.lead { background: var(--accent); color: var(--on-accent); }
   /* 대표 개발 사례의 동작 영상 + 아키텍처 */
   .showcase {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* min() — 320px 화면의 가용폭(288px)보다 트랙이 커져 가로 오버플로가 나던 것을 막는다 */
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 16px; margin: 20px 0 22px; align-items: start;
   }
   .showcase-item {
@@ -572,7 +574,7 @@
   .badge { transition: filter .15s ease; }
   .badge:hover { filter: brightness(1.25); }
   .entry::before { transition: box-shadow .2s ease; }
-  .entry:hover::before { border-color: var(--accent); box-shadow: 0 2px 8px rgba(88,166,255,0.25); }
+  .entry:hover::before { border-color: var(--accent); box-shadow: 0 2px 8px var(--accent-shadow); }
   .entry h3 { transition: color .2s ease; }
   .entry:hover h3 { color: var(--accent); }
   .activity { transition: border-color .2s ease; }
@@ -792,13 +794,13 @@
     .hero h1 { font-size: 30px; line-height: 1.16; word-break: keep-all; }
     .hero .tagline {
       max-width: 100%; margin-left: auto; margin-right: auto;
-      word-break: break-all; overflow-wrap: anywhere;
+      overflow-wrap: anywhere;   /* keep-all 유지 — 긴 토큰만 흘려보낸다 */
     }
     .ai-review-box {
       width: 100%; max-width: 100%; margin: 16px auto 0; padding: 12px 14px;
-      text-align: left; word-break: break-all; overflow-wrap: anywhere;
+      text-align: left; overflow-wrap: anywhere;
     }
-    .ai-review-box .ai-meta { word-break: keep-all; overflow-wrap: normal; }
+    .ai-review-box .ai-meta { overflow-wrap: normal; }
     .hero-actions {
       display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
       width: 100%; margin: 20px auto 0; gap: 8px;
