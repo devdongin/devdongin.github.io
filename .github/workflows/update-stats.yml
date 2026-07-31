@@ -116,9 +116,16 @@ jobs:
           # 다른 writer 워크플로가 먼저 push 했을 수 있으므로 rebase 후 재시도한다.
           # (concurrency group 으로 대부분 막히지만, 수동 push 와 겹치는 경우가 남는다)
           for i in 1 2 3; do
-            if git push; then exit 0; fi
-            echo "push rejected, rebasing (attempt $i)"
+            if err=$(git push 2>&1); then exit 0; fi
+            echo "$err"
+            # Ruleset(PR 필수) 거부는 재시도로 풀리지 않는다 — 즉시 원인을 남기고 중단한다.
+            case "$err" in
+              *GH013*|*"protected branch"*|*"must be made through a pull request"*)
+                echo "::error::main Ruleset이 push를 차단했습니다. 재시도로는 해결되지 않습니다 — GitHub Actions 앱을 Ruleset bypass에 추가하거나 PR 기반 갱신으로 전환하세요." >&2
+                exit 1 ;;
+            esac
+            echo "push rejected (non-fast-forward로 추정), rebase 후 재시도 ($i)"
             git pull --rebase --autostash origin main || exit 1
           done
-          echo "push failed after retries" >&2
+          echo "::error::push가 3회 재시도 후에도 실패했습니다." >&2
           exit 1
