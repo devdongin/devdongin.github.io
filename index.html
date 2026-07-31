@@ -802,6 +802,13 @@
     .hero-actions .btn:nth-child(3) { grid-column: 1 / -1; }
     .hero-avatar { align-self: center; }
     .hero-avatar img { width: 96px; }
+    .stats-inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 12px; padding: 28px 16px;
+    }
+    .stat { min-width: 0; }
+    .stat .num { font-size: 24px; white-space: nowrap; }
+    .stat .label { font-size: 12px; overflow-wrap: anywhere; }
     section { padding: 64px 0; }
     .project { padding: 22px; }
     .skill-card { padding: 20px; }
@@ -809,6 +816,9 @@
     .stack-row { flex-direction: column; gap: 6px; }
     .stack-label { width: auto; }
     .scroll-hint { display: none; }
+  }
+  @media (max-width: 360px) {
+    .stat .num { font-size: 20px; }
   }
 </style>
 </head>
@@ -927,8 +937,8 @@
   <div class="stats-inner">
     <div class="stat reveal"><div class="num">150ms → 45ms</div><div class="label">모델 5종 + 특징점 추출 · 사용자 PC 기준 (3배 개선)</div></div>
     <div class="stat reveal"><div class="num">7년</div><div class="label">Windows 시스템 개발</div></div>
-    <div class="stat reveal"><div class="num">40–50%</div><div class="label">2024 회사 매출 기여 (100억 중)</div></div>
-    <div class="stat reveal"><div class="num">80억+</div><div class="label">담당 솔루션 누적 매출</div></div>
+    <div class="stat reveal"><div class="num"><!-- STAT-HIGHLIGHT-SEEUONCLIENT:START -->81% · 1위<!-- STAT-HIGHLIGHT-SEEUONCLIENT:END --></div><div class="label">핵심 클라이언트 저장소 기여율</div></div>
+    <div class="stat reveal"><div class="num"><!-- STAT-HIGHLIGHT-ACTIVITY:START -->886 commits<!-- STAT-HIGHLIGHT-ACTIVITY:END --></div><div class="label">최근 12개월 · 전 저장소/전 브랜치</div></div>
   </div>
 </div>
 

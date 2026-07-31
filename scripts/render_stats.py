@@ -4,6 +4,8 @@
 갱신 구간 (index.html 안의 HTML 주석 마커):
   HEATMAP           커밋 히트맵 SVG
   HEATMAP-TITLE     h3 안의 기간·총 커밋 수
+  STAT-HIGHLIGHT-ACTIVITY / STAT-HIGHLIGHT-SEEUONCLIENT
+                    상단 핵심 개발 지표
   COLLECTED         activity-note 안의 수집일
   MONTHLY           월별 커밋 합계 테이블 (접근성 대체 텍스트)
   STAT-SEEUONCLIENT / STAT-CULOCKERFSFD / STAT-CUFACESDK
@@ -200,12 +202,15 @@ def main():
     svg = build_svg(daily, start, end, total)
     html = replace(html, "HEATMAP", f"\n        {svg}\n        ")
     html = replace(html, "HEATMAP-TITLE", f"{start} – {end} · {total} commits")
+    html = replace(html, "STAT-HIGHLIGHT-ACTIVITY", f"{total:,} commits")
     html = replace(html, "COLLECTED", f"{end} 수집 · merge 커밋 포함 · author 계정 기준 통합.")
     html = replace(html, "MONTHLY",
                    f"\n        {build_monthly(daily, start, end)}\n        ")
 
     s = repo_stats.get("seeuonclient")
     if s:
+        html = replace(html, "STAT-HIGHLIGHT-SEEUONCLIENT",
+                       f'{s["percent"]}% · {s["rank"]}위')
         html = replace(html, "STAT-SEEUONCLIENT",
                        f'<strong>커밋 {s["percent"]}% · {s["rank"]}위 기여자</strong> '
                        f'({s["mine"]:,} / {s["total"]:,} 커밋 · 기본 브랜치 contributors 집계 · {end} 기준)',
