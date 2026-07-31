@@ -30,6 +30,10 @@ CAPTIONS = {
     "liveness-데모.mp4": "Windows 로그인 세션 liveness 데모 — 보안 솔루션의 시작 지점인 로그인 단계라 성능보다 위변조 탐지 강도를 우선해 설정했습니다",
     "얼굴-위변조-탐지-데모.youtube": "얼굴 위변조(anti-spoofing) 탐지 테스트 앱 — 사진·화면 재생 같은 제시형 공격을 실시간으로 판별합니다",
 }
+# 로컬 영상의 대표 이미지 — 재생 전 검은 화면 대신 첫인상을 준다
+POSTERS = {
+    "liveness-데모.mp4": "assets/images/liveness-poster.webp",
+}
 
 
 def youtube_id(path):
@@ -63,7 +67,9 @@ def build_card(name):
                  f'referrerpolicy="strict-origin-when-cross-origin"></iframe></div>')
     elif ext in VID_EXT:
         mime = "video/webm" if ext == ".webm" else "video/mp4"
-        media = (f'<video controls preload="metadata" playsinline>'
+        poster = POSTERS.get(name)
+        attr = f' poster="{poster}"' if poster else ""
+        media = (f'<video controls preload="metadata" playsinline{attr}>'
                  f'<source src="{url}" type="{mime}"></video>')
     else:
         media = (f'<a href="{url}" target="_blank" rel="noopener">'
