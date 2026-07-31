@@ -70,12 +70,19 @@
     --nav-h: 64px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* 미세 그레인 오버레이 — 평면적 디지털 느낌을 줄인다 (supanova Rule 4) */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none;
+    opacity: 0.022;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter><rect width="140" height="140" filter="url(%23n)"/></svg>');
+  }
   html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
   body {
     background: var(--bg);
     color: var(--text);
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     line-height: 1.7;
+    word-break: keep-all;          /* 한국어 단어 중간 줄바꿈 방지 (supanova 규칙) */
     -webkit-font-smoothing: antialiased;
   }
   .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
@@ -222,14 +229,17 @@
     padding: 12px 24px; border-radius: 10px;
     font-size: 15px; font-weight: 600;
     text-decoration: none;
-    transition: transform .15s, filter .15s, border-color .15s, background .15s;
+    transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1), filter .15s, border-color .15s, background .15s;
+    min-height: 48px;
   }
-  .btn:hover { transform: translateY(-2px); }
+  .btn:hover { transform: translateY(-2px) scale(1.02); }
+  .btn:active { transform: scale(0.97); }
   .btn-primary { background: var(--accent); color: var(--on-accent); }
   .btn-primary:hover { filter: brightness(1.1); }
   .btn-ghost { border: 1px solid var(--border); color: var(--text); }
   .btn-ghost:hover { border-color: var(--accent); background: var(--accent-dim); }
   .btn svg { width: 17px; height: 17px; fill: currentColor; }
+  .btn .btn-ico { fill: none; }
   .hero-avatar { flex-shrink: 0; }
   .hero-avatar img {
     width: clamp(200px, 26vw, 300px);
@@ -272,7 +282,7 @@
     display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 24px; text-align: center;
   }
-  .stat .num { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat .num { font-feature-settings: "tnum"; font-size: 28px; font-weight: 800; color: var(--accent); }
   .stat .label { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
 
   /* ===== Sections ===== */
@@ -301,7 +311,8 @@
     transition: background .15s, transform .15s, border-color .15s;
   }
   .skill-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); border-color: var(--border-hover); }
-  .skill-card .icon { font-size: 26px; margin-bottom: 12px; }
+  .skill-card .icon { margin-bottom: 12px; color: var(--accent); }
+  .skill-card .icon svg { width: 27px; height: 27px; display: block; }
   .skill-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
   .skill-card p { font-size: 14px; color: var(--text-dim); }
   .thread-flow {
@@ -337,7 +348,8 @@
     padding: 34px 36px;
     display: flex; flex-direction: column;
   }
-  .skill-card--lead .icon { font-size: 36px; margin-bottom: 16px; }
+  .skill-card--lead .icon { margin-bottom: 16px; }
+  .skill-card--lead .icon svg { width: 34px; height: 34px; }
   .skill-card--lead h3 { font-size: 21px; margin-bottom: 10px; }
   .skill-card--lead p { font-size: 15.5px; line-height: 1.8; }
   .skill-card--lead .lead-tag {
@@ -570,7 +582,7 @@
   .badge { transition: filter .15s ease; }
   .badge:hover { filter: brightness(1.25); }
   .entry::before { transition: box-shadow .2s ease; }
-  .entry:hover::before { box-shadow: 0 0 10px var(--accent-glow); }
+  .entry:hover::before { border-color: var(--accent); box-shadow: 0 2px 8px rgba(88,166,255,0.25); }
   .entry h3 { transition: color .2s ease; }
   .entry:hover h3 { color: var(--accent); }
   .activity { transition: border-color .2s ease; }
@@ -760,28 +772,7 @@
   .nav-links a:not(.nav-cta) { position: relative; }
   .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
 
-  /* 아바타 링 펄스 */
-  .hero-avatar { position: relative; }
-  .hero-avatar::before {
-    content: ""; position: absolute; inset: -6px; border-radius: 50%;
-    border: 1px solid var(--accent); opacity: 0;
-    animation: ring-pulse 4.5s ease-out infinite;
-  }
-  @keyframes ring-pulse {
-    0% { transform: scale(.96); opacity: 0; }
-    18% { opacity: .35; }
-    60% { transform: scale(1.06); opacity: 0; }
-    100% { opacity: 0; }
-  }
 
-  /* CTA 버튼 광택 */
-  .btn-primary { position: relative; overflow: hidden; }
-  .btn-primary::after {
-    content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
-    transform: skewX(-20deg); transition: left .5s ease;
-  }
-  .btn-primary:hover::after { left: 130%; }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal { transition: none; }
@@ -794,8 +785,6 @@
     .heatmap-scroll.wave rect { animation: none; }
     .deep-dive[open] > *:not(summary), .qa[open] > *:not(summary), .heatmap-alt[open] > *:not(summary) { animation: none; }
     .qa-badge { transition: none; }
-    .hero-avatar::before { animation: none; }
-    .btn-primary::after { transition: none; }
     }
 
   @media (max-width: 720px) {
@@ -835,7 +824,7 @@
       gap: 24px 12px; padding: 28px 16px;
     }
     .stat { min-width: 0; }
-    .stat .num { font-size: 24px; white-space: nowrap; }
+    .stat .num { font-feature-settings: "tnum"; font-size: 24px; white-space: nowrap; }
     .stat .label { font-size: 12px; overflow-wrap: anywhere; }
     section { padding: 64px 0; }
     .project { padding: 22px; }
@@ -846,7 +835,7 @@
     .scroll-hint { display: none; }
   }
   @media (max-width: 360px) {
-    .stat .num { font-size: 20px; }
+    .stat .num { font-feature-settings: "tnum"; font-size: 20px; }
   }
 </style>
 </head>
@@ -974,7 +963,7 @@
     <div class="skills strengths">
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
-        <div class="icon">🎯</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4h-4"/></svg></div>
         <h3>제품 전체 사이클 경험 — 연구실 모델에서 고객사 운영까지</h3>
         <p>한 제품의 흐름을 처음부터 끝까지 직접 이어왔습니다. 제 강점은 모델을 <strong>고객 PC에서 계속 도는 제품</strong>으로 바꾸는 일입니다</p>
         <div class="thread-flow" aria-label="제품 전체 사이클 흐름">
@@ -987,7 +976,7 @@
       </div>
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
-        <div class="icon">🧵</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h7"/><path d="M15 12h5"/><path d="M4 18h16"/></svg></div>
         <h3>멀티스레딩 &amp; 병목 설계 — 실시간을 만든 구조</h3>
         <p>한 경로에서 순차 처리하던 수집·전처리·추론·후처리를 분리하고, ROI·위변조 탐지를 조건부 실행해 <strong>150ms → 40~50ms</strong>로 줄였습니다</p>
         <div class="thread-flow" aria-label="멀티스레딩 병목 개선 흐름">
@@ -1000,27 +989,27 @@
     </div>
     <div class="skills">
       <div class="skill-card reveal">
-        <div class="icon">🔧</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-2.9 7.4-7 9-4.1-1.6-7-4.6-7-9V6l7-3z"/></svg></div>
         <h3>커널 드라이버 &amp; 자기보호</h3>
         <p>FileSystem Minifilter 단독 설계·개발. 화이트리스트 기반 솔루션 자기보호, 관리자·SYSTEM 권한 우회까지 커널에서 차단, IOCTL 기반 커널-유저모드 통신 설계. Microsoft filter altitude 정식 할당</p>
       </div>
       <div class="skill-card reveal">
-        <div class="icon">🤖</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></div>
         <h3>AI 추론 SDK</h3>
         <p>OpenVINO 기반 C/C++ 추론 엔진과 C++/C#/Python 바인딩을 만들고, 모델 5종 + 특징점 추출 경로를 제품 환경에 맞게 최적화했습니다</p>
       </div>
       <div class="skill-card reveal">
-        <div class="icon">🚨</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
         <h3>필드 엔지니어링</h3>
         <p>백신·EDR 충돌, OS 업데이트, 정책 공백처럼 배포 뒤에야 드러나는 문제를 고객 환경에서 재현하고, 풀 덤프와 WinDbg로 원인 경로를 규명해 제품 수정으로 연결합니다</p>
       </div>
       <div class="skill-card reveal">
-        <div class="icon">🤝</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h12v8H9l-4 4V5z"/><path d="M8 9h.01M12 9h.01"/><path d="M18 9h2v9l-3-3h-2"/></svg></div>
         <h3>커뮤니케이션 &amp; 협업</h3>
         <p>고객사 실무자·보안 벤더·AI 리서처 사이에서 기술 언어를 통역합니다. 장애 분석 결과를 화이트리스트 협의로, POC 현장 요구를 스펙으로 옮기며, 첫 회사부터 부팀장을 맡았습니다</p>
       </div>
       <div class="skill-card reveal">
-        <div class="icon">📦</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg></div>
         <h3>배포 &amp; 코드 서명</h3>
         <p>NSIS, Themida, 인증서 서명 기반 릴리스 파이프라인을 구축하고 솔루션 전체 릴리스 프로세스를 담당했습니다</p>
       </div>
@@ -1382,12 +1371,12 @@
     </div>
     <div class="edu-grid">
       <div class="skill-card reveal">
-        <div class="icon">🎓</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l10 5-10 5L2 9l10-5z"/><path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5"/></svg></div>
         <h3>학력</h3>
         <p>호서대학교 정보통신공학 학사 (2014 – 2020)<br>졸업작품: 시각장애인을 위한 영상·음성 복합 서비스</p>
       </div>
       <div class="skill-card reveal">
-        <div class="icon">🏆</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5v1a3 3 0 0 0 3 3M16 6h3v1a3 3 0 0 1-3 3"/><path d="M12 13v4M9 20h6"/></svg></div>
         <h3>수상</h3>
         <p>교내 캡스톤디자인 경진대회 최우수상 (2019)<br>YOLO 객체 인식 + STT/TTS 기반 시각장애인용 물건찾기 시스템</p>
       </div>
@@ -1421,7 +1410,7 @@
       <p>커널, 보안, AI 추론 — 어떤 이야기든 환영합니다</p>
     </div>
     <div class="links">
-      <a class="btn btn-primary" href="mailto:devdongin@gmail.com">✉ devdongin@gmail.com</a>
+      <a class="btn btn-primary" href="mailto:devdongin@gmail.com"><svg class="btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7.5l9 6 9-6"/></svg>devdongin@gmail.com</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-ghost" href="https://github.com/devdongin" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-ghost" href="https://he11oworld.tistory.com" target="_blank" rel="noopener">Tech Blog</a>
@@ -1432,7 +1421,7 @@
 <footer>
   <div class="container">
     <p>© 2026 선동인 (devdongin) · <strong>v2</strong> · Built with plain HTML — hosted on GitHub Pages</p>
-    <p class="visits" hidden>👀 Today <span id="v-today">–</span> · Total <span id="v-total">–</span> <span class="visits-note">· 제3자 무가입 집계(Abacus)</span></p>
+    <p class="visits" hidden>Today <span id="v-today">–</span> · Total <span id="v-total">–</span> <span class="visits-note">· 제3자 무가입 집계(Abacus)</span></p>
   </div>
 </footer>
 

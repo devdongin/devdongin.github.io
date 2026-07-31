@@ -18,6 +18,7 @@
 2. **사실관계** — 이름은 반드시 "선동인" (손동인은 오기). 경력 기간·수치·프로젝트명이 기존 내용과 모순되면 보고.
 3. **HTML/CSS 일관성** — CSS 변수 대신 리터럴 색상 하드코딩, 기존 컴포넌트(.skill-card/.project/.badge/.chip) 미재사용, `.reveal` 클래스 누락, 섹션 배경 교차(기본↔.alt) 붕괴.
 4. **접근성/반응형** — alt 텍스트 누락, 720px 이하 레이아웃 깨짐, 가로 오버플로.
+5. **디자인 스킬 기준(2026-08-01 도입, CLAUDE.md 참조)** — 이모지 사용, keep-all 누락, 네온 글로우, CTA 상태(hover/active/focus) 누락, 인접 섹션 레이아웃 반복, AI 클리셰 카피를 발견하면 보고. 기준 원문: anthropics/skills frontend-design · uxjoseph/supanova-design-skill · nextlevelbuilder/ui-ux-pro-max-skill.
 
 리뷰 결과는 파일:줄 위치와 함께 간결한 목록으로 제시한다.
 
