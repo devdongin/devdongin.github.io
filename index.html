@@ -686,6 +686,22 @@
   }
   .hd-stat strong { color: var(--accent); font-weight: 700; }
 
+  /* 보조 프로젝트 카드 (ClouDoc·골프) — #14 병합 때 HTML만 남고 유실됐던 스타일 복구 */
+  .other-projects {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px; margin-top: 24px;
+  }
+  .other-project {
+    padding: 22px; background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: 12px;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .other-project:hover { transform: translateY(-2px); border-color: var(--border-hover); }
+  .other-project h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .other-project .meta { font-size: 12.5px; color: var(--text-dim); margin-bottom: 10px; }
+  .other-project p { font-size: 14px; color: var(--text-dim); line-height: 1.7; }
+  .other-project strong { color: var(--text); }
+
   /* ===== Motion: scroll progress, stagger, pipeline, expand ===== */
 
   /* reveal 카드 계단식 등장 */
@@ -1367,14 +1383,6 @@
           <li>가상드라이브, 탐색기 이동·복사 정책, 매체 제어, 네트워크 제어 등 로컬 PC 환경 통제 기능 개발</li>
           <li>WinDbg 덤프 분석으로 타 보안 프로그램과의 충돌 원인 규명·해결</li>
           <li>Python·NSIS·Themida·코드 서명 기반 전체 배포 파이프라인 담당</li>
-        </ul>
-      </div>
-      <div class="entry reveal">
-        <p class="period">2019.09 – 2020.01</p>
-        <h3>오토소프트</h3>
-        <p class="role">IVI-설계팀 · 차량 소프트웨어 테스트 / 분석</p>
-        <ul>
-          <li>현대·기아 자동차 디지털 클러스터 테스트, 차량 내 모듈 개발 코드 분석</li>
         </ul>
       </div>
     </div>
