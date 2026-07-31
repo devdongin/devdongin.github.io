@@ -57,6 +57,8 @@
   }
   .g-card:hover { border-color: var(--accent); transform: translateY(-3px); }
   .g-card img, .g-card video { display: block; width: 100%; height: auto; }
+  .g-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+  .g-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
   .g-card a { display: block; line-height: 0; }
   .g-card figcaption { padding: 12px 16px; font-size: 14px; color: var(--text-dim); }
   footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; color: var(--text-dim); font-size: 13px; }
@@ -86,6 +88,7 @@
   <figure class="g-card"><a href="gallery/%ED%95%B4%EC%BB%A4%ED%86%A4-3.webp" target="_blank" rel="noopener"><img src="gallery/%ED%95%B4%EC%BB%A4%ED%86%A4-3.webp" alt="서울시 하드웨어 해커톤 2019" loading="lazy"></a><figcaption>서울시 하드웨어 해커톤 2019</figcaption></figure>
   <figure class="g-card"><a href="gallery/%ED%95%B4%EC%BB%A4%ED%86%A4-2.webp" target="_blank" rel="noopener"><img src="gallery/%ED%95%B4%EC%BB%A4%ED%86%A4-2.webp" alt="서울시 하드웨어 해커톤 2019" loading="lazy"></a><figcaption>서울시 하드웨어 해커톤 2019</figcaption></figure>
   <figure class="g-card"><a href="gallery/%ED%95%B4%EC%BB%A4%ED%86%A4-1.webp" target="_blank" rel="noopener"><img src="gallery/%ED%95%B4%EC%BB%A4%ED%86%A4-1.webp" alt="서울시 하드웨어 해커톤 2019" loading="lazy"></a><figcaption>서울시 하드웨어 해커톤 2019</figcaption></figure>
+  <figure class="g-card"><div class="g-embed"><iframe src="https://www.youtube-nocookie.com/embed/1roC-9KqAXI" title="얼굴 위변조(anti-spoofing) 탐지 테스트 앱 — 사진·화면 재생 같은 제시형 공격을 실시간으로 판별합니다" loading="lazy" allowfullscreen allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><figcaption>얼굴 위변조(anti-spoofing) 탐지 테스트 앱 — 사진·화면 재생 같은 제시형 공격을 실시간으로 판별합니다</figcaption></figure>
   <figure class="g-card"><video controls preload="metadata" playsinline><source src="gallery/liveness-%EB%8D%B0%EB%AA%A8.mp4" type="video/mp4"></video><figcaption>Windows 로그인 세션 liveness 데모 — 보안 솔루션의 시작 지점인 로그인 단계라 성능보다 위변조 탐지 강도를 우선해 설정했습니다</figcaption></figure>
   <!-- GALLERY:END -->
 </div>

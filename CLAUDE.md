@@ -65,6 +65,14 @@ GitHub Actions(`.github/workflows/update-stats.yml`)가 자동 갱신한다 — 
 - 수동으로 index.html의 마커 구간을 편집하지 말 것 — 다음 자동 갱신에서 덮어써진다. 마커 주석 자체를 삭제하면 렌더러가 실패한다(의도된 안전장치).
 - 필요 secrets: `STATS_TOKEN`(회사 계정 fine-grained PAT, 대상 저장소 Contents/Metadata Read), `STATS_CONFIG`, `CLAUDE_CODE_OAUTH_TOKEN`(`claude setup-token`으로 발급, 플랜 차감 방식).
 
+## 갤러리 (2026-07-31)
+
+`gallery/` 폴더에 파일을 넣고 push하면 `update-gallery.yml`이 `render_gallery.py`로 카드를 재생성한다 — 업로드 UI 없이 git이 CMS다. 정렬은 파일명 내림차순(`YYYY-MM_제목.ext` 권장), 캡션은 파일명 자동 생성이며 긴 설명은 `CAPTIONS` 딕셔너리에 파일명을 키로 추가한다.
+
+- **영상은 유튜브 임베드를 기본으로 한다** — `제목.youtube` 파일에 영상 URL이나 ID를 한 줄 넣으면 `youtube-nocookie.com` iframe으로 렌더링된다. 저장소 용량·Pages 대역폭을 쓰지 않고 화질 적응도 자동이다.
+- 저장소에 직접 넣는 `.mp4`/`.webm`은 짧은 클립에만 쓰고 **5MB 이내로 압축**한다 (`-vf scale=-2:1280 -crf 26 -movflags +faststart`). 파일당 100MB가 GitHub 하드 리밋이고, 큰 파일은 git 히스토리에 영구히 남아 클론을 무겁게 만든다.
+- **Git LFS는 GitHub Pages에서 서빙되지 않는다** — 포인터 텍스트가 내려가 재생이 깨지므로 절대 쓰지 말 것.
+
 ## 작업 후 필수: 3자 관점 리뷰
 
 모든 의미 있는 변경 후, 랜딩 페이지의 **디자인·전체 화면·내용을 제3자 관점에서 리뷰**한다. 특히 다음 두 페르소나를 반드시 적용한다:
