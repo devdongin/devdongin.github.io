@@ -597,6 +597,49 @@
   .highlight-box:hover { border-color: var(--green); }
 
 
+
+  /* ===== 제품 데모 밴드 (히어로 직후) ===== */
+  .demo-band { border-bottom: 1px solid var(--border); background: var(--bg-soft); padding: 44px 0 48px; }
+  .demo-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .demo-head h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+  .demo-head .demo-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-dim); padding: 3px 9px; border-radius: 999px;
+  }
+  .demo-head p { flex: 1 1 100%; font-size: 14px; color: var(--text-dim); margin-top: 2px; }
+  .demo-frame {
+    position: relative; display: block; width: 100%;
+    aspect-ratio: 3456 / 2234; overflow: hidden;
+    border: 1px solid var(--border); border-radius: 14px;
+    background: #1c1c1c; cursor: pointer; padding: 0;
+    box-shadow: 0 18px 48px var(--card-shadow);
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .demo-frame:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .demo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .demo-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .demo-play {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    background: linear-gradient(180deg, rgba(13,17,23,.15), rgba(13,17,23,.55));
+    transition: background .2s ease;
+  }
+  .demo-frame:hover .demo-play { background: linear-gradient(180deg, rgba(13,17,23,.05), rgba(13,17,23,.45)); }
+  .demo-play span {
+    display: grid; place-items: center; width: 66px; height: 66px; border-radius: 50%;
+    background: rgba(13,17,23,.72); border: 1px solid rgba(255,255,255,.22);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: transform .2s cubic-bezier(.2,.8,.3,1.3), background .2s ease;
+  }
+  .demo-frame:hover .demo-play span { transform: scale(1.09); background: var(--accent); }
+  .demo-play svg { width: 22px; height: 22px; fill: #fff; margin-left: 3px; }
+  .demo-frame:hover .demo-play svg { fill: var(--on-accent); }
+  .demo-note { margin-top: 12px; font-size: 13px; color: var(--text-dim); }
+
+  @media (max-width: 720px) {
+    .demo-band { padding: 32px 0 36px; }
+    .demo-play span { width: 52px; height: 52px; }
+  }
+
   /* ===== Motion: scroll progress, stagger, pipeline, expand ===== */
 
   /* reveal 카드 계단식 등장 */
@@ -769,6 +812,21 @@
   </div>
   <div class="scroll-hint">SCROLL</div>
 </section>
+
+<div class="demo-band">
+  <div class="container">
+    <div class="demo-head reveal">
+      <h2>제품 데모</h2>
+      <span class="demo-tag">SEEUON macOS</span>
+      <p>AI 코딩 하네스로 구축 중인 macOS 클라이언트 — 실시간 얼굴 인증과 감시 정책이 동작하는 화면입니다</p>
+    </div>
+    <button class="demo-frame reveal" type="button" data-yt="" aria-label="SEEUON macOS 데모 영상 재생">
+      <img src="assets/images/macos-demo-poster.webp" alt="SEEUON macOS 클라이언트 화면 — 얼굴 검출 박스와 매칭 점수, 감시 정책 패널이 표시된 상태" width="1920" height="1242" loading="lazy">
+      <span class="demo-play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
+    </button>
+    <p class="demo-note reveal">사용자 PC에서 모델 5종과 특징점 추출이 프레임마다 도는 구성 — 프레임당 40~50ms</p>
+  </div>
+</div>
 
 <div class="stats">
   <div class="stats-inner">
@@ -1351,6 +1409,19 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => io.observe(el));
 
+
+  // 제품 데모 — 클릭 전까지 유튜브를 부르지 않는 facade
+  document.querySelectorAll('.demo-frame').forEach(frame => {
+    frame.addEventListener('click', () => {
+      const id = frame.dataset.yt;
+      if (!id) return;
+      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" `
+        + `title="SEEUON macOS 데모" allowfullscreen `
+        + `allow="autoplay; encrypted-media; picture-in-picture" `
+        + `referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+      frame.style.cursor = 'default';
+    });
+  });
   // 히트맵 셀 웨이브 · 파이프라인 흐름 (뷰 진입 시 1회)
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!calm) {
