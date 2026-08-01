@@ -761,6 +761,19 @@
     100% { transform: translateX(100%); opacity: 0; }
   }
 
+  /* 히트맵 잔디 — 커밋 밀도만큼 돋았다가 스러진다 (PC 호버 / 모바일 탭) */
+  .grass path {
+    fill: none; stroke-linecap: round; stroke-width: 1.3;
+    transform-box: fill-box; transform-origin: bottom center;
+    animation: grass-pop 1.25s cubic-bezier(.2,.8,.3,1) forwards;
+  }
+  @keyframes grass-pop {
+    0%   { transform: scaleY(0);    opacity: 0; }
+    32%  { transform: scaleY(1.12); opacity: 1; }
+    52%  { transform: scaleY(1);    opacity: 1; }
+    100% { transform: scaleY(1);    opacity: 0; }
+  }
+
   /* 히트맵 셀 웨이브 등장 */
   .heatmap-scroll.wave rect { animation: cell-in .45s ease both; }
   @keyframes cell-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
@@ -794,6 +807,7 @@
     .section-head .kicker::after { transition: none; }
     .thread-flow.flowing .thread-step::after { animation: none; }
     .heatmap-scroll.wave rect { animation: none; }
+    .grass path { animation: none; opacity: 0; }
     .deep-dive[open] > *:not(summary), .qa[open] > *:not(summary), .heatmap-alt[open] > *:not(summary) { animation: none; }
     .qa-badge { transition: none; }
     }
@@ -1546,6 +1560,45 @@
         hio.disconnect();
       }), { threshold: 0.15 });
       hio.observe(heat);
+
+      // 셀 위로 잔디를 틔운다 — 개수·색은 그날 커밋 밀도(셀 색)를 그대로 따른다.
+      // SVG는 render_stats.py가 매번 다시 그리므로 마크업이 아니라 런타임에 얹는다.
+      const NS = 'http://www.w3.org/2000/svg';
+      const sprout = rect => {
+        const svg = rect.ownerSVGElement;
+        if (!svg || rect.dataset.sprouting) return;
+        const m = /·\s*(\d+)\s*commits/.exec(rect.querySelector('title')?.textContent || '');
+        const n = m ? +m[1] : 0;
+        if (!n) return;                       // 커밋 없는 날은 돋지 않는다
+        rect.dataset.sprouting = '1';
+        const blades = Math.min(2 + Math.ceil(n / 3), 6);
+        const cx = +rect.getAttribute('x') + 5.5;
+        const top = +rect.getAttribute('y');
+        const color = rect.getAttribute('fill');
+        const g = document.createElementNS(NS, 'g');
+        g.setAttribute('class', 'grass');
+        g.setAttribute('pointer-events', 'none');
+        for (let i = 0; i < blades; i++) {
+          const t = blades > 1 ? (i / (blades - 1)) - 0.5 : 0;   // -0.5 ~ 0.5
+          const dx = t * 8;
+          const hgt = 7 + Math.random() * 5 + Math.min(n, 12) * 0.25;
+          const p = document.createElementNS(NS, 'path');
+          p.setAttribute('d', `M ${cx} ${top} Q ${cx + dx * 0.5} ${top - hgt * 0.65} ${cx + dx} ${top - hgt}`);
+          p.setAttribute('stroke', color);
+          p.style.animationDelay = (i * 45) + 'ms';
+          g.appendChild(p);
+        }
+        svg.appendChild(g);
+        setTimeout(() => { g.remove(); delete rect.dataset.sprouting; }, 1500);
+      };
+
+      heat.addEventListener('pointerover', e => {
+        // 마우스만 호버로 반응 — 터치는 스와이프 중 오작동하지 않게 탭에서 처리
+        if (e.pointerType === 'mouse' && e.target.tagName === 'rect') sprout(e.target);
+      });
+      heat.addEventListener('click', e => {
+        if (e.target.tagName === 'rect') sprout(e.target);
+      });
     }
     document.querySelectorAll('.thread-flow').forEach(flow => {
       const fio = new IntersectionObserver(es => es.forEach(e => {
