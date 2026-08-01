@@ -101,8 +101,19 @@ jobs:
               (사람·카메라 탐지 + liveness 3종. "모델 3종/4종" 표기는 오기).
             - 평가 근거는 data/stats.json의 실제 수치(총 커밋 수, 기여 통계)와
               index.html에 이미 공개된 사실만 사용한다. 내부 저장소명은 절대 쓰지 않는다.
-            - 최근 활동량(월별 추이)이 눈에 띄게 변했다면 그것을 반영해도 좋다.
+            - 커밋 활동은 **수치와 추세까지만** 서술한다. stats.json은 커밋 수와 시점만
+              증명하므로, 증가·감소의 원인이나 업무 종류(운영 대응·신규 개발 등),
+              생산성·품질을 별도 근거 없이 추론하지 않는다.
+              (나쁜 예: "커밋이 몰릴 만큼 운영 대응이 이어지고 있습니다")
+              활동량을 언급할 거라면 검증 가능한 구현 범위나 성능 근거와 함께 쓴다.
             - 마커 밖의 내용은 절대 수정하지 않는다.
+
+      # 승인 0건 자동 병합이라 사람 리뷰가 없다 — 기계적으로 확인 가능한 것은 여기서 막는다 (#27)
+      - name: Verify before publishing
+        id: verify
+        run: |
+          git fetch -q origin main
+          python scripts/verify_auto_update.py origin/main | tee /tmp/verify.txt
 
       - name: Commit & push (PR 경유)
         env:
@@ -123,7 +134,7 @@ jobs:
           git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
             --title "chore: 자동 갱신 — 커밋 통계 / AI REVIEW" \
-            --body "자동 갱신 워크플로가 생성한 PR입니다. run: $GITHUB_RUN_ID" > /tmp/pr_url.txt
+            --body "$(printf '자동 갱신 워크플로가 생성한 PR입니다. run: %s\n\n## 게시 전 검증\n\n```\n%s\n```\n\n## 변경 요약\n\n```\n%s\n```\n' "$GITHUB_RUN_ID" "$(cat /tmp/verify.txt)" "$(git diff --stat origin/main -- | tail -20)")" > /tmp/pr_url.txt
           cat /tmp/pr_url.txt
           # mergeable 상태 계산에 잠깐 걸리므로 몇 번 재시도한다
           for i in 1 2 3 4 5; do

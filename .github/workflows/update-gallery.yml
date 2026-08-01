@@ -31,6 +31,13 @@ jobs:
       - name: Render gallery page
         run: python scripts/render_gallery.py
 
+      # 승인 0건 자동 병합이라 사람 리뷰가 없다 — 기계적으로 확인 가능한 것은 여기서 막는다 (#27)
+      - name: Verify before publishing
+        id: verify
+        run: |
+          git fetch -q origin main
+          python scripts/verify_auto_update.py origin/main | tee /tmp/verify.txt
+
       - name: Commit & push (PR 경유)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +57,7 @@ jobs:
           git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
             --title "chore: 갤러리 자동 반영" \
-            --body "자동 갱신 워크플로가 생성한 PR입니다. run: $GITHUB_RUN_ID" > /tmp/pr_url.txt
+            --body "$(printf '자동 갱신 워크플로가 생성한 PR입니다. run: %s\n\n## 게시 전 검증\n\n```\n%s\n```\n\n## 변경 요약\n\n```\n%s\n```\n' "$GITHUB_RUN_ID" "$(cat /tmp/verify.txt)" "$(git diff --stat origin/main -- | tail -20)")" > /tmp/pr_url.txt
           cat /tmp/pr_url.txt
           # mergeable 상태 계산에 잠깐 걸리므로 몇 번 재시도한다
           for i in 1 2 3 4 5; do
