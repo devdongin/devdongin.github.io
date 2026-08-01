@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
   id-token: write # claude-code-action OIDC 요구사항
 
 concurrency:
@@ -103,7 +104,9 @@ jobs:
             - 최근 활동량(월별 추이)이 눈에 띄게 변했다면 그것을 반영해도 좋다.
             - 마커 밖의 내용은 절대 수정하지 않는다.
 
-      - name: Commit & push
+      - name: Commit & push (PR 경유)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name devdongin
           git config user.email devdongin@users.noreply.github.com
@@ -112,20 +115,21 @@ jobs:
             echo "no changes, skipping commit"
             exit 0
           fi
+          # main Ruleset이 직접 push를 막으므로 작업 브랜치 → PR → 자동 병합으로 반영한다.
+          # (Ruleset은 기본 브랜치에만 걸려 있어 작업 브랜치 push·삭제는 자유롭다)
+          BRANCH="auto/stats-$GITHUB_RUN_ID"
+          git checkout -b "$BRANCH"
           git commit -m "chore: 자동 갱신 — 커밋 통계 / AI REVIEW"
-          # 다른 writer 워크플로가 먼저 push 했을 수 있으므로 rebase 후 재시도한다.
-          # (concurrency group 으로 대부분 막히지만, 수동 push 와 겹치는 경우가 남는다)
-          for i in 1 2 3; do
-            if err=$(git push 2>&1); then exit 0; fi
-            echo "$err"
-            # Ruleset(PR 필수) 거부는 재시도로 풀리지 않는다 — 즉시 원인을 남기고 중단한다.
-            case "$err" in
-              *GH013*|*"protected branch"*|*"must be made through a pull request"*)
-                echo "::error::main Ruleset이 push를 차단했습니다. 재시도로는 해결되지 않습니다 — GitHub Actions 앱을 Ruleset bypass에 추가하거나 PR 기반 갱신으로 전환하세요." >&2
-                exit 1 ;;
-            esac
-            echo "push rejected (non-fast-forward로 추정), rebase 후 재시도 ($i)"
-            git pull --rebase --autostash origin main || exit 1
+          git push -u origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore: 자동 갱신 — 커밋 통계 / AI REVIEW" \
+            --body "자동 갱신 워크플로가 생성한 PR입니다. run: $GITHUB_RUN_ID" > /tmp/pr_url.txt
+          cat /tmp/pr_url.txt
+          # mergeable 상태 계산에 잠깐 걸리므로 몇 번 재시도한다
+          for i in 1 2 3 4 5; do
+            if gh pr merge "$BRANCH" --squash --delete-branch; then exit 0; fi
+            echo "merge not ready, retrying ($i)"
+            sleep 10
           done
-          echo "::error::push가 3회 재시도 후에도 실패했습니다." >&2
+          echo "::error::자동 생성 PR 병합에 실패했습니다. 수동 확인이 필요합니다: $(cat /tmp/pr_url.txt)" >&2
           exit 1
