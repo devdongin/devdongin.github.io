@@ -381,8 +381,12 @@
   .showcase-item video, .showcase-item .arch {
     display: block; width: 100%; height: auto; background: #0b0f15;
   }
-  /* 데모는 세로(1080x1920) 영상이라 높이를 제한하고 레터박스로 담는다 */
+  /* 데모는 세로(1080x1920) 영상이라 높이를 제한하고 레터박스로 담는다.
+     아키텍처 SVG도 세로 흐름이라 같은 상한을 줘서 두 칸의 높이를 맞춘다 */
   .showcase-item video { max-height: 420px; object-fit: contain; }
+  /* viewBox가 320x420이라 폭을 320으로 묶으면 높이가 정확히 420 — 영상과 같은 상한이 된다.
+     (max-height 만으로는 SVG 고유 크기 계산이 부모를 넘어서 오버플로가 났다) */
+  .showcase-item .arch { width: 100%; max-width: 320px; height: auto; margin: 0 auto; padding: 10px 0; }
   .showcase-item .arch { padding: 10px 8px; }
   .showcase-item figcaption {
     padding: 12px 16px; font-size: 13px; line-height: 1.65;
@@ -1088,8 +1092,8 @@
           <figcaption><strong>실제 동작</strong> — Windows 로그인 화면에 통합한 liveness 판정. 로그인 경로에서는 처리 속도보다 위변조 탐지 강도를 우선한 구성입니다</figcaption>
         </figure>
         <figure class="showcase-item">
-          <svg class="arch" viewBox="0 0 560 292" xmlns="http://www.w3.org/2000/svg" role="img"
-               aria-label="SEEUON 처리 흐름: 카메라·화면 입력이 추론 SDK의 모델 5종과 특징점 추출을 거쳐 판별 미들웨어로 들어가고, 거기서 두 경로로 갈라진다 — 클라이언트 앱을 지나 서버 이력 전송으로, 그리고 로그인 화면의 Credential Provider로. 전 구간을 커널 드라이버가 보호한다">
+          <svg class="arch" viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" role="img"
+               aria-label="SEEUON 처리 흐름: 카메라·화면 입력이 추론 SDK의 모델 5종과 특징점 추출을 거쳐 판별 미들웨어로 내려가고, 거기서 두 갈래로 갈라진다 — 왼쪽은 클라이언트 앱을 지나 서버 이력 전송, 오른쪽은 로그인 화면의 Credential Provider. 전 구간을 커널 드라이버가 보호한다">
             <defs>
               <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                 <path d="M0 0 L10 5 L0 10 z" fill="#9ba7b4"/>
@@ -1099,44 +1103,47 @@
               .ab { fill: #10151d; stroke: #30363d; }
               .ab-hi { fill: rgba(88,166,255,0.12); stroke: #58a6ff; }
               .at { fill: #e6edf3; font-size: 12px; font-weight: 700; }
-              .as { fill: #9ba7b4; font-size: 10.5px; }
-              .al { stroke: #9ba7b4; stroke-width: 1.2; marker-end: url(#ah); }
+              .as { fill: #9ba7b4; font-size: 10px; }
+              .al { stroke: #9ba7b4; stroke-width: 1.2; fill: none; marker-end: url(#ah); }
             </style>
 
-            <rect class="ab" x="4" y="34" width="92" height="52" rx="9"/>
-            <text class="at" x="50" y="58" text-anchor="middle">카메라 · 화면</text>
-            <text class="as" x="50" y="74" text-anchor="middle">프레임 캡처</text>
-            <line class="al" x1="98" y1="60" x2="126" y2="60"/>
+            <rect class="ab" x="8" y="6" width="304" height="42" rx="9"/>
+            <text class="at" x="160" y="26" text-anchor="middle">카메라 · 화면</text>
+            <text class="as" x="160" y="41" text-anchor="middle">프레임 캡처</text>
+            <line class="al" x1="160" y1="50" x2="160" y2="66"/>
 
-            <rect class="ab-hi" x="130" y="16" width="152" height="88" rx="9"/>
-            <text class="at" x="206" y="38" text-anchor="middle">추론 SDK · CUFaceSDK</text>
-            <text class="as" x="206" y="57" text-anchor="middle">사람 탐지 · 카메라 탐지</text>
-            <text class="as" x="206" y="72" text-anchor="middle">liveness 3종(디스플레이 ·</text>
-            <text class="as" x="206" y="87" text-anchor="middle">출력물 · IR) + 특징점 추출</text>
-            <line class="al" x1="284" y1="60" x2="312" y2="60"/>
+            <rect class="ab-hi" x="8" y="70" width="304" height="74" rx="9"/>
+            <text class="at" x="160" y="90" text-anchor="middle">추론 SDK · CUFaceSDK</text>
+            <text class="as" x="160" y="108" text-anchor="middle">사람 탐지 · 카메라 탐지</text>
+            <text class="as" x="160" y="123" text-anchor="middle">liveness 3종(디스플레이 · 출력물 · IR)</text>
+            <text class="as" x="160" y="138" text-anchor="middle">+ 특징점 추출</text>
+            <line class="al" x1="160" y1="146" x2="160" y2="162"/>
 
-            <rect class="ab" x="316" y="34" width="104" height="52" rx="9"/>
-            <text class="at" x="368" y="58" text-anchor="middle">판별 미들웨어</text>
-            <text class="as" x="368" y="74" text-anchor="middle">이상행위 판단</text>
-            <line class="al" x1="422" y1="60" x2="450" y2="60"/>
+            <rect class="ab" x="8" y="166" width="304" height="42" rx="9"/>
+            <text class="at" x="160" y="186" text-anchor="middle">판별 미들웨어</text>
+            <text class="as" x="160" y="201" text-anchor="middle">이상행위 판단</text>
 
-            <rect class="ab" x="454" y="34" width="102" height="52" rx="9"/>
-            <text class="at" x="505" y="58" text-anchor="middle">클라이언트 앱</text>
-            <text class="as" x="505" y="74" text-anchor="middle">정책 · 알림 · 로그</text>
+            <!-- 판별 결과가 두 경로로 갈라진다 -->
+            <path class="al" d="M160 210 V224 H82 V240"/>
+            <path class="al" d="M160 210 V224 H238 V240"/>
 
-            <line class="al" x1="505" y1="90" x2="505" y2="120"/>
-            <rect class="ab" x="450" y="124" width="106" height="38" rx="9"/>
-            <text class="as" x="503" y="148" text-anchor="middle">서버 이력 전송</text>
+            <rect class="ab" x="8" y="244" width="148" height="46" rx="9"/>
+            <text class="at" x="82" y="264" text-anchor="middle">클라이언트 앱</text>
+            <text class="as" x="82" y="279" text-anchor="middle">정책 · 알림 · 로그</text>
 
-            <line class="al" x1="368" y1="90" x2="368" y2="120"/>
-            <rect class="ab" x="292" y="124" width="152" height="42" rx="9"/>
-            <text class="at" x="368" y="143" text-anchor="middle">Credential Provider</text>
-            <text class="as" x="368" y="158" text-anchor="middle">로그인 화면 얼굴 인증</text>
+            <rect class="ab" x="164" y="244" width="148" height="46" rx="9"/>
+            <text class="at" x="238" y="264" text-anchor="middle">Credential Provider</text>
+            <text class="as" x="238" y="279" text-anchor="middle">로그인 화면 얼굴 인증</text>
 
-            <rect class="ab-hi" x="4" y="206" width="552" height="50" rx="9"/>
-            <text class="at" x="280" y="228" text-anchor="middle">커널 드라이버 · CULockerFsfd — 전 구간 자기보호</text>
-            <text class="as" x="280" y="246" text-anchor="middle">화이트리스트 파일·프로세스 I/O 통제 · 관리자/SYSTEM 우회 차단 · IOCTL 요청 검증</text>
-            <text class="as" x="280" y="278" text-anchor="middle">한 프레임 처리 150ms → 40~50ms · 사용자 PC 환경</text>
+            <line class="al" x1="82" y1="292" x2="82" y2="308"/>
+            <rect class="ab" x="8" y="312" width="148" height="34" rx="9"/>
+            <text class="as" x="82" y="333" text-anchor="middle">서버 이력 전송</text>
+
+            <rect class="ab-hi" x="8" y="358" width="304" height="46" rx="9"/>
+            <text class="at" x="160" y="377" text-anchor="middle">커널 드라이버 · CULockerFsfd</text>
+            <text class="as" x="160" y="393" text-anchor="middle">전 구간 자기보호 — I/O 통제 · 우회 차단 · 요청 검증</text>
+
+            <text class="as" x="160" y="416" text-anchor="middle">한 프레임 처리 150ms → 40~50ms · 사용자 PC 환경</text>
           </svg>
           <figcaption><strong>처리 흐름</strong> — 입력부터 서버 전송까지의 경로와, 그 전 구간을 감싸는 커널 자기보호 계층</figcaption>
         </figure>
