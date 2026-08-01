@@ -763,10 +763,12 @@
 
   /* 히트맵 잔디 — 커밋 밀도만큼 돋았다가 스러진다 (PC 호버 / 모바일 탭) */
   .grass path {
-    fill: none; stroke-linecap: round; stroke-width: 1.3;
+    fill: none; stroke-linecap: round; stroke-width: 1.4;
     transform-box: fill-box; transform-origin: bottom center;
     animation: grass-pop 1.25s cubic-bezier(.2,.8,.3,1) forwards;
   }
+  /* 겉테두리 — 셀·배경 위 어디서든 줄기가 또렷하게 떨어지도록 어두운 층을 깐다 */
+  .grass .grass-edge { stroke: var(--bg); stroke-width: 3.4; }
   @keyframes grass-pop {
     0%   { transform: scaleY(0);    opacity: 0; }
     32%  { transform: scaleY(1.12); opacity: 1; }
@@ -1578,15 +1580,27 @@
         const g = document.createElementNS(NS, 'g');
         g.setAttribute('class', 'grass');
         g.setAttribute('pointer-events', 'none');
+        // 길이도 밀도를 따른다 — 1커밋 ~7px에서 20커밋 이상 ~17px까지
+        const shapes = [];
         for (let i = 0; i < blades; i++) {
           const t = blades > 1 ? (i / (blades - 1)) - 0.5 : 0;   // -0.5 ~ 0.5
           const dx = t * 8;
-          const hgt = 7 + Math.random() * 5 + Math.min(n, 12) * 0.25;
-          const p = document.createElementNS(NS, 'path');
-          p.setAttribute('d', `M ${cx} ${top} Q ${cx + dx * 0.5} ${top - hgt * 0.65} ${cx + dx} ${top - hgt}`);
-          p.setAttribute('stroke', color);
-          p.style.animationDelay = (i * 45) + 'ms';
-          g.appendChild(p);
+          const hgt = 6 + Math.min(n, 20) * 0.55 + Math.random() * 3;
+          shapes.push({
+            d: `M ${cx} ${top} Q ${cx + dx * 0.5} ${top - hgt * 0.65} ${cx + dx} ${top - hgt}`,
+            delay: (i * 45) + 'ms',
+          });
+        }
+        // 테두리를 전부 먼저 깔고 줄기를 얹는다 (섞어 그리면 옆 줄기의 테두리가 앞 줄기를 덮는다)
+        for (const cls of ['grass-edge', 'grass-blade']) {
+          for (const s of shapes) {
+            const p = document.createElementNS(NS, 'path');
+            p.setAttribute('d', s.d);
+            p.setAttribute('class', cls);
+            if (cls === 'grass-blade') p.setAttribute('stroke', color);
+            p.style.animationDelay = s.delay;
+            g.appendChild(p);
+          }
         }
         svg.appendChild(g);
         setTimeout(() => { g.remove(); delete rect.dataset.sprouting; }, 1500);
