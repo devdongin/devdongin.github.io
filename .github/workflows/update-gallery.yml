@@ -35,8 +35,11 @@ jobs:
       - name: Verify before publishing
         id: verify
         run: |
+          # pipefail 없이 | tee 를 쓰면 파이프라인 exit code 가 tee(항상 0)의 것이 되어
+          # 검증 실패가 그대로 통과한다 — 실제로 run 30682489009 에서 그렇게 새어나갔다.
+          set -o pipefail
           git fetch -q origin main
-          python scripts/verify_auto_update.py origin/main | tee /tmp/verify.txt
+          python scripts/verify_auto_update.py origin/main 2>&1 | tee /tmp/verify.txt
 
       - name: Commit & push (PR 경유)
         env:

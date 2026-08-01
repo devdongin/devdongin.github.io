@@ -18,9 +18,13 @@ ALLOWED = {"index.html", "gallery.html", "data/stats.json", "data/blog.json",
            "data/scan_cache.json"}
 
 # 마커 구간 — 렌더러/AI가 갱신하는 곳. 짝이 맞고 중복이 없어야 한다.
-MARKERS = ["AI-REVIEW", "HEATMAP", "HEATMAP-TITLE", "COLLECTED", "MONTHLY",
-           "STAT-SEEUONCLIENT", "STAT-CULOCKERFSFD", "STAT-CUFACESDK", "STAT-SEEUONCP",
-           "BLOG-CARDS"]
+# 목록을 하드코딩하면 새 마커가 생길 때마다 "마커 밖 변경"으로 오탐하므로
+# (실제로 STAT-HIGHLIGHT-ACTIVITY 추가 때 그랬다) HTML에서 직접 찾아낸다.
+MARKER_RE = re.compile(r"<!-- ([A-Z][A-Z0-9_-]*):START -->")
+
+
+def markers_in(text):
+    return sorted(set(MARKER_RE.findall(text)))
 
 # 공개 금지 — CLAUDE.md 절대 규칙과 #24에서 정리한 보안 표현
 FORBIDDEN = [
@@ -60,7 +64,11 @@ def main():
     html = pathlib.Path("index.html").read_text(encoding="utf-8")
 
     # 2) 마커 무결성 — START/END 각각 정확히 1개
-    for name in MARKERS:
+    names = markers_in(html)
+    if not names:
+        fails.append("index.html에서 마커를 찾지 못함")
+    print(f"[verify] 마커 {len(names)}개 확인")
+    for name in names:
         s = html.count(f"<!-- {name}:START -->")
         e = html.count(f"<!-- {name}:END -->")
         if (s, e) != (1, 1):
@@ -69,7 +77,7 @@ def main():
     # 3) 마커 밖 비의도 변경 — 마커 구간을 지운 뒤에도 diff가 남는지
     if "index.html" in changed:
         def strip(text):
-            for name in MARKERS:
+            for name in set(names) | set(markers_in(text)):
                 text = re.sub(rf"<!-- {name}:START -->.*?<!-- {name}:END -->",
                               f"<!--{name}-->", text, flags=re.S)
             return text
