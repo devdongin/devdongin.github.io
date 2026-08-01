@@ -1,6 +1,6 @@
 # devdongin.github.io
 
-선동인의 개인 포트폴리오 사이트 — **https://devdongin.github.io**
+개인 포트폴리오 사이트 — **https://devdongin.github.io**
 
 AI 모델을 C++ 추론 SDK와 클라이언트 소프트웨어에 통합해온 개발 경험을 담았습니다.
 실시간 최적화 · Windows 시스템 연동 · 커널 드라이버 · 배포 파이프라인 · 운영 장애 분석까지.
