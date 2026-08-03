@@ -862,6 +862,110 @@
   @media (max-width: 360px) {
     .stat .num { font-feature-settings: "tnum"; font-size: 20px; }
   }
+
+  /* 인쇄 전용 요소는 화면에서 감춘다 (짝: @media print의 .no-print) */
+  @media screen { .print-only { display: none !important; } }
+
+  /* ===== 인쇄 · PDF 제출용 =====
+     포트폴리오를 PDF로 제출해야 하는 경우를 위한 레이아웃.
+     다크 테마를 흰 배경으로 뒤집고, 화면 전용 요소(내비·티커·애니메이션)를 걷어내며,
+     접힌 <details>는 beforeprint 스크립트가 모두 펼친다(딥다이브·면접 Q&A가 빠지지 않도록). */
+  @media print {
+    @page { size: A4; margin: 12mm 10mm 14mm; }
+
+    html, body {
+      background: #fff !important;
+      color: #1a1a1a !important;
+    }
+    body::after { display: none !important; }   /* 그레인 텍스처 */
+
+    /* 다크 테마 → 종이. 브라우저 인쇄 기본값이 '배경 그래픽 끄기'라서,
+       어두운 배경만 빠지고 밝은 글씨가 남으면 흰 종이에서 읽히지 않는다.
+       선택자를 열거하면 블록을 새로 넣을 때마다 누락되므로(.demo-band가 그랬다)
+       전체에 기본값을 깔고, 아래에서 필요한 것만 되살린다.
+       *는 명시도 0이라 이어지는 요소·클래스 규칙이 항상 이긴다. */
+    *, *::before, *::after {
+      background-color: transparent !important;
+      background-image: none !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+      border-color: #cfcfcf !important;
+      color: #333 !important;
+    }
+
+    h1, h2, h3, h4, strong, b, dt, summary,
+    .stat .num, .accent, .kicker, .qa-badge, .fc-tag, .badge, .demo-tag {
+      color: #111 !important;
+    }
+    a { color: #0b4fa8 !important; }
+    .badge, .chip { background-color: #f2f2f2 !important; }
+
+    /* 화면 전용 요소는 인쇄에서 제외 (화면 표시에는 영향 없음).
+       #ai-review  : 3시간마다 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
+       #interview  : 분량이 큰 읽을거리라 온라인에서 보게 두고 PDF에서는 뺀다 */
+    #nav, #blog, #ai-review, #interview, .hero-actions, .visits,
+    .scroll-hint, .ticker { display: none !important; }
+
+    /* 조건부 인쇄 유틸리티
+       .no-print   : 화면에는 보이고 인쇄에서는 빠진다
+       .print-only : 인쇄에만 나온다 (아래 @media screen에서 화면 숨김)
+       body[data-print-mode] : ?print=<모드> 쿼리로 인쇄 범위를 바꾼다 */
+    .no-print { display: none !important; }
+
+    /* compact 모드 — 분량을 줄여야 할 때 긴 섹션을 뺀다 (?print=compact) */
+    body[data-print-mode="compact"] #activity,
+    body[data-print-mode="compact"] #skills { display: none !important; }
+
+    /* 애니메이션·등장 효과 해제 (미등장 상태로 인쇄되는 것 방지) */
+    .reveal { opacity: 1 !important; transform: none !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+
+    /* 페이지 경계에서 카드가 잘리지 않게.
+       break-inside는 브라우저가 페이지 나눌 때마다 재배치를 시도해 비용이 크므로,
+       잘리면 실제로 읽기 나쁜 블록에만 건다 (작은 칩·박스류는 제외). */
+    .project, .qa, .entry, .showcase-item { break-inside: avoid; page-break-inside: avoid; }
+    h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+
+    /* 섹션마다 새 페이지에서 시작한다.
+       요소 선택자(section)로 걸어두었기 때문에 앞으로 섹션을 추가하거나 지워도
+       규칙이 그대로 따라간다 — 새 섹션은 자동으로 새 페이지를 얻는다.
+       <section>이 아닌 블록에도 페이지를 주려면 class="print-page",
+       반대로 앞 페이지에 이어 붙이려면 class="print-continue"를 준다. */
+    section, .print-page { padding: 18px 0 !important; break-before: page; page-break-before: always; }
+    section:first-of-type, .hero, .print-continue {
+      break-before: auto; page-break-before: auto;
+    }
+    /* 마지막 페이지 뒤에 빈 장이 생기지 않도록 */
+    section:last-of-type { break-after: auto; page-break-after: auto; }
+
+    /* 히트맵 SVG는 378개 rect라 지면 폭으로 확대해 래스터화하는 비용이 크다.
+       인쇄물에는 같은 데이터를 담은 월별 표(.heatmap-alt)만 싣는다. */
+    .heatmap-scroll { display: none !important; }
+    .heatmap-alt { color: #333 !important; font-size: 12px !important; }
+    .heatmap-alt summary { list-style: none; font-weight: 600; }
+    .heatmap-alt summary::-webkit-details-marker { display: none; }
+
+    /* 영상 대신 미리 만들어 둔 포스터 이미지를 싣는다 —
+       인쇄 미리보기에서 영상 프레임을 디코딩하지 않아 로드가 빠르다. */
+    .showcase video { display: none !important; }
+    .showcase-item .print-only {
+      display: block !important;
+      max-height: 300px; width: auto; margin: 0 auto;
+      border: 1px solid #cfcfcf; border-radius: 6px;
+    }
+    /* video는 display:none이어도 DOM에 남으므로 형제 선택자는 그대로 동작한다
+       — 영상이 있는 figure의 캡션에만 붙는다 */
+    .showcase video ~ figcaption::after {
+      content: " (영상 재생: devdongin.github.io)";
+      color: #555;
+    }
+
+    /* 종이에서는 링크를 누를 수 없으므로 주소를 함께 노출 */
+    .contact .links a[href^="http"]::after {
+      content: " " attr(href);
+      font-size: 10px; color: #555; word-break: break-all;
+    }
+  }
 </style>
 </head>
 <body>
@@ -923,7 +1027,8 @@
   <div class="scroll-hint">SCROLL</div>
 </section>
 
-<div class="demo-band">
+<!-- print-page: <section>이 아니어서 인쇄 시 자기 페이지를 못 받던 것을 명시 -->
+<div class="demo-band print-page">
   <div class="container">
     <div class="demo-head reveal">
       <h2>AI 개발 하네스 실전 사례</h2>
@@ -1105,6 +1210,9 @@
           <video controls preload="metadata" playsinline poster="assets/images/liveness-poster.webp">
             <source src="gallery/liveness-%EB%8D%B0%EB%AA%A8.mp4" type="video/mp4">
           </video>
+          <!-- 인쇄 전용 썸네일: 영상 프레임을 디코딩하는 대신 24KB 포스터 이미지를 그린다 -->
+          <img class="print-only" src="assets/images/liveness-poster.webp"
+               alt="Windows 로그인 화면 liveness 판정 데모 화면" width="406" height="720">
           <figcaption><strong>실제 동작</strong> — Windows 로그인 화면에 통합한 liveness 판정. 로그인 경로에서는 처리 속도보다 위변조 탐지 강도를 우선한 구성입니다</figcaption>
         </figure>
         <figure class="showcase-item">
@@ -1638,6 +1746,108 @@
       document.getElementById('v-today').textContent = d.value.toLocaleString();
       document.querySelector('.visits').hidden = false;
     } catch (e) {}
+  })();
+
+  // animated favicon — face-detection brackets + scan line over the avatar.
+  // 프레임을 최초 1회만 미리 렌더해 두고 이후에는 href 문자열만 교체한다
+  // (매 프레임 캔버스를 다시 그리지 않으므로 실행 비용이 사실상 0).
+  (() => {
+    // 티커와 동일하게 prefers-reduced-motion 여부와 무관하게 동작시킨다 (소유자 지시).
+    // 본문이 아니라 16px 탭 아이콘이라 어지럼증 유발 위험이 낮다고 판단.
+    const link = document.querySelector('link[rel="icon"]');
+    if (!link) return;
+
+    const S = 32, R = S / 64, FRAMES = 24, FPS = 12;   // 64 좌표계로 그리고 32px로 축소
+    const ACCENT = '#58a6ff';
+    const img = new Image();
+    img.src = link.getAttribute('href');
+
+    img.onload = () => {
+      const cv = document.createElement('canvas');
+      cv.width = cv.height = S;
+      const g = cv.getContext('2d');
+      if (!g) return;
+
+      const bracket = (x, y, dx, dy) => {          // 모서리 ㄱ자
+        g.beginPath();
+        g.moveTo(x, y + dy * 13);
+        g.lineTo(x, y);
+        g.lineTo(x + dx * 13, y);
+        g.stroke();
+      };
+
+      let urls;
+      try {
+        urls = Array.from({ length: FRAMES }, (_, i) => {
+          const t = i / FRAMES;
+          g.setTransform(1, 0, 0, 1, 0, 0);
+          g.clearRect(0, 0, S, S);
+          g.setTransform(R, 0, 0, R, 0, 0);          // 이하 좌표는 64 기준
+          g.drawImage(img, 0, 0, 64, 64);
+
+          // 스캔 라인: 위에서 아래로 훑고 다시 위로
+          const sweep = t < 0.5 ? t * 2 : (1 - t) * 2;
+          const y = 8 + sweep * 48;
+          const grad = g.createLinearGradient(0, y - 6, 0, y + 6);
+          grad.addColorStop(0, 'rgba(88,166,255,0)');
+          grad.addColorStop(0.5, 'rgba(88,166,255,0.55)');
+          grad.addColorStop(1, 'rgba(88,166,255,0)');
+          g.fillStyle = grad;
+          g.fillRect(5, y - 6, 54, 12);
+          g.strokeStyle = 'rgba(88,166,255,0.95)';
+          g.lineWidth = 2;
+          g.beginPath(); g.moveTo(6, y); g.lineTo(58, y); g.stroke();
+
+          // 탐지 브래킷: 스캔에 맞춰 은은하게 맥동
+          g.strokeStyle = ACCENT;
+          g.globalAlpha = 0.65 + 0.35 * Math.sin(t * Math.PI * 2);
+          g.lineWidth = 5;
+          g.lineCap = 'round';
+          bracket(6, 6, 1, 1); bracket(58, 6, -1, 1);
+          bracket(6, 58, 1, -1); bracket(58, 58, -1, -1);
+          g.globalAlpha = 1;
+
+          return cv.toDataURL('image/png');
+        });
+      } catch (e) { return; }        // 캔버스가 오염되면 정적 파비콘 유지
+
+      let i = 0, timer = null;
+      const tick = () => { link.href = urls[i = (i + 1) % FRAMES]; };
+      const start = () => { if (!timer) timer = setInterval(tick, 1000 / FPS); };
+      const stop = () => { clearInterval(timer); timer = null; };
+
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+      if (!document.hidden) start();
+    };
+  })();
+
+  // 인쇄 범위 모드 — ?print=compact 처럼 쿼리로 지정하면 인쇄 CSS가 그 모드 규칙을 적용한다.
+  // (예: compact는 면접·활동 섹션을 빼고 분량을 줄인다. 화면 표시에는 영향이 없다.)
+  (() => {
+    const mode = new URLSearchParams(location.search).get('print');
+    if (mode) document.body.dataset.printMode = mode;
+  })();
+
+  // 인쇄·PDF 저장 시 접힌 <details>를 모두 펼친다.
+  // 딥다이브와 면접 Q&A가 전부 details 안에 있어서, 펼치지 않으면 PDF에서 통째로 빠진다.
+  // 인쇄가 끝나면 원래 접힘 상태로 되돌린다.
+  (() => {
+    const expand = () => document.querySelectorAll('details:not([open])').forEach(d => {
+      d.dataset.printExpanded = '1';
+      d.open = true;
+    });
+    const restore = () => document.querySelectorAll('details[data-print-expanded]').forEach(d => {
+      d.open = false;
+      delete d.dataset.printExpanded;
+    });
+    addEventListener('beforeprint', expand);
+    addEventListener('afterprint', restore);
+    // Safari 등 beforeprint 미지원 브라우저 대비
+    if (window.matchMedia) {
+      const mq = matchMedia('print');
+      const onChange = e => (e.matches ? expand() : restore());
+      mq.addEventListener ? mq.addEventListener('change', onChange) : mq.addListener(onChange);
+    }
   })();
 </script>
 
