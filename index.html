@@ -23,7 +23,7 @@
   "@type": "Person",
   "name": "선동인",
   "alternateName": "devdongin",
-  "jobTitle": "AI Product Engineering · C++ Systems & Inference Engineer",
+  "jobTitle": "AI Product Engineering · C++ Systems & Inference",
   "url": "https://devdongin.github.io",
   "image": "https://devdongin.github.io/assets/images/login_avatar.jpg",
   "sameAs": ["https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/", "https://github.com/devdongin", "https://he11oworld.tistory.com"]
@@ -901,9 +901,11 @@
     .badge, .chip { background-color: #f2f2f2 !important; }
 
     /* 화면 전용 요소는 인쇄에서 제외 (화면 표시에는 영향 없음).
-       #ai-review  : 3시간마다 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
-       #interview  : 분량이 큰 읽을거리라 온라인에서 보게 두고 PDF에서는 뺀다 */
-    #nav, #blog, #ai-review, #interview, .hero-actions, .visits,
+       #ai-review    : 3시간마다 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
+       #interview    : 분량이 큰 읽을거리라 온라인에서 보게 두고 PDF에서는 뺀다
+       .harness-dive : 이게 있으면 하네스 블록이 1.56페이지가 되어 뒤따르는 통계 띠가
+                       갈 곳을 잃고 빈 장을 만든다. 펼쳐 보는 성격의 토글이라 온라인에 둔다 */
+    #nav, #blog, #ai-review, #interview, .harness-dive, .hero-actions, .visits,
     .scroll-hint, .ticker { display: none !important; }
 
     /* 조건부 인쇄 유틸리티
@@ -920,11 +922,25 @@
     .reveal { opacity: 1 !important; transform: none !important; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
 
-    /* 페이지 경계에서 카드가 잘리지 않게.
-       break-inside는 브라우저가 페이지 나눌 때마다 재배치를 시도해 비용이 크므로,
-       잘리면 실제로 읽기 나쁜 블록에만 건다 (작은 칩·박스류는 제외). */
-    .project, .qa, .entry, .showcase-item { break-inside: avoid; page-break-inside: avoid; }
-    h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+    /* 제목만 남고 내용이 다음 장으로 넘어가는 것을 막는다.
+       머리 블록은 자기 자신도 쪼개지지 않고, 뒤따르는 내용과도 붙어 있어야 한다. */
+    h1, h2, h3, h4, .section-head, .project-head, .demo-head, summary {
+      break-after: avoid; page-break-after: avoid;
+    }
+    .section-head, .project-head, .demo-head {
+      break-inside: avoid; page-break-inside: avoid;
+    }
+
+    /* .project 는 일부러 쪼개지도록 둔다 — 대표 사례 카드가 한 페이지보다 커서(약 1.6배)
+       break-inside: avoid 를 걸면 브라우저가 카드를 통째로 다음 장으로 밀고,
+       그 결과 제목만 있는 빈 페이지가 생긴다. 안쪽의 작은 단위만 보호한다. */
+    .qa, .entry, .showcase-item, .deep-dive, .highlight-box, .clients-block,
+    .stats, .stack-row, .edu-grid > * {
+      break-inside: avoid; page-break-inside: avoid;
+    }
+
+    /* 문단·목록이 한 줄만 남고 끊기지 않게 */
+    p, li { orphans: 3; widows: 3; }
 
     /* 섹션마다 새 페이지에서 시작한다.
        요소 선택자(section)로 걸어두었기 때문에 앞으로 섹션을 추가하거나 지워도
@@ -937,6 +953,11 @@
     }
     /* 마지막 페이지 뒤에 빈 장이 생기지 않도록 */
     section:last-of-type { break-after: auto; page-break-after: auto; }
+
+    /* 통계 띠 — 지면 폭이 좁아 숫자가 중간에서 줄바꿈되던 것을 막는다 */
+    .stats-inner { grid-template-columns: repeat(4, 1fr) !important; gap: 10px !important; }
+    .stat .num { font-size: 19px !important; white-space: nowrap; }
+    .stat .label { font-size: 10px !important; }
 
     /* 히트맵 SVG는 378개 rect라 지면 폭으로 확대해 래스터화하는 비용이 크다.
        인쇄물에는 같은 데이터를 담은 월별 표(.heatmap-alt)만 싣는다. */
@@ -1499,7 +1520,7 @@
       <div class="entry reveal">
         <p class="period">2022.07 – 현재</p>
         <h3>(주)시선에이아이 <small>([구]씨유박스)</small></h3>
-        <p class="role">Windows Systems / AI Inference Engineer</p>
+        <p class="role">Windows 시스템 소프트웨어 · AI 추론 SDK 개발</p>
         <ul>
           <li>Vision AI 클라이언트 SEEUON — POC 데모부터 추론 SDK·판별 미들웨어·Windows 애플리케이션·커널 드라이버·배포까지 개발</li>
           <li>OpenVINO 기반 AI 추론 SDK(CUFaceSDK) 설계·개발 — C/C++/C#/Python 멀티 언어 바인딩, Windows·Ubuntu 크로스 플랫폼</li>
