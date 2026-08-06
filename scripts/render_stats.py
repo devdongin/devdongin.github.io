@@ -228,7 +228,7 @@ def main():
     s = repo_stats.get("seeuoncp")
     if s:
         html = replace(html, "STAT-SEEUONCP",
-                       f' — 사내 저장소 커밋 <strong>{s["mine"]:,}/{s["total"]:,} '
+                       f'. 사내 저장소 커밋 <strong>{s["mine"]:,}/{s["total"]:,} '
                        f'({s["percent"]}% · {end} 기준)</strong>',
                        required=False)
 

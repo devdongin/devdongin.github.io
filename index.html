@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://devdongin.github.io/assets/images/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="선동인 — Vision AI 제품화 · C++ 시스템 소프트웨어 개발자">
+<meta property="og:image:alt" content="선동인 · Vision AI 제품화 · C++ 시스템 소프트웨어 개발자">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://devdongin.github.io/">
 <script type="application/ld+json">
@@ -23,7 +23,7 @@
   "@type": "Person",
   "name": "선동인",
   "alternateName": "devdongin",
-  "jobTitle": "AI Product Engineering · C++ Systems & Inference Engineer",
+  "jobTitle": "AI Product Engineering · C++ Systems & Inference",
   "url": "https://devdongin.github.io",
   "image": "https://devdongin.github.io/assets/images/login_avatar.jpg",
   "sameAs": ["https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/", "https://github.com/devdongin", "https://he11oworld.tistory.com"]
@@ -71,7 +71,7 @@
     --nav-h: 64px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  /* 미세 그레인 오버레이 — 평면적 디지털 느낌을 줄인다 (supanova Rule 4) */
+  /* 미세 그레인 오버레이. 평면적 디지털 느낌을 줄인다 (supanova Rule 4) */
   body::after {
     content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none;
     opacity: 0.022;
@@ -188,7 +188,7 @@
     padding-top: var(--nav-h);
   }
   .hero-text { flex: 1; }
-  /* 스펙시트 헤더 — 알약 배지 대신 헤어라인 + 도메인/역할 2단 */
+  /* 스펙시트 헤더. 알약 배지 대신 헤어라인 + 도메인/역할 2단 */
   .hero .eyebrow {
     display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     font-size: 13px; margin-bottom: 18px;
@@ -325,14 +325,14 @@
   .thread-step span { color: var(--accent); font-weight: 700; white-space: nowrap; }
 
   /* ===== Strengths / Stack / Clients / Edu ===== */
-  /* 하단 역량 카드 5장 — 4+1 고아 배치 대신 3+2 로 균형 */
+  /* 하단 역량 카드 5장. 4+1 고아 배치 대신 3+2 로 균형 */
   #skills .skills:not(.strengths) { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
   .strengths {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     margin-bottom: 18px;
   }
-  /* v2: 중요도에 따른 카드 크기 — 대표 역량은 넓게 */
+  /* v2: 중요도에 따른 카드 크기. 대표 역량은 넓게 */
   .skill-card--lead {
     background: linear-gradient(160deg, var(--bg-card-hover), var(--bg-card) 60%);
     border-color: rgba(88,166,255,0.35);
@@ -350,7 +350,7 @@
     margin-bottom: 12px;
   }
   /* CORE 카드 안에서는 파이프라인 다이어그램도 함께 커진다 */
-  /* 다이어그램은 카드 하단 정렬 — 본문 길이가 달라도 두 CORE 카드가 같은 결로 끝난다 */
+  /* 다이어그램은 카드 하단 정렬. 본문 길이가 달라도 두 CORE 카드가 같은 결로 끝난다 */
   .skill-card--lead .thread-flow { margin-top: auto; padding-top: 18px; gap: 8px; }
   .skill-card--lead .thread-step { padding: 11px 14px; font-size: 13.5px; border-radius: 10px; }
   @media (min-width: 721px) {
@@ -369,7 +369,7 @@
   .badge.lead { background: var(--accent); color: var(--on-accent); }
   /* 대표 개발 사례의 동작 영상 + 아키텍처 */
   .showcase {
-    /* min() — 320px 화면의 가용폭(288px)보다 트랙이 커져 가로 오버플로가 나던 것을 막는다 */
+    /* min(). 320px 화면의 가용폭(288px)보다 트랙이 커져 가로 오버플로가 나던 것을 막는다 */
     display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 16px; margin: 20px 0 22px; align-items: start;
   }
@@ -384,7 +384,7 @@
   /* 데모는 세로(1080x1920) 영상이라 높이를 제한하고 레터박스로 담는다.
      아키텍처 SVG도 세로 흐름이라 같은 상한을 줘서 두 칸의 높이를 맞춘다 */
   .showcase-item video { max-height: 420px; object-fit: contain; }
-  /* viewBox가 320x420이라 폭을 320으로 묶으면 높이가 정확히 420 — 영상과 같은 상한이 된다.
+  /* viewBox가 320x420이라 폭을 320으로 묶으면 높이가 정확히 420. 영상과 같은 상한이 된다.
      (max-height 만으로는 SVG 고유 크기 계산이 부모를 넘어서 오버플로가 났다) */
   .showcase-item .arch { width: 100%; max-width: 320px; height: auto; margin: 0 auto; padding: 10px 0; }
   .showcase-item .arch { padding: 10px 8px; }
@@ -607,7 +607,7 @@
   .fc-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
   .fc-title { font-size: 14px; font-weight: 600; line-height: 1.5; margin: 8px 0 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 42px; }
   .fc-meta { font-size: 12px; color: var(--text-dim); margin-top: auto; }
-  /* 채널 카드 브랜딩 — 시그니처 로고·컬러 */
+  /* 채널 카드 브랜딩. 시그니처 로고·컬러 */
   .fc-logo { width: 22px; height: 22px; margin-bottom: 10px; }
   .flow-card--linkedin { border-color: rgba(10,102,194,0.55); }
   .flow-card--linkedin:hover { border-color: var(--brand-linkedin); }
@@ -670,7 +670,7 @@
     .demo-play span { width: 52px; height: 52px; }
   }
 
-  /* 하네스 딥다이브 — 라벨/본문 2단, 행 카드 */
+  /* 하네스 딥다이브. 라벨/본문 2단, 행 카드 */
   .harness-dive summary { font-size: 14px; }
   .harness-dive dl { margin: 16px 0 0; display: flex; flex-direction: column; gap: 10px; }
   .hd-row {
@@ -694,7 +694,7 @@
   }
   .hd-stat strong { color: var(--accent); font-weight: 700; }
 
-  /* 보조 프로젝트 카드 (ClouDoc·골프) — #14 병합 때 HTML만 남고 유실됐던 스타일 복구 */
+  /* 보조 프로젝트 카드 (ClouDoc·골프). #14 병합 때 HTML만 남고 유실됐던 스타일 복구 */
   .other-projects {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 16px; margin-top: 24px;
@@ -710,7 +710,7 @@
   .other-project p { font-size: 14px; color: var(--text-dim); line-height: 1.7; }
   .other-project strong { color: var(--text); }
 
-  /* 역할 분리 — 사람·Claude·Codex 마크 */
+  /* 역할 분리. 사람·Claude·Codex 마크 */
   .role-split {
     list-style: none; padding: 0; margin: 0 0 12px;
     display: flex; flex-wrap: wrap; gap: 8px;
@@ -743,7 +743,7 @@
   }
   .section-head.on .kicker::after { width: 100%; left: 0; }
 
-  /* 파이프라인 다이어그램 — 순차 흐름 */
+  /* 파이프라인 다이어그램. 순차 흐름 */
   .thread-step { position: relative; overflow: hidden; }
   .thread-flow.flowing .thread-step::after {
     content: ""; position: absolute; inset: 0;
@@ -761,13 +761,13 @@
     100% { transform: translateX(100%); opacity: 0; }
   }
 
-  /* 히트맵 잔디 — 커밋 밀도만큼 돋았다가 스러진다 (PC 호버 / 모바일 탭) */
+  /* 히트맵 잔디. 커밋 밀도만큼 돋았다가 스러진다 (PC 호버 / 모바일 탭) */
   .grass path {
     fill: none; stroke-linecap: round; stroke-width: 1.4;
     transform-box: fill-box; transform-origin: bottom center;
     animation: grass-pop 1.25s cubic-bezier(.2,.8,.3,1) forwards;
   }
-  /* 겉테두리 — 셀·배경 위 어디서든 줄기가 또렷하게 떨어지도록 어두운 층을 깐다 */
+  /* 겉테두리. 셀·배경 위 어디서든 줄기가 또렷하게 떨어지도록 어두운 층을 깐다 */
   .grass .grass-edge { stroke: var(--bg); stroke-width: 3.4; }
   @keyframes grass-pop {
     0%   { transform: scaleY(0);    opacity: 0; }
@@ -829,7 +829,7 @@
     .hero h1 { font-size: 30px; line-height: 1.16; word-break: keep-all; }
     .hero .tagline {
       max-width: 100%; margin-left: auto; margin-right: auto;
-      overflow-wrap: anywhere;   /* keep-all 유지 — 긴 토큰만 흘려보낸다 */
+      overflow-wrap: anywhere;   /* keep-all 유지. 긴 토큰만 흘려보낸다 */
     }
     .ai-review-box {
       width: 100%; max-width: 100%; margin: 16px auto 0; padding: 12px 14px;
@@ -901,10 +901,27 @@
     .badge, .chip { background-color: #f2f2f2 !important; }
 
     /* 화면 전용 요소는 인쇄에서 제외 (화면 표시에는 영향 없음).
-       #ai-review  : 3시간마다 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
-       #interview  : 분량이 큰 읽을거리라 온라인에서 보게 두고 PDF에서는 뺀다 */
-    #nav, #blog, #ai-review, #interview, .hero-actions, .visits,
-    .scroll-hint, .ticker { display: none !important; }
+       #ai-review    : 3시간마다 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
+       #interview    : 분량이 큰 읽을거리라 온라인에서 보게 두고 PDF에서는 뺀다
+       .harness-dive : 이게 있으면 하네스 블록이 1.56페이지가 되어 뒤따르는 통계 띠가
+                       갈 곳을 잃고 빈 장을 만든다. 펼쳐 보는 성격의 토글이라 온라인에 둔다
+       #activity     : 내용이 커밋 히트맵 하나뿐이라 섹션째 뺀다. 커밋 수(943)는
+                       히어로 아래 통계 띠에 남으므로 지면에서 사라지지 않는다
+       #contact      : 화면에서 연락을 유도하는 마무리 섹션. 인쇄물에서는 뺀다
+       .edu-grid     : 학력·수상. 이력서 PDF에 같은 내용이 있고, 경력 뒤에 197px 만
+                       남아 빈 장을 만들었다. 섹션 제목도 '경력'만 남긴다
+       .other-projects : 보조 프로젝트(ClouDoc·골프). 대표 사례에 비해 비중이 낮고
+                       ClouDoc 은 경력 섹션에 이미 있어, 한 장을 통째로 쓰던 것을 뺀다
+       #career       : 이력서 PDF 의 경력 섹션과 내용이 거의 같다(이력서 쪽이 더 자세함).
+                       고객사명도 대표 사례의 '구축·수행 고객사'에 남아 있어 손실이 없다.
+                       포트폴리오만 단독 제출한다면 이 줄을 지워야 경력이 나온다
+       footer        : 저작권 한 줄뿐이라 혼자 마지막 장을 차지했다 */
+    #nav, #blog, #ai-review, #interview, #activity, #contact, #career, footer,
+    .harness-dive, .hero-actions, .visits, .scroll-hint, .ticker, .edu-grid,
+    .other-projects { display: none !important; }
+
+    /* 페이지 안으로 내려가는 앵커는 인쇄물에서 가리킬 곳이 없다 */
+    .hero-note a[href^="#"] { display: none !important; }
 
     /* 조건부 인쇄 유틸리티
        .no-print   : 화면에는 보이고 인쇄에서는 빠진다
@@ -912,7 +929,7 @@
        body[data-print-mode] : ?print=<모드> 쿼리로 인쇄 범위를 바꾼다 */
     .no-print { display: none !important; }
 
-    /* compact 모드 — 분량을 줄여야 할 때 긴 섹션을 뺀다 (?print=compact) */
+    /* compact 모드. 분량을 줄여야 할 때 긴 섹션을 뺀다 (?print=compact) */
     body[data-print-mode="compact"] #activity,
     body[data-print-mode="compact"] #skills { display: none !important; }
 
@@ -920,15 +937,29 @@
     .reveal { opacity: 1 !important; transform: none !important; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
 
-    /* 페이지 경계에서 카드가 잘리지 않게.
-       break-inside는 브라우저가 페이지 나눌 때마다 재배치를 시도해 비용이 크므로,
-       잘리면 실제로 읽기 나쁜 블록에만 건다 (작은 칩·박스류는 제외). */
-    .project, .qa, .entry, .showcase-item { break-inside: avoid; page-break-inside: avoid; }
-    h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+    /* 제목만 남고 내용이 다음 장으로 넘어가는 것을 막는다.
+       머리 블록은 자기 자신도 쪼개지지 않고, 뒤따르는 내용과도 붙어 있어야 한다. */
+    h1, h2, h3, h4, .section-head, .project-head, .demo-head, summary {
+      break-after: avoid; page-break-after: avoid;
+    }
+    .section-head, .project-head, .demo-head {
+      break-inside: avoid; page-break-inside: avoid;
+    }
+
+    /* .project 는 일부러 쪼개지도록 둔다. 대표 사례 카드가 한 페이지보다 커서(약 1.6배)
+       break-inside: avoid 를 걸면 브라우저가 카드를 통째로 다음 장으로 밀고,
+       그 결과 제목만 있는 빈 페이지가 생긴다. 안쪽의 작은 단위만 보호한다. */
+    .qa, .entry, .showcase-item, .deep-dive, .highlight-box, .clients-block,
+    .stats, .stack-row {
+      break-inside: avoid; page-break-inside: avoid;
+    }
+
+    /* 문단·목록이 한 줄만 남고 끊기지 않게 */
+    p, li { orphans: 3; widows: 3; }
 
     /* 섹션마다 새 페이지에서 시작한다.
        요소 선택자(section)로 걸어두었기 때문에 앞으로 섹션을 추가하거나 지워도
-       규칙이 그대로 따라간다 — 새 섹션은 자동으로 새 페이지를 얻는다.
+       규칙이 그대로 따라간다. 새 섹션은 자동으로 새 페이지를 얻는다.
        <section>이 아닌 블록에도 페이지를 주려면 class="print-page",
        반대로 앞 페이지에 이어 붙이려면 class="print-continue"를 준다. */
     section, .print-page { padding: 18px 0 !important; break-before: page; page-break-before: always; }
@@ -938,15 +969,12 @@
     /* 마지막 페이지 뒤에 빈 장이 생기지 않도록 */
     section:last-of-type { break-after: auto; page-break-after: auto; }
 
-    /* 히트맵 SVG는 378개 rect라 지면 폭으로 확대해 래스터화하는 비용이 크다.
-       인쇄물에는 같은 데이터를 담은 월별 표(.heatmap-alt)만 싣는다. */
-    .heatmap-scroll { display: none !important; }
-    .heatmap-alt { color: #333 !important; font-size: 12px !important; }
-    .heatmap-alt summary { list-style: none; font-weight: 600; }
-    .heatmap-alt summary::-webkit-details-marker { display: none; }
+    /* 통계 띠. 지면 폭이 좁아 숫자가 중간에서 줄바꿈되던 것을 막는다 */
+    .stats-inner { grid-template-columns: repeat(4, 1fr) !important; gap: 10px !important; }
+    .stat .num { font-size: 19px !important; white-space: nowrap; }
+    .stat .label { font-size: 10px !important; }
 
-    /* 영상 대신 미리 만들어 둔 포스터 이미지를 싣는다 —
-       인쇄 미리보기에서 영상 프레임을 디코딩하지 않아 로드가 빠르다. */
+    /* 영상 대신 미리 만들어 둔 포스터 이미지를 싣는다.        인쇄 미리보기에서 영상 프레임을 디코딩하지 않아 로드가 빠르다. */
     .showcase video { display: none !important; }
     .showcase-item .print-only {
       display: block !important;
@@ -954,14 +982,15 @@
       border: 1px solid #cfcfcf; border-radius: 6px;
     }
     /* video는 display:none이어도 DOM에 남으므로 형제 선택자는 그대로 동작한다
-       — 영상이 있는 figure의 캡션에만 붙는다 */
+      . 영상이 있는 figure의 캡션에만 붙는다 */
     .showcase video ~ figcaption::after {
       content: " (영상 재생: devdongin.github.io)";
       color: #555;
     }
 
-    /* 종이에서는 링크를 누를 수 없으므로 주소를 함께 노출 */
-    .contact .links a[href^="http"]::after {
+    /* 종이에서는 링크를 누를 수 없으므로 주소를 함께 노출.
+       #contact 는 인쇄에서 빠지므로 본문에 남는 외부 링크에만 적용된다. */
+    .hero-note a[href^="http"]::after, .project a[href^="http"]::after {
       content: " " attr(href);
       font-size: 10px; color: #555; word-break: break-all;
     }
@@ -1036,10 +1065,10 @@
       <p>Windows에서 개발한 Vision AI 클라이언트의 동작을 Swift·AVFoundation 기반 macOS 앱으로 옮기며, Claude 구현과 Codex 리뷰를 설계·검증 절차 안에 통제한 작업입니다</p>
     </div>
     <button class="demo-frame reveal" type="button" data-yt="wrOujmQzxPk" aria-label="SEEUON macOS 클라이언트 동작 영상 재생">
-      <img src="assets/images/macos-demo-poster.webp" alt="SEEUON macOS 클라이언트 화면 — 얼굴 검출 박스와 매칭 점수, 감시 정책 패널이 표시된 상태" width="1920" height="1242" loading="lazy">
+      <img src="assets/images/macos-demo-poster.webp" alt="SEEUON macOS 클라이언트 화면: 얼굴 검출 박스와 매칭 점수, 감시 정책 패널이 표시된 상태" width="1920" height="1242" loading="lazy">
       <span class="demo-play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
     </button>
-    <p class="demo-note reveal">사용자 PC에서 모델 5종과 특징점 추출이 프레임마다 도는 구성 — 프레임당 40~50ms · 소리 없음</p>
+    <p class="demo-note reveal">사용자 PC에서 모델 5종과 특징점 추출이 프레임마다 도는 구성. 프레임당 40~50ms · 소리 없음</p>
     <details class="deep-dive harness-dive reveal">
       <summary>AI 에이전트를 개발 절차에 통합한 방식</summary>
       <dl>
@@ -1073,7 +1102,7 @@
         </div>
         <div class="hd-row">
           <dt>사람의 개입</dt>
-          <dd>에이전트가 제안한 기능 하나를 검토 후 <strong>"구현 안 함"으로 종결</strong>하고 대안 경로를 지정한 결정, 리뷰 분담이 생기자 자체 점검 횟수를 5회에서 2회로 줄인 프로세스 튜닝 — 모두 날짜와 함께 문서에 남아 있습니다.</dd>
+          <dd>에이전트가 제안한 기능 하나를 검토 후 <strong>"구현 안 함"으로 종결</strong>하고 대안 경로를 지정한 결정, 리뷰 분담이 생기자 자체 점검 횟수를 5회에서 2회로 줄인 프로세스 튜닝. 모두 날짜와 함께 문서에 남아 있습니다.</dd>
         </div>
         <div class="hd-row">
           <dt>규모</dt>
@@ -1084,7 +1113,7 @@
         </div>
         <div class="hd-row">
           <dt>공개 검증</dt>
-          <dd>이 포트폴리오 저장소가 같은 하네스로 운영됩니다 — <a href="https://github.com/devdongin/devdongin.github.io/blob/main/AGENTS.md" target="_blank" rel="noopener">역할 규칙(AGENTS.md)</a>과 <a href="https://github.com/devdongin/devdongin.github.io/issues?q=is%3Aissue" target="_blank" rel="noopener">Codex 리뷰가 근거와 함께 종결되는 이슈 트래커</a>가 전부 공개돼 있습니다.</dd>
+          <dd>이 포트폴리오 저장소가 같은 하네스로 운영됩니다. <a href="https://github.com/devdongin/devdongin.github.io/blob/main/AGENTS.md" target="_blank" rel="noopener">역할 규칙(AGENTS.md)</a>과 <a href="https://github.com/devdongin/devdongin.github.io/issues?q=is%3Aissue" target="_blank" rel="noopener">Codex 리뷰가 근거와 함께 종결되는 이슈 트래커</a>가 전부 공개돼 있습니다.</dd>
         </div>
       </dl>
     </details>
@@ -1111,7 +1140,7 @@
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4h-4"/></svg></div>
-        <h3>AI 모델 통합 — POC에서 운영 가능한 클라이언트까지</h3>
+        <h3>AI 모델 통합: POC에서 운영 가능한 클라이언트까지</h3>
         <p>훈련된 모델을 추론 SDK와 판별 미들웨어로 감싸 Windows 애플리케이션에 연결하고, 설치·배포와 현장 장애까지 이어서 해결했습니다</p>
         <div class="thread-flow" aria-label="AI 모델 통합 개발 흐름">
           <div class="thread-step"><strong>POC 데모</strong><span>검증</span></div>
@@ -1124,7 +1153,7 @@
       <div class="skill-card skill-card--lead reveal">
         <span class="lead-tag">CORE</span>
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h7"/><path d="M15 12h5"/><path d="M4 18h16"/></svg></div>
-        <h3>멀티스레딩 &amp; 병목 설계 — 실시간을 만든 구조</h3>
+        <h3>멀티스레딩 &amp; 병목 설계: 실시간을 만든 구조</h3>
         <p>한 경로에서 순차 처리하던 수집·전처리·추론·후처리를 분리하고, ROI·위변조 탐지를 조건부 실행해 <strong>150ms → 40~50ms</strong>로 줄였습니다</p>
         <div class="thread-flow" aria-label="멀티스레딩 병목 개선 흐름">
           <div class="thread-step"><strong>Capture / Preprocess</strong><span>입력 분리</span></div>
@@ -1213,11 +1242,11 @@
           <!-- 인쇄 전용 썸네일: 영상 프레임을 디코딩하는 대신 24KB 포스터 이미지를 그린다 -->
           <img class="print-only" src="assets/images/liveness-poster.webp"
                alt="Windows 로그인 화면 liveness 판정 데모 화면" width="406" height="720">
-          <figcaption><strong>실제 동작</strong> — Windows 로그인 화면에 통합한 liveness 판정. 로그인 경로에서는 처리 속도보다 위변조 탐지 강도를 우선한 구성입니다</figcaption>
+          <figcaption><strong>실제 동작</strong>: Windows 로그인 화면에 통합한 liveness 판정. 로그인 경로에서는 처리 속도보다 위변조 탐지 강도를 우선한 구성입니다</figcaption>
         </figure>
         <figure class="showcase-item">
           <svg class="arch" viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" role="img"
-               aria-label="SEEUON 처리 흐름: 카메라·화면 입력이 추론 SDK의 모델 5종과 특징점 추출을 거쳐 판별 미들웨어로 내려가고, 거기서 두 갈래로 갈라진다 — 왼쪽은 클라이언트 앱을 지나 서버 이력 전송, 오른쪽은 로그인 화면의 Credential Provider. 전 구간을 커널 드라이버가 보호한다">
+               aria-label="SEEUON 처리 흐름: 카메라·화면 입력이 추론 SDK의 모델 5종과 특징점 추출을 거쳐 판별 미들웨어로 내려가고, 거기서 두 갈래로 갈라진다. 왼쪽은 클라이언트 앱을 지나 서버 이력 전송, 오른쪽은 로그인 화면의 Credential Provider. 전 구간을 커널 드라이버가 보호한다">
             <defs>
               <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                 <path d="M0 0 L10 5 L0 10 z" fill="#9ba7b4"/>
@@ -1265,11 +1294,11 @@
 
             <rect class="ab-hi" x="8" y="358" width="304" height="46" rx="9"/>
             <text class="at" x="160" y="377" text-anchor="middle">커널 드라이버 · CULockerFsfd</text>
-            <text class="as" x="160" y="393" text-anchor="middle">전 구간 자기보호 — I/O 통제 · 우회 차단 · 요청 검증</text>
+            <text class="as" x="160" y="393" text-anchor="middle">전 구간 자기보호: I/O 통제 · 우회 차단 · 요청 검증</text>
 
             <text class="as" x="160" y="416" text-anchor="middle">한 프레임 처리 150ms → 40~50ms · 사용자 PC 환경</text>
           </svg>
-          <figcaption><strong>처리 흐름</strong> — 입력부터 서버 전송까지의 경로와, 그 전 구간을 감싸는 커널 자기보호 계층</figcaption>
+          <figcaption><strong>처리 흐름</strong>: 입력부터 서버 전송까지의 경로와, 그 전 구간을 감싸는 커널 자기보호 계층</figcaption>
         </figure>
       </div>
 
@@ -1282,36 +1311,37 @@
         <span class="badge">Credential Provider</span>
       </div>
       <ul>
-        <li><strong>CUFaceSDK (C++)</strong> — OpenVINO 기반 AI 추론 SDK. 애플리케이션 개발의 공통 기반 엔진</li>
-        <li><strong>Discriminator (C++)</strong> — 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발. 사용자 PC에서 모델 5종 + 특징점 추출을 프레임마다 통과시키는 구조를 재설계해 <strong>프레임당 150ms → 40~50ms</strong> 단축</li>
-        <li><strong>CULockerFsfd (C)</strong> — 솔루션 프로세스·파일 자체 보호 커널 드라이버. Anti-Debugging, 로컬 파일 I/O 통제</li>
-        <li><strong>SeeuonCP</strong> — Windows 로그인 화면에서 얼굴 인증을 제공하는 커스텀 Credential Provider 모듈 개발<!-- STAT-SEEUONCP:START --> — 사내 저장소 커밋 <strong>16/21 (76% · 2026-08-06 기준)</strong><!-- STAT-SEEUONCP:END --></li>
-        <li><strong>SEEUONIdp</strong> — Identity Provider 확장판 클라이언트 메인 개발·설계. SSO 연계, GoogleOTP 연동, Passwordless 얼굴 본인인증</li>
-        <li><strong>스크린 캡처 방지</strong> — API 후킹, DLL 인젝션 기반 화면 유출 차단 기능 개발</li>
-        <li><strong>SEEUON macOS 버전</strong> — AI 코딩 하네스(Claude Code)를 실무 파이프라인에 도입해 macOS 클라이언트 구축 진행 중</li>
-        <li><strong>배포 총괄</strong> — Python, NSIS, Themida, 인증서 서명 기반 전체 릴리스 파이프라인 담당</li>
-        <li><strong>장애 분석</strong> — WinDbg 크래시 덤프 사후 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 원인 규명·해결</li>
+        <li><strong>CUFaceSDK (C++)</strong>: OpenVINO 기반 AI 추론 SDK. 애플리케이션 개발의 공통 기반 엔진</li>
+        <li><strong>Discriminator (C++)</strong>: 추론 SDK 위에서 애플리케이션 레벨 이상행위를 감지하는 미들웨어 개발. 사용자 PC에서 모델 5종 + 특징점 추출을 프레임마다 통과시키는 구조를 재설계해 <strong>프레임당 150ms → 40~50ms</strong> 단축</li>
+        <li><strong>CULockerFsfd (C)</strong>: 솔루션 프로세스·파일 자체 보호 커널 드라이버. Anti-Debugging, 로컬 파일 I/O 통제</li>
+        <li><strong>SeeuonCP</strong>: Windows 로그인 화면에서 얼굴 인증을 제공하는 커스텀 Credential Provider 모듈 개발<!-- STAT-SEEUONCP:START -->. 사내 저장소 커밋 <strong>16/21 (76% · 2026-08-06 기준)</strong><!-- STAT-SEEUONCP:END --></li>
+        <li><strong>SEEUONIdp</strong>: Identity Provider 확장판 클라이언트 메인 개발·설계. SSO 연계, GoogleOTP 연동, Passwordless 얼굴 본인인증</li>
+        <li><strong>스크린 캡처 방지</strong>: API 후킹, DLL 인젝션 기반 화면 유출 차단 기능 개발</li>
+        <li><strong>SEEUON macOS 버전</strong>: AI 코딩 하네스(Claude Code)를 실무 파이프라인에 도입해 macOS 클라이언트 구축 진행 중</li>
+        <li><strong>배포 총괄</strong>: Python, NSIS, Themida, 인증서 서명 기반 전체 릴리스 파이프라인 담당</li>
+        <li><strong>장애 분석</strong>: WinDbg 크래시 덤프 사후 분석으로 프로세스 비정상 종료, 보안 프로그램 간 충돌 원인 규명·해결</li>
       </ul>
       <details class="deep-dive">
-        <summary>기술 딥다이브 — AI 추론을 사용자 PC에 통합한 과정</summary>
+        <summary>기술 딥다이브: AI 추론을 사용자 PC에 통합한 과정</summary>
         <ul>
-          <li><strong>문제</strong> — 연구실 모델을 사용자 PC에 통합하면 제한된 CPU 자원, 백신·EDR 충돌, OS 업데이트, 프로세스 우회·종료까지 모델 밖의 문제가 동시에 발생합니다</li>
-          <li><strong>구현</strong> — 추론 SDK(공통 엔진) → 판별 미들웨어 → 클라이언트 앱으로 층을 나눠 모델 교체가 상위 레이어를 흔들지 않게 했고, 솔루션 자기보호는 커널(Minifilter)로, 로그인 경로 인증은 Credential Provider로 각각 내려서 해결</li>
-          <li><strong>난점 → 해결</strong> — DLL 인젝션·API 후킹·파일시스템 필터링은 타 보안 제품과 충돌이 잦은 영역. 재현 가능한 케이스는 풀 덤프를 남기도록 설정하고 충돌 시점에 각 프로세스·드라이버가 타는 API/I/O 경로를 WinDbg로 분석 — 자사 원인이면 예외 처리·기능 수정, 상호 충돌이면 벤더·고객사 보안 담당자와 화이트리스트를 협의하고, 불가피한 조합은 한쪽 기능을 끄는 운영 정책으로 정리</li>
-          <li><strong>결과</strong> — 모델 5종 + 특징점 추출 경로를 150ms에서 40~50ms로 줄였고, SDK·클라이언트·커널 모듈을 여러 고객 환경에 배포·운영했습니다</li>
+          <li><strong>문제</strong>: 연구실 모델을 사용자 PC에 통합하면 제한된 CPU 자원, 백신·EDR 충돌, OS 업데이트, 프로세스 우회·종료까지 모델 밖의 문제가 동시에 발생합니다</li>
+          <li><strong>구현</strong>: 추론 SDK(공통 엔진) → 판별 미들웨어 → 클라이언트 앱으로 층을 나눠 모델 교체가 상위 레이어를 흔들지 않게 했고, 솔루션 자기보호는 커널(Minifilter)로, 로그인 경로 인증은 Credential Provider로 각각 내려서 해결</li>
+          <li><strong>난점 → 해결</strong>: DLL 인젝션·API 후킹·파일시스템 필터링은 타 보안 제품과 충돌이 잦은 영역. 재현 가능한 케이스는 풀 덤프를 남기도록 설정하고 충돌 시점에 각 프로세스·드라이버가 타는 API/I/O 경로를 WinDbg로 분석하고, 자사 원인이면 예외 처리·기능 수정, 상호 충돌이면 벤더·고객사 보안 담당자와 화이트리스트를 협의하고, 불가피한 조합은 한쪽 기능을 끄는 운영 정책으로 정리</li>
+          <li><strong>결과</strong>: 모델 5종 + 특징점 추출 경로를 150ms에서 40~50ms로 줄였고, SDK·클라이언트·커널 모듈을 여러 고객 환경에 배포·운영했습니다</li>
         </ul>
       </details>
       <div class="highlight-box">
         <p>✦ OpenVINO 기반 <strong>C++ 추론 SDK</strong>와 C/C++/C#/Python 바인딩 개발</p>
         <p>✦ 모델 5종 + 특징점 추출 처리 <strong>150ms → 40~50ms</strong></p>
         <p>✦ Windows 클라이언트·Credential Provider·커널 드라이버까지 통합</p>
-        <p>✦ 이 사례가 만든 사업 결과 — 2024 회사 매출의 <strong>40–50%</strong>, 누적 약 <strong>80억 원</strong></p>
+        <p>✦ 이 사례가 만든 사업 결과: 2024 회사 매출의 <strong>40–50%</strong>, 누적 약 <strong>80억 원</strong></p>
         <p>✦ 사내 클라이언트 저장소 <!-- STAT-SEEUONCLIENT:START --><strong>커밋 81% · 1위 기여자</strong> (832 / 1,029 커밋 · 기본 브랜치 contributors 집계 · 2026-08-06 기준)<!-- STAT-SEEUONCLIENT:END --></p>
       </div>
       <div class="clients-block">
-        <p class="clients-label">구축·수행 고객사 — 에이전트 보안 파트 메인 개발</p>
+        <p class="clients-label">구축·수행 고객사: 에이전트 보안 파트 메인 개발</p>
         <div class="chips">
-          <span class="chip hot">삼성 SDS</span><span class="chip hot">삼성 SDI</span><span class="chip hot">국세청</span><span class="chip hot">SGI 서울보증</span><span class="chip hot">삼성전기 인도법인</span><span class="chip">외 대기업 POC 9건</span>
+          <!-- 공개 저장소라 고객사는 실명 대신 유형으로 표기한다 (2026-08-04 사용자 지시) -->
+          <span class="chip hot">S사 SI 계열</span><span class="chip hot">S사 제조 계열</span><span class="chip hot">S사 해외법인</span><span class="chip hot">금융권</span><span class="chip hot">공공기관</span><span class="chip">외 대기업 POC 9건</span>
         </div>
       </div>
     </div>
@@ -1321,27 +1351,27 @@
         <h3>CULockerFsfd</h3>
         <span class="meta">2023.07 – 현재 · Windows FileSystem Minifilter Driver</span>
       </div>
-      <p class="desc">Windows 파일·프로세스 접근을 커널에서 통제하는 Minifilter 드라이버 — 베이스 설계부터 서명, MS 등재까지 단독 개발</p>
+      <p class="desc">Windows 파일·프로세스 접근을 커널에서 통제하는 Minifilter 드라이버. 베이스 설계부터 서명, MS 등재까지 단독 개발</p>
       <div class="badges">
         <span class="badge">C</span>
         <span class="badge">WDK / Minifilter</span>
         <span class="badge green">MS Altitude 정식 할당</span>
       </div>
       <ul>
-        <li>커널 드라이버 베이스 설계부터 인증서 서명, 배포까지 <strong>전체 사이클 단독 개발</strong> — 사내 저장소 커밋 <!-- STAT-CULOCKERFSFD:START --><strong>93/93 (100% · 2026-08-06 기준)</strong><!-- STAT-CULOCKERFSFD:END --></li>
+        <li>커널 드라이버 베이스 설계부터 인증서 서명, 배포까지 <strong>전체 사이클 단독 개발</strong>. 사내 저장소 커밋 <!-- STAT-CULOCKERFSFD:START --><strong>93/93 (100% · 2026-08-06 기준)</strong><!-- STAT-CULOCKERFSFD:END --></li>
         <li>Microsoft에 filter altitude 정식 할당받아 공식 <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/ifs/allocated-altitudes" target="_blank" rel="noopener"><strong>allocated altitudes 문서 등재</strong></a> (CULockerFsfd.sys · altitude 389385.5)</li>
-        <li><strong>MS Hardware Dev Center 등록</strong> — 드라이버 제출, attestation 서명, 배포 체계 구축</li>
+        <li><strong>MS Hardware Dev Center 등록</strong>: 드라이버 제출, attestation 서명, 배포 체계 구축</li>
         <li>Anti-Debugging 및 로컬 시스템 파일 I/O 통제로 솔루션 무결성 보호. 프로세스·파일/폴더 보호 및 권한 설정</li>
       </ul>
       <details class="deep-dive">
-        <summary>기술 딥다이브 — 문제와 해결</summary>
+        <summary>기술 딥다이브: 문제와 해결</summary>
         <ul>
-          <li><strong>문제</strong> — 보안 솔루션은 그 자체가 우회 대상이 됩니다: 프로세스 강제 종료, 디버거 부착, 바이너리 교체로 정책을 무력화할 수 있습니다. 유저모드 방어만으로는 관리자 권한 앞에서 무의미합니다</li>
-          <li><strong>설계 축이 이전 경험과 정반대였던 점</strong> — 엠클라우독의 파일시스템 드라이버는 <strong>사용자 파일시스템 전체를 관장하는 정책 기반 접근 제어</strong>였고, 난이도는 호환성에 있었습니다(OS 업데이트·신규 프로그램 출시마다 연쇄 파일 I/O와 fallback 미지원 프로그램 대응). CULockerFsfd는 반대로 <strong>솔루션 자기보호를 위한 화이트리스트</strong>가 목적이라, 정책 복잡도보다 차단 강도와 우회 봉쇄가 핵심이었습니다</li>
-          <li><strong>구현</strong> — 화이트리스트에 없는 접근은 정책 검사 없이 차단. 솔루션 내부 프로세스 사이에도 zero trust를 적용하고, <strong>관리자·SYSTEM 권한 프로세스라도 정책 밖이면 커널 레벨에서 거부</strong>. 신뢰 판별은 경로 → 바이너리 해시 → 디지털 서명 순으로 확인. Anti-Debugging을 함께 결합</li>
-          <li><strong>난점 → 해결</strong> — 강한 차단은 정상 운영을 깨뜨립니다. 업데이트·유지보수는 <strong>제한된 경로로만 열리도록 설계</strong>하고, 실패 시 단계별로 되돌릴 수 있는 복구 절차와 완료 후 무결성 재검증을 함께 두었습니다. 보호가 일시적으로 완화되는 구간 자체를 최소화하는 것이 설계 목표였습니다</li>
-          <li><strong>커널-유저모드 통신</strong> — IOCTL 기반으로, <strong>요청 무결성과 호출 주체를 함께 검증하는 인증 계층</strong>을 설계했습니다. 목적은 암호화가 아니라 요청 위변조와 임의 프로세스의 호출을 걸러내는 것이고, 파일 I/O처럼 빈번한 경로가 아니라 검증에 연산을 더 쓸 수 있다고 판단했습니다</li>
-          <li><strong>결과</strong> — Microsoft filter altitude 정식 할당과 attestation 서명 배포 체계 구축, 커밋 100% 단독 개발로 고객사 운영 환경에 배포</li>
+          <li><strong>문제</strong>: 보안 솔루션은 그 자체가 우회 대상이 됩니다: 프로세스 강제 종료, 디버거 부착, 바이너리 교체로 정책을 무력화할 수 있습니다. 유저모드 방어만으로는 관리자 권한 앞에서 무의미합니다</li>
+          <li><strong>설계 축이 이전 경험과 정반대였던 점</strong>: 엠클라우독의 파일시스템 드라이버는 <strong>사용자 파일시스템 전체를 관장하는 정책 기반 접근 제어</strong>였고, 난이도는 호환성에 있었습니다(OS 업데이트·신규 프로그램 출시마다 연쇄 파일 I/O와 fallback 미지원 프로그램 대응). CULockerFsfd는 반대로 <strong>솔루션 자기보호를 위한 화이트리스트</strong>가 목적이라, 정책 복잡도보다 차단 강도와 우회 봉쇄가 핵심이었습니다</li>
+          <li><strong>구현</strong>: 화이트리스트에 없는 접근은 정책 검사 없이 차단. 솔루션 내부 프로세스 사이에도 zero trust를 적용하고, <strong>관리자·SYSTEM 권한 프로세스라도 정책 밖이면 커널 레벨에서 거부</strong>. 신뢰 판별은 경로 → 바이너리 해시 → 디지털 서명 순으로 확인. Anti-Debugging을 함께 결합</li>
+          <li><strong>난점 → 해결</strong>: 강한 차단은 정상 운영을 깨뜨립니다. 업데이트·유지보수는 <strong>제한된 경로로만 열리도록 설계</strong>하고, 실패 시 단계별로 되돌릴 수 있는 복구 절차와 완료 후 무결성 재검증을 함께 두었습니다. 보호가 일시적으로 완화되는 구간 자체를 최소화하는 것이 설계 목표였습니다</li>
+          <li><strong>커널-유저모드 통신</strong>: IOCTL 기반으로, <strong>요청 무결성과 호출 주체를 함께 검증하는 인증 계층</strong>을 설계했습니다. 목적은 암호화가 아니라 요청 위변조와 임의 프로세스의 호출을 걸러내는 것이고, 파일 I/O처럼 빈번한 경로가 아니라 검증에 연산을 더 쓸 수 있다고 판단했습니다</li>
+          <li><strong>결과</strong>: Microsoft filter altitude 정식 할당과 attestation 서명 배포 체계 구축, 커밋 100% 단독 개발로 고객사 운영 환경에 배포</li>
         </ul>
       </details>
     </div>
@@ -1360,22 +1390,22 @@
       <ul>
         <li>훈련 모델을 C/C++로 포팅한 <strong>추론 엔진 SDK</strong> 설계·개발 및 데모 앱 제작</li>
         <li>C / C++ / C# / Python <strong>멀티 언어 바인딩</strong>, Windows·Ubuntu 크로스 플랫폼 라이브러리 제공</li>
-        <li>SEEUON의 기반 SDK로 채택 — 이를 토대로 판별 미들웨어(FaceOnDiscriminator) 개발</li>
-        <li>Edge Device 보드 최적화 버전 개발 — 사내 저장소 <!-- STAT-CUFACESDK:START --><strong>기여 2위 (커밋 325회 · 2026-08-06 기준)</strong><!-- STAT-CUFACESDK:END --></li>
+        <li>SEEUON의 기반 SDK로 채택. 이를 토대로 판별 미들웨어(FaceOnDiscriminator) 개발</li>
+        <li>Edge Device 보드 최적화 버전 개발. 사내 저장소 <!-- STAT-CUFACESDK:START --><strong>기여 2위 (커밋 325회 · 2026-08-06 기준)</strong><!-- STAT-CUFACESDK:END --></li>
       </ul>
       <details class="deep-dive">
-        <summary>기술 딥다이브 — 문제와 해결</summary>
+        <summary>기술 딥다이브: 문제와 해결</summary>
         <ul>
-          <li><strong>문제</strong> — 연구실에서 훈련된 모델을 C++ 클라이언트에서 안정적으로 호출하려면 모델 입출력과 런타임 차이를 감싸는 추론 계층이 필요했습니다</li>
-          <li><strong>구현</strong> — OpenVINO 기반 C/C++ 추론 엔진을 설계하고, C/C++/C#/Python 바인딩과 Windows·Ubuntu 크로스 플랫폼 빌드 제공</li>
-          <li><strong>왜 사용자 PC인가</strong> — 서버 장애와 망분리 환경에서도 추론이 중단되지 않고 얼굴 영상을 외부로 보내지 않아야 했습니다. 그래서 <strong>Intel CPU 기반 사용자 PC</strong>를 기준 실행 환경으로 선택했습니다</li>
-          <li><strong>OpenVINO 선택</strong> — 대상 PC의 다수가 Intel CPU 기반이었고, CPU 스레드 튜닝·모델 캐싱·내장 그래픽 활용 등 클라이언트 추론 경로를 세밀하게 조정할 수 있어 ONNX Runtime/OpenCV DNN보다 요구사항에 잘 맞았습니다</li>
-          <li><strong>SDK 설계 원칙</strong> — 코어는 기능만 제공하고 <strong>메모리 소유권은 애플리케이션이 갖는 구조</strong>로 두었습니다. 리소스 생명주기는 명시적 init/finalize에 더해 언어별 생성자·소멸자 패턴까지 고려해 정리했습니다. 모델은 최초 로딩 시 캐시를 만들고 이후에는 필요한 모델만 부분 load/unload할 수 있게 했습니다</li>
-          <li><strong>쓰는 사람 기준으로 검증</strong> — C#·Python Wrapper는 혼자 상상해서 내지 않고, 실제 그 언어를 쓰는 개발자들에게 사용성을 물어 API 형태를 조정했습니다</li>
-          <li><strong>파이프라인 설계</strong> — 프레임 수집·전처리·모델 추론·후처리·판별이 한 경로에서 순차 처리되던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI를 만들고, 위변조 탐지는 얼굴이 검출된 경우에만 수행했습니다. 다만 고객 정책에 따라 모든 판별 이력을 남겨야 하는 모드도 있어, 조건부 실행과 전체 탐지를 모두 지원했습니다</li>
-          <li><strong>난점 → 해결</strong> — 실행 환경이 서버 GPU가 아니라 <strong>고객의 일반 사용자 PC</strong>였고, 한 프레임에 사람 탐지·카메라 탐지, 그리고 위변조(liveness) 탐지 3종 — 디스플레이·출력물·IR — 까지 모델 5종과 얼굴 특징점 추출이 모두 얹혔습니다 (얼굴 등록 시엔 품질 평가 모델 3종이 추가됩니다). 초기엔 프레임당 150ms(약 6fps)라 실시간 감시라 부르기 어려운 수준이었습니다. 추론 워커와 판별 미들웨어(FaceOnDiscriminator)의 처리 경로를 분리하고, ROI 기반 조건부 실행과 모델 캐싱으로 병목을 줄였습니다</li>
-          <li><strong>정확도와 트레이드오프</strong> — 3배 개선은 모델 경량화나 입력 해상도 축소가 아니라 추론 아키텍처와 처리 경로 개선에서 얻었습니다. 모델 자체 정확도는 유지했고, 정확도 손실 가능성은 사용자 PC에서 실행 가능한 모델을 만들기 위한 FP16/양자화 단계의 트레이드오프로 분리해 판단했습니다</li>
-          <li><strong>결과</strong> — 같은 사용자 PC에서 <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>. SDK를 Windows 클라이언트와 판별 미들웨어의 공통 추론 계층으로 적용하고 Edge Device 보드 최적화 버전까지 확장</li>
+          <li><strong>문제</strong>: 연구실에서 훈련된 모델을 C++ 클라이언트에서 안정적으로 호출하려면 모델 입출력과 런타임 차이를 감싸는 추론 계층이 필요했습니다</li>
+          <li><strong>구현</strong>: OpenVINO 기반 C/C++ 추론 엔진을 설계하고, C/C++/C#/Python 바인딩과 Windows·Ubuntu 크로스 플랫폼 빌드 제공</li>
+          <li><strong>왜 사용자 PC인가</strong>: 서버 장애와 망분리 환경에서도 추론이 중단되지 않고 얼굴 영상을 외부로 보내지 않아야 했습니다. 그래서 <strong>Intel CPU 기반 사용자 PC</strong>를 기준 실행 환경으로 선택했습니다</li>
+          <li><strong>OpenVINO 선택</strong>: 대상 PC의 다수가 Intel CPU 기반이었고, CPU 스레드 튜닝·모델 캐싱·내장 그래픽 활용 등 클라이언트 추론 경로를 세밀하게 조정할 수 있어 ONNX Runtime/OpenCV DNN보다 요구사항에 잘 맞았습니다</li>
+          <li><strong>SDK 설계 원칙</strong>: 코어는 기능만 제공하고 <strong>메모리 소유권은 애플리케이션이 갖는 구조</strong>로 두었습니다. 리소스 생명주기는 명시적 init/finalize에 더해 언어별 생성자·소멸자 패턴까지 고려해 정리했습니다. 모델은 최초 로딩 시 캐시를 만들고 이후에는 필요한 모델만 부분 load/unload할 수 있게 했습니다</li>
+          <li><strong>쓰는 사람 기준으로 검증</strong>: C#·Python Wrapper는 혼자 상상해서 내지 않고, 실제 그 언어를 쓰는 개발자들에게 사용성을 물어 API 형태를 조정했습니다</li>
+          <li><strong>파이프라인 설계</strong>: 프레임 수집·전처리·모델 추론·후처리·판별이 한 경로에서 순차 처리되던 병목을 분리했습니다. 얼굴 검출 결과를 기준으로 ROI를 만들고, 위변조 탐지는 얼굴이 검출된 경우에만 수행했습니다. 다만 고객 정책에 따라 모든 판별 이력을 남겨야 하는 모드도 있어, 조건부 실행과 전체 탐지를 모두 지원했습니다</li>
+          <li><strong>난점 → 해결</strong>: 실행 환경이 서버 GPU가 아니라 <strong>고객의 일반 사용자 PC</strong>였고, 한 프레임에 사람 탐지·카메라 탐지, 그리고 위변조(liveness) 탐지 3종(디스플레이·출력물·IR)까지 모델 5종과 얼굴 특징점 추출이 모두 얹혔습니다 (얼굴 등록 시엔 품질 평가 모델 3종이 추가됩니다). 초기엔 프레임당 150ms(약 6fps)라 실시간 감시라 부르기 어려운 수준이었습니다. 추론 워커와 판별 미들웨어(FaceOnDiscriminator)의 처리 경로를 분리하고, ROI 기반 조건부 실행과 모델 캐싱으로 병목을 줄였습니다</li>
+          <li><strong>정확도와 트레이드오프</strong>: 3배 개선은 모델 경량화나 입력 해상도 축소가 아니라 추론 아키텍처와 처리 경로 개선에서 얻었습니다. 모델 자체 정확도는 유지했고, 정확도 손실 가능성은 사용자 PC에서 실행 가능한 모델을 만들기 위한 FP16/양자화 단계의 트레이드오프로 분리해 판단했습니다</li>
+          <li><strong>결과</strong>: 같은 사용자 PC에서 <strong>프레임당 150ms → 40~50ms(약 3배 개선)</strong>. SDK를 Windows 클라이언트와 판별 미들웨어의 공통 추론 계층으로 적용하고 Edge Device 보드 최적화 버전까지 확장</li>
         </ul>
       </details>
     </div>
@@ -1419,7 +1449,7 @@
       <div class="qa-body">
         <p>같은 FileSystem Minifilter지만 <strong>설계 축이 정반대</strong>였습니다.</p>
         <p>엠클라우독의 드라이버는 <strong>사용자 파일시스템 전체를 관장하는 정책 기반 접근 제어</strong>가 목적이었습니다. 제품 자체가 프로세스 기준으로 동작했고, 정책 파일이 커널 메모리에 상주하면서 "이 프로세스가 이 경로에 권한이 있는가"를 판단했습니다. 여기서 어려운 건 차단이 아니라 <strong>호환성</strong>이었습니다. OS 업데이트나 신규 프로그램이 나올 때마다 연달아 일어나는 파일 I/O를 감당해야 했고, 프로그램 쪽에서 fallback 처리를 하지 않아 정책을 새로 적용하는 도중 문제가 되는 경우도 많았습니다.</p>
-        <p>시선에이아이의 CULockerFsfd는 <strong>솔루션 자기보호를 위한 화이트리스트</strong>가 목적입니다. 정책 복잡도보다 차단 강도와 우회 봉쇄가 핵심이라, 화이트리스트에 없으면 별도 판단 없이 거부하면 됩니다. 대신 상당히 강하게 걸었습니다 — 솔루션 내부 프로세스 사이에도 zero trust를 적용했고, 관리자나 SYSTEM 권한 프로세스라도 정책에 맞지 않으면 커널 레벨에서 접근을 막았습니다.</p>
+        <p>시선에이아이의 CULockerFsfd는 <strong>솔루션 자기보호를 위한 화이트리스트</strong>가 목적입니다. 정책 복잡도보다 차단 강도와 우회 봉쇄가 핵심이라, 화이트리스트에 없으면 별도 판단 없이 거부하면 됩니다. 대신 상당히 강하게 걸었습니다. 솔루션 내부 프로세스 사이에도 zero trust를 적용했고, 관리자나 SYSTEM 권한 프로세스라도 정책에 맞지 않으면 커널 레벨에서 접근을 막았습니다.</p>
       </div>
     </details>
 
@@ -1429,7 +1459,7 @@
         <p>화이트리스트가 강할수록 운영이 깨지기 쉽다는 게 실제로 가장 큰 숙제였습니다.</p>
         <p><strong>업데이트</strong>는 일반 사용자 세션과 분리된 <strong>제한된 유지보수 경로</strong>에서만 수행되도록 설계했습니다. 도중 실패는 단계별로 되돌릴 수 있게 했고, 완료 후에는 무결성을 다시 검증했습니다. 보호가 일시적으로 완화되는 구간은 존재할 수밖에 없으므로, 그 창을 얼마나 좁히고 그 안에서 무엇을 다시 확인하느냐가 설계의 핵심이었습니다.</p>
         <p><strong>백신·EDR</strong>은 원칙적으로 차단하되, OS가 스스로 보호하는 Windows Defender 컴포넌트는 허용했습니다. 그 외 제품은 고객사 환경과 정책에 따라 예외 등록이나 운영 협의로 풀었습니다. <strong>장애 분석</strong>은 모니터링 서비스를 따로 두고, 덤프는 레지스트리 설정으로 수집해 서버로 자동 전송되게 했습니다.</p>
-        <div class="qa-note"><b>지금이라면</b> — 보호를 전체 완화하는 대신, 업데이트에 필요한 파일·프로세스·시간 범위만 여는 maintenance mode로 좁히겠습니다. 완화 구간 자체가 가장 매력적인 공격 타이밍입니다.</div>
+        <div class="qa-note"><b>지금이라면</b>: 보호를 전체 완화하는 대신, 업데이트에 필요한 파일·프로세스·시간 범위만 여는 maintenance mode로 좁히겠습니다. 완화 구간 자체가 가장 매력적인 공격 타이밍입니다.</div>
       </div>
     </details>
 
@@ -1438,7 +1468,7 @@
       <div class="qa-body">
         <p>IOCTL로 주고받되, 단순 체크섬처럼 위변조에 취약한 방식은 배제하고 <strong>요청 무결성과 호출 주체를 함께 검증하는 인증 계층</strong>을 두었습니다. 파일 I/O처럼 초당 수천 번 들어오는 경로가 아니라 검증에 연산을 더 써도 부담이 적다고 봤습니다. 목적은 암호화가 아니라 <strong>요청 위변조와 임의 프로세스의 호출을 걸러내는 것</strong>이고, 커널과 통신하는 앱 자체를 소수로 한정했습니다.</p>
         <p>바이너리 쪽은 패킹·난독화만을 보안 경계로 보지 않고, <strong>경로·무결성·서명 등 복수의 신뢰 신호를 함께 확인</strong>했습니다. 하나가 뚫려도 나머지가 남도록 판별 근거를 겹쳐 두는 것이 목표였습니다.</p>
-        <div class="qa-note"><b>지금이라면</b> — 정적인 비밀값은 장기적으로 완전한 보안 경계가 되지 못하고, 난독화는 분석 비용을 올릴 뿐입니다. <strong>키 수명주기 관리, 재전송(replay) 방지, 최소 권한</strong>을 축으로 다시 설계하고, 커널 측에서 요청자를 한 번 더 검증하는 계층을 얹겠습니다.</div>
+        <div class="qa-note"><b>지금이라면</b>: 정적인 비밀값은 장기적으로 완전한 보안 경계가 되지 못하고, 난독화는 분석 비용을 올릴 뿐입니다. <strong>키 수명주기 관리, 재전송(replay) 방지, 최소 권한</strong>을 축으로 다시 설계하고, 커널 측에서 요청자를 한 번 더 검증하는 계층을 얹겠습니다.</div>
       </div>
     </details>
 
@@ -1469,12 +1499,12 @@
     <div class="section-head reveal">
       <p class="kicker">Activity</p>
       <h2>개발 활동</h2>
-      <p>잔디에 보이지 않는 것까지 — 전 저장소 · 전 브랜치 집계</p>
+      <p>잔디에 보이지 않는 것까지: 전 저장소 · 전 브랜치 집계</p>
     </div>
     <div class="activity reveal">
       <h3>커밋 히트맵 <span><!-- HEATMAP-TITLE:START -->2025-08-06 – 2026-08-06 · 950 commits<!-- HEATMAP-TITLE:END --></span></h3>
-      <p class="activity-note">회사 계정(disun-cubox-ai, SECERN AI 조직) + 개인 계정(devdongin)의 <strong>전 저장소 · 전 브랜치</strong> 커밋 집계 (중복 제거, KST 기준). 고객사별 코드가 브랜치로 분리 운영되어, 기본 브랜치·gh-pages만 세는 GitHub 잔디에는 잡히지 않는 고객사 브랜치 push까지 포함한 실제 활동량입니다. <em><!-- COLLECTED:START -->2026-08-06 수집 · merge 커밋 포함 · author 계정 기준 통합.<!-- COLLECTED:END --></em></p>
-      <div class="heatmap-scroll" tabindex="0" role="region" aria-label="커밋 히트맵 — 좌우 방향키로 스크롤할 수 있습니다">
+      <p class="activity-note">회사 계정과 개인 계정의 <strong>전 저장소 · 전 브랜치</strong> 커밋 집계 (중복 제거, KST 기준). 고객사별 코드가 브랜치로 분리 운영되어, 기본 브랜치·gh-pages만 세는 GitHub 잔디에는 잡히지 않는 브랜치 push까지 포함한 실제 활동량입니다. <em><!-- COLLECTED:START -->2026-08-06 수집 · merge 커밋 포함 · author 계정 기준 통합.<!-- COLLECTED:END --></em></p>
+      <div class="heatmap-scroll" tabindex="0" role="region" aria-label="커밋 히트맵. 좌우 방향키로 스크롤할 수 있습니다">
         <!-- HEATMAP:START -->
         <svg viewBox="0 0 718 131" width="718" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="커밋 히트맵 2025-08-06부터 2026-08-06까지, 총 950 커밋"><text x="21" y="12" font-size="10" fill="#9ba7b4">8월</text><text x="86" y="12" font-size="10" fill="#9ba7b4">9월</text><text x="138" y="12" font-size="10" fill="#9ba7b4">10월</text><text x="190" y="12" font-size="10" fill="#9ba7b4">11월</text><text x="255" y="12" font-size="10" fill="#9ba7b4">12월</text><text x="307" y="12" font-size="10" fill="#9ba7b4">1월</text><text x="359" y="12" font-size="10" fill="#9ba7b4">2월</text><text x="411" y="12" font-size="10" fill="#9ba7b4">3월</text><text x="476" y="12" font-size="10" fill="#9ba7b4">4월</text><text x="528" y="12" font-size="10" fill="#9ba7b4">5월</text><text x="593" y="12" font-size="10" fill="#9ba7b4">6월</text><text x="645" y="12" font-size="10" fill="#9ba7b4">7월</text><text x="697" y="12" font-size="10" fill="#9ba7b4">8월</text><rect x="8" y="18" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-07-27 · 집계 기간 이전</title></rect><rect x="8" y="31" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-07-28 · 집계 기간 이전</title></rect><rect x="8" y="44" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-07-29 · 집계 기간 이전</title></rect><rect x="8" y="57" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-07-30 · 집계 기간 이전</title></rect><rect x="8" y="70" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-07-31 · 집계 기간 이전</title></rect><rect x="8" y="83" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-08-01 · 집계 기간 이전</title></rect><rect x="8" y="96" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-08-02 · 집계 기간 이전</title></rect><rect x="21" y="18" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-08-03 · 집계 기간 이전</title></rect><rect x="21" y="31" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-08-04 · 집계 기간 이전</title></rect><rect x="21" y="44" width="11" height="11" rx="2" fill="#12161d" stroke="#1f2733" stroke-dasharray="2 2" stroke-width="0.5"><title>2025-08-05 · 집계 기간 이전</title></rect><rect x="21" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-06 · 2 commits</title></rect><rect x="21" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-07 · 1 commits</title></rect><rect x="21" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-08 · 1 commits</title></rect><rect x="21" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-09 · 0 commits</title></rect><rect x="34" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-10 · 0 commits</title></rect><rect x="34" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-11 · 0 commits</title></rect><rect x="34" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-08-12 · 3 commits</title></rect><rect x="34" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2025-08-13 · 4 commits</title></rect><rect x="34" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-14 · 0 commits</title></rect><rect x="34" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-15 · 0 commits</title></rect><rect x="34" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-16 · 0 commits</title></rect><rect x="47" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-17 · 0 commits</title></rect><rect x="47" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-18 · 1 commits</title></rect><rect x="47" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-08-19 · 3 commits</title></rect><rect x="47" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-20 · 2 commits</title></rect><rect x="47" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-21 · 2 commits</title></rect><rect x="47" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-22 · 0 commits</title></rect><rect x="47" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-23 · 0 commits</title></rect><rect x="60" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-24 · 0 commits</title></rect><rect x="60" y="31" width="11" height="11" rx="2" fill="#26a641"><title>2025-08-25 · 6 commits</title></rect><rect x="60" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-26 · 2 commits</title></rect><rect x="60" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-08-27 · 2 commits</title></rect><rect x="60" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2025-08-28 · 3 commits</title></rect><rect x="60" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-29 · 0 commits</title></rect><rect x="60" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-30 · 0 commits</title></rect><rect x="73" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-08-31 · 0 commits</title></rect><rect x="73" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-01 · 1 commits</title></rect><rect x="73" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-02 · 1 commits</title></rect><rect x="73" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-03 · 0 commits</title></rect><rect x="73" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-04 · 2 commits</title></rect><rect x="73" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-05 · 1 commits</title></rect><rect x="73" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-06 · 0 commits</title></rect><rect x="86" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-07 · 0 commits</title></rect><rect x="86" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2025-09-08 · 3 commits</title></rect><rect x="86" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-09-09 · 4 commits</title></rect><rect x="86" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-10 · 2 commits</title></rect><rect x="86" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2025-09-11 · 3 commits</title></rect><rect x="86" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-12 · 0 commits</title></rect><rect x="86" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-13 · 0 commits</title></rect><rect x="99" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-14 · 0 commits</title></rect><rect x="99" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-15 · 1 commits</title></rect><rect x="99" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-09-16 · 4 commits</title></rect><rect x="99" y="57" width="11" height="11" rx="2" fill="#26a641"><title>2025-09-17 · 7 commits</title></rect><rect x="99" y="70" width="11" height="11" rx="2" fill="#26a641"><title>2025-09-18 · 6 commits</title></rect><rect x="99" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-19 · 0 commits</title></rect><rect x="99" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-20 · 0 commits</title></rect><rect x="112" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-21 · 0 commits</title></rect><rect x="112" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-22 · 2 commits</title></rect><rect x="112" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-23 · 0 commits</title></rect><rect x="112" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-09-24 · 1 commits</title></rect><rect x="112" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-25 · 0 commits</title></rect><rect x="112" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-26 · 0 commits</title></rect><rect x="112" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-27 · 0 commits</title></rect><rect x="125" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-28 · 0 commits</title></rect><rect x="125" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-29 · 0 commits</title></rect><rect x="125" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2025-09-30 · 0 commits</title></rect><rect x="125" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-01 · 0 commits</title></rect><rect x="125" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-10-02 · 2 commits</title></rect><rect x="125" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-03 · 0 commits</title></rect><rect x="125" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-04 · 0 commits</title></rect><rect x="138" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-05 · 0 commits</title></rect><rect x="138" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-06 · 0 commits</title></rect><rect x="138" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-07 · 0 commits</title></rect><rect x="138" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-08 · 0 commits</title></rect><rect x="138" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-09 · 0 commits</title></rect><rect x="138" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2025-10-10 · 1 commits</title></rect><rect x="138" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-11 · 0 commits</title></rect><rect x="151" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-12 · 0 commits</title></rect><rect x="151" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-10-13 · 1 commits</title></rect><rect x="151" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-10-14 · 4 commits</title></rect><rect x="151" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-10-15 · 2 commits</title></rect><rect x="151" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-10-16 · 2 commits</title></rect><rect x="151" y="83" width="11" height="11" rx="2" fill="#26a641"><title>2025-10-17 · 6 commits</title></rect><rect x="151" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-18 · 0 commits</title></rect><rect x="164" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-19 · 0 commits</title></rect><rect x="164" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-20 · 0 commits</title></rect><rect x="164" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-21 · 0 commits</title></rect><rect x="164" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-10-22 · 1 commits</title></rect><rect x="164" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-10-23 · 1 commits</title></rect><rect x="164" y="83" width="11" height="11" rx="2" fill="#006d32"><title>2025-10-24 · 3 commits</title></rect><rect x="164" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-25 · 0 commits</title></rect><rect x="177" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-26 · 0 commits</title></rect><rect x="177" y="31" width="11" height="11" rx="2" fill="#26a641"><title>2025-10-27 · 8 commits</title></rect><rect x="177" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-28 · 0 commits</title></rect><rect x="177" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2025-10-29 · 4 commits</title></rect><rect x="177" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-30 · 0 commits</title></rect><rect x="177" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-10-31 · 0 commits</title></rect><rect x="177" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-01 · 0 commits</title></rect><rect x="190" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-02 · 0 commits</title></rect><rect x="190" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2025-11-03 · 3 commits</title></rect><rect x="190" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-11-04 · 4 commits</title></rect><rect x="190" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2025-11-05 · 3 commits</title></rect><rect x="190" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-06 · 1 commits</title></rect><rect x="190" y="83" width="11" height="11" rx="2" fill="#26a641"><title>2025-11-07 · 6 commits</title></rect><rect x="190" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-08 · 0 commits</title></rect><rect x="203" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-09 · 0 commits</title></rect><rect x="203" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-10 · 1 commits</title></rect><rect x="203" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-11 · 0 commits</title></rect><rect x="203" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-12 · 1 commits</title></rect><rect x="203" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-13 · 2 commits</title></rect><rect x="203" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-14 · 2 commits</title></rect><rect x="203" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-15 · 0 commits</title></rect><rect x="216" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-16 · 0 commits</title></rect><rect x="216" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-17 · 2 commits</title></rect><rect x="216" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-18 · 2 commits</title></rect><rect x="216" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-19 · 1 commits</title></rect><rect x="216" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-20 · 1 commits</title></rect><rect x="216" y="83" width="11" height="11" rx="2" fill="#006d32"><title>2025-11-21 · 3 commits</title></rect><rect x="216" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-22 · 0 commits</title></rect><rect x="229" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-23 · 0 commits</title></rect><rect x="229" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-24 · 2 commits</title></rect><rect x="229" y="44" width="11" height="11" rx="2" fill="#39d353"><title>2025-11-25 · 16 commits</title></rect><rect x="229" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-11-26 · 1 commits</title></rect><rect x="229" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-27 · 0 commits</title></rect><rect x="229" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-28 · 0 commits</title></rect><rect x="229" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-29 · 0 commits</title></rect><rect x="242" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-11-30 · 0 commits</title></rect><rect x="242" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-01 · 5 commits</title></rect><rect x="242" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2025-12-02 · 7 commits</title></rect><rect x="242" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-03 · 3 commits</title></rect><rect x="242" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-12-04 · 2 commits</title></rect><rect x="242" y="83" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-05 · 5 commits</title></rect><rect x="242" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-06 · 0 commits</title></rect><rect x="255" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-07 · 0 commits</title></rect><rect x="255" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2025-12-08 · 1 commits</title></rect><rect x="255" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2025-12-09 · 1 commits</title></rect><rect x="255" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2025-12-10 · 1 commits</title></rect><rect x="255" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-11 · 5 commits</title></rect><rect x="255" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2025-12-12 · 1 commits</title></rect><rect x="255" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-13 · 0 commits</title></rect><rect x="268" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-14 · 0 commits</title></rect><rect x="268" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-15 · 3 commits</title></rect><rect x="268" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2025-12-16 · 9 commits</title></rect><rect x="268" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-17 · 3 commits</title></rect><rect x="268" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2025-12-18 · 1 commits</title></rect><rect x="268" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2025-12-19 · 2 commits</title></rect><rect x="268" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-20 · 0 commits</title></rect><rect x="281" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-21 · 0 commits</title></rect><rect x="281" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-22 · 4 commits</title></rect><rect x="281" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-23 · 5 commits</title></rect><rect x="281" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-24 · 0 commits</title></rect><rect x="281" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-25 · 0 commits</title></rect><rect x="281" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-26 · 0 commits</title></rect><rect x="281" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-27 · 0 commits</title></rect><rect x="294" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-28 · 0 commits</title></rect><rect x="294" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-29 · 3 commits</title></rect><rect x="294" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2025-12-30 · 4 commits</title></rect><rect x="294" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2025-12-31 · 0 commits</title></rect><rect x="294" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-01 · 0 commits</title></rect><rect x="294" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-02 · 0 commits</title></rect><rect x="294" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-03 · 0 commits</title></rect><rect x="307" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-04 · 0 commits</title></rect><rect x="307" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2026-01-05 · 1 commits</title></rect><rect x="307" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2026-01-06 · 3 commits</title></rect><rect x="307" y="57" width="11" height="11" rx="2" fill="#39d353"><title>2026-01-07 · 10 commits</title></rect><rect x="307" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-08 · 0 commits</title></rect><rect x="307" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2026-01-09 · 2 commits</title></rect><rect x="307" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-10 · 0 commits</title></rect><rect x="320" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-11 · 0 commits</title></rect><rect x="320" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-01-12 · 3 commits</title></rect><rect x="320" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2026-01-13 · 4 commits</title></rect><rect x="320" y="57" width="11" height="11" rx="2" fill="#26a641"><title>2026-01-14 · 7 commits</title></rect><rect x="320" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2026-01-15 · 1 commits</title></rect><rect x="320" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-16 · 0 commits</title></rect><rect x="320" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-17 · 0 commits</title></rect><rect x="333" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-18 · 0 commits</title></rect><rect x="333" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-01-19 · 4 commits</title></rect><rect x="333" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2026-01-20 · 8 commits</title></rect><rect x="333" y="57" width="11" height="11" rx="2" fill="#26a641"><title>2026-01-21 · 6 commits</title></rect><rect x="333" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-22 · 0 commits</title></rect><rect x="333" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-23 · 0 commits</title></rect><rect x="333" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-24 · 0 commits</title></rect><rect x="346" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-25 · 0 commits</title></rect><rect x="346" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-01-26 · 3 commits</title></rect><rect x="346" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-27 · 0 commits</title></rect><rect x="346" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-01-28 · 5 commits</title></rect><rect x="346" y="70" width="11" height="11" rx="2" fill="#26a641"><title>2026-01-29 · 9 commits</title></rect><rect x="346" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2026-01-30 · 1 commits</title></rect><rect x="346" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-01-31 · 0 commits</title></rect><rect x="359" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-01 · 0 commits</title></rect><rect x="359" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-02-02 · 3 commits</title></rect><rect x="359" y="44" width="11" height="11" rx="2" fill="#39d353"><title>2026-02-03 · 11 commits</title></rect><rect x="359" y="57" width="11" height="11" rx="2" fill="#26a641"><title>2026-02-04 · 6 commits</title></rect><rect x="359" y="70" width="11" height="11" rx="2" fill="#39d353"><title>2026-02-05 · 12 commits</title></rect><rect x="359" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-06 · 0 commits</title></rect><rect x="359" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-07 · 0 commits</title></rect><rect x="372" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-08 · 0 commits</title></rect><rect x="372" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-02-09 · 5 commits</title></rect><rect x="372" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-10 · 0 commits</title></rect><rect x="372" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-02-11 · 4 commits</title></rect><rect x="372" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2026-02-12 · 1 commits</title></rect><rect x="372" y="83" width="11" height="11" rx="2" fill="#26a641"><title>2026-02-13 · 8 commits</title></rect><rect x="372" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-14 · 0 commits</title></rect><rect x="385" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-15 · 0 commits</title></rect><rect x="385" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-16 · 0 commits</title></rect><rect x="385" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-17 · 0 commits</title></rect><rect x="385" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-18 · 0 commits</title></rect><rect x="385" y="70" width="11" height="11" rx="2" fill="#26a641"><title>2026-02-19 · 7 commits</title></rect><rect x="385" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2026-02-20 · 1 commits</title></rect><rect x="385" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-21 · 0 commits</title></rect><rect x="398" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-22 · 0 commits</title></rect><rect x="398" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-02-23 · 3 commits</title></rect><rect x="398" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2026-02-24 · 5 commits</title></rect><rect x="398" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2026-02-25 · 2 commits</title></rect><rect x="398" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-26 · 0 commits</title></rect><rect x="398" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-27 · 0 commits</title></rect><rect x="398" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-02-28 · 0 commits</title></rect><rect x="411" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-03-01 · 0 commits</title></rect><rect x="411" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-03-02 · 0 commits</title></rect><rect x="411" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2026-03-03 · 2 commits</title></rect><rect x="411" y="57" width="11" height="11" rx="2" fill="#26a641"><title>2026-03-04 · 9 commits</title></rect><rect x="411" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-05 · 4 commits</title></rect><rect x="411" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2026-03-06 · 1 commits</title></rect><rect x="411" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-03-07 · 0 commits</title></rect><rect x="424" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-03-08 · 0 commits</title></rect><rect x="424" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-09 · 3 commits</title></rect><rect x="424" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2026-03-10 · 6 commits</title></rect><rect x="424" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-11 · 3 commits</title></rect><rect x="424" y="70" width="11" height="11" rx="2" fill="#26a641"><title>2026-03-12 · 6 commits</title></rect><rect x="424" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2026-03-13 · 2 commits</title></rect><rect x="424" y="96" width="11" height="11" rx="2" fill="#26a641"><title>2026-03-14 · 6 commits</title></rect><rect x="437" y="18" width="11" height="11" rx="2" fill="#39d353"><title>2026-03-15 · 10 commits</title></rect><rect x="437" y="31" width="11" height="11" rx="2" fill="#39d353"><title>2026-03-16 · 12 commits</title></rect><rect x="437" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-17 · 3 commits</title></rect><rect x="437" y="57" width="11" height="11" rx="2" fill="#39d353"><title>2026-03-18 · 20 commits</title></rect><rect x="437" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-19 · 3 commits</title></rect><rect x="437" y="83" width="11" height="11" rx="2" fill="#0e4429"><title>2026-03-20 · 1 commits</title></rect><rect x="437" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-03-21 · 0 commits</title></rect><rect x="450" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-03-22 · 0 commits</title></rect><rect x="450" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-03-23 · 0 commits</title></rect><rect x="450" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2026-03-24 · 6 commits</title></rect><rect x="450" y="57" width="11" height="11" rx="2" fill="#39d353"><title>2026-03-25 · 16 commits</title></rect><rect x="450" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-26 · 5 commits</title></rect><rect x="450" y="83" width="11" height="11" rx="2" fill="#26a641"><title>2026-03-27 · 8 commits</title></rect><rect x="450" y="96" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-28 · 4 commits</title></rect><rect x="463" y="18" width="11" height="11" rx="2" fill="#0e4429"><title>2026-03-29 · 2 commits</title></rect><rect x="463" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-03-30 · 5 commits</title></rect><rect x="463" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2026-03-31 · 6 commits</title></rect><rect x="463" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-01 · 0 commits</title></rect><rect x="463" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-04-02 · 5 commits</title></rect><rect x="463" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-03 · 0 commits</title></rect><rect x="463" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-04 · 0 commits</title></rect><rect x="476" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-05 · 0 commits</title></rect><rect x="476" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-04-06 · 3 commits</title></rect><rect x="476" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-07 · 0 commits</title></rect><rect x="476" y="57" width="11" height="11" rx="2" fill="#39d353"><title>2026-04-08 · 12 commits</title></rect><rect x="476" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-04-09 · 4 commits</title></rect><rect x="476" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-10 · 0 commits</title></rect><rect x="476" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-11 · 0 commits</title></rect><rect x="489" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-12 · 0 commits</title></rect><rect x="489" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2026-04-13 · 1 commits</title></rect><rect x="489" y="44" width="11" height="11" rx="2" fill="#39d353"><title>2026-04-14 · 16 commits</title></rect><rect x="489" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-04-15 · 4 commits</title></rect><rect x="489" y="70" width="11" height="11" rx="2" fill="#26a641"><title>2026-04-16 · 9 commits</title></rect><rect x="489" y="83" width="11" height="11" rx="2" fill="#39d353"><title>2026-04-17 · 11 commits</title></rect><rect x="489" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-18 · 0 commits</title></rect><rect x="502" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-19 · 0 commits</title></rect><rect x="502" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-04-20 · 3 commits</title></rect><rect x="502" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-21 · 0 commits</title></rect><rect x="502" y="57" width="11" height="11" rx="2" fill="#39d353"><title>2026-04-22 · 12 commits</title></rect><rect x="502" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2026-04-23 · 2 commits</title></rect><rect x="502" y="83" width="11" height="11" rx="2" fill="#26a641"><title>2026-04-24 · 8 commits</title></rect><rect x="502" y="96" width="11" height="11" rx="2" fill="#0e4429"><title>2026-04-25 · 1 commits</title></rect><rect x="515" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-04-26 · 0 commits</title></rect><rect x="515" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-04-27 · 3 commits</title></rect><rect x="515" y="44" width="11" height="11" rx="2" fill="#39d353"><title>2026-04-28 · 16 commits</title></rect><rect x="515" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-04-29 · 5 commits</title></rect><rect x="515" y="70" width="11" height="11" rx="2" fill="#26a641"><title>2026-04-30 · 6 commits</title></rect><rect x="515" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-01 · 0 commits</title></rect><rect x="515" y="96" width="11" height="11" rx="2" fill="#006d32"><title>2026-05-02 · 3 commits</title></rect><rect x="528" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-03 · 0 commits</title></rect><rect x="528" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-04 · 0 commits</title></rect><rect x="528" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-05 · 0 commits</title></rect><rect x="528" y="57" width="11" height="11" rx="2" fill="#26a641"><title>2026-05-06 · 7 commits</title></rect><rect x="528" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-05-07 · 4 commits</title></rect><rect x="528" y="83" width="11" height="11" rx="2" fill="#26a641"><title>2026-05-08 · 7 commits</title></rect><rect x="528" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-09 · 0 commits</title></rect><rect x="541" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-10 · 0 commits</title></rect><rect x="541" y="31" width="11" height="11" rx="2" fill="#26a641"><title>2026-05-11 · 7 commits</title></rect><rect x="541" y="44" width="11" height="11" rx="2" fill="#39d353"><title>2026-05-12 · 10 commits</title></rect><rect x="541" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-05-13 · 5 commits</title></rect><rect x="541" y="70" width="11" height="11" rx="2" fill="#26a641"><title>2026-05-14 · 9 commits</title></rect><rect x="541" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-15 · 0 commits</title></rect><rect x="541" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-16 · 0 commits</title></rect><rect x="554" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-17 · 0 commits</title></rect><rect x="554" y="31" width="11" height="11" rx="2" fill="#39d353"><title>2026-05-18 · 12 commits</title></rect><rect x="554" y="44" width="11" height="11" rx="2" fill="#39d353"><title>2026-05-19 · 16 commits</title></rect><rect x="554" y="57" width="11" height="11" rx="2" fill="#39d353"><title>2026-05-20 · 17 commits</title></rect><rect x="554" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-21 · 0 commits</title></rect><rect x="554" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-22 · 0 commits</title></rect><rect x="554" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-23 · 0 commits</title></rect><rect x="567" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-24 · 0 commits</title></rect><rect x="567" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-25 · 0 commits</title></rect><rect x="567" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2026-05-26 · 9 commits</title></rect><rect x="567" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-05-27 · 5 commits</title></rect><rect x="567" y="70" width="11" height="11" rx="2" fill="#39d353"><title>2026-05-28 · 13 commits</title></rect><rect x="567" y="83" width="11" height="11" rx="2" fill="#39d353"><title>2026-05-29 · 19 commits</title></rect><rect x="567" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-30 · 0 commits</title></rect><rect x="580" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-05-31 · 0 commits</title></rect><rect x="580" y="31" width="11" height="11" rx="2" fill="#26a641"><title>2026-06-01 · 6 commits</title></rect><rect x="580" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2026-06-02 · 1 commits</title></rect><rect x="580" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-03 · 0 commits</title></rect><rect x="580" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-06-04 · 3 commits</title></rect><rect x="580" y="83" width="11" height="11" rx="2" fill="#39d353"><title>2026-06-05 · 12 commits</title></rect><rect x="580" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-06 · 0 commits</title></rect><rect x="593" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-07 · 0 commits</title></rect><rect x="593" y="31" width="11" height="11" rx="2" fill="#26a641"><title>2026-06-08 · 6 commits</title></rect><rect x="593" y="44" width="11" height="11" rx="2" fill="#39d353"><title>2026-06-09 · 10 commits</title></rect><rect x="593" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2026-06-10 · 2 commits</title></rect><rect x="593" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-06-11 · 3 commits</title></rect><rect x="593" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-12 · 0 commits</title></rect><rect x="593" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-13 · 0 commits</title></rect><rect x="606" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-14 · 0 commits</title></rect><rect x="606" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-15 · 0 commits</title></rect><rect x="606" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2026-06-16 · 4 commits</title></rect><rect x="606" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2026-06-17 · 1 commits</title></rect><rect x="606" y="70" width="11" height="11" rx="2" fill="#0e4429"><title>2026-06-18 · 1 commits</title></rect><rect x="606" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-19 · 0 commits</title></rect><rect x="606" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-20 · 0 commits</title></rect><rect x="619" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-21 · 0 commits</title></rect><rect x="619" y="31" width="11" height="11" rx="2" fill="#0e4429"><title>2026-06-22 · 2 commits</title></rect><rect x="619" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2026-06-23 · 1 commits</title></rect><rect x="619" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-24 · 0 commits</title></rect><rect x="619" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-25 · 0 commits</title></rect><rect x="619" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-26 · 0 commits</title></rect><rect x="619" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-27 · 0 commits</title></rect><rect x="632" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-28 · 0 commits</title></rect><rect x="632" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-29 · 0 commits</title></rect><rect x="632" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-06-30 · 0 commits</title></rect><rect x="632" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-01 · 0 commits</title></rect><rect x="632" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-02 · 0 commits</title></rect><rect x="632" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-03 · 0 commits</title></rect><rect x="632" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-04 · 0 commits</title></rect><rect x="645" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-05 · 0 commits</title></rect><rect x="645" y="31" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-06 · 0 commits</title></rect><rect x="645" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-07 · 0 commits</title></rect><rect x="645" y="57" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-08 · 0 commits</title></rect><rect x="645" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-09 · 0 commits</title></rect><rect x="645" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-10 · 0 commits</title></rect><rect x="645" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-11 · 0 commits</title></rect><rect x="658" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-12 · 0 commits</title></rect><rect x="658" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-07-13 · 4 commits</title></rect><rect x="658" y="44" width="11" height="11" rx="2" fill="#006d32"><title>2026-07-14 · 3 commits</title></rect><rect x="658" y="57" width="11" height="11" rx="2" fill="#0e4429"><title>2026-07-15 · 1 commits</title></rect><rect x="658" y="70" width="11" height="11" rx="2" fill="#39d353"><title>2026-07-16 · 11 commits</title></rect><rect x="658" y="83" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-17 · 0 commits</title></rect><rect x="658" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-18 · 0 commits</title></rect><rect x="671" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-19 · 0 commits</title></rect><rect x="671" y="31" width="11" height="11" rx="2" fill="#006d32"><title>2026-07-20 · 5 commits</title></rect><rect x="671" y="44" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-21 · 0 commits</title></rect><rect x="671" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-07-22 · 3 commits</title></rect><rect x="671" y="70" width="11" height="11" rx="2" fill="#006d32"><title>2026-07-23 · 3 commits</title></rect><rect x="671" y="83" width="11" height="11" rx="2" fill="#26a641"><title>2026-07-24 · 6 commits</title></rect><rect x="671" y="96" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-25 · 0 commits</title></rect><rect x="684" y="18" width="11" height="11" rx="2" fill="#1b222c"><title>2026-07-26 · 0 commits</title></rect><rect x="684" y="31" width="11" height="11" rx="2" fill="#26a641"><title>2026-07-27 · 7 commits</title></rect><rect x="684" y="44" width="11" height="11" rx="2" fill="#0e4429"><title>2026-07-28 · 1 commits</title></rect><rect x="684" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-07-29 · 5 commits</title></rect><rect x="684" y="70" width="11" height="11" rx="2" fill="#39d353"><title>2026-07-30 · 16 commits</title></rect><rect x="684" y="83" width="11" height="11" rx="2" fill="#39d353"><title>2026-07-31 · 18 commits</title></rect><rect x="684" y="96" width="11" height="11" rx="2" fill="#39d353"><title>2026-08-01 · 32 commits</title></rect><rect x="697" y="18" width="11" height="11" rx="2" fill="#0e4429"><title>2026-08-02 · 2 commits</title></rect><rect x="697" y="31" width="11" height="11" rx="2" fill="#26a641"><title>2026-08-03 · 7 commits</title></rect><rect x="697" y="44" width="11" height="11" rx="2" fill="#26a641"><title>2026-08-04 · 8 commits</title></rect><rect x="697" y="57" width="11" height="11" rx="2" fill="#006d32"><title>2026-08-05 · 3 commits</title></rect><rect x="697" y="70" width="11" height="11" rx="2" fill="#1b222c"><title>2026-08-06 · 0 commits</title></rect><text x="551" y="122" font-size="10" fill="#9ba7b4">Less</text><rect x="585" y="113" width="11" height="11" rx="2" fill="#1b222c"/><rect x="598" y="113" width="11" height="11" rx="2" fill="#0e4429"/><rect x="611" y="113" width="11" height="11" rx="2" fill="#006d32"/><rect x="624" y="113" width="11" height="11" rx="2" fill="#26a641"/><rect x="637" y="113" width="11" height="11" rx="2" fill="#39d353"/><text x="654" y="122" font-size="10" fill="#9ba7b4">More</text></svg>
         <!-- HEATMAP:END -->
@@ -1492,22 +1522,23 @@
 <section id="career">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Career &amp; Education</p>
-      <h2>경력 &amp; 학력</h2>
+      <!-- 인쇄에서는 학력·수상(.edu-grid)이 빠지므로 제목도 '경력'만 남긴다 -->
+      <p class="kicker">Career<span class="no-print"> &amp; Education</span></p>
+      <h2>경력<span class="no-print"> &amp; 학력</span></h2>
     </div>
     <div class="timeline">
       <div class="entry reveal">
         <p class="period">2022.07 – 현재</p>
         <h3>(주)시선에이아이 <small>([구]씨유박스)</small></h3>
-        <p class="role">Windows Systems / AI Inference Engineer</p>
+        <p class="role">Windows 시스템 소프트웨어 · AI 추론 SDK 개발</p>
         <ul>
-          <li>Vision AI 클라이언트 SEEUON — POC 데모부터 추론 SDK·판별 미들웨어·Windows 애플리케이션·커널 드라이버·배포까지 개발</li>
-          <li>OpenVINO 기반 AI 추론 SDK(CUFaceSDK) 설계·개발 — C/C++/C#/Python 멀티 언어 바인딩, Windows·Ubuntu 크로스 플랫폼</li>
-          <li>FileSystem Minifilter 커널 드라이버(CULockerFsfd) 단독 개발 — Microsoft filter altitude 정식 할당, attestation 서명·배포 체계 구축</li>
-          <li>Windows 로그인 얼굴인증 Credential Provider(SeeuonCP)와 IdP 확장판(SEEUONIdp) 클라이언트 메인 개발 — SSO·GoogleOTP·Passwordless 연계</li>
+          <li>Vision AI 클라이언트 SEEUON: POC 데모부터 추론 SDK·판별 미들웨어·Windows 애플리케이션·커널 드라이버·배포까지 개발</li>
+          <li>OpenVINO 기반 AI 추론 SDK(CUFaceSDK) 설계·개발. C/C++/C#/Python 멀티 언어 바인딩, Windows·Ubuntu 크로스 플랫폼</li>
+          <li>FileSystem Minifilter 커널 드라이버(CULockerFsfd) 단독 개발. Microsoft filter altitude 정식 할당, attestation 서명·배포 체계 구축</li>
+          <li>Windows 로그인 얼굴인증 Credential Provider(SeeuonCP)와 IdP 확장판(SEEUONIdp) 클라이언트 메인 개발. SSO·GoogleOTP·Passwordless 연계</li>
           <li>API 후킹·DLL 인젝션 기반 스크린 캡처 방지 기능, WinDbg 덤프 분석 기반 장애·충돌 규명</li>
           <li>NSIS·Themida·인증서 서명 릴리스 파이프라인 총괄, AI 코딩 하네스(Claude Code) 도입으로 macOS 클라이언트 확장 진행</li>
-          <li>삼성 SDS·SDI, 국세청, SGI 서울보증 등 주요 고객사 POC·구축 메인 개발자 수행</li>
+          <li>S사 계열, 금융권, 공공기관 등 주요 고객사 POC·구축 메인 개발자 수행</li>
         </ul>
       </div>
       <div class="entry reveal">
@@ -1542,7 +1573,7 @@
     <div class="section-head reveal">
       <p class="kicker">Blog &amp; Links</p>
       <h2>최근 글 &amp; 채널</h2>
-      <p>기술 블로그 최신 글 — 매주 자동 갱신됩니다</p>
+      <p>기술 블로그 최신 글. 매주 자동 갱신됩니다</p>
     </div>
   </div>
   <div class="ticker reveal" role="region" aria-label="블로그 최근 글과 외부 채널 카드">
@@ -1560,7 +1591,7 @@
     <div class="section-head section-head--tight">
       <p class="kicker">Contact</p>
       <h2>함께 일해보고 싶다면</h2>
-      <p>커널, 보안, AI 추론 — 어떤 이야기든 환영합니다</p>
+      <p>커널, 보안, AI 추론. 어떤 이야기든 환영합니다</p>
     </div>
     <div class="links">
       <a class="btn btn-primary" href="mailto:devdongin@gmail.com"><svg class="btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7.5l9 6 9-6"/></svg>devdongin@gmail.com</a>
@@ -1573,7 +1604,7 @@
 
 <footer>
   <div class="container">
-    <p>© 2026 선동인 (devdongin) · <strong>v2</strong> · Built with plain HTML — hosted on GitHub Pages</p>
+    <p>© 2026 선동인 (devdongin) · <strong>v2</strong> · Built with plain HTML · hosted on GitHub Pages</p>
     <p class="visits" hidden>Today <span id="v-today">–</span> · Total <span id="v-total">–</span> <span class="visits-note">· 제3자 무가입 집계(Abacus)</span></p>
   </div>
 </footer>
@@ -1607,8 +1638,7 @@
     if (Date.now() < lockUntil) return;
     const navHeight = nav.offsetHeight || 72;
     const readLine = scrollY + navHeight + Math.min(innerHeight * 0.22, 180);
-    // 페이지 바닥에 닿으면 마지막 섹션을 활성화한다 —
-    // 문서 끝의 짧은 섹션은 readLine 기준을 영영 만족하지 못하기 때문
+    // 페이지 바닥에 닿으면 마지막 섹션을 활성화한다.     // 문서 끝의 짧은 섹션은 readLine 기준을 영영 만족하지 못하기 때문
     const atBottom = scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
     const active = atBottom
       ? navSections[navSections.length - 1]
@@ -1644,7 +1674,7 @@
   reveals.forEach(el => io.observe(el));
 
 
-  // 개발 사례 영상 — 클릭 전까지 유튜브를 부르지 않는 facade
+  // 개발 사례 영상. 클릭 전까지 유튜브를 부르지 않는 facade
   document.querySelectorAll('.demo-frame').forEach(frame => {
     frame.addEventListener('click', () => {
       const id = frame.dataset.yt;
@@ -1671,7 +1701,7 @@
       }), { threshold: 0.15 });
       hio.observe(heat);
 
-      // 셀 위로 잔디를 틔운다 — 개수·색은 그날 커밋 밀도(셀 색)를 그대로 따른다.
+      // 셀 위로 잔디를 틔운다. 개수·색은 그날 커밋 밀도(셀 색)를 그대로 따른다.
       // SVG는 render_stats.py가 매번 다시 그리므로 마크업이 아니라 런타임에 얹는다.
       const NS = 'http://www.w3.org/2000/svg';
       const sprout = rect => {
@@ -1688,7 +1718,7 @@
         const g = document.createElementNS(NS, 'g');
         g.setAttribute('class', 'grass');
         g.setAttribute('pointer-events', 'none');
-        // 길이도 밀도를 따른다 — 1커밋 ~7px에서 20커밋 이상 ~17px까지
+        // 길이도 밀도를 따른다. 1커밋 ~7px에서 20커밋 이상 ~17px까지
         const shapes = [];
         for (let i = 0; i < blades; i++) {
           const t = blades > 1 ? (i / (blades - 1)) - 0.5 : 0;   // -0.5 ~ 0.5
@@ -1715,7 +1745,7 @@
       };
 
       heat.addEventListener('pointerover', e => {
-        // 마우스만 호버로 반응 — 터치는 스와이프 중 오작동하지 않게 탭에서 처리
+        // 마우스만 호버로 반응. 터치는 스와이프 중 오작동하지 않게 탭에서 처리
         if (e.pointerType === 'mouse' && e.target.tagName === 'rect') sprout(e.target);
       });
       heat.addEventListener('click', e => {
@@ -1748,7 +1778,7 @@
     } catch (e) {}
   })();
 
-  // animated favicon — face-detection brackets + scan line over the avatar.
+  // animated favicon. face-detection brackets + scan line over the avatar.
   // 프레임을 최초 1회만 미리 렌더해 두고 이후에는 href 문자열만 교체한다
   // (매 프레임 캔버스를 다시 그리지 않으므로 실행 비용이 사실상 0).
   (() => {
@@ -1821,7 +1851,7 @@
     };
   })();
 
-  // 인쇄 범위 모드 — ?print=compact 처럼 쿼리로 지정하면 인쇄 CSS가 그 모드 규칙을 적용한다.
+  // 인쇄 범위 모드. ?print=compact 처럼 쿼리로 지정하면 인쇄 CSS가 그 모드 규칙을 적용한다.
   // (예: compact는 면접·활동 섹션을 빼고 분량을 줄인다. 화면 표시에는 영향이 없다.)
   (() => {
     const mode = new URLSearchParams(location.search).get('print');

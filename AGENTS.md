@@ -1,4 +1,4 @@
-# AGENTS.md — devdongin.github.io
+# AGENTS.md: devdongin.github.io
 
 이 저장소는 선동인의 개인 포트폴리오 사이트다 (GitHub Pages, 단일 `index.html`).
 
@@ -14,11 +14,12 @@
 
 ## Codex 리뷰 관점 (우선순위순)
 
-1. **민감 정보 유출** — 전화번호, 집주소, 연봉, 출생연도/나이, 학점이 발견되면 최우선(critical)으로 보고. 이메일은 Contact 섹션 외 위치에 있으면 보고.
-2. **사실관계** — 이름은 반드시 "선동인" (손동인은 오기). 경력 기간·수치·프로젝트명이 기존 내용과 모순되면 보고.
-3. **HTML/CSS 일관성** — CSS 변수 대신 리터럴 색상 하드코딩, 기존 컴포넌트(.skill-card/.project/.badge/.chip) 미재사용, `.reveal` 클래스 누락, 섹션 배경 교차(기본↔.alt) 붕괴.
-4. **접근성/반응형** — alt 텍스트 누락, 720px 이하 레이아웃 깨짐, 가로 오버플로.
-5. **디자인 스킬 기준(2026-08-01 도입, CLAUDE.md 참조)** — 이모지 사용, keep-all 누락, 네온 글로우, CTA 상태(hover/active/focus) 누락, 인접 섹션 레이아웃 반복, AI 클리셰 카피를 발견하면 보고. 기준 원문: anthropics/skills frontend-design · uxjoseph/supanova-design-skill · nextlevelbuilder/ui-ux-pro-max-skill.
+1. **민감 정보 유출**: 전화번호, 집주소, 연봉, 출생연도/나이, 학점이 발견되면 최우선(critical)으로 보고. 이메일은 Contact 섹션 외 위치에 있으면 보고.
+2. **사실관계**: 이름은 반드시 "선동인" (손동인은 오기). 경력 기간·수치·프로젝트명이 기존 내용과 모순되면 보고.
+3. **HTML/CSS 일관성**: CSS 변수 대신 리터럴 색상 하드코딩, 기존 컴포넌트(.skill-card/.project/.badge/.chip) 미재사용, `.reveal` 클래스 누락, 섹션 배경 교차(기본↔.alt) 붕괴.
+4. **접근성/반응형**: alt 텍스트 누락, 720px 이하 레이아웃 깨짐, 가로 오버플로.
+5. **디자인 스킬 기준(2026-08-01 도입, CLAUDE.md 참조)**: 이모지 사용, keep-all 누락, 네온 글로우, CTA 상태(hover/active/focus) 누락, 인접 섹션 레이아웃 반복, AI 클리셰 카피를 발견하면 보고. 기준 원문: anthropics/skills frontend-design · uxjoseph/supanova-design-skill · nextlevelbuilder/ui-ux-pro-max-skill.
+6. **엠 대시 사용(2026-08-04 사용자 지시)**: 본문·문서·커밋 메시지에 `—`가 있으면 보고한다. AI가 쓴 글의 표시로 읽히기 때문이다. 엔 대시 `–`는 날짜 범위(`2022.07 – 현재`)에만 허용. 대체 표기는 CLAUDE.md 절대 규칙 6번 참조.
 
 리뷰 결과는 파일:줄 위치와 함께 간결한 목록으로 제시한다.
 
