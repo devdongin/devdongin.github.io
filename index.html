@@ -809,7 +809,7 @@
     .section-head .kicker::after { transition: none; }
     .thread-flow.flowing .thread-step::after { animation: none; }
     .heatmap-scroll.wave rect { animation: none; }
-    .grass path { animation: none; opacity: 0; }
+    .grass path { animation: none; opacity: 1; }  /* 잔디는 사용자가 부르는 효과라 숨기지 않는다 */
     .deep-dive[open] > *:not(summary), .qa[open] > *:not(summary), .heatmap-alt[open] > *:not(summary) { animation: none; }
     .qa-badge { transition: none; }
     }
@@ -1688,8 +1688,8 @@
   });
   // 히트맵 셀 웨이브 · 파이프라인 흐름 (뷰 진입 시 1회)
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heat = document.querySelector('.heatmap-scroll');
   if (!calm) {
-    const heat = document.querySelector('.heatmap-scroll');
     if (heat) {
       const hio = new IntersectionObserver(es => es.forEach(e => {
         if (!e.isIntersecting) return;
@@ -1700,63 +1700,67 @@
         hio.disconnect();
       }), { threshold: 0.15 });
       hio.observe(heat);
-
-      // 셀 위로 잔디를 틔운다. 개수·색은 그날 커밋 밀도(셀 색)를 그대로 따른다.
-      // SVG는 render_stats.py가 매번 다시 그리므로 마크업이 아니라 런타임에 얹는다.
-      const NS = 'http://www.w3.org/2000/svg';
-      const sprout = rect => {
-        const svg = rect.ownerSVGElement;
-        if (!svg || rect.dataset.sprouting) return;
-        const m = /·\s*(\d+)\s*commits/.exec(rect.querySelector('title')?.textContent || '');
-        const n = m ? +m[1] : 0;
-        if (!n) return;                       // 커밋 없는 날은 돋지 않는다
-        rect.dataset.sprouting = '1';
-        const blades = Math.min(2 + Math.ceil(n / 3), 6);
-        const cx = +rect.getAttribute('x') + 5.5;
-        const top = +rect.getAttribute('y');
-        const color = rect.getAttribute('fill');
-        const g = document.createElementNS(NS, 'g');
-        g.setAttribute('class', 'grass');
-        g.setAttribute('pointer-events', 'none');
-        // 길이도 밀도를 따른다. 1커밋 ~7px에서 20커밋 이상 ~17px까지
-        const shapes = [];
-        for (let i = 0; i < blades; i++) {
-          const t = blades > 1 ? (i / (blades - 1)) - 0.5 : 0;   // -0.5 ~ 0.5
-          const dx = t * 8;
-          const hgt = 6 + Math.min(n, 20) * 0.55 + Math.random() * 3;
-          shapes.push({
-            d: `M ${cx} ${top} Q ${cx + dx * 0.5} ${top - hgt * 0.65} ${cx + dx} ${top - hgt}`,
-            delay: (i * 45) + 'ms',
-          });
-        }
-        // 테두리를 전부 먼저 깔고 줄기를 얹는다 (섞어 그리면 옆 줄기의 테두리가 앞 줄기를 덮는다)
-        for (const cls of ['grass-edge', 'grass-blade']) {
-          for (const s of shapes) {
-            const p = document.createElementNS(NS, 'path');
-            p.setAttribute('d', s.d);
-            p.setAttribute('class', cls);
-            if (cls === 'grass-blade') p.setAttribute('stroke', color);
-            p.style.animationDelay = s.delay;
-            g.appendChild(p);
-          }
-        }
-        svg.appendChild(g);
-        setTimeout(() => { g.remove(); delete rect.dataset.sprouting; }, 1500);
-      };
-
-      heat.addEventListener('pointerover', e => {
-        // 마우스만 호버로 반응. 터치는 스와이프 중 오작동하지 않게 탭에서 처리
-        if (e.pointerType === 'mouse' && e.target.tagName === 'rect') sprout(e.target);
-      });
-      heat.addEventListener('click', e => {
-        if (e.target.tagName === 'rect') sprout(e.target);
-      });
     }
     document.querySelectorAll('.thread-flow').forEach(flow => {
       const fio = new IntersectionObserver(es => es.forEach(e => {
         flow.classList.toggle('flowing', e.isIntersecting);
       }), { threshold: 0.3 });
       fio.observe(flow);
+    });
+  }
+
+  // 잔디는 호버·탭으로만 도는 사용자 주도 효과라 모션 감소에서도 막지 않는다.
+  // calm 이면 계단식 지연을 빼고, CSS 가 애니메이션 없이 즉시 그렸다가 1.5초 뒤 걷는다.
+  if (heat) {
+    // 셀 위로 잔디를 틔운다. 개수·색은 그날 커밋 밀도(셀 색)를 그대로 따른다.
+    // SVG는 render_stats.py가 매번 다시 그리므로 마크업이 아니라 런타임에 얹는다.
+    const NS = 'http://www.w3.org/2000/svg';
+    const sprout = rect => {
+      const svg = rect.ownerSVGElement;
+      if (!svg || rect.dataset.sprouting) return;
+      const m = /·\s*(\d+)\s*commits/.exec(rect.querySelector('title')?.textContent || '');
+      const n = m ? +m[1] : 0;
+      if (!n) return;                       // 커밋 없는 날은 돋지 않는다
+      rect.dataset.sprouting = '1';
+      const blades = Math.min(2 + Math.ceil(n / 3), 6);
+      const cx = +rect.getAttribute('x') + 5.5;
+      const top = +rect.getAttribute('y');
+      const color = rect.getAttribute('fill');
+      const g = document.createElementNS(NS, 'g');
+      g.setAttribute('class', 'grass');
+      g.setAttribute('pointer-events', 'none');
+      // 길이도 밀도를 따른다. 1커밋 ~7px에서 20커밋 이상 ~17px까지
+      const shapes = [];
+      for (let i = 0; i < blades; i++) {
+        const t = blades > 1 ? (i / (blades - 1)) - 0.5 : 0;   // -0.5 ~ 0.5
+        const dx = t * 8;
+        const hgt = 6 + Math.min(n, 20) * 0.55 + Math.random() * 3;
+        shapes.push({
+          d: `M ${cx} ${top} Q ${cx + dx * 0.5} ${top - hgt * 0.65} ${cx + dx} ${top - hgt}`,
+          delay: (i * 45) + 'ms',
+        });
+      }
+      // 테두리를 전부 먼저 깔고 줄기를 얹는다 (섞어 그리면 옆 줄기의 테두리가 앞 줄기를 덮는다)
+      for (const cls of ['grass-edge', 'grass-blade']) {
+        for (const s of shapes) {
+          const p = document.createElementNS(NS, 'path');
+          p.setAttribute('d', s.d);
+          p.setAttribute('class', cls);
+          if (cls === 'grass-blade') p.setAttribute('stroke', color);
+          p.style.animationDelay = calm ? '0s' : s.delay;
+          g.appendChild(p);
+        }
+      }
+      svg.appendChild(g);
+      setTimeout(() => { g.remove(); delete rect.dataset.sprouting; }, 1500);
+    };
+
+    heat.addEventListener('pointerover', e => {
+      // 마우스만 호버로 반응. 터치는 스와이프 중 오작동하지 않게 탭에서 처리
+      if (e.pointerType === 'mouse' && e.target.tagName === 'rect') sprout(e.target);
+    });
+    heat.addEventListener('click', e => {
+      if (e.target.tagName === 'rect') sprout(e.target);
     });
   }
 
