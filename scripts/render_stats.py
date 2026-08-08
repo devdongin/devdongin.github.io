@@ -23,9 +23,9 @@ INDEX = "index.html"
 STATS = "data/stats.json"
 BLOG = "data/blog.json"
 
-# LinkedIn 프로필 URL — 비어 있으면 카드 미출력
+# LinkedIn 프로필 URL: 비어 있으면 카드 미출력
 LINKEDIN_URL = "https://www.linkedin.com/in/%EB%8F%99%EC%9D%B8-%EC%84%A0-9056021a3/"
-# 크몽 프로필 URL — 비어 있으면 카드 미출력
+# 크몽 프로필 URL: 비어 있으면 카드 미출력
 KMONG_URL = ""
 
 # 메인 포트폴리오에서는 시니어 포지셔닝에 맞는 글만 노출한다.
@@ -135,7 +135,7 @@ def build_monthly(daily, start, end):
 def _blog_half(posts, focusable):
     esc = html_mod.escape
     extra = "" if focusable else ' tabindex="-1"'
-    # LinkedIn이 현재 주 활동 채널 — 카드를 맨 앞에 배치. 채널 카드는 브랜드 컬러/로고 적용
+    # LinkedIn이 현재 주 활동 채널: 카드를 맨 앞에 배치. 채널 카드는 브랜드 컬러/로고 적용
     entries = []
     if LINKEDIN_URL:
         entries.append(("LinkedIn", "최근 활동 & 프로필 보기 →", "linkedin.com",
@@ -161,7 +161,7 @@ def build_blog_cards(posts):
     # 끊김 없는 무한 스크롤을 위해 동일한 절반을 2벌 렌더.
     # 두 번째 절반은 스크린리더(aria-hidden)와 탭 순서(tabindex="-1")에서만 제외한다.
     #
-    # inert를 쓰면 안 된다 — inert 요소는 hit-test 대상에서 빠지므로,
+    # inert를 쓰면 안 된다: inert 요소는 hit-test 대상에서 빠지므로,
     # 애니메이션이 후반부로 가서 두 번째 절반이 화면을 채우면 카드 클릭이
     # 그대로 통과해 버린다. tabindex="-1"만으로 키보드 중복 탭은 막히고,
     # aria-hidden 안에 키보드 포커스 가능한 요소가 없으므로 접근성 검사도 통과한다.

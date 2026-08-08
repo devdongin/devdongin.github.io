@@ -133,10 +133,10 @@ jobs:
           # (Ruleset은 기본 브랜치에만 걸려 있어 작업 브랜치 push·삭제는 자유롭다)
           BRANCH="auto/stats-$GITHUB_RUN_ID"
           git checkout -b "$BRANCH"
-          git commit -m "chore: 자동 갱신 — 커밋 통계 / AI REVIEW"
+          git commit -m "chore: 자동 갱신: 커밋 통계 / AI REVIEW"
           git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
-            --title "chore: 자동 갱신 — 커밋 통계 / AI REVIEW" \
+            --title "chore: 자동 갱신: 커밋 통계 / AI REVIEW" \
             --body "$(printf '자동 갱신 워크플로가 생성한 PR입니다. run: %s\n\n## 게시 전 검증\n\n```\n%s\n```\n\n## 변경 요약\n\n```\n%s\n```\n' "$GITHUB_RUN_ID" "$(cat /tmp/verify.txt)" "$(git diff --stat origin/main -- | tail -20)")" > /tmp/pr_url.txt
           cat /tmp/pr_url.txt
           # mergeable 상태 계산에 잠깐 걸리므로 몇 번 재시도한다

@@ -2,7 +2,7 @@
 """Tistory RSS → data/blog.json (최근 글 카드용).
 
 secret 불필요 (공개 RSS). 실패 시 기존 blog.json을 유지하기 위해
-경고만 남기고 정상 종료한다 — 블로그 수집 실패가 전체 갱신을 막지 않게.
+경고만 남기고 정상 종료한다: 블로그 수집 실패가 전체 갱신을 막지 않게.
 """
 import html
 import json

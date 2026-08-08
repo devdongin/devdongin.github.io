@@ -77,10 +77,10 @@ def gh(token, path, params=None):
                 continue
             if e.code in (404, 409):  # 접근 불가 / 빈 저장소
                 return None
-            # from None — HTTPError 의 URL 이 traceback 에 실리지 않도록 체인을 끊는다
+            # from None: HTTPError 의 URL 이 traceback 에 실리지 않도록 체인을 끊는다
             raise ApiError(f"GitHub API 오류 (HTTP {e.code})") from None
         except (urllib.error.URLError, http.client.HTTPException, OSError) as e:
-            # RemoteDisconnected, 타임아웃 등 일시적 네트워크 오류 — 백오프 후 재시도
+            # RemoteDisconnected, 타임아웃 등 일시적 네트워크 오류: 백오프 후 재시도
             if attempt < 5:
                 wait = min(10 * (2 ** attempt), 120)
                 print(f"[collect] network error ({type(e).__name__}), "
@@ -139,7 +139,7 @@ def main():
         entry = cache["repos"].get(h)
         if entry and not entry.get("found"):
             # 스캔 당시의 pushed_at 을 함께 저장해 두고, 그 뒤로 push 가 있었다면
-            # 캐시를 무효화하고 다시 스캔한다. (기록이 없는 옛 캐시는 재스캔한다 —
+            # 캐시를 무효화하고 다시 스캔한다. (기록이 없는 옛 캐시는 재스캔한다:
             # 한 번 비었다는 이유로 영구히 빠지는 것을 막기 위함)
             cached_push = entry.get("pushed_at")
             if cached_push and pushed_at and pushed_at <= cached_push:

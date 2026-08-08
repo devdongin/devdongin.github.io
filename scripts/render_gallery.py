@@ -3,12 +3,12 @@
 
 운영 방식: gallery/ 폴더에 이미지·영상 파일을 넣고 push하면
 GitHub Actions(update-gallery.yml)가 이 스크립트를 실행해 페이지에 반영한다.
-로그인·업로드 기능 없음 — git이 곧 CMS다.
+로그인·업로드 기능 없음: git이 곧 CMS다.
 
 캡션 = 파일명(확장자 제외, '-'/'_' → 공백).
-정렬 = 파일명 내림차순 — 'YYYY-MM_제목.ext' 형식으로 넣으면 최신이 앞에 온다.
+정렬 = 파일명 내림차순: 'YYYY-MM_제목.ext' 형식으로 넣으면 최신이 앞에 온다.
 
-유튜브 영상은 '.youtube' 파일로 넣는다 — 파일 내용에 영상 URL이나 ID 한 줄.
+유튜브 영상은 '.youtube' 파일로 넣는다: 파일 내용에 영상 URL이나 ID 한 줄.
 저장소 용량·대역폭을 쓰지 않으므로 긴 영상은 이 방식을 쓴다.
 """
 import html
@@ -27,11 +27,11 @@ CAPTIONS = {
     "해커톤-1.webp": "서울시 하드웨어 해커톤 2019",
     "해커톤-2.webp": "서울시 하드웨어 해커톤 2019",
     "해커톤-3.webp": "서울시 하드웨어 해커톤 2019",
-    "liveness-데모.mp4": "Windows 로그인 세션 liveness 데모 — 보안 솔루션의 시작 지점인 로그인 단계라 성능보다 위변조 탐지 강도를 우선해 설정했습니다",
-    "얼굴-위변조-탐지-데모.youtube": "얼굴 위변조(anti-spoofing) 탐지 테스트 앱 — 사진·화면 재생 같은 제시형 공격을 실시간으로 판별합니다",
-    "SEEUON-macOS-클라이언트.youtube": "SEEUON macOS 클라이언트 — AI 코딩 하네스를 실무에 들여 구축 중인 macOS 버전. 실시간 얼굴 인증과 감시 정책이 동작하는 화면입니다 (소리 없음)",
+    "liveness-데모.mp4": "Windows 로그인 세션 liveness 데모: 보안 솔루션의 시작 지점인 로그인 단계라 성능보다 위변조 탐지 강도를 우선해 설정했습니다",
+    "얼굴-위변조-탐지-데모.youtube": "얼굴 위변조(anti-spoofing) 탐지 테스트 앱: 사진·화면 재생 같은 제시형 공격을 실시간으로 판별합니다",
+    "SEEUON-macOS-클라이언트.youtube": "SEEUON macOS 클라이언트: AI 코딩 하네스를 실무에 들여 구축 중인 macOS 버전. 실시간 얼굴 인증과 감시 정책이 동작하는 화면입니다 (소리 없음)",
 }
-# 로컬 영상의 대표 이미지 — 재생 전 검은 화면 대신 첫인상을 준다
+# 로컬 영상의 대표 이미지: 재생 전 검은 화면 대신 첫인상을 준다
 POSTERS = {
     "liveness-데모.mp4": "assets/images/liveness-poster.webp",
 }
@@ -61,7 +61,7 @@ def build_card(name):
         if not vid:
             print(f"[gallery] skip {name}: no video id", file=sys.stderr)
             return None
-        # nocookie 도메인 — 재생 전에는 추적 쿠키를 심지 않는다
+        # nocookie 도메인: 재생 전에는 추적 쿠키를 심지 않는다
         media = (f'<div class="g-embed"><iframe src="https://www.youtube-nocookie.com/embed/{vid}" '
                  f'title="{caption}" loading="lazy" allowfullscreen '
                  f'allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" '

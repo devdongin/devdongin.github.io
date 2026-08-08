@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""assets/images/og-card.png 생성 — 링크 공유 시 노출되는 1200x630 카드.
+"""assets/images/og-card.png 생성: 링크 공유 시 노출되는 1200x630 카드.
 
 사이트 다크 팔레트(index.html :root)와 동일한 톤. 로컬에서 실행:
   pip install pillow
@@ -54,7 +54,7 @@ def main():
     d.text((margin + name_w + 28, y + 62), "devdongin", font=f_handle, fill=DIM)
     y += 164
 
-    # 헤드라인 두 줄 — 아바타 영역(x>780)을 침범하지 않는다
+    # 헤드라인 두 줄: 아바타 영역(x>780)을 침범하지 않는다
     f_head = font("malgunbd.ttf", 46)
     d.text((margin, y), "AI 모델을,", font=f_head, fill=TEXT)
     y += 66
