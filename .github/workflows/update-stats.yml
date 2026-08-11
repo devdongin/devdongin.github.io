@@ -78,8 +78,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub App 설치 없이 워크플로 토큰 사용
           claude_args: '--allowedTools "Read,Edit"'
           prompt: |
-            data/stats.json(최신 커밋 집계)과 index.html, CLAUDE.md를 읽고,
-            index.html에서 <!-- AI-REVIEW:START --> 와 <!-- AI-REVIEW:END --> 사이의
+            data/stats.json(최신 커밋 집계), data/focus.md(사람이 직접 적는 최근 작업),
+            index.html, CLAUDE.md를 읽고, index.html에서
+            <!-- AI-REVIEW:START --> 와 <!-- AI-REVIEW:END --> 사이의
             평가 문단만 다시 작성하라.
 
             규칙:
@@ -102,10 +103,16 @@ jobs:
             - 평가 근거는 data/stats.json의 실제 수치(총 커밋 수, 기여 통계)와
               index.html에 이미 공개된 사실만 사용한다. 내부 저장소명은 절대 쓰지 않는다.
             - 커밋 활동은 **수치와 추세까지만** 서술한다. stats.json은 커밋 수와 시점만
-              증명하므로, 증가·감소의 원인이나 업무 종류(운영 대응·신규 개발 등),
-              생산성·품질을 별도 근거 없이 추론하지 않는다.
+              증명하므로, 증가·감소의 원인이나 생산성·품질을 거기서 추론하지 않는다.
               (나쁜 예: "커밋이 몰릴 만큼 운영 대응이 이어지고 있습니다")
               활동량을 언급할 거라면 검증 가능한 구현 범위나 성능 근거와 함께 쓴다.
+            - **최근 작업은 data/focus.md 에 적힌 것만 쓴다.** 3~4줄 중 마지막 1문장을
+              "요즘 무엇을 하고 있는가"에 배정하고, focus.md 최상단 항목(가장 최근)을
+              근거로 삼는다. focus.md 에 없는 업무 종류를 커밋 수나 저장소 구성에서
+              짐작해 쓰지 않는다. focus.md 가 비어 있으면 이 문장은 생략한다.
+              focus.md 문장을 그대로 복사하지 말고 평가문 어조로 압축한다.
+            - focus.md 항목이라도 고객사 실명·내부 저장소명·미공개 일정은 옮겨 쓰지 않는다.
+              (focus.md 자체에 그런 내용이 들어왔다면 그 항목을 통째로 건너뛴다)
             - 마커 밖의 내용은 절대 수정하지 않는다.
 
       # 승인 0건 자동 병합이라 사람 리뷰가 없다 — 기계적으로 확인 가능한 것은 여기서 막는다 (#27)

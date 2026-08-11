@@ -1,0 +1,57 @@
+/* 픽셀 다이버 스프라이트 애니메이션.
+   프레임 3종: idle(2프레임) / swim-down(4) / swim-up(4). 각 프레임 원본 256x256.
+
+   표시 크기를 --f 하나로 조절한다. 스프라이트는 배경 이미지라
+   background-size 와 키프레임의 이동량이 표시 크기에 함께 비례해야 하는데,
+   값을 하드코딩하면 크기를 바꿀 때마다 프레임이 어긋난다. 그래서 전부 --f 기준으로 계산한다.
+
+   transform: scale() 로 줄이지 않는 이유: scale 은 레이아웃 상자를 줄이지 않아
+   요소 주변에 죽은 여백이 남고, right/top 으로 잡은 위치가 실제 그림과 어긋난다.
+   또 부모(스크롤 이동·부유)가 이미 transform 을 쓰고 있어 축이 겹친다. */
+.pixel-diver {
+  --f: clamp(96px, 11vw, 150px);   /* 프레임 한 장의 표시 크기 */
+  width: var(--f);
+  height: var(--f);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  image-rendering: pixelated;      /* 픽셀아트는 보간하면 뭉갠다 */
+  pointer-events: none;
+}
+
+.pixel-diver.idle {
+  background-image: url("./diver-idle-spritesheet.png");
+  background-size: calc(var(--f) * 2) var(--f);
+  animation: diver-idle 0.9s steps(2) infinite;
+}
+
+.pixel-diver.swim-down {
+  background-image: url("./diver-swim-down-spritesheet.png");
+  background-size: calc(var(--f) * 4) var(--f);
+  animation: diver-swim 0.55s steps(4) infinite;
+}
+
+.pixel-diver.swim-up {
+  background-image: url("./diver-swim-up-spritesheet.png");
+  background-size: calc(var(--f) * 4) var(--f);
+  animation: diver-swim 0.55s steps(4) infinite;
+}
+
+@keyframes diver-idle {
+  from { background-position: 0 0; }
+  to   { background-position: calc(var(--f) * -2) 0; }
+}
+
+@keyframes diver-swim {
+  from { background-position: 0 0; }
+  to   { background-position: calc(var(--f) * -4) 0; }
+}
+
+/* 모션 최소화 설정에서도 프레임 재생은 남긴다.
+   이 사이트는 티커·파비콘·게이트에서 같은 판단을 이미 내렸다 (소유자 지시).
+   여기서 animation: none 을 걸면 소유자 환경에서 다이버가 항상 정지 프레임으로 굳는다.
+   대신 재생 속도를 늦춰 자극을 줄인다. */
+@media (prefers-reduced-motion: reduce) {
+  .pixel-diver.idle { animation-duration: 1.6s; }
+  .pixel-diver.swim-down,
+  .pixel-diver.swim-up { animation-duration: 0.9s; }
+}
