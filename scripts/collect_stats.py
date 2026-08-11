@@ -183,23 +183,42 @@ def main():
         }
         print(f"[collect] repo {i}/{len(targets)} done, {len(seen)} unique commits", file=sys.stderr)
 
-    repo_stats = {}
+    # 같은 슬러그에 여러 저장소를 매핑하면 한 묶음으로 합산한다.
+    # 파생 제품이 저장소만 갈라져 있고 실제로는 한 제품인 경우가 있다.
+    # mine/total 만 더하면 순위를 낼 수 없으므로 기여자 목록 자체를 합친 뒤 계산한다.
+    groups = {}
     for full_name, slug in config.get("repo_stats", {}).items():
         if slug not in ALLOWED_SLUGS:
             sys.exit(f"[collect] error: slug not in allowlist: '{slug}'")
-        contribs = list(gh_paged(token, f"/repos/{full_name}/contributors"))
-        if not contribs:
-            print(f"[collect] warn: no contributor data for slug '{slug}'", file=sys.stderr)
+        groups.setdefault(slug, []).append(full_name)
+
+    repo_stats = {}
+    for slug, names in groups.items():
+        tally = {}          # login -> 기여 커밋 수 (묶음 전체 합산)
+        for full_name in names:
+            contribs = list(gh_paged(token, f"/repos/{full_name}/contributors"))
+            if not contribs:
+                print(f"[collect] warn: no contributor data in group '{slug}'", file=sys.stderr)
+                continue
+            for c in contribs:
+                login = c.get("login") or "(unknown)"
+                tally[login] = tally.get(login, 0) + c["contributions"]
+        if not tally:
+            print(f"[collect] warn: group '{slug}' empty, skipped", file=sys.stderr)
             continue
-        total = sum(c["contributions"] for c in contribs)
-        mine = sum(c["contributions"] for c in contribs if c.get("login") in authors)
-        rank = next((i + 1 for i, c in enumerate(contribs) if c.get("login") in authors), None)
+        total = sum(tally.values())
+        mine = sum(v for k, v in tally.items() if k in authors)
+        ordered = sorted(tally.items(), key=lambda kv: -kv[1])
+        rank = next((i + 1 for i, (k, _) in enumerate(ordered) if k in authors), None)
         repo_stats[slug] = {
             "mine": mine,
             "total": total,
             "percent": round(mine / total * 100) if total else 0,
             "rank": rank,
+            "repos": len(names),   # 묶인 저장소 수 (1이면 단일 저장소)
         }
+        print(f"[collect] group '{slug}': {len(names)} repo(s), {mine}/{total} "
+              f"({repo_stats[slug]['percent']}%), rank {rank}", file=sys.stderr)
 
     out = {
         "collected_at": end.isoformat(),

@@ -211,9 +211,12 @@ def main():
     if s:
         html = replace(html, "STAT-HIGHLIGHT-SEEUONCLIENT",
                        f'{s["percent"]}% · {s["rank"]}위')
+        # 파생 제품이 별도 저장소로 갈라져 있어 묶어 세는 경우, 합산임을 밝힌다.
+        # (저장소명은 공개하지 않으므로 개수만 적는다)
+        merged = f' · 저장소 {s["repos"]}개 합산' if s.get("repos", 1) > 1 else ''
         html = replace(html, "STAT-SEEUONCLIENT",
                        f'<strong>커밋 {s["percent"]}% · {s["rank"]}위 기여자</strong> '
-                       f'({s["mine"]:,} / {s["total"]:,} 커밋 · 기본 브랜치 contributors 집계 · {end} 기준)',
+                       f'({s["mine"]:,} / {s["total"]:,} 커밋 · 기본 브랜치 contributors 집계{merged} · {end} 기준)',
                        required=False)
     s = repo_stats.get("culockerfsfd")
     if s:
