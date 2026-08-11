@@ -1031,6 +1031,12 @@
     15%  { opacity: .7; }
     100% { transform: translateY(-150px) translateX(var(--sx, 10px)) scale(1); opacity: 0; }
   }
+  /* 탭이 백그라운드면 멈춘다. 다이버는 fixed 라 화면 밖으로 나갈 일이 없어
+     그냥 두면 애니메이션 5개가 영원히 돌며 페이지가 유휴 상태로 가지 못한다. */
+  #diver.paused .pixel-diver,
+  #diver.paused .diver-float,
+  #diver.paused .diver-bub i { animation-play-state: paused; }
+
   /* 좁은 화면에서는 본문을 가리므로 뺀다 */
   @media (max-width: 860px) { #diver { display: none; } }
   @media print { #diver { display: none !important; } }
@@ -1985,6 +1991,22 @@
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
     }, { passive: true });
     addEventListener('resize', update, { passive: true });
+
+    // 백그라운드 탭에서는 재생을 멈춘다
+    const onVis = () => diver.classList.toggle('paused', document.hidden);
+    document.addEventListener('visibilitychange', onVis);
+    onVis();
+
+    // 헤엄 스프라이트는 CSS 배경이라 해당 클래스가 붙기 전까지 받지 않는다.
+    // 그대로 두면 첫 스크롤에서 시트를 받는 동안 프레임이 비어 보인다.
+    // 초기 렌더를 방해하지 않도록 load 이후에 미리 받아 둔다.
+    // (<link rel="prefetch"> 는 Safari 가 지원하지 않아 JS 로 한다)
+    addEventListener('load', () => {
+      for (const n of ['swim-down', 'swim-up']) {
+        new Image().src = `assets/diver/diver-${n}-spritesheet.png`;
+      }
+    });
+
     setState('idle');
     update();
   })();
