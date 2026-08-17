@@ -1,6 +1,12 @@
 {
  "posts": [
   {
+   "title": "Python FastAPI 학습기 1일차..",
+   "link": "https://he11oworld.tistory.com/entry/Python-FastAPI-%ED%95%99%EC%8A%B5%EA%B8%B0-1%EC%9D%BC%EC%B0%A8",
+   "category": "백엔드",
+   "date": "2026-08-18"
+  },
+  {
    "title": "개발자 이력서 가이드 모음",
    "link": "https://he11oworld.tistory.com/entry/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B4%EB%A0%A5%EC%84%9C-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%AA%A8%EC%9D%8C",
    "category": "그냥 개발 이야기",
@@ -41,12 +47,6 @@
    "link": "https://he11oworld.tistory.com/entry/OpenCVC-cvMat%EC%9D%98-%ED%8F%AC%EB%A7%B7%EC%9D%84-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B0%A9%EB%B2%95NCHW-NHWC-cvtransposeND-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95",
    "category": "OpenCV",
    "date": "2023-08-30"
-  },
-  {
-   "title": "[OpenCV,C++] OpenCV 설치 및 Visual Studio에서 OpenCV 사용하는 방법 - 프로젝트 설정",
-   "link": "https://he11oworld.tistory.com/entry/OpenCVC-OpenCV-%EC%84%A4%EC%B9%98-%EB%B0%8F-Visual-Studio%EC%97%90%EC%84%9C-OpenCV-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%84%A4%EC%A0%95",
-   "category": "OpenCV",
-   "date": "2023-08-29"
   }
  ]
 }
