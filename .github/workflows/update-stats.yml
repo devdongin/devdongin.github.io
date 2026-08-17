@@ -1,4 +1,4 @@
-# 자동 갱신 — 커밋 집계(매일) + AI REVIEW(3시간마다)
+# 자동 갱신: 커밋 집계와 AI REVIEW (매일 00:30 KST)
 #
 # 필요한 repo secrets:
 #   STATS_TOKEN             회사 계정 PAT (대상 저장소 읽기 권한)
@@ -10,14 +10,8 @@ name: update-stats
 
 on:
   schedule:
-    - cron: "30 15 * * *" # 00:30 KST 시도 — 누락돼도 아래 3시간 크론이 대신 채운다
-    - cron: "0 */3 * * *" # 3시간마다 — AI REVIEW 재작성
+    - cron: "30 15 * * *" # 매일 00:30 KST — 통계와 AI REVIEW 갱신
   workflow_dispatch:
-
-permissions:
-  contents: write
-  pull-requests: write
-  id-token: write # claude-code-action OIDC 요구사항
 
 concurrency:
   # 두 워크플로 모두 main 에 자동 커밋·push 하므로 같은 group 으로 묶는다.
@@ -28,10 +22,19 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # 권한은 job 스코프로만 준다 (#138 P1).
+    # id-token 은 뺐다: claude-code-action 에 OAuth 토큰과 GITHUB_TOKEN 을 직접 넘기고
+    # 있어 OIDC 로 앱 토큰을 교환하지 않는다 (run 32002798344 로그에서 'Revoke app token'
+    # 스텝이 skipped 로 남는 것이 근거). 되돌릴 때는 이 줄만 다시 넣으면 된다.
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      # 서드파티는 물론 first-party Action 도 전부 커밋 SHA 로 고정한다 (#138 P1).
+      # 가변 태그는 재태깅 한 번으로 쓰기 권한과 시크릿을 가진 코드가 바뀔 수 있다.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.12"
 
@@ -70,9 +73,9 @@ jobs:
         run: echo "NOW_KST=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M')" >> "$GITHUB_ENV"
 
       - name: Regenerate AI review (Claude, subscription OAuth)
-        # 3시간 크론·수동 실행, 그리고 통계가 새로 수집된 실행에서 재작성
-        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 */3 * * *' || steps.freshness.outputs.stale == 'true'
-        uses: anthropics/claude-code-action@v1
+        # 매일 예약 실행·수동 실행, 그리고 통계가 새로 수집된 실행에서 재작성
+        if: github.event_name == 'workflow_dispatch' || steps.freshness.outputs.stale == 'true'
+        uses: anthropics/claude-code-action@9d7150bc8a3dae8149739a88019d192b579ad90c # v1.0.193
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub App 설치 없이 워크플로 토큰 사용
@@ -91,13 +94,14 @@ jobs:
               SEEUON 제품 기능이나 사업 성과를 홍보하지 말고, 문제 정의·기술 선택·구현 범위·
               검증 결과를 주어로 쓴다. 커널 드라이버·Credential Provider·후킹/인젝션은
               AI 클라이언트를 실제 환경에 통합하며 확장한 시스템 역량으로 서술한다.
-            - 분량: 데스크톱 기준 3~4줄. 핵심 평가 1문장에 검증 가능한 근거
-              2~3문장을 이어 쓰며, 한 문장 요약으로 축소하지 않는다. 모바일에서는
-              화면 폭에 따라 줄 수가 늘어날 수 있다.
-            - 구조: <p><strong>첫 문장 핵심 평가.</strong> 이어서 근거 2~3문장 —
-              집계 범위, 대표 저장소 기여율, 성능 수치 중 강한 것만 압축 인용한다.
+            - 분량: 마커 안 본문(ai-meta 문장 제외)을 공백 포함 240자 이내,
+              문장 3개 이내로 쓴다. 이 상한은 검증기가 강제하며 넘기면 배포가 막힌다.
+              길어지면 데스크톱·모바일 모두에서 CTA가 첫 화면 밖으로 밀린다 (#138 P1).
+            - 수치는 강한 것 2개까지만 인용한다. 히어로 태그라인에 이미 있는 문장
+              (PoC 대비, 커널 보호·코드 서명 구간)은 반복하지 않는다.
+            - 구조: <p><strong>첫 문장 핵심 평가.</strong> 이어서 근거 2문장.
               <span class="ai-meta">이 평가는 AI(Claude)가 저장소 기여 데이터를 근거로
-              3시간마다 자동 생성·갱신합니다 · 최근 갱신 ${{ env.NOW_KST }} KST</span></p>
+              매일 자동 생성·갱신합니다 · 최근 갱신 ${{ env.NOW_KST }} KST</span></p>
             - 추론 파이프라인 모델 구성은 반드시 "모델 5종 + 특징점 추출"로 표기한다
               (사람·카메라 탐지 + liveness 3종. "모델 3종/4종" 표기는 오기).
             - 평가 근거는 data/stats.json의 실제 수치(총 커밋 수, 기여 통계)와
@@ -106,7 +110,7 @@ jobs:
               증명하므로, 증가·감소의 원인이나 생산성·품질을 거기서 추론하지 않는다.
               (나쁜 예: "커밋이 몰릴 만큼 운영 대응이 이어지고 있습니다")
               활동량을 언급할 거라면 검증 가능한 구현 범위나 성능 근거와 함께 쓴다.
-            - **최근 작업은 data/focus.md 에 적힌 것만 쓴다.** 3~4줄 중 마지막 1문장을
+            - **최근 작업은 data/focus.md 에 적힌 것만 쓴다.** 3문장 중 마지막 1문장을
               "요즘 무엇을 하고 있는가"에 배정하고, focus.md 최상단 항목(가장 최근)을
               근거로 삼는다. focus.md 에 없는 업무 종류를 커밋 수나 저장소 구성에서
               짐작해 쓰지 않는다. focus.md 가 비어 있으면 이 문장은 생략한다.

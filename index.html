@@ -2,6 +2,15 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<!-- CSP: GitHub Pages는 응답 헤더를 못 바꾸므로 meta로 건다 (#138 P2).
+     허용 출처는 실제로 관측된 것만 넣었다.
+       cdn.jsdelivr.net       Pretendard 가변 폰트 CSS와 그 CSS가 부르는 woff2
+       abacus.jasoncameron.dev 방문자 카운터 fetch
+       youtube-nocookie.com   개발 사례 영상. 클릭 후에만 붙는다
+     인라인 script·style은 이 저장소가 무빌드 단일 HTML이라 'unsafe-inline'이 필요하다.
+     frame-ancestors는 meta로 전달하면 브라우저가 무시하므로 넣지 않았다.
+     클릭재킹 차단이 필요하면 Pages 앞단에 헤더를 세워야 한다. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline'; connect-src 'self' https://abacus.jasoncameron.dev; frame-src https://www.youtube-nocookie.com">
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선동인 | Vision AI 제품화 · C++ 시스템 소프트웨어 개발자</title>
@@ -901,7 +910,7 @@
     .badge, .chip { background-color: #f2f2f2 !important; }
 
     /* 화면 전용 요소는 인쇄에서 제외 (화면 표시에는 영향 없음).
-       #ai-review    : 3시간마다 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
+       #ai-review    : 매일 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
        #interview    : 분량이 큰 읽을거리라 온라인에서 보게 두고 PDF에서는 뺀다
        .harness-dive : 이게 있으면 하네스 블록이 1.56페이지가 되어 뒤따르는 통계 띠가
                        갈 곳을 잃고 빈 장을 만든다. 펼쳐 보는 성격의 토글이라 온라인에 둔다
@@ -1095,8 +1104,8 @@
       <div class="ai-review-box" id="ai-review">
         <span class="ai-tag">AI REVIEW</span>
         <!-- AI-REVIEW:START -->
-        <p><strong>AI 모델을 C++ 추론 SDK와 클라이언트 소프트웨어에 통합하고, 실시간 최적화부터 OS 연동·배포·운영 장애까지 해결해온 개발자입니다.</strong> 사람 탐지·카메라 탐지·liveness 3종(디스플레이/출력물/IR)으로 구성된 모델 5종과 특징점 추출 경로를 재설계하고 ROI 기반 조건부 실행을 적용해 프레임당 처리 시간을 150ms에서 40~50ms로 낮췄습니다. 이 파이프라인이 속한 SEEUON 계열 저장소 기여율은 71%(1,050/1,478 커밋, 저장소 3개 합산·기여 1위)이며, 최근 12개월 두 계정 전 저장소·전 브랜치 합계 커밋 수는 1,037건입니다. Windows에서 쌓은 커널 드라이버·Credential Provider 통합 경험을 바탕으로, 최근에는 Swift·AVFoundation 기반 macOS 클라이언트로 실시간 얼굴 인증과 감시 정책 경로를 이식하며 에이전트·서버 간 REST 연동을 클라이언트 측에서 구현하고 있습니다.
-        <span class="ai-meta">이 평가는 AI(Claude)가 저장소 기여 데이터를 근거로 3시간마다 자동 생성·갱신합니다 · 최근 갱신 2026-08-17 21:48 KST</span></p>
+        <p><strong>AI 모델을 C++ 추론 SDK와 클라이언트 소프트웨어에 통합하고, 실시간 최적화부터 OS 연동·배포·운영 장애까지 해결해온 개발자입니다.</strong> 모델 5종과 특징점 추출 경로를 재설계해 프레임당 150ms를 40~50ms로 낮췄고, SEEUON 계열 저장소 기여율은 71%로 기여 1위입니다. 지금은 Windows 클라이언트 구조를 Swift 기반 macOS로 이식하고 있습니다.
+        <span class="ai-meta">이 평가는 AI(Claude)가 저장소 기여 데이터를 근거로 매일 자동 생성·갱신합니다 · 최근 갱신 2026-08-17 21:48 KST</span></p>
         <!-- AI-REVIEW:END -->
       </div>
       <div class="hero-actions">
@@ -1741,11 +1750,17 @@
   document.querySelectorAll('.demo-frame').forEach(frame => {
     frame.addEventListener('click', () => {
       const id = frame.dataset.yt;
-      if (!id) return;
-      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" `
-        + `title="SEEUON macOS 데모" allowfullscreen `
-        + `allow="autoplay; encrypted-media; picture-in-picture" `
-        + `referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+      // data-yt를 문자열 템플릿으로 이어 붙이면 그 값이 그대로 마크업으로 해석된다.
+      // 지금 값은 작성자가 넣은 것이라 실제 취약점은 아니지만, ID 형식을 먼저
+      // 확정하고 DOM API로만 만들어 그 경로 자체를 없앤다 (#138 P2).
+      if (!id || !/^[A-Za-z0-9_-]{11}$/.test(id)) return;
+      const player = document.createElement('iframe');
+      player.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+      player.title = 'SEEUON macOS 데모';
+      player.allowFullscreen = true;
+      player.allow = 'autoplay; encrypted-media; picture-in-picture';
+      player.referrerPolicy = 'strict-origin-when-cross-origin';
+      frame.replaceChildren(player);
       frame.style.cursor = 'default';
     });
   });
@@ -2001,11 +2016,23 @@
     // 그대로 두면 첫 스크롤에서 시트를 받는 동안 프레임이 비어 보인다.
     // 초기 렌더를 방해하지 않도록 load 이후에 미리 받아 둔다.
     // (<link rel="prefetch"> 는 Safari 가 지원하지 않아 JS 로 한다)
-    addEventListener('load', () => {
+    //
+    // 다만 다이버는 860px 이하에서 display:none 이다. 게이트가 없으면 화면에 나오지도
+    // 않는 시트 176KB 를 모바일에서 그대로 받는다 (실측: 모바일 전송량 338KB 중 52.5%).
+    // idle 시트는 display:none 자손이라 브라우저가 알아서 건너뛰지만, 이 프리로드는
+    // JS 라 CSS 표시 여부와 무관하게 실행된다. 같은 중단점으로 묶는다 (#138 P3).
+    const diverWide = matchMedia('(min-width: 861px)');
+    let spritesWarmed = false;
+    const warmSprites = () => {
+      if (spritesWarmed || !diverWide.matches) return;
+      spritesWarmed = true;
       for (const n of ['swim-down', 'swim-up']) {
         new Image().src = `assets/diver/diver-${n}-spritesheet.png`;
       }
-    });
+    };
+    addEventListener('load', warmSprites);
+    // 모바일 폭으로 열었다가 데스크톱으로 넓히면 그때 받는다
+    diverWide.addEventListener('change', warmSprites);
 
     setState('idle');
     update();
