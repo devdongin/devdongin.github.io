@@ -2,6 +2,15 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<!-- CSP: GitHub Pages는 응답 헤더를 못 바꾸므로 meta로 건다 (#138 P2).
+     허용 출처는 실제로 관측된 것만 넣었다.
+       cdn.jsdelivr.net       Pretendard 가변 폰트 CSS와 그 CSS가 부르는 woff2
+       abacus.jasoncameron.dev 방문자 카운터 fetch
+       youtube-nocookie.com   개발 사례 영상. 클릭 후에만 붙는다
+     인라인 script·style은 이 저장소가 무빌드 단일 HTML이라 'unsafe-inline'이 필요하다.
+     frame-ancestors는 meta로 전달하면 브라우저가 무시하므로 넣지 않았다.
+     클릭재킹 차단이 필요하면 Pages 앞단에 헤더를 세워야 한다. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline'; connect-src 'self' https://abacus.jasoncameron.dev; frame-src https://www.youtube-nocookie.com">
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선동인 | Vision AI 제품화 · C++ 시스템 소프트웨어 개발자</title>
@@ -901,7 +910,7 @@
     .badge, .chip { background-color: #f2f2f2 !important; }
 
     /* 화면 전용 요소는 인쇄에서 제외 (화면 표시에는 영향 없음).
-       #ai-review    : 3시간마다 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
+       #ai-review    : 매일 갱신되는 시점 의존 콘텐츠라 인쇄물에 박제하지 않는다
        #interview    : 분량이 큰 읽을거리라 온라인에서 보게 두고 PDF에서는 뺀다
        .harness-dive : 이게 있으면 하네스 블록이 1.56페이지가 되어 뒤따르는 통계 띠가
                        갈 곳을 잃고 빈 장을 만든다. 펼쳐 보는 성격의 토글이라 온라인에 둔다
@@ -1741,11 +1750,17 @@
   document.querySelectorAll('.demo-frame').forEach(frame => {
     frame.addEventListener('click', () => {
       const id = frame.dataset.yt;
-      if (!id) return;
-      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" `
-        + `title="SEEUON macOS 데모" allowfullscreen `
-        + `allow="autoplay; encrypted-media; picture-in-picture" `
-        + `referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+      // data-yt를 문자열 템플릿으로 이어 붙이면 그 값이 그대로 마크업으로 해석된다.
+      // 지금 값은 작성자가 넣은 것이라 실제 취약점은 아니지만, ID 형식을 먼저
+      // 확정하고 DOM API로만 만들어 그 경로 자체를 없앤다 (#138 P2).
+      if (!id || !/^[A-Za-z0-9_-]{11}$/.test(id)) return;
+      const player = document.createElement('iframe');
+      player.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+      player.title = 'SEEUON macOS 데모';
+      player.allowFullscreen = true;
+      player.allow = 'autoplay; encrypted-media; picture-in-picture';
+      player.referrerPolicy = 'strict-origin-when-cross-origin';
+      frame.replaceChildren(player);
       frame.style.cursor = 'default';
     });
   });
