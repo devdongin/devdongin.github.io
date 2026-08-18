@@ -115,12 +115,37 @@ def main():
     # 6) stats.json 정합성
     if "data/stats.json" in changed:
         try:
-            d = json.loads(pathlib.Path("data/stats.json").read_text())
+            d = json.loads(pathlib.Path("data/stats.json").read_text(encoding="utf-8"))
             if sum(d["daily"].values()) != d["total_commits"]:
                 fails.append("stats.json: daily 합계와 total_commits 불일치")
             for slug, s in d.get("repo_stats", {}).items():
                 if s["mine"] > s["total"]:
                     fails.append(f"stats.json: {slug} mine > total")
+
+            # 6-1) 급락 가드 (2026-08-18 추가)
+            #
+            # STATS_CONFIG 의 조직·저장소명이 틀리면 GitHub API 가 404 를 준다.
+            # gh() 는 404 를 "접근 불가/빈 저장소"로 보고 None 을 돌려주므로
+            # 수집이 조용히 빈 결과로 끝나고, 워크플로는 초록불로 통과한다.
+            # 실제로 총 커밋이 1,037 에서 81 로 떨어진 채 그대로 게시됐다.
+            # 집계 구간이 365일 롤링이라 하루치 정상 변동은 몇 % 수준이므로,
+            # 30% 이상 빠지면 사람이 봐야 할 사고로 본다.
+            old_raw = sh("git", "show", f"{base}:data/stats.json")
+            if old_raw:
+                o = json.loads(old_raw)
+                prev, now = o.get("total_commits", 0), d.get("total_commits", 0)
+                if prev and now < prev * 0.7:
+                    fails.append(
+                        f"총 커밋 급락: {prev:,} -> {now:,} "
+                        f"({round((1 - now / prev) * 100)}% 감소). "
+                        "STATS_TOKEN 권한이나 STATS_CONFIG 의 조직·저장소명을 확인할 것")
+                gone = sorted(set(o.get("repo_stats", {})) - set(d.get("repo_stats", {})))
+                if gone:
+                    fails.append(
+                        f"기여율 슬러그 소실: {', '.join(gone)}. "
+                        "해당 저장소에 접근하지 못했을 가능성이 크다")
+                # 의도적으로 줄인 경우(집계 대상 축소 등)에는 사람이 직접
+                # 새 stats.json 을 커밋해 기준선을 낮춘 뒤 다시 돌리면 된다.
         except Exception as exc:
             fails.append(f"stats.json 파싱 실패: {exc}")
 
@@ -129,11 +154,11 @@ def main():
         fails.append("git diff --check 실패 (공백 오류)")
 
     if fails:
-        print("\n[verify] ❌ 검증 실패: PR을 생성하지 않습니다", file=sys.stderr)
+        print("\n[verify] FAIL 검증 실패: PR을 생성하지 않습니다", file=sys.stderr)
         for f in fails:
             print(f"  - {f}", file=sys.stderr)
         return 1
-    print("[verify] ✅ 전 항목 통과")
+    print("[verify] PASS 전 항목 통과")
     return 0
 
 
