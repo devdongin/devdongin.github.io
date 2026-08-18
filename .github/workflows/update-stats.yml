@@ -17,6 +17,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write # 실패 시 Issue 자동 등록
   id-token: write # claude-code-action OIDC 요구사항
 
 concurrency:
@@ -52,6 +53,7 @@ jobs:
           fi
 
       - name: Collect commit stats
+        id: collect
         if: github.event_name == 'workflow_dispatch' || steps.freshness.outputs.stale == 'true'
         env:
           STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
@@ -63,6 +65,7 @@ jobs:
         run: python scripts/collect_blog.py
 
       - name: Render stats into index.html
+        id: render
         if: github.event_name == 'workflow_dispatch' || steps.freshness.outputs.stale == 'true'
         run: python scripts/render_stats.py
 
@@ -70,6 +73,7 @@ jobs:
         run: echo "NOW_KST=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M')" >> "$GITHUB_ENV"
 
       - name: Regenerate AI review (Claude, subscription OAuth)
+        id: review
         # 3시간 크론·수동 실행, 그리고 통계가 새로 수집된 실행에서 재작성
         if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 */3 * * *' || steps.freshness.outputs.stale == 'true'
         uses: anthropics/claude-code-action@v1
@@ -154,3 +158,64 @@ jobs:
           done
           echo "::error::자동 생성 PR 병합에 실패했습니다. 수동 확인이 필요합니다: $(cat /tmp/pr_url.txt)" >&2
           exit 1
+
+      # 승인 0건 자동 병합이라 사람이 실패를 알아챌 경로가 없다.
+      # 실제로 STATS_CONFIG 오류로 통계가 92% 빠진 채 며칠 게시됐다.
+      # 실패하면 Issue 로 알리고, 다음 성공 실행에서 자동으로 닫는다.
+      - name: Report failure as Issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OUT_COLLECT: ${{ steps.collect.outcome }}
+          OUT_RENDER: ${{ steps.render.outcome }}
+          OUT_REVIEW: ${{ steps.review.outcome }}
+          OUT_VERIFY: ${{ steps.verify.outcome }}
+        run: |
+          TITLE_PREFIX='[자동 갱신 실패]'
+          VERIFY_OUT=$(cat /tmp/verify.txt 2>/dev/null || echo '(verify 단계 전에 실패해 출력 없음)')
+
+          {
+            echo "실행: $RUN_URL"
+            echo
+            echo "| 단계 | 결과 |"
+            echo "|---|---|"
+            echo "| Collect commit stats | ${OUT_COLLECT:-skipped} |"
+            echo "| Render stats | ${OUT_RENDER:-skipped} |"
+            echo "| AI review | ${OUT_REVIEW:-skipped} |"
+            echo "| Verify | ${OUT_VERIFY:-skipped} |"
+            echo
+            echo '<details><summary>검증 출력</summary>'
+            echo
+            echo '```'
+            echo "$VERIFY_OUT"
+            echo '```'
+            echo
+            echo '</details>'
+          } > /tmp/issue_body.md
+
+          # 3시간마다 도는 워크플로라 매번 새 Issue 를 만들면 하루 8개가 쌓인다.
+          # 열려 있는 같은 제목의 Issue 가 있으면 코멘트만 붙인다.
+          EXISTING=$(gh issue list --state open --limit 1 \
+            --search "$TITLE_PREFIX in:title" --json number --jq '.[0].number' 2>/dev/null || true)
+
+          if [ -n "$EXISTING" ]; then
+            echo "기존 Issue #$EXISTING 에 코멘트"
+            gh issue comment "$EXISTING" --body-file /tmp/issue_body.md
+          else
+            gh issue create \
+              --title "$TITLE_PREFIX $(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M') KST" \
+              --body-file /tmp/issue_body.md
+          fi
+
+      - name: Close failure Issue on recovery
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          # 복구됐는데 Issue 가 열린 채면 알림 자체를 믿을 수 없게 된다
+          for n in $(gh issue list --state open --limit 20 \
+              --search '[자동 갱신 실패] in:title' --json number --jq '.[].number' 2>/dev/null || true); do
+            gh issue close "$n" --comment "자동 갱신이 정상 실행되어 닫습니다. 실행: $RUN_URL"
+          done
