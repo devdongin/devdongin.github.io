@@ -22,7 +22,9 @@ PAGE = "gallery.html"
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".jfif", ".avif"}
 VID_EXT = {".mp4", ".webm"}
 YT_EXT = {".youtube"}
-YT_ID = re.compile(r"^[\w-]{11}$")
+# \w 는 파이썬에서 유니코드까지 매칭해 한글 11자도 통과한다. 유튜브 ID 문자 집합으로
+# 정확히 좁힌다 (#138 P2). 이 값은 그대로 iframe src 에 들어간다.
+YT_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
 CAPTIONS = {
     "해커톤-1.webp": "서울시 하드웨어 해커톤 2019",
     "해커톤-2.webp": "서울시 하드웨어 해커톤 2019",
@@ -45,7 +47,7 @@ def youtube_id(path):
         return None
     if YT_ID.match(raw):
         return raw
-    m = re.search(r"(?:v=|youtu\.be/|embed/|shorts/)([\w-]{11})", raw)
+    m = re.search(r"(?:v=|youtu\.be/|embed/|shorts/)([A-Za-z0-9_-]{11})", raw)
     return m.group(1) if m else None
 
 
