@@ -42,6 +42,14 @@ CAUSAL = [
     (r"커밋[^.]{0,40}(운영\s*대응|신규\s*개발|생산성|품질)[^.]{0,20}(이어지|늘|증가|향상)", "커밋량→업무원인 추론"),
 ]
 
+# AI REVIEW 분량 상한 (#138 P1).
+# 문법·사실관계가 모두 맞아도 길이만으로 히어로 위계가 무너져 CTA가 첫 화면 밖으로
+# 밀린 사례가 있었다. 사람 승인 0건으로 자동 병합되므로 여기서 기계적으로 막는다.
+# ai-meta(자동 생성 안내 문장)는 길이에서 제외하고 평가 본문만 센다.
+REVIEW_MIN_CHARS = 80
+REVIEW_MAX_CHARS = 240
+REVIEW_MAX_SENTENCES = 3
+
 
 def sh(*args):
     return subprocess.run(args, capture_output=True, text=True).stdout
@@ -105,12 +113,30 @@ def main():
     # 5) 통계로 증명 불가한 인과 해석
     review = re.search(r"<!-- AI-REVIEW:START -->(.*?)<!-- AI-REVIEW:END -->", html, re.S)
     if review:
-        text = re.sub(r"<[^>]+>", "", review.group(1))
+        raw = review.group(1)
+        text = re.sub(r"<[^>]+>", "", raw)
         for pat, label in CAUSAL:
             if re.search(pat, text):
                 fails.append(f"AI REVIEW 인과 추론({label}): 수치·추세까지만 서술할 것")
-        if len(text.strip()) < 80:
+
+        # 평가 본문만 남긴다: 자동 생성 안내(ai-meta)는 분량 판단 대상이 아니다.
+        body = re.sub(r'<span class="ai-meta">.*?</span>', "", raw, flags=re.S)
+        body = re.sub(r"<[^>]+>", "", body)
+        body = re.sub(r"\s+", " ", body).strip()
+        # 마침표 뒤에 공백이나 끝이 와야 문장 경계로 본다. "40~50ms" 같은 수치는 안 쪼개진다.
+        sentences = [s for s in re.split(r"[.!?]+(?:\s|$)", body) if s.strip()]
+
+        if len(body) < REVIEW_MIN_CHARS:
             fails.append("AI REVIEW가 비었거나 지나치게 짧음")
+        if len(body) > REVIEW_MAX_CHARS:
+            fails.append(
+                f"AI REVIEW 본문 {len(body)}자로 상한 {REVIEW_MAX_CHARS}자 초과: "
+                "히어로 CTA가 첫 화면 밖으로 밀린다")
+        if len(sentences) > REVIEW_MAX_SENTENCES:
+            fails.append(
+                f"AI REVIEW 문장 {len(sentences)}개로 상한 {REVIEW_MAX_SENTENCES}개 초과: "
+                "핵심 평가 1문장에 근거 2문장까지만 쓴다")
+        print(f"[verify] AI REVIEW 본문 {len(body)}자 / {len(sentences)}문장")
 
     # 6) stats.json 정합성
     if "data/stats.json" in changed:
