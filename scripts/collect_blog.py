@@ -10,7 +10,7 @@ import os
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 
 RSS_URL = "https://he11oworld.tistory.com/rss"
@@ -54,7 +54,10 @@ def main():
 
     os.makedirs("data", exist_ok=True)
     with open(OUT_PATH, "w", encoding="utf-8", newline="\n") as f:
-        json.dump({"posts": posts}, f, ensure_ascii=False, indent=1)
+        # collected_at 은 워크플로가 "언제 마지막으로 받아왔는지"를 판단하는 근거다.
+        # 이게 없으면 블로그 갱신 주기를 통계에 묶을 수밖에 없다.
+        json.dump({"collected_at": datetime.now(KST).date().isoformat(),
+                   "posts": posts}, f, ensure_ascii=False, indent=1)
         f.write("\n")
     print(f"[blog] {len(posts)} posts -> {OUT_PATH}", file=sys.stderr)
 

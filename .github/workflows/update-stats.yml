@@ -44,7 +44,7 @@ jobs:
         id: freshness
         run: |
           TODAY=$(TZ=Asia/Seoul date +%F)
-          COLLECTED=$(python -c "import json;print(json.load(open('data/stats.json'))['collected_at'])" 2>/dev/null || echo none)
+          COLLECTED=$(python -c "import json;print(json.load(open('data/stats.json',encoding='utf-8'))['collected_at'])" 2>/dev/null || echo none)
           echo "collected=$COLLECTED today=$TODAY"
           if [ "$COLLECTED" = "$TODAY" ]; then
             echo "stale=false" >> "$GITHUB_OUTPUT"
@@ -60,13 +60,38 @@ jobs:
           STATS_CONFIG: ${{ secrets.STATS_CONFIG }}
         run: python scripts/collect_stats.py
 
+      # 블로그는 통계와 분리해 자체 주기로 돈다.
+      # 예전에는 통계 신선도(stale)에 묶여 있어, 통계 수집이 건너뛰거나 실패하면
+      # 블로그도 함께 멈췄다. AI REVIEW 의 관심사 문장이 blog.json 하나에
+      # 의존하게 된 뒤로는 그 정지가 곧 평가문 정체로 이어진다.
+      - name: Check blog freshness
+        id: blogfresh
+        env:
+          MAX_AGE_DAYS: "1" # 하루. 이틀로 늘리려면 2 로 바꾼다
+        run: |
+          COLLECTED=$(python -c "import json;print(json.load(open('data/blog.json',encoding='utf-8')).get('collected_at',''))" 2>/dev/null || echo "")
+          if [ -z "$COLLECTED" ]; then
+            echo "collected_at 없음(최초 도입 등) -> 갱신"
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          PREV=$(date -d "$COLLECTED" +%s 2>/dev/null || echo 0)
+          AGE=$(( ( $(date +%s) - PREV ) / 86400 ))
+          echo "collected=$COLLECTED age=${AGE}d max=${MAX_AGE_DAYS}d"
+          if [ "$AGE" -ge "$MAX_AGE_DAYS" ]; then
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Collect blog posts (RSS)
-        if: github.event_name == 'workflow_dispatch' || steps.freshness.outputs.stale == 'true'
+        if: github.event_name == 'workflow_dispatch' || steps.blogfresh.outputs.stale == 'true'
         run: python scripts/collect_blog.py
 
       - name: Render stats into index.html
         id: render
-        if: github.event_name == 'workflow_dispatch' || steps.freshness.outputs.stale == 'true'
+        # 블로그만 갱신된 날에도 BLOG-CARDS 마커를 다시 그려야 한다
+        if: github.event_name == 'workflow_dispatch' || steps.freshness.outputs.stale == 'true' || steps.blogfresh.outputs.stale == 'true'
         run: python scripts/render_stats.py
 
       - name: Set KST timestamp
