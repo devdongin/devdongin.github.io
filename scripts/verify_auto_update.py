@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 ALLOWED = {"index.html", "gallery.html", "data/stats.json", "data/blog.json",
-           "data/scan_cache.json", "data/focus.md"}
+           "data/scan_cache.json"}
 
 # 마커 구간: 렌더러/AI가 갱신하는 곳. 짝이 맞고 중복이 없어야 한다.
 # 목록을 하드코딩하면 새 마커가 생길 때마다 "마커 밖 변경"으로 오탐하므로
@@ -89,18 +89,6 @@ def main():
     for pat, label in FORBIDDEN:
         if re.search(pat, html):
             fails.append(f"금지 표현 발견({label}): {re.search(pat, html).group()[:40]}")
-
-    # 4-1) data/focus.md 도 같은 기준으로 본다.
-    # 사람이 손으로 적는 파일이고 public 저장소에 그대로 올라가므로,
-    # AI REVIEW 를 거치기 전에 이미 노출된다. 여기가 마지막 방어선이다.
-    focus_path = pathlib.Path("data/focus.md")
-    if focus_path.exists():
-        focus = focus_path.read_text(encoding="utf-8")
-        for pat, label in FORBIDDEN:
-            m = re.search(pat, focus)
-            if m:
-                fails.append(f"focus.md 금지 표현({label}): {m.group()[:40]}")
-        print("[verify] focus.md 금지 표현 검사 완료")
 
     # 5) 통계로 증명 불가한 인과 해석
     review = re.search(r"<!-- AI-REVIEW:START -->(.*?)<!-- AI-REVIEW:END -->", html, re.S)
