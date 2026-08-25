@@ -158,11 +158,11 @@ def _blog_half(posts, focusable):
 
 
 def build_blog_cards(posts):
-    # 끊김 없는 무한 스크롤을 위해 동일한 절반을 2벌 렌더.
-    # 두 번째 절반은 스크린리더(aria-hidden)와 탭 순서(tabindex="-1")에서만 제외한다.
+    # 끊김 없는 무한 스크롤을 위해 동일한 카드 묶음을 3벌 렌더.
+    # 첫 묶음 외에는 스크린리더(aria-hidden)와 탭 순서(tabindex="-1")에서만 제외한다.
     #
     # inert를 쓰면 안 된다: inert 요소는 hit-test 대상에서 빠지므로,
-    # 애니메이션이 후반부로 가서 두 번째 절반이 화면을 채우면 카드 클릭이
+    # 애니메이션 후반부에 복제 묶음이 화면을 채우면 카드 클릭이
     # 그대로 통과해 버린다. tabindex="-1"만으로 키보드 중복 탭은 막히고,
     # aria-hidden 안에 키보드 포커스 가능한 요소가 없으므로 접근성 검사도 통과한다.
     posts = [
@@ -170,6 +170,8 @@ def build_blog_cards(posts):
         if any(pattern in p.get("title", "") for pattern in FEATURED_BLOG_PATTERNS)
     ][:5]
     return (f'\n      <div class="ticker-half">{_blog_half(posts, True)}</div>'
+            f'\n      <div class="ticker-half" aria-hidden="true">'
+            f'{_blog_half(posts, False)}</div>'
             f'\n      <div class="ticker-half" aria-hidden="true">'
             f'{_blog_half(posts, False)}</div>\n      ')
 
