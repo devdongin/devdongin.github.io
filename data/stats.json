@@ -1,8 +1,8 @@
 {
- "collected_at": "2026-10-20",
+ "collected_at": "2026-10-21",
  "window": {
-  "start": "2025-10-20",
-  "end": "2026-10-20"
+  "start": "2025-10-21",
+  "end": "2026-10-21"
  },
  "total_commits": 1779,
  "daily": {
