@@ -1,8 +1,8 @@
 {
- "collected_at": "2026-11-09",
+ "collected_at": "2026-11-10",
  "window": {
-  "start": "2025-11-09",
-  "end": "2026-11-09"
+  "start": "2025-11-10",
+  "end": "2026-11-10"
  },
  "total_commits": 2493,
  "daily": {
@@ -236,7 +236,7 @@
   },
   "cufacesdk": {
    "mine": 325,
-   "total": 2169,
+   "total": 2170,
    "percent": 15,
    "rank": 2,
    "repos": 1
